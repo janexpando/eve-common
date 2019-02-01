@@ -1,6 +1,6 @@
 {
   "name": "eve-common",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
@@ -23,7 +23,9 @@
   },
   "ava": {
     "compileEnhancements": false,
-    "files": ["src/**/__tests__/*.ts"],
+    "files": [
+      "src/**/__tests__/*.ts"
+    ],
     "extensions": [
       "ts"
     ],
