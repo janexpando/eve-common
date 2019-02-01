@@ -1,2 +1,7 @@
 node_modules
 src
+.idea
+coverage.lcov
+.travis.yml
+.nyc_output
+**/__tests__/**/*.js
