@@ -1,15 +1,15 @@
 import {Subject} from "rxjs";
 import {Logger} from "winston";
 import {Injectable} from "injection-js";
-
-const mongoose = require('mongoose');
+import {Environment} from "./environment";
+import mongoose = require('mongoose');
 
 @Injectable()
 export class DbDriver {
 
     connected: Subject<void> = new Subject();
 
-    constructor(protected connString: string,
+    constructor(protected env: Environment,
                 protected logg: Logger) {
 
         mongoose.Promise = global.Promise;
@@ -26,7 +26,7 @@ export class DbDriver {
 
     connect() {
         return mongoose.connect(
-            this.connString,
+            this.env.MONGODB_URI,
             {
                 autoReconnect: true,
                 reconnectTries: Number.MAX_VALUE,

@@ -17,17 +17,20 @@
   "license": "MIT",
   "devDependencies": {
     "@sentry/node": "^4.5.3",
+    "@types/mongoose": "^5.3.12",
     "@types/node": "^10.12.21",
     "@types/winston": "^2.4.4",
     "ava": "^1.2.0",
     "codecov": "^3.1.0",
+    "dotenv": "^6.2.0",
+    "imparsable": "^1.0.7",
+    "injection-js": "^2.2.1",
+    "mongoose": "^5.4.8",
     "nyc": "^13.1.0",
+    "rxjs": "^6.4.0",
     "ts-node": "^8.0.2",
     "typescript": "^3.3.1",
-    "injection-js": "^2.2.1",
-    "rxjs": "^6.4.0",
-    "winston": "^3.2.1",
-    "imparsable": "^1.0.7"
+    "winston": "^3.2.1"
   },
   "ava": {
     "compileEnhancements": false,
@@ -57,7 +60,9 @@
   "dependencies": {},
   "peerDependencies": {
     "injection-js": "^2.2.1",
+    "mongoose": "^5.4.8",
     "@sentry/node": "^4.5.3",
+    "dotenv": "^6.2.0",
     "rxjs": "^6.4.0",
     "winston": "^3.2.1",
     "imparsable": "^1.0.7"

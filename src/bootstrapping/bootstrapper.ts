@@ -12,7 +12,8 @@ export class Bootstrapper {
                 private env: Environment,
                 private logg: Logger,
                 private sentryOptions: SentryOptions,
-                private start: Function) {
+                private start: Function,
+                private disconnect: boolean = true) {
 
         this.initSentry();
         this.dbDriver.connected.subscribe(async () => {
@@ -22,7 +23,7 @@ export class Bootstrapper {
                 console.error(err);
                 Sentry.captureException(err);
             } finally {
-                await dbDriver.disconnect();
+                if (this.disconnect) await dbDriver.disconnect();
             }
         });
 
@@ -39,6 +40,7 @@ export class Bootstrapper {
     }
 
     async bootstrap() {
+        this.logg.info(this.env);
         try {
             await this.dbDriver.connect();
         } catch (error) {
