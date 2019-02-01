@@ -16,11 +16,17 @@
   "author": "Expando global s.r.o.",
   "license": "MIT",
   "devDependencies": {
+    "@sentry/node": "^4.5.3",
+    "@types/node": "^10.12.21",
+    "@types/winston": "^2.4.4",
     "ava": "^1.2.0",
     "codecov": "^3.1.0",
+    "injection-js": "^2.2.1",
     "nyc": "^13.1.0",
+    "rxjs": "^6.4.0",
     "ts-node": "^8.0.2",
-    "typescript": "^3.3.1"
+    "typescript": "^3.3.1",
+    "winston": "^3.2.1"
   },
   "ava": {
     "compileEnhancements": false,
@@ -46,5 +52,8 @@
       "**/*.d.ts"
     ],
     "all": true
+  },
+  "dependencies": {
+    "imparsable": "^1.0.7"
   }
 }
