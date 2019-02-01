@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "10"
+  - '10'
 cache: npm
 after_success:
   - npm run coverage-report
@@ -10,3 +10,5 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+  api_key:
+    secure: lVplrlI4FGtnLJI9MecaObg+GmANqrNpJFOhHKtTj5qsM9jWln171WOcCDNLzbS2/Ir3qukeX17D60FxcvDpT8jkTSQfZz+tqlCyZZYnkOWITFLAtiGm2czaZHhJFCydltbLP0pDfPFntN2tk1fM84US0ppNMIvHf8+8ALalWQ6cVP4Nwe5paa6L1K7IPvIpZGtbqeOSboJ54+mR73FjrqlJyjm+KdA02QlgnERvEDF36mOGl38YeVJejWAH/JT8t7kPr5Y0nMFh3lv3z559eaOjhu1FEw8ggb87/Lyeeo7Mnv2Tac3v6qy/UqwiFzjDneRwcgVnMhI4m1hoIwtOfLXZn1grsr4iDWrqwOKGjlW4cltGEBIlSEVwaXrqRvH6eOb1v9h6mJrkZDZsk1JeR9ab7+GGne++gxGqDNqi2/2bFWEFeOkFKnbYaJVgFoHK6clDTn23ECkq1Yv8xU1j8eodL4dmYYwzGXtRa/6BHmrx+y4CFxg1kU4P/t57C68G6Sxz67BLgz9WBfltSHdwnpbfX09xqR9+iVB3QM5h55nq8X3f1YFjtOgrM7cFwhvZA6tWRdWYt8lbPnLheEkfNjYagKZuAUpOc4UP/ZfCKE7g1IKzO+3YnlAvzQALOHhI5mYYpjZHAv5DlmdYY/vg3c7XnQyuSBFw7P1nKJoTVsM=
