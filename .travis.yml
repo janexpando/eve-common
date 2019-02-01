@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "10"
+cache: npm
+after_success:
+  - npm run coverage-report
+deploy:
+  provider: npm
+  email: devops@expan.do
+  skip_cleanup: true
+  on:
+    tags: true
