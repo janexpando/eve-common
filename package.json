@@ -57,7 +57,9 @@
     ],
     "all": true
   },
-  "dependencies": {},
+  "dependencies": {
+    "ts-essentials": "^2.0.0"
+  },
   "peerDependencies": {
     "injection-js": "^2.2.1",
     "mongoose": "^5.4.8",
