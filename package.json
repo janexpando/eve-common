@@ -10,6 +10,7 @@
     "build:dts": "dts-generator --name eve-common --project . --out ./dist/public_api.d.ts",
     "test:watch": "ava --watch",
     "check": "tsc --noEmit",
+    "link": "npm link && npm link injection-js reflect-metadata mongoose @sentry/node imparsable amazon-mws",
     "prepublish": "npm run build",
     "coverage-report": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
@@ -19,7 +20,9 @@
   "devDependencies": {
     "@sentry/node": "^4.5.3",
     "@types/mongoose": "^5.3.12",
+    "amazon-mws": "0.0.23",
     "@types/node": "^10.12.21",
+    "injection-js": "^2.2.1",
     "@types/winston": "^2.4.4",
     "ava": "^1.2.0",
     "codecov": "^3.1.0",
@@ -58,10 +61,11 @@
     "all": true
   },
   "dependencies": {
-    "injection-js": "^2.2.1",
     "ts-essentials": "^2.0.0"
   },
   "peerDependencies": {
+    "amazon-mws": "0.0.23",
+    "injection-js": "^2.2.1",
     "mongoose": "^5.4.8",
     "@sentry/node": "^4.5.3",
     "dotenv": "^6.2.0",

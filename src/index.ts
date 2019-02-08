@@ -12,3 +12,8 @@ export * from './models/dto/order/order-status';
 export * from './models/dto/order/order-item';
 export * from './models/address';
 export * from './models/currency';
+export * from './mws/mws-creator';
+export * from './mws/get-marketplace-currency';
+export * from './mws/get-marketplace-host';
+export * from './mws/get-marketplace-id';
+export * from './mws/get-marketplace-name';
