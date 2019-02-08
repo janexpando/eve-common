@@ -3,8 +3,6 @@ export * from './bootstrapping/environment';
 export * from './bootstrapping/mongoose';
 export * from './bootstrapping/sentry-options';
 export * from './types';
-export * from './testing/injector';
-export * from './testing/global-ava';
 export * from './utils';
 export * from './logging/console-logger';
 export * from './models/continent-names';
