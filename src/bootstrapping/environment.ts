@@ -8,10 +8,12 @@ export class Environment {
     @property() SENTRY_DSN: string;
     @property() NODE_ENV: string;
     @property() MONGODB_URI: string = 'mongodb://127.0.0.1:27017/app';
-    
+    @property() EVE_AUTH_BEARER: string;
 
-    static create() {
-        return Imparsable.parsePojo(Environment, process.env);
+    static create(override?: Partial<Environment>) {
+        let env = Imparsable.parsePojo(Environment, process.env);
+        if (override) return Object.assign(env, override);
+        return env;
     }
 }
 

@@ -1,13 +1,6 @@
 import {test} from "../../testing";
 import {aggregate} from "../aggregate";
-
-function* generate(): IterableIterator<number> {
-    for (let i = 0; i < 10; i++) yield i;
-}
-
-async function* generateAsync(): AsyncIterableIterator<number> {
-    for (let i = 0; i < 10; i++) yield await i;
-}
+import {generate, generateAsync} from "./_support";
 
 test('aggregate by 5 sync', async t => {
     let result = [];

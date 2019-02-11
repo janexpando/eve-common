@@ -5,6 +5,7 @@ export * from './bootstrapping/sentry-options';
 export * from './types';
 export * from './utils';
 export * from './utils/aggregate';
+export * from './utils/iterator-to-array';
 export * from './logging/console-logger';
 export * from './models/continent-names';
 export * from './models/marketplace-names';

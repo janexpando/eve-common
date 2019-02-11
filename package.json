@@ -5,12 +5,12 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "install:skipdev": "npm install --production",
     "test": "npm run check && nyc ava",
-    "build": "tsc",
+    "build": "tsc || true",
     "build:dts": "dts-generator --name eve-common --project . --out ./dist/public_api.d.ts",
     "test:watch": "ava --watch",
     "check": "tsc --noEmit",
-    "link": "npm link && npm link injection-js reflect-metadata mongoose @sentry/node imparsable amazon-mws",
     "prepublish": "npm run build",
     "coverage-report": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
@@ -61,6 +61,7 @@
     "all": true
   },
   "dependencies": {
+    "request-promise-native": "^1.0.5",
     "ts-essentials": "^2.0.0"
   },
   "peerDependencies": {
