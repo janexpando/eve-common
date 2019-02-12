@@ -2,8 +2,8 @@ import 'dotenv/config';
 import {Imparsable, imparsable, property} from 'imparsable';
 import {Provider, Type} from "injection-js";
 
-export function makeCreateEnvironment<T>(type: Type<T>) {
-    return (override?: Partial<Environment>) => {
+export function makeCreateEnvironment<T extends Environment>(type: Type<T>) {
+    return (override?: Partial<T>): T => {
         let env = Imparsable.parsePojo(type, process.env);
         if (override) return Object.assign(env, override);
         return env;
