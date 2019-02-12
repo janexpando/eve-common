@@ -1,5 +1,5 @@
-import { Injectable } from 'injection-js';
-import { ObjectId } from 'bson';
+import {Injectable} from 'injection-js';
+import {ObjectId} from 'bson';
 import Sentry = require('@sentry/node');
 import {isString} from "../utils";
 
@@ -9,15 +9,15 @@ export class ConsoleLogger {
         console.log(...args);
     }
 
-    error(error: Error | string) {
+    error = (error: Error | string) => {
         console.error(error);
         this.reportError(error);
-    }
+    };
 
-    json(obj){
+    json(obj) {
         try {
             console.log(JSON.stringify(obj));
-        }catch (e) {
+        } catch (e) {
         }
     }
 
