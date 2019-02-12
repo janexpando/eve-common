@@ -1,6 +1,14 @@
 import 'dotenv/config';
 import {Imparsable, imparsable, property} from 'imparsable';
-import {Provider} from "injection-js";
+import {Provider, Type} from "injection-js";
+
+export function makeCreateEnvironment<T>(type: Type<T>) {
+    return (override?: Partial<Environment>) => {
+        let env = Imparsable.parsePojo(type, process.env);
+        if (override) return Object.assign(env, override);
+        return env;
+    }
+}
 
 @imparsable()
 export class Environment {
@@ -10,11 +18,7 @@ export class Environment {
     @property() MONGODB_URI: string = 'mongodb://127.0.0.1:27017/app';
     @property() EVE_AUTH_BEARER: string;
 
-    static create(override?: Partial<Environment>) {
-        let env = Imparsable.parsePojo(Environment, process.env);
-        if (override) return Object.assign(env, override);
-        return env;
-    }
+    static create = makeCreateEnvironment(Environment);
 }
 
 export const ENVIRONMENT_PROVIDER: Provider = {
