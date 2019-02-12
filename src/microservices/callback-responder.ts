@@ -23,7 +23,7 @@ export class CallbackResponder {
 
     async run<T>(callbackUrl: string, fn: () => T | Promise<T>): Promise<void> {
         try {
-            let item = fn();
+            let item = await fn();
             return await this.send(callbackUrl, item);
         } catch (e) {
             this.logger.error(e);

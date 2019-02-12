@@ -19,17 +19,23 @@
   "license": "MIT",
   "devDependencies": {
     "@sentry/node": "^4.5.3",
+    "@types/koa": "^2.0.48",
+    "@types/koa-bodyparser": "^4.2.1",
     "@types/mongoose": "^5.3.12",
-    "amazon-mws": "0.0.23",
     "@types/node": "^10.12.21",
-    "injection-js": "^2.2.1",
     "@types/winston": "^2.4.4",
+    "amazon-mws": "0.0.23",
     "ava": "^1.2.0",
     "codecov": "^3.1.0",
     "dotenv": "^6.2.0",
     "imparsable": "^1.0.7",
+    "injection-js": "^2.2.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
     "mongoose": "^5.4.8",
+    "nock": "^10.0.6",
     "nyc": "^13.1.0",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^6.4.0",
     "ts-node": "^8.0.2",
     "typescript": "^3.3.1",
@@ -44,6 +50,7 @@
       "ts"
     ],
     "require": [
+      "reflect-metadata",
       "ts-node/register"
     ],
     "sources": [
