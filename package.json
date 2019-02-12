@@ -8,7 +8,6 @@
     "install:skipdev": "npm install --production",
     "test": "npm run check && nyc ava",
     "build": "tsc || true",
-    "build:dts": "dts-generator --name eve-common --project . --out ./dist/public_api.d.ts",
     "test:watch": "ava --watch",
     "check": "tsc --noEmit",
     "prepublish": "npm run build",
@@ -68,6 +67,8 @@
     "all": true
   },
   "dependencies": {
+    "koa-bearer-token": "^1.0.0",
+    "koa-compose": "^4.1.0",
     "request-promise-native": "^1.0.5",
     "ts-essentials": "^2.0.0"
   },

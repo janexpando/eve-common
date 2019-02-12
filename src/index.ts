@@ -19,3 +19,5 @@ export * from './mws/get-marketplace-currency';
 export * from './mws/get-marketplace-host';
 export * from './mws/get-marketplace-id';
 export * from './mws/get-marketplace-name';
+export * from './microservices/auth-checker';
+export * from './microservices/callback-responder';
