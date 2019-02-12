@@ -72,6 +72,9 @@
     "ts-essentials": "^2.0.0"
   },
   "peerDependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "reflect-metadata": "^0.1.13",
     "amazon-mws": "0.0.23",
     "injection-js": "^2.2.1",
     "mongoose": "^5.4.8",
