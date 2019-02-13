@@ -1,6 +1,6 @@
 import {Injectable} from "injection-js";
-import request = require('request-promise-native');
 import {ConsoleLogger, Environment} from "..";
+import * as got from "got";
 
 export interface IterableFn<T> {
     (): AsyncIterableIterator<T> | IterableIterator<T> | T[];
@@ -21,7 +21,7 @@ export class CallbackResponder {
         }
     }
 
-    async run<T>(callbackUrl: string, fn: () => T | Promise<T>): Promise<void> {
+    async run<T>(callbackUrl: string, fn: () => T | Promise<T>): Promise<any> {
         try {
             let item = await fn();
             return await this.send(callbackUrl, item);
@@ -31,11 +31,11 @@ export class CallbackResponder {
     }
 
     private async send(url: string, body) {
-        return await request.post(url, {
-            body,
-            json: true,
-            auth: {
-                bearer: this.env.EVE_AUTH_BEARER,
+        return await got.post(url, {
+            body: JSON.stringify(body),
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${this.env.EVE_AUTH_BEARER}`
             }
         });
     }
