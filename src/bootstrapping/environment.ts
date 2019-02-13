@@ -17,6 +17,7 @@ export class Environment {
     @property() NODE_ENV: string;
     @property() MONGODB_URI: string = 'mongodb://127.0.0.1:27017/app';
     @property() EVE_AUTH_BEARER: string;
+    @property() SERVICE_URL: string;
 
     static create = makeCreateEnvironment(Environment);
 }
