@@ -1,4 +1,4 @@
-import * as util from "util";
+const util = require("util");
 import * as stream from 'stream';
 
 export function sleep(ms) {
