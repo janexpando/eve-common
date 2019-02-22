@@ -10,8 +10,9 @@ export function provideInjector(
     providers: Provider[] = [],
 ) {
     let resolved = ReflectiveInjector.resolve(providers);
-    test.beforeEach((t: ExecutionContext<InjectorContext>) => {
-        let injector = ReflectiveInjector.fromResolvedProviders(resolved);
-        t.context.injector = injector;
-    });
+    let _provide = (t: ExecutionContext<InjectorContext>) => {
+        t.context.injector = ReflectiveInjector.fromResolvedProviders(resolved);
+    };
+    test.before(_provide);
+    test.beforeEach(_provide);
 }

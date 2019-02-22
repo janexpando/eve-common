@@ -1,6 +1,6 @@
 import {Subject} from "rxjs";
 import {Logger} from "winston";
-import {Injectable} from "injection-js";
+import {Inject, Injectable} from "injection-js";
 import {Environment} from "./environment";
 import mongoose = require('mongoose');
 
@@ -10,7 +10,7 @@ export class DbDriver {
     connected: Subject<void> = new Subject();
 
     constructor(protected env: Environment,
-                protected logg: Logger) {
+                @Inject('winston_logger') protected logg: Logger) {
 
         mongoose.Promise = global.Promise;
         mongoose.set('useFindAndModify', false);
@@ -34,8 +34,8 @@ export class DbDriver {
         );
     };
 
-    disconnect() {
-        mongoose.disconnect();
+    async disconnect() {
+        await mongoose.disconnect();
     }
 
     get db() {
