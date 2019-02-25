@@ -29,7 +29,7 @@ test.serial('job version is increasing', async t => {
 test.serial('exactly once delivery', async t => {
     let queue = t.context.injector.get(JobQueue);
     for (let i = 0; i < 100; i++) {
-        queue.add({id: i}); // await???
+        await queue.add({id: i});
     }
     let promises = [];
     for (let i = 0; i < 100; i++) {
