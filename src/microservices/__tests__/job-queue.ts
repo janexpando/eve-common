@@ -2,7 +2,7 @@ import {provideInjector, test} from "../../testing";
 import {JobQueue} from "../job-queue";
 import {prepareDB} from "../../testing/prepare-db";
 import {DbDriver, ENVIRONMENT_PROVIDER} from "../..";
-import {Logger, createLogger} from "winston";
+import {createLogger} from "winston";
 
 provideInjector(test, [ENVIRONMENT_PROVIDER,
     DbDriver,
@@ -26,19 +26,20 @@ test.serial('job version is increasing', async t => {
     t.is(job.payload.param, '123');
 });
 
-test.serial.skip('exacly once delivery', async t => {
+test.serial('exactly once delivery', async t => {
     let queue = t.context.injector.get(JobQueue);
     for (let i = 0; i < 100; i++) {
-        queue.add({id: i});
+        queue.add({id: i}); // await???
     }
     let promises = [];
     for (let i = 0; i < 100; i++) {
-        queue.add({id: i});
+        promises.push(queue.add({id: i}));
     }
+    await Promise.all(promises);
 
-
-    let results = await Promise.all(promises);
-    t.log(results);
-    t.pass();
-
+    let result = await queue.take();
+    let result2 = await queue.take();
+    t.is((result.payload as any).id,0);
+    t.is((result2.payload as any).id,1);
+    t.truthy(result.version < result2.version);
 });
