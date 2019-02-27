@@ -27,7 +27,7 @@ test.serial('job version is increasing', async t => {
 });
 
 test.serial('exactly once delivery', async t => {
-    let queue = t.context.injector.get(JobQueue);
+    let queue = t.context.injector.get<JobQueue<{ id: number }>>(JobQueue);
     for (let i = 0; i < 100; i++) {
         await queue.add({id: i});
     }
@@ -37,9 +37,17 @@ test.serial('exactly once delivery', async t => {
     }
     await Promise.all(promises);
 
-    let result = await queue.take();
-    let result2 = await queue.take();
-    t.is((result.payload as any).id,0);
-    t.is((result2.payload as any).id,1);
-    t.truthy(result.version < result2.version);
+    let versions = new Set();
+    promises = [];
+    let ids = new Set();
+    for (let i = 0; i < 100; i++) {
+        let p = queue.take().then(value => {
+            ids.add(value.payload.id);
+            versions.add(value.version);
+        }).catch(reason => t.fail(reason));
+        promises.push(p);
+    }
+    await Promise.all(promises);
+    t.is(ids.size, 100);
+    t.is(versions.size, 100);
 });
