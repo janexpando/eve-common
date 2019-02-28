@@ -1,4 +1,5 @@
 import {model, Schema, Document, Model} from "mongoose";
+import {ObjectId} from "bson";
 
 export class JobQueue<T> {
     private lastUsedTick: number = 0;
@@ -19,23 +20,42 @@ export class JobQueue<T> {
         return this.lastUsedTick;
     }
 
-    async add(job: T) {
-        await this.model.create({
+    async add(payload: T): Promise<Job<T>> {
+        return await this.model.create({
             createdOn: new Date(),
-            completed: false,
+            received: false,
             version: this.getVersion(),
-            payload: job
-        });
+            payload,
+            finishedOn: null,
+            startedOn: null,
+            timeoutOn: null
+        } as IJob<T>);
     }
 
-    async take(): Promise<IJob<T>> {
+    async take(processTime: number): Promise<Job<T>> {
+        let now = new Date();
+        let timeoutOn = new Date(now.getTime() + processTime);
         return await this.model.findOneAndUpdate(
-            {completed: false},
-            {completed: true},
+            {received: false},
+            {
+                received: true,
+                startedOn: now,
+                timeoutOn
+            },
             {
                 sort: {version: 1},
                 new: true
             });
+    }
+
+    async markFinished(_id: ObjectId) {
+        await this.model.updateOne({_id}, {
+            finishedOn: new Date()
+        })
+    }
+
+    async get(_id: ObjectId): Promise<IJob<T>> {
+        return await this.model.findById(_id);
     }
 
     async clear() {
@@ -46,13 +66,31 @@ export class JobQueue<T> {
 
 export interface IJob<T> {
     createdOn: Date;
-    completed: boolean;
+    received: boolean;
     version: number;
     payload: T;
+    startedOn: Date;
+    timeoutOn: Date;
+    finishedOn: Date;
+}
+
+export type JobState = 'queued' | 'processing' | 'timeout' | 'finished';
+
+export function getJobState(job: IJob<any>): JobState {
+    if (!job.received) {
+        return 'queued';
+    }
+    if (job.finishedOn) {
+        return 'finished';
+    }
+    let now = Date.now();
+    if (job.timeoutOn.getTime() < now) {
+        return 'timeout';
+    }
+    return 'processing';
 }
 
 export interface Job<T> extends Document, IJob<T> {
-
 }
 
 const JOB_SCHEMA = new Schema({
@@ -64,15 +102,23 @@ const JOB_SCHEMA = new Schema({
         type: Number,
         required: true
     },
-    completed: {
+    received: {
         type: Boolean,
         required: true,
     },
+    startedOn: {
+        type: Date,
+        default: null
+    },
+    timeoutOn: {
+        type: Date,
+        default: null
+    },
+    finishedOn: {
+        type: Date,
+        default: null
+    },
     payload: Schema.Types.Mixed
 });
-
-JOB_SCHEMA.statics.findAndModify = function (options) {
-    return this.collection.findAndModify(options);
-};
 
 
