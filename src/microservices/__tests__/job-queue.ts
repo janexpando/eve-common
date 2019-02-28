@@ -22,7 +22,9 @@ test.serial('job version is increasing', async t => {
     await queue.add({param: '1234'});
     await queue.add({param: '12345'});
     t.is(getJobState(await queue.get(jobId)), 'queued');
+    t.is(await queue.waitingJobsCount(), 3);
     let job = await queue.take(10 * SECOND);
+    t.is(await queue.waitingJobsCount(), 2);
     t.is(job.payload.param, '123');
     t.is(getJobState(await queue.get(jobId)), 'processing');
     await queue.markFinished(job._id);

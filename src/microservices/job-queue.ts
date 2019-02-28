@@ -61,6 +61,10 @@ export class JobQueue<T> {
     async clear() {
         return await this.model.remove({});
     }
+
+    async waitingJobsCount(): Promise<number> {
+        return await this.model.count({received: false});
+    }
 }
 
 
