@@ -51,7 +51,7 @@ test('respond with iterable', async t => {
             }
         }
 
-        await responder.runIterable(`http://127.0.0.1:${port}/callback`, gen);
+        await responder.runIterable(`http://127.0.0.1:${port}/callback`, gen());
         t.deepEqual(indexes, [0, 1, 2, 3, 4]);
     } finally {
         server.close();
