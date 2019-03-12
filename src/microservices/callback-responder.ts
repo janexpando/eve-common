@@ -2,17 +2,15 @@ import {Injectable} from "injection-js";
 import {ConsoleLogger, Environment} from "..";
 import * as got from "got";
 
-export interface IterableFn<T> {
-    (): AsyncIterableIterator<T> | IterableIterator<T> | T[];
-}
+export type Iterable<T> = AsyncIterableIterator<T> | IterableIterator<T> | T[];
 
 @Injectable()
 export class CallbackResponder {
     constructor(private env: Environment, private logger: ConsoleLogger) {
     }
 
-    async runIterable<T>(callbackUrl: string, fn: IterableFn<T>): Promise<void> {
-        for await (let item of fn()) {
+    async runIterable<T>(callbackUrl: string, fn: Iterable<T>): Promise<void> {
+        for await (let item of fn) {
             await this.send(callbackUrl, item);
         }
     }
