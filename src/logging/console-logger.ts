@@ -31,6 +31,7 @@ export class ConsoleLogger {
 
     companyError(companyId: ObjectId, error: Error | string) {
         console.error(`[${companyId}]: `, error);
+        (error as any).companyId = companyId;
         this.reportError(error);
     }
 }
