@@ -12,22 +12,14 @@ export class CallbackResponder {
     }
 
     async runIterable<T>(callbackUrl: string, fn: IterableFn<T>): Promise<void> {
-        try {
-            for await (let item of fn()) {
-                await this.send(callbackUrl, item);
-            }
-        } catch (e) {
-            this.logger.error(e);
+        for await (let item of fn()) {
+            await this.send(callbackUrl, item);
         }
     }
 
     async run<T>(callbackUrl: string, fn: () => T | Promise<T>): Promise<any> {
-        try {
-            let item = await fn();
-            return await this.send(callbackUrl, item);
-        } catch (e) {
-            this.logger.error(e);
-        }
+        let item = await fn();
+        return await this.send(callbackUrl, item);
     }
 
     private async send(url: string, body) {
