@@ -5,7 +5,7 @@ import {InjectorContext} from "./injector";
 
 async function truncateCollections() {
     for (let modelName of mongoose.modelNames()) {
-        await mongoose.models[modelName].remove({});
+        await mongoose.models[modelName].deleteMany({});
     }
 }
 
