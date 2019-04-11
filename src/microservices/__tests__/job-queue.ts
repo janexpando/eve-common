@@ -1,12 +1,9 @@
 import {prepareDB, provideInjector, test} from "../../testing";
 import {getJobState, JobQueue} from "../job-queue";
-import {DbDriver, ENVIRONMENT_PROVIDER, SECOND, sleep} from "../..";
-import {createLogger} from "winston";
+import {SECOND, sleep} from "../..";
 
-provideInjector(test, [ENVIRONMENT_PROVIDER,
-    DbDriver,
-    {provide: 'winston_logger', useValue: createLogger()},
-    {provide: JobQueue, useValue: new JobQueue('test')}
+
+provideInjector(test, [{provide: JobQueue, useValue: new JobQueue('test')}
 ]);
 prepareDB(test);
 

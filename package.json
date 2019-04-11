@@ -22,9 +22,8 @@
     "@types/koa-bodyparser": "^4.2.1",
     "@types/mongoose": "^5.3.12",
     "@types/node": "^10.12.21",
-    "@types/winston": "^2.4.4",
     "amazon-mws": "0.0.23",
-    "ava": "^1.2.0",
+    "ava": "^1.4.1",
     "codecov": "^3.1.0",
     "dotenv": "^6.2.0",
     "imparsable": "^1.0.7",
@@ -37,8 +36,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.4.0",
     "ts-node": "^8.0.2",
-    "typescript": "^3.3.1",
-    "winston": "^3.2.1"
+    "typescript": "^3.3.1"
   },
   "ava": {
     "compileEnhancements": false,
@@ -50,7 +48,7 @@
     ],
     "require": [
       "reflect-metadata",
-      "ts-node/register/transpile-only"
+      "ts-node/register"
     ],
     "sources": [
       "src/**/*.ts"
