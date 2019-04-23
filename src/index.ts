@@ -18,3 +18,4 @@ export * from './mws/get-marketplace-name';
 export * from './microservices/auth-checker';
 export * from './microservices/callback-responder';
 export * from './time';
+export * from './products/parse-barcode';
