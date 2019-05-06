@@ -40,7 +40,6 @@ export class Bootstrapper {
     }
 
     async bootstrap() {
-        this.logg.log(this.env);
         try {
             await this.dbDriver.connect();
         } catch (error) {
