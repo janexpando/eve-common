@@ -45,7 +45,3 @@ export const ENVIRONMENT_PROVIDER: Provider = {
     provide: Environment,
     useValue: Environment.create()
 };
-
-class Env2 extends Environment {
-
-}
