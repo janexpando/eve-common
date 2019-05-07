@@ -2,6 +2,7 @@ import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
 import Sentry = require('@sentry/node');
 import {isString} from "../utils";
+import safeStringify from 'fast-safe-stringify';
 
 @Injectable()
 export class ConsoleLogger {
@@ -18,6 +19,7 @@ export class ConsoleLogger {
         try {
             console.log(JSON.stringify(obj));
         } catch (e) {
+            console.log(safeStringify(obj));
         }
     }
 
