@@ -6,20 +6,29 @@ import safeStringify from 'fast-safe-stringify';
 
 @Injectable()
 export class ConsoleLogger {
-    log(...args: any[]) {
+    log = (...args: any[]) => {
         console.log(...args);
-    }
+    };
 
     error = (error: Error | string) => {
-        console.error(error);
+        console.error(this.stringify(error));
         this.reportError(error);
     };
 
-    json(obj) {
+    debug = (obj) => {
+        console.debug(this.stringify(obj));
+    };
+
+    json = (obj) => {
+        console.log(this.stringify(obj));
+    };
+
+    private stringify(obj): string {
+        if (isString(obj)) return JSON.stringify({message: obj});
         try {
-            console.log(JSON.stringify(obj));
+            return JSON.stringify(obj);
         } catch (e) {
-            console.log(safeStringify(obj));
+            return safeStringify(obj);
         }
     }
 
