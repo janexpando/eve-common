@@ -10,9 +10,19 @@ export class ConsoleLogger {
         console.log(...args);
     }
 
-    error = (error: Error | string) => {
-        console.error(error);
-        this.reportError(error);
+    error = (error: any) => {
+        let sentryId = this.reportError(error);
+        if(isString(error)){
+            error = {
+                message: error,
+                sentryId
+            }
+        }
+        try {
+            console.error(JSON.stringify(error));
+        } catch (e) {
+            console.error(safeStringify(error));
+        }
     };
 
     json(obj) {
@@ -23,17 +33,21 @@ export class ConsoleLogger {
         }
     }
 
-    private reportError(error: Error | string) {
+    private reportError(error: Error | string): string {
         if (isString(error)) {
-            Sentry.captureMessage(error);
+            return Sentry.captureMessage(error);
         } else {
-            Sentry.captureException(error);
+            return Sentry.captureException(error);
         }
     }
 
-    companyError(companyId: ObjectId, error: Error | string) {
-        console.error(`[${companyId}]: `, error);
-        (error as any).companyId = companyId;
-        this.reportError(error);
+    companyError(companyId: ObjectId, error) {
+        if(isString(error)){
+            error = {
+                message: error,
+                companyId
+            }
+        }
+        this.error(error);
     }
 }
