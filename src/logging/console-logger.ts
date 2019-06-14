@@ -18,18 +18,23 @@ export class ConsoleLogger {
                 sentryId
             }
         }
-        try {
-            console.error(JSON.stringify(error));
-        } catch (e) {
-            console.error(safeStringify(error));
-        }
+        console.error(this.stringify(error))
+    };
+
+    debug = (obj) => {
+        console.debug(this.stringify(obj));
     };
 
     json(obj) {
+        console.log(this.stringify(obj));
+    }
+
+    private stringify(obj): string {
+        if (isString(obj)) return JSON.stringify({message: obj});
         try {
-            console.log(JSON.stringify(obj));
+            return JSON.stringify(obj);
         } catch (e) {
-            console.log(safeStringify(obj));
+            return safeStringify(obj);
         }
     }
 
