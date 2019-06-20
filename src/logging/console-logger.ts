@@ -12,11 +12,13 @@ export class ConsoleLogger {
 
     error = (error: any) => {
         let sentryId = this.reportError(error);
-        if(isString(error)){
+        if (isString(error)) {
             error = {
                 message: error,
                 sentryId
             }
+        } else {
+            error.sentryId = sentryId;
         }
         console.error(this.stringify(error))
     };
@@ -47,11 +49,13 @@ export class ConsoleLogger {
     }
 
     companyError(companyId: ObjectId, error) {
-        if(isString(error)){
+        if (isString(error)) {
             error = {
-                message: error,
-                companyId
-            }
+                companyId,
+                message: error
+            };
+        } else {
+            error.companyId = companyId;
         }
         this.error(error);
     }
