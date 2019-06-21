@@ -4,7 +4,7 @@ import {ObjectId} from "bson";
 
 
 export class MwsCredentialsClient extends EveClient {
-    protected constructor(protected env: Environment) {
+    constructor(protected env: Environment) {
         super(env);
         this.baseUrl = this.env.COMPANY_SERVICE_URL;
     }

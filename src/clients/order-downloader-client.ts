@@ -22,7 +22,7 @@ interface OrdersDownloadBody {
 @Injectable()
 export class OrderDownloaderClient extends EveClient {
 
-    protected constructor(protected env: Environment,
+    constructor(protected env: Environment,
                 private mwsCredentialsKeeper: MwsCredentialsClient,
                 private developerConfigKeeper: DeveloperConfigClient,
                 private logger: ConsoleLogger) {

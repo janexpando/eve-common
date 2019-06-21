@@ -3,7 +3,7 @@ import {EveClient} from "./eve-client";
 import {Dict, Environment, MarketplaceName} from "..";
 
 export class SettingsClient extends EveClient {
-    protected constructor(protected env: Environment) {
+    constructor(protected env: Environment) {
         super(env);
         this.baseUrl = this.env.SERVICE_URL;
     }

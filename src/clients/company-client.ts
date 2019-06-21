@@ -3,7 +3,7 @@ import {Environment, EveClient} from "..";
 
 @Injectable()
 export class CompanyClient extends EveClient {
-    protected constructor(protected env: Environment) {
+    constructor(protected env: Environment) {
         super(env);
         this.baseUrl = this.env.COMPANY_SERVICE_URL;
     }

@@ -4,7 +4,7 @@ import {AmazonType, Dict, Environment, EveClient, ApiBarcode, MarketplaceName} f
 
 @Injectable()
 export class ProductServiceClient extends EveClient {
-    protected constructor(protected env: Environment) {
+    constructor(protected env: Environment) {
         super(env);
         this.baseUrl = this.env.PRODUCT_SERVICE_URL;
     }

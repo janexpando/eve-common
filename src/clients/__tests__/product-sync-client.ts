@@ -3,9 +3,9 @@ import { ObjectId } from 'bson';
 import nock = require('nock');
 import timekeeper = require('timekeeper');
 import {provideInjector, test} from "../../testing";
-import {Environment} from "../..";
+import {Environment, ENVIRONMENT_PROVIDER} from "../..";
 
-provideInjector(test);
+provideInjector(test, [ProductSyncClient, ENVIRONMENT_PROVIDER]);
 test.serial('get product sync', async t => {
     timekeeper.freeze(1557393716603);
 

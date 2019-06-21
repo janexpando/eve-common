@@ -4,7 +4,7 @@ import {Environment, MarketplaceName} from "..";
 
 @Injectable()
 export class ProductPricingClient extends EveClient{
-    protected constructor(
+    constructor(
         protected env: Environment,
     ) {
         super(env);

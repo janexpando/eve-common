@@ -15,7 +15,7 @@ export interface ApiProductSync {
 
 @Injectable()
 export class ProductSyncClient extends EveClient {
-    protected constructor(protected env: Environment) {
+    constructor(protected env: Environment) {
         super(env);
         this.baseUrl = this.env.PRODUCT_SERVICE_URL;
     }

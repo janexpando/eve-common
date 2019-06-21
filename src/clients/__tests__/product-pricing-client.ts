@@ -1,9 +1,9 @@
 import nock = require('nock');
-import {Environment} from "../..";
+import {Environment, ENVIRONMENT_PROVIDER} from "../..";
 import {ProductPricingClient} from "../product-pricing-client";
 import {provideInjector, test} from "../../testing";
 
-provideInjector(test);
+provideInjector(test, [ProductPricingClient, ENVIRONMENT_PROVIDER]);
 test.serial('get pricing for product', async t => {
 
     let client = t.context.injector.get(ProductPricingClient);

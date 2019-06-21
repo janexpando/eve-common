@@ -8,7 +8,7 @@ import {GotInstance, GotJSONFn} from "got";
 export abstract class EveClient {
     protected baseUrl: string = 'https://eve.expan.do';
 
-    protected constructor(protected env: Environment) {}
+    constructor(protected env: Environment) {}
 
     get got(): GotInstance<GotJSONFn> {
         let token = this.env.EVE_AUTH_BEARER;
