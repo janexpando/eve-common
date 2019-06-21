@@ -1,8 +1,8 @@
-export type BarcodeKind = 'EAN_8' | 'EAN_13' | 'UPC' | 'ASIN' | 'wtf';
+export type ApiBarcodeType = 'EAN_8' | 'EAN_13' | 'UPC' | 'ASIN' | 'wtf';
 
-export interface IBarcode {
+export interface ApiBarcode {
     code: string;
-    type: BarcodeKind;
+    type: ApiBarcodeType;
 }
 
 function checkBarcode(code, weightArray) {
@@ -18,7 +18,7 @@ function checkBarcode(code, weightArray) {
     return difference.toString() === code[code.length - 1];
 }
 
-export function parseBarcode(code): IBarcode {
+export function parseBarcode(code): ApiBarcode {
     if (code == null) {
         return {
             code,
@@ -26,7 +26,7 @@ export function parseBarcode(code): IBarcode {
         };
     }
     let check = false;
-    let codeType: BarcodeKind = 'wtf';
+    let codeType: ApiBarcodeType = 'wtf';
 
     if (code.length === 13) {
         check = checkBarcode(code, [1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3]);

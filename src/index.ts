@@ -19,3 +19,4 @@ export * from './microservices/auth-checker';
 export * from './microservices/callback-responder';
 export * from './time';
 export * from './products/parse-barcode';
+export * from './clients/eve-client';

@@ -1,0 +1,56 @@
+import { ObjectId } from 'bson';
+import {AmazonType, ConsoleLogger, Environment, EveClient} from "..";
+import {DeveloperConfigClient} from "./developer-config-client";
+import {MwsCredentialsClient} from "./mws-credentials-client";
+
+interface IMwsCredentials {
+    accessKey: string;
+    secretKey: string;
+    sellerId: string;
+    token: string;
+}
+
+interface FinancialEventsDownloadBody {
+    credentials: IMwsCredentials;
+    callback: string;
+    marketplace: AmazonType;
+    fromDate: Date;
+}
+
+export class FinancialEventsClient extends EveClient{
+    protected constructor(protected env: Environment,
+                private mwsCredentialsKeeper: MwsCredentialsClient,
+                private developerConfigKeeper: DeveloperConfigClient,
+                private logger: ConsoleLogger) {
+        super(env);
+        this.baseUrl = this.env.ORDER_DOWNLOADER_URL;
+    }
+
+    async downloadFinancialEvents(
+        companyId: ObjectId,
+        marketplace: AmazonType,
+        fromDate: Date,
+    ) {
+        let { developerId, token, sellerId } = await this.mwsCredentialsKeeper.getCredentials(companyId, marketplace);
+        let { accessKey, secretKey } = await this.developerConfigKeeper.getMwsConfig(developerId);
+        this.logger.json({
+            companyId,
+            marketplace,
+            fromDate,
+            message: 'Requesting financial events downloader',
+        });
+        await this.got.post(`/company/${companyId}/finances/financial-events`, {
+            body: {
+                marketplace,
+                fromDate,
+                credentials: {
+                    sellerId,
+                    token,
+                    accessKey,
+                    secretKey,
+                },
+                callback: `${this.env.SERVICE_URL}/company/${companyId}/finances/financial-events`,
+            } as FinancialEventsDownloadBody,
+        });
+    }
+}
