@@ -1,7 +1,8 @@
 import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
-import {Environment, EveClient} from "..";
 import * as got from "got";
+import {EveClient} from "./eve-client";
+import {Environment} from "../bootstrapping/environment";
 
 export interface ApiProductSync {
     interval: number;

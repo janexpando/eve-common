@@ -1,7 +1,9 @@
 import { Injectable } from 'injection-js';
 import {EveClient} from "./eve-client";
-import {CurrencyCode, Environment, MarketplaceName} from "..";
 import {ObjectId} from "bson";
+import {Environment} from "../bootstrapping/environment";
+import {MarketplaceName} from "../models/marketplace-names";
+import {CurrencyCode} from "../models/currency";
 
 @Injectable()
 export class ShoptetServiceClient extends EveClient {

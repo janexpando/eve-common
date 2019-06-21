@@ -1,6 +1,8 @@
 import {ObjectId} from 'bson';
 import {EveClient} from "./eve-client";
-import {Dict, Environment, MarketplaceName} from "..";
+import {Environment} from "../bootstrapping/environment";
+import {Dict} from "../types";
+import {MarketplaceName} from "../models/marketplace-names";
 
 export class SettingsClient extends EveClient {
     constructor(protected env: Environment) {

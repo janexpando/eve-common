@@ -1,6 +1,7 @@
 import {EveClient} from "./eve-client";
-import {AmazonType, Environment} from "..";
 import {ObjectId} from "bson";
+import {Environment} from "../bootstrapping/environment";
+import {AmazonType} from "../models/marketplace-names";
 
 
 export class MwsCredentialsClient extends EveClient {

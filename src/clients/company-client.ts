@@ -1,5 +1,6 @@
 import {Injectable} from "injection-js";
-import {Environment, EveClient} from "..";
+import {Environment} from "../bootstrapping/environment";
+import {EveClient} from "./eve-client";
 
 @Injectable()
 export class CompanyClient extends EveClient {

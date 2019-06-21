@@ -1,6 +1,10 @@
 import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
-import {AmazonType, Dict, Environment, EveClient, ApiBarcode, MarketplaceName} from "..";
+import {EveClient} from "./eve-client";
+import {Environment} from "../bootstrapping/environment";
+import {AmazonType, MarketplaceName} from "../models/marketplace-names";
+import {Dict} from "../types";
+import {ApiBarcode} from "../products/parse-barcode";
 
 @Injectable()
 export class ProductServiceClient extends EveClient {

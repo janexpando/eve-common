@@ -1,6 +1,7 @@
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
-import {Environment, EveClient} from "..";
+import {Environment} from "../bootstrapping/environment";
+import {EveClient} from "./eve-client";
 
 @Injectable()
 export class BlacklistClient extends EveClient {
