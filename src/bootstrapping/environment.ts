@@ -21,6 +21,12 @@ export class Environment {
     SERVICE_URL: string;
     GATEWAY_URL: string;
     FRONTEND_URL: string;
+    SHOPTET_SERVICE_URL: string;
+    PRODUCT_SERVICE_URL: string;
+    COMPANY_SERVICE_URL: string;
+    ORDER_DOWNLOADER_URL: string;
+    PRICING_SERVICE_URL: string;
+    SENDINBLUE_TOKEN: string;
 
 
     protected schema: ObjectSchema = object({
@@ -32,6 +38,12 @@ export class Environment {
         SERVICE_URL: string().default('http://127.0.0.1:3333'),
         GATEWAY_URL: string().required(),
         FRONTEND_URL: string().required(),
+        SHOPTET_SERVICE_URL: string().required(),
+        PRODUCT_SERVICE_URL: string().required(),
+        COMPANY_SERVICE_URL: string().required(),
+        ORDER_DOWNLOADER_URL: string().required(),
+        PRICING_SERVICE_URL: string().required(),
+        SENDINBLUE_TOKEN: string().required(),
     }).options({stripUnknown: true});
 
     init() {

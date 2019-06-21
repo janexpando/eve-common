@@ -11,6 +11,7 @@
     "test:watch": "ava --watch",
     "ava": "ava",
     "check": "tsc --noEmit",
+    "check:watch": "tsc --noEmit -w",
     "prepublish": "npm run build",
     "coverage-report": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
@@ -69,12 +70,13 @@
     "all": true
   },
   "dependencies": {
-    "@types/got": "^9.4.0",
+    "@types/got": "^9.6.0",
     "fast-safe-stringify": "^2.0.6",
     "got": "^9.6.0",
     "koa-bearer-token": "^1.0.0",
     "koa-compose": "^4.1.0",
     "request-promise-native": "^1.0.5",
+    "timekeeper": "^2.2.0",
     "ts-essentials": "^2.0.0"
   },
   "peerDependencies": {
