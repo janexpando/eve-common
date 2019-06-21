@@ -41,7 +41,10 @@
     "rxjs": "^6.4.0",
     "ts-node": "^8.0.2",
     "typescript": "^3.3.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "timekeeper": "^2.2.0",
+    "@types/got": "^9.6.0",
+    "got": "^9.6.0"
   },
   "ava": {
     "compileEnhancements": false,
@@ -70,16 +73,14 @@
     "all": true
   },
   "dependencies": {
-    "@types/got": "^9.6.0",
     "fast-safe-stringify": "^2.0.6",
-    "got": "^9.6.0",
     "koa-bearer-token": "^1.0.0",
     "koa-compose": "^4.1.0",
     "request-promise-native": "^1.0.5",
-    "timekeeper": "^2.2.0",
     "ts-essentials": "^2.0.0"
   },
   "peerDependencies": {
+    "got": "^9.6.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "reflect-metadata": "^0.1.13",
