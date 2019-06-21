@@ -19,4 +19,17 @@ export * from './microservices/auth-checker';
 export * from './microservices/callback-responder';
 export * from './time';
 export * from './products/parse-barcode';
+
+export * from './clients/blacklist-client';
+export * from './clients/company-client';
+export * from './clients/developer-config-client';
 export * from './clients/eve-client';
+export * from './clients/financial-events-client';
+export * from './clients/mws-credentials-client';
+export * from './clients/order-downloader-client';
+export * from './clients/product-pricing-client';
+export * from './clients/product-service-client';
+export * from './clients/product-sync-client';
+export * from './clients/sendinblue-client';
+export * from './clients/settings-client';
+export * from './clients/shoptet-service-client';
