@@ -33,3 +33,9 @@ export * from './clients/product-sync-client';
 export * from './clients/sendinblue-client';
 export * from './clients/settings-client';
 export * from './clients/shoptet-service-client';
+
+export * from './stream/array-to-readable';
+export * from './stream/string-to-readable';
+export * from './stream/temp-file';
+export * from './stream/transform/chunk-aggregator';
+export * from './stream/transform/noop';
