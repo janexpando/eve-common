@@ -1,4 +1,3 @@
-import test from '../../../test/global-ava';
 import {
     getLastMonthStart,
     getLastWeekStart,
@@ -7,6 +6,7 @@ import {
     getWeekStart,
     getYesterdayMidnight,
 } from '../time-bending';
+import {test} from "../../testing";
 
 test('get yesterday', t => {
     let result = getYesterdayMidnight(new Date('2019-01-21T12:00:00Z'));

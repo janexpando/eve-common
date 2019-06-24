@@ -1,6 +1,18 @@
 import {Injectable} from "injection-js";
 import {Environment} from "../bootstrapping/environment";
 import {EveClient} from "./eve-client";
+import {ObjectId} from "bson";
+
+
+export type ApiFeedType = 'GOOGLE_PRODUCT' | 'SHOPIFY' | 'SHOPTET';
+
+export interface ApiCompany {
+    _id: string;
+    name: string;
+    feedType: ApiFeedType;
+    feedUrl: string;
+    active: boolean;
+}
 
 @Injectable()
 export class CompanyClient extends EveClient {
@@ -9,8 +21,13 @@ export class CompanyClient extends EveClient {
         this.baseUrl = this.env.COMPANY_SERVICE_URL;
     }
 
-    async getCompanies(): Promise<{ _id: string }[]> {
+    async getCompanies(): Promise<ApiCompany[]> {
         let response = await this.got.get(`/company`);
+        return response.body;
+    }
+
+    async getCompanyById(companyId: ObjectId): Promise<ApiCompany> {
+        let response = await this.got.get(`/company/${companyId}`);
         return response.body;
     }
 }
