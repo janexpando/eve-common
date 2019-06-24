@@ -74,6 +74,7 @@
     "all": true
   },
   "dependencies": {
+    "@types/nock": "^10.0.3",
     "fast-safe-stringify": "^2.0.6",
     "koa-bearer-token": "^1.0.0",
     "koa-compose": "^4.1.0",

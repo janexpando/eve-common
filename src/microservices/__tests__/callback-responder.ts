@@ -38,7 +38,7 @@ test('respond with iterable', async t => {
         .use(bodyparser())
         .use(ctx => {
             t.is(ctx.header.authorization, `Bearer ${token}`);
-            indexes.push(ctx.request.body.index);
+            indexes.push(ctx.request.body.mws);
             ctx.body = 'ok';
         });
     let server = app.listen();

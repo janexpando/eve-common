@@ -27,11 +27,11 @@ test.serial('get pricing for product', async t => {
             'Date',
             'Wed, 22 May 2019 10:04:56 GMT',
             'Connection',
-            'close']);
+            'close'] as any);
 
     nock(env.PRICING_SERVICE_URL, { 'encodedQueryParams': true })
         .get('/marketplace/amazon_de/asin/B002W5S2IS_X', { 'sellerId': 'A11ECV7XDUNWGU' })
-        .reply(204, '', ['Date', 'Wed, 22 May 2019 10:04:56 GMT', 'Connection', 'close']);
+        .reply(204, '', ['Date', 'Wed, 22 May 2019 10:04:56 GMT', 'Connection', 'close'] as any);
 
     let pricing = await client.getPricing('amazon_de', 'B002W5S2IS', 'A11ECV7XDUNWGU');
     let emptyPricing = await client.getPricing('amazon_de', 'B002W5S2IS_X', 'A11ECV7XDUNWGU');

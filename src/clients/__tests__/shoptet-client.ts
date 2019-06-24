@@ -85,12 +85,12 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
             }],
         })
         .reply(200, {}, ['Content-Type',
-            'application/json; charset=utf-8',
+            "application/json; charset=utf-8",
             'Content-Length',
             '2',
             'Date',
             'Fri, 26 Apr 2019 13:20:04 GMT',
             'Connection',
-            'close']);
+            'close'] as any);
 
 }
