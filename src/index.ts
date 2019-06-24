@@ -17,7 +17,7 @@ export * from './mws/get-marketplace-id';
 export * from './mws/get-marketplace-name';
 export * from './microservices/auth-checker';
 export * from './microservices/callback-responder';
-export * from './time';
+export * from './time/time';
 export * from './products/parse-barcode';
 
 export * from './clients/blacklist-client';
