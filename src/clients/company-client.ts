@@ -4,7 +4,7 @@ import {EveClient} from "./eve-client";
 import {ObjectId} from "bson";
 
 
-export type ApiFeedType = 'GOOGLE_PRODUCT' | 'SHOPIFY' | 'SHOPTET';
+export type ApiFeedType = 'GOOGLE_PRODUCT' | 'SHOPIFY' | 'SHOPTET' | 'CUSTOM';
 
 export interface ApiCompany {
     _id: string;
