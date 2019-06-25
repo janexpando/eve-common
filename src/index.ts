@@ -26,6 +26,7 @@ export * from './time/stop-watch';
 export * from './products/parse-barcode';
 
 export * from './clients/blacklist-client';
+export * from './clients/marketplace-client';
 export * from './clients/company-client';
 export * from './clients/developer-config-client';
 export * from './clients/eve-client';
