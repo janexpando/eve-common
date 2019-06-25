@@ -5,6 +5,7 @@ import {DeveloperConfigClient} from "./developer-config-client";
 import {MwsCredentialsClient} from "./mws-credentials-client";
 import {AmazonType} from "../models/marketplace-names";
 import {ConsoleLogger} from "../logging/console-logger";
+import {Injectable} from "injection-js";
 
 interface IMwsCredentials {
     accessKey: string;
@@ -20,6 +21,7 @@ interface FinancialEventsDownloadBody {
     fromDate: Date;
 }
 
+@Injectable()
 export class FinancialEventsClient extends EveClient{
     constructor(protected env: Environment,
                 private mwsCredentialsKeeper: MwsCredentialsClient,

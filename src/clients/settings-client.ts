@@ -3,7 +3,9 @@ import {EveClient} from "./eve-client";
 import {Environment} from "../bootstrapping/environment";
 import {Dict} from "../types";
 import {MarketplaceName} from "../models/marketplace-names";
+import {Injectable} from "injection-js";
 
+@Injectable()
 export class SettingsClient extends EveClient {
     constructor(protected env: Environment) {
         super(env);
