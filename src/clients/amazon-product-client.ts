@@ -1,6 +1,6 @@
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
-import {Environment} from "..";
+import {Environment} from "../bootstrapping/environment";
 import {EveClient} from "./eve-client";
 import {MarketplaceName} from "..";
 

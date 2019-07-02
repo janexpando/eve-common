@@ -1,8 +1,7 @@
-import { Injectable } from 'injection-js';
-import got = require('got');
+import {Injectable} from "injection-js";
+import {Environment} from "../bootstrapping/environment";
 import {GotInstance, GotJSONFn} from "got";
-import {Environment} from "..";
-
+import got = require("got");
 
 @Injectable()
 export abstract class EveClient {

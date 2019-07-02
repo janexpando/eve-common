@@ -1,10 +1,10 @@
 import { ObjectId } from 'bson';
-import {Environment} from "..";
+import {Environment} from "../bootstrapping/environment";
 import {EveClient} from "./eve-client";
 import {DeveloperConfigClient} from "./developer-config-client";
 import {MwsCredentialsClient} from "./mws-credentials-client";
-import {AmazonType} from "..";
-import {ConsoleLogger} from "..";
+import {AmazonType} from "../models/marketplace-names";
+import {ConsoleLogger} from "../logging/console-logger";
 import {Injectable} from "injection-js";
 
 interface IMwsCredentials {
