@@ -1,5 +1,5 @@
 import {Injectable} from "injection-js";
-import {Environment} from "../bootstrapping/environment";
+import {Environment} from "..";
 import {EveClient} from "./eve-client";
 import {ObjectId} from "bson";
 

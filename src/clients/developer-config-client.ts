@@ -1,7 +1,7 @@
 import {Injectable} from 'injection-js';
-import {Environment} from "../bootstrapping/environment";
+import {Environment} from "..";
 import {EveClient} from "./eve-client";
-import {ContinentName} from "../models/continent-names";
+import {ContinentName} from "..";
 
 @Injectable()
 export class DeveloperConfigClient extends EveClient {
