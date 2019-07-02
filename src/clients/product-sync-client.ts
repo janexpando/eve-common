@@ -42,8 +42,8 @@ export class ProductSyncClient extends EveClient {
         };
     }
 
-    async syncCompanyManually(companyId: ObjectId, onlyFeed: false) {
-        let response: got.Response<any> = await this.got.post(
+    async syncCompanyManually(companyId: ObjectId, onlyFeed: boolean) {
+        await this.got.post(
             `/company/${companyId.toHexString()}/product-sync`, {
                 body: {onlyFeed}
             }
