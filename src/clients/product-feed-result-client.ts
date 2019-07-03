@@ -10,6 +10,14 @@ export type ProductFeedType =
     | "NONE"
     | "CUSTOM";
 
+export const PRODUCT_FEED_TYPE: ProductFeedType[] = [
+    "GOOGLE_PRODUCT",
+    "SHOPIFY",
+    "SHOPTET",
+    "NONE",
+    "CUSTOM"
+];
+
 export interface ApiProductFeedResult {
     companyId: ObjectId;
     productsInStock: number;
