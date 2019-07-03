@@ -27,6 +27,7 @@ test.serial('get product sync', async t => {
     let restSync: ApiProductSync = sync as any;
     restSync.isFeedSyncing = false;
     restSync.isSyncing = false;
+    restSync.isFeedSyncIncoming = false;
     delete (restSync as any).jobId;
     delete (restSync as any).companyId;
 

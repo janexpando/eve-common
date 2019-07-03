@@ -12,6 +12,7 @@ export interface ApiProductSync {
     feedDownloadStartedOn: Date;
     feedDownloadFinishedOn: Date;
     isFeedSyncing: boolean;
+    isFeedSyncIncoming: boolean;
 }
 
 @Injectable()
@@ -39,6 +40,7 @@ export class ProductSyncClient extends EveClient {
                 response.body.feedDownloadFinishedOn &&
                 new Date(response.body.feedDownloadFinishedOn),
             isFeedSyncing: response.body.isFeedSyncing,
+            isFeedSyncIncoming: response.body.isFeedSyncIncoming,
         };
     }
 
