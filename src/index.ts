@@ -25,6 +25,7 @@ export * from './time/stop-watch';
 
 export * from './products/parse-barcode';
 
+export * from './clients/amazon-error-rates-client';
 export * from './clients/amazon-product-client';
 export * from './clients/blacklist-client';
 export * from './clients/marketplace-client';
