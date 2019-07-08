@@ -5,6 +5,8 @@ import {EveClient} from "./eve-client";
 import {Environment} from "../bootstrapping/environment";
 
 export interface ApiProductSync {
+    _id: string;
+    companyId: ObjectId;
     interval: number;
     startedOn: Date;
     finishedOn: Date;
@@ -28,6 +30,8 @@ export class ProductSyncClient extends EveClient {
         );
         if (!response.body) return null;
         return {
+            _id: response.body._id,
+            companyId: new ObjectId(response.body.companyId),
             interval: response.body.interval,
             startedOn: new Date(response.body.startedOn),
             finishedOn:

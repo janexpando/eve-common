@@ -15,6 +15,7 @@ test.serial('get product sync', async t => {
 
     let date = new Date(Date.now());
     let sync = {
+        _id: "abc-123-abc",
         companyId,
         jobId: new ObjectId(),
         interval: 180,
@@ -29,7 +30,6 @@ test.serial('get product sync', async t => {
     restSync.isSyncing = false;
     restSync.isFeedSyncIncoming = false;
     delete (restSync as any).jobId;
-    delete (restSync as any).companyId;
 
     nock(`${environment.PRODUCT_SERVICE_URL}`)
         .get(`/company/${cid}/product-sync`)
