@@ -18,6 +18,13 @@ export class SettingsClient extends EveClient {
         settings.companyId = new ObjectId(settings.companyId);
         return settings;
     }
+
+    async setFormula(companyId: ObjectId): Promise<ApiSyncSettings> {
+        let response = await this.got.patch(`/company/${companyId}/settings`);
+        let settings = response.body;
+        settings.companyId = new ObjectId(settings.companyId);
+        return settings;
+    }
 }
 
 export interface ApiSyncSettings {
