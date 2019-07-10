@@ -9,7 +9,7 @@ import {Injectable} from "injection-js";
 export class SettingsClient extends EveClient {
     constructor(protected env: Environment) {
         super(env);
-        this.baseUrl = this.env.SERVICE_URL;
+        this.baseUrl = this.env.COMPANY_SERVICE_URL;
     }
 
     async getOrCreate(companyId: ObjectId): Promise<ApiSyncSettings> {
