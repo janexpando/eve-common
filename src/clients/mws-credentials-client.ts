@@ -11,7 +11,6 @@ export class MwsCredentialsClient extends EveClient {
         this.baseUrl = this.env.COMPANY_SERVICE_URL;
     }
 
-
     async getCredentials(companyId: ObjectId, marketplace: AmazonType): Promise<ApiMwsCredentials> {
         let result = await this.got.get(`/company/${companyId}/marketplace/${marketplace}/mws-credentials`);
         return result.body;
