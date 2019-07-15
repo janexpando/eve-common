@@ -30,6 +30,7 @@ export * from './clients/amazon-product-client';
 export * from './clients/blacklist-client';
 export * from './clients/marketplace-client';
 export * from './clients/company-client';
+export * from './clients/company-error-client';
 export * from './clients/developer-config-client';
 export * from './clients/eve-client';
 export * from './clients/financial-events-client';
