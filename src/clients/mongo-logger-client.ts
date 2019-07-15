@@ -14,7 +14,7 @@ export class MongoLoggerClient extends EveClient {
         const url = `/company/${companyId}/log/last-synced`;
         let response = await this.got.get(url);
         let lastSynced = response.body && response.body.lastSynced;
-        if(!lastSynced) return null;
+        if(!lastSynced) return lastSynced;
         return new Date(lastSynced);
     }
 }
