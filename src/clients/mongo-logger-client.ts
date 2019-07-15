@@ -13,6 +13,8 @@ export class MongoLoggerClient extends EveClient {
     async getLastSynced(companyId: ObjectId): Promise<Date> {
         const url = `/company/${companyId}/log/last-synced`;
         let response = await this.got.get(url);
-        return response.body && response.body.lastSynced;
+        let lastSynced = response.body && response.body.lastSynced;
+        if(!lastSynced) return null;
+        return new Date(lastSynced);
     }
 }
