@@ -25,6 +25,7 @@ export interface ApiSyncSettings {
     synchronizePrices: boolean;
     synchronizeStock: boolean;
     listNewProducts: boolean;
+    zeroUnmatchedProducts: boolean;
     formulas: Dict<ApiFormula, MarketplaceName>;
 }
 
