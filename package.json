@@ -75,9 +75,11 @@
   },
   "dependencies": {
     "@types/nock": "^10.0.3",
+    "@types/pino": "^5.8.8",
     "fast-safe-stringify": "^2.0.6",
     "koa-bearer-token": "^1.0.0",
     "koa-compose": "^4.1.0",
+    "pino": "^5.12.6",
     "request-promise-native": "^1.0.5",
     "ts-essentials": "^2.0.0"
   },

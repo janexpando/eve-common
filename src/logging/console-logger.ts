@@ -2,12 +2,17 @@ import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
 import Sentry = require('@sentry/node');
 import {isString} from "../utils";
-import safeStringify from 'fast-safe-stringify';
+import * as pino from 'pino';
 
 @Injectable()
 export class ConsoleLogger {
+
+    private pinoLogger = pino();
+
+
     log(...args: any[]) {
-        console.log(...args);
+        // @ts-ignore
+        this.pinoLogger.info(...args);
     }
 
     error = (error: any) => {
@@ -20,24 +25,15 @@ export class ConsoleLogger {
         } else {
             error.sentryId = sentryId;
         }
-        console.error(this.stringify(error))
+        this.pinoLogger.error(error);
     };
 
     debug = (obj) => {
-        console.debug(this.stringify(obj));
+        this.pinoLogger.debug(obj)
     };
 
     json(obj) {
-        console.log(this.stringify(obj));
-    }
-
-    private stringify(obj): string {
-        if (isString(obj)) return JSON.stringify({message: obj});
-        try {
-            return JSON.stringify(obj);
-        } catch (e) {
-            return safeStringify(obj);
-        }
+        this.pinoLogger.info(obj)
     }
 
     private reportError(error: Error | string): string {
