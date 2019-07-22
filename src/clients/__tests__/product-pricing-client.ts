@@ -70,3 +70,98 @@ test.serial('get pricing for product', async t => {
     });
     t.deepEqual(emptyPricing, null);
 });
+
+test.serial('get buy box winners', async t => {
+
+    let client = t.context.injector.get(ProductPricingClient);
+    let env = t.context.injector.get(Environment);
+    // nock.recorder.rec();
+
+    nock(env.PRICING_SERVICE_URL, { "encodedQueryParams": true })
+        .get('/buyBoxWinners', [])
+        .reply(200, {
+                "buyBoxWinners": [{
+                    "_id": "5d35b0058ccaa0995bc40b72",
+                    "asin": "4SH-L150M",
+                    "marketplace": "amazon_de",
+                    "offers": [{
+                        "isBuyBoxWinner": true,
+                        "isFeaturedMerchant": true,
+                        "isFulfilledByAmazon": false,
+                        "sellerId": "abc",
+                        "listingPrice": 14.74,
+                        "shippingPrice": 9,
+                        "feedback": { "count": 95, "rating": 90 },
+                        "shippingTime": { "minimumHours": 24, "maximumHours": 48 }
+                    }]
+                }, {
+                    "_id": "5d35b0058ccaa0995bc40b74",
+                    "asin": "OKWEFP",
+                    "marketplace": "amazon_uk",
+                    "offers": [{
+                        "isBuyBoxWinner": true,
+                        "isFeaturedMerchant": true,
+                        "isFulfilledByAmazon": false,
+                        "sellerId": "wer",
+                        "listingPrice": 14.74,
+                        "shippingPrice": 9,
+                        "feedback": { "count": 95, "rating": 90 },
+                        "shippingTime": { "minimumHours": 24, "maximumHours": 48 }
+                    }]
+                }]
+            },
+            ['Content-Type',
+                'application/json; charset=utf-8',
+                'Content-Length',
+                '644',
+                'Date',
+                'Mon, 22 Jul 2019 13:14:21 GMT',
+                'Connection',
+                'close'
+            ] as any);
+
+    let buyBoxWinners = await client.getBuyBoxWinners();
+
+    t.deepEqual(buyBoxWinners,
+        {
+            buyBoxWinners:
+                [{
+                    "_id": "5d35b0058ccaa0995bc40b72",
+                    "asin": "4SH-L150M",
+                    "marketplace": "amazon_de",
+                    "offers": [{
+                        "isBuyBoxWinner": true,
+                        "isFeaturedMerchant": true,
+                        "isFulfilledByAmazon": false,
+                        "sellerId": "abc",
+                        "listingPrice": 14.74,
+                        "shippingPrice": 9,
+                        "feedback":
+                            {
+                                "count": 95,
+                                "rating": 90
+                            },
+                        "shippingTime":
+                            {
+                                "minimumHours": 24,
+                                "maximumHours": 48
+                            }
+                    }]
+                },
+                    {
+                        "_id": "5d35b0058ccaa0995bc40b74",
+                        "asin": "OKWEFP",
+                        "marketplace": "amazon_uk",
+                        "offers": [{
+                            "isBuyBoxWinner": true,
+                            "isFeaturedMerchant": true,
+                            "isFulfilledByAmazon": false,
+                            "sellerId": "wer",
+                            "listingPrice": 14.74,
+                            "shippingPrice": 9,
+                            "feedback": { "count": 95, "rating": 90 },
+                            "shippingTime": { "minimumHours": 24, "maximumHours": 48 }
+                        }]
+                    }]
+        });
+});

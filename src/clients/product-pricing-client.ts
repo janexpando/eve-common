@@ -1,10 +1,10 @@
-import { Injectable } from 'injection-js';
+import {Injectable} from 'injection-js';
 import {EveClient} from "./eve-client";
 import {Environment} from "../bootstrapping/environment";
 import {MarketplaceName} from "../models/marketplace-names";
 
 @Injectable()
-export class ProductPricingClient extends EveClient{
+export class ProductPricingClient extends EveClient {
     constructor(
         protected env: Environment,
     ) {
@@ -21,5 +21,12 @@ export class ProductPricingClient extends EveClient{
         if (response.statusCode == 204)
             return null;
         return response.body;
+    }
+
+    async getBuyBoxWinners() {
+        let response = await this.got.get('/buyBoxWinners', {
+            body: [],
+        });
+        return response.body
     }
 }
