@@ -27,6 +27,8 @@ export class ProductPricingClient extends EveClient {
         let response = await this.got.get('/buyBoxWinners', {
             body: [],
         });
+        if (response.statusCode == 204)
+            return null;
         return response.body
     }
 }
