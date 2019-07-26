@@ -14,6 +14,18 @@ export interface ApiCompany {
     active: boolean;
 }
 
+export interface ApiSellerId {
+    _id: string;
+    mwsCredentials: IMwsCredential[]
+}
+
+export interface IMwsCredential {
+    marketplaceId: string;
+    developerId: string;
+    sellerId: string;
+    token: string;
+}
+
 @Injectable()
 export class CompanyClient extends EveClient {
     constructor(protected env: Environment) {
@@ -28,6 +40,11 @@ export class CompanyClient extends EveClient {
 
     async getCompanyById(companyId: ObjectId): Promise<ApiCompany> {
         let response = await this.got.get(`/company/${companyId}`);
+        return response.body;
+    }
+
+    async getSellerIds(): Promise<ApiSellerId[]> {
+        let response = await this.got.get(`/sellerId`);
         return response.body;
     }
 }
