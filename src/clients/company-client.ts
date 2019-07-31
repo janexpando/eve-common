@@ -16,15 +16,21 @@ export interface ApiCompany {
 
 export interface ApiSellerId {
     _id: string;
-    mwsCredentials: IMwsCredential[]
+    mwsCredentials: IMwsCredential[];
+    mwsMarketplaces: ICompanyMwsMarketplace[];
 }
 
 export interface IMwsCredential {
     marketplaceId: string;
-    developerId: string;
     sellerId: string;
-    token: string;
 }
+
+export interface ICompanyMwsMarketplace {
+    status: MarketplaceStatus;
+    marketplaceId: string;
+}
+
+export type MarketplaceStatus = "online" | "offline" | "error";
 
 @Injectable()
 export class CompanyClient extends EveClient {

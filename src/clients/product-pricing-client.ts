@@ -22,13 +22,4 @@ export class ProductPricingClient extends EveClient {
             return null;
         return response.body;
     }
-
-    async getBuyBoxWinners() {
-        let response = await this.got.get('/buyBoxWinners', {
-            body: [],
-        });
-        if (response.statusCode == 204)
-            return null;
-        return response.body
-    }
 }
