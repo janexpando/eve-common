@@ -9,7 +9,6 @@ export class ConsoleLogger {
 
     private pinoLogger = pino();
 
-
     log(...args: any[]) {
         // @ts-ignore
         this.pinoLogger.info(...args);

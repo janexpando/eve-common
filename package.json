@@ -1,6 +1,6 @@
 {
   "name": "eve-common",
-  "version": "4.8.4",
+  "version": "4.9.0",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,7 +27,7 @@
     "@types/mongoose": "^5.3.12",
     "@types/node": "^10.12.21",
     "amazon-mws": "0.0.23",
-    "ava": "^2.1.0",
+    "ava": "^2.2.0",
     "bson": "^4.0.2",
     "codecov": "^3.1.0",
     "dotenv": "^6.2.0",
