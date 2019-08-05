@@ -12,10 +12,11 @@ export class ProductPricingClient extends EveClient {
         this.baseUrl = this.env.PRICING_SERVICE_URL;
     }
 
-    async getPricing(marketplace: MarketplaceName, asin: string, sellerId: string = null) {
-        let response = await this.got.get(`/marketplace/${marketplace}/asin/${asin}`, {
+    async getPricing(marketplace: MarketplaceName, asins: string[], sellerId: string = null) {
+        let response = await this.got.get(`/marketplace/${marketplace}`, {
             body: {
                 sellerId,
+                asins
             },
         });
         if (response.statusCode == 204)
