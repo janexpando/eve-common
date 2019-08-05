@@ -20,7 +20,7 @@ export class ProductPricingClient extends EveClient {
             },
         });
         if (response.statusCode == 204)
-            return null;
+            return [];
         return response.body;
     }
 }

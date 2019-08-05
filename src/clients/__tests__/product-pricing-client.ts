@@ -10,8 +10,8 @@ test.serial('get pricing for product', async t => {
     let env = t.context.injector.get(Environment);
     // nock.recorder.rec();
     nock(env.PRICING_SERVICE_URL, { 'encodedQueryParams': true })
-        .get('/marketplace/amazon_de/asin/B002W5S2IS', { 'sellerId': 'A11ECV7XDUNWGU' })
-        .reply(200, {
+        .get('/marketplace/amazon_de', { 'sellerId': 'A11ECV7XDUNWGU', 'asins' : ['B002W5S2IS']})
+        .reply(200, [{
             'summary': {
                 'lowest': { 'landed': 49.8, 'listing': 49.8, 'shipping': 0, 'channel': 'Merchant' },
                 'buyBox': { 'landed': 50.03, 'listing': 50.03, 'shipping': 0 }, 'totalOffers': 144,
@@ -20,7 +20,7 @@ test.serial('get pricing for product', async t => {
                 'sellerId': 'A11ECV7XDUNWGU', 'listingPrice': 50.03, 'shippingPrice': 0,
                 'feedback': { 'count': 7170, 'rating': 99 }, 'shippingTime': { 'minimumHours': 24, 'maximumHours': 48 },
             },
-        }, ['Content-Type',
+        }], ['Content-Type',
             'application/json; charset=utf-8',
             'Content-Length',
             '404',
@@ -30,13 +30,13 @@ test.serial('get pricing for product', async t => {
             'close'] as any);
 
     nock(env.PRICING_SERVICE_URL, { 'encodedQueryParams': true })
-        .get('/marketplace/amazon_de/asin/B002W5S2IS_X', { 'sellerId': 'A11ECV7XDUNWGU' })
-        .reply(204, '', ['Date', 'Wed, 22 May 2019 10:04:56 GMT', 'Connection', 'close'] as any);
+        .get('/marketplace/amazon_de', { 'sellerId': 'A11ECV7XDUNWGU', 'asins' : ['B002W5S2IS_X'] })
+        .reply(204, [], ['Date', 'Wed, 22 May 2019 10:04:56 GMT', 'Connection', 'close'] as any);
 
-    let pricing = await client.getPricing('amazon_de', 'B002W5S2IS', 'A11ECV7XDUNWGU');
-    let emptyPricing = await client.getPricing('amazon_de', 'B002W5S2IS_X', 'A11ECV7XDUNWGU');
+    let pricing = await client.getPricing('amazon_de', ['B002W5S2IS'], 'A11ECV7XDUNWGU');
+    let emptyPricing = await client.getPricing('amazon_de', ['B002W5S2IS_X'], 'A11ECV7XDUNWGU');
 
-    t.deepEqual(pricing, {
+    t.deepEqual(pricing, [{
         'summary': {
             'lowest': {
                 'landed': 49.8,
@@ -67,6 +67,6 @@ test.serial('get pricing for product', async t => {
                 'maximumHours': 48,
             },
         },
-    });
-    t.deepEqual(emptyPricing, null);
+    }]);
+    t.deepEqual(emptyPricing, []);
 });
