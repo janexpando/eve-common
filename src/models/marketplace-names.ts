@@ -63,3 +63,11 @@ export function getContinentMarketplaces(continent: ContinentName): MarketplaceN
         return [];
     }
 }
+
+export function getContinent(marketplace: MarketplaceName): ContinentName {
+    if (AMAZON_EUROPE.includes(marketplace as AmazonEuropeType))
+        return 'europe';
+    if (AMAZON_AMERICA.includes(marketplace as AmazonAmericaType))
+        return 'america';
+    return null; //TODO: we need to resolve all continents
+}
