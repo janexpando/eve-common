@@ -20,6 +20,7 @@ export class ProductServiceClient extends EveClient {
         sort: any[],
         skip: number,
         perPage: number,
+        buyBox?: boolean
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/page`,
@@ -30,6 +31,7 @@ export class ProductServiceClient extends EveClient {
                     sort,
                     skip,
                     perPage,
+                    buyBox
                 },
             },
         );
