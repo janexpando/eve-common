@@ -49,8 +49,8 @@ export class CompanyClient extends EveClient {
         return response.body;
     }
 
-    async getSellerIds(): Promise<ApiSellerId[]> {
-        let response = await this.got.get(`/sellerId`);
+    async getSellerIds(companyId: ObjectId): Promise<ApiSellerId> {
+        let response = await this.got.get(`/company/${companyId}/sellerIds`);
         return response.body;
     }
 }
