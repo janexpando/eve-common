@@ -55,7 +55,7 @@ export class ProductPricingClient extends EveClient {
                 variants: variants.map(x => {
                     return {
                         barcode: x.barcode,
-                        price: x.prices[marketplace]
+                        price: x.prices[marketplace].selling
                     }
                 }),
                 credentials,
