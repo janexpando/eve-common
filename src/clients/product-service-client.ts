@@ -6,6 +6,13 @@ import {AmazonType, MarketplaceName} from "../models/marketplace-names";
 import {Dict} from "../types";
 import {ApiBarcode} from "../products/parse-barcode";
 
+export type ListingStatus =
+    | "ok"
+    | "paused"
+    | "notFound"
+    | "error"
+    | "missingBarcode";
+
 @Injectable()
 export class ProductServiceClient extends EveClient {
     constructor(protected env: Environment) {
@@ -21,7 +28,8 @@ export class ProductServiceClient extends EveClient {
         skip: number,
         perPage: number,
         buyBox?: boolean,
-        isBuyBoxWinner?: boolean
+        isBuyBoxWinner?: boolean,
+        listingStatus?: ListingStatus
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/page`,
@@ -33,7 +41,8 @@ export class ProductServiceClient extends EveClient {
                     skip,
                     perPage,
                     buyBox,
-                    isBuyBoxWinner
+                    isBuyBoxWinner,
+                    listingStatus
                 },
             },
         );
@@ -46,7 +55,8 @@ export class ProductServiceClient extends EveClient {
         marketplace: MarketplaceName,
         search: string,
         buyBox?: boolean,
-        isBuyBoxWinner?: boolean
+        isBuyBoxWinner?: boolean,
+        listingStatus?: ListingStatus
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/count`,
@@ -55,7 +65,8 @@ export class ProductServiceClient extends EveClient {
                     marketplace,
                     search,
                     buyBox,
-                    isBuyBoxWinner
+                    isBuyBoxWinner,
+                    listingStatus
                 },
             },
         );
