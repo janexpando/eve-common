@@ -5,6 +5,7 @@ import {Environment} from "../bootstrapping/environment";
 import {AmazonType, MarketplaceName} from "../models/marketplace-names";
 import {Dict} from "../types";
 import {ApiBarcode} from "../products/parse-barcode";
+import {IMwsCredentials} from "./product-pricing-client";
 
 export type ListingStatus =
     | "ok"
@@ -86,6 +87,19 @@ export class ProductServiceClient extends EveClient {
 
         return response.body;
     }
+
+    async requestShallowPricingReport(companyId: ObjectId, marketplace: MarketplaceName, credentials: IMwsCredentials) {
+        let response = await this.got.post(
+            `/company/${companyId}/marketplace/${marketplace}/shallow-pricing-report`,
+            {
+                body: {
+                    credentials
+                }
+            },
+        );
+
+        return response.body;
+    }
 }
 
 export interface ApiPrice {
@@ -97,6 +111,7 @@ export interface ApiPrice {
 }
 
 export interface ApiAsins extends Dict<string, AmazonType> {
+
 }
 
 export interface ApiVariant {

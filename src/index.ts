@@ -46,6 +46,7 @@ export * from './clients/product-stats-client';
 export * from './clients/product-sync-client';
 export * from './clients/sendinblue-client';
 export * from './clients/settings-client';
+export * from './clients/pricing-report-client'
 export * from './clients/shoptet-service-client';
 
 export * from './stream/array-to-readable';
