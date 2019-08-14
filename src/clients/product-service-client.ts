@@ -6,7 +6,7 @@ import {AmazonType, MarketplaceName} from "../models/marketplace-names";
 import {Dict} from "../types";
 import {ApiBarcode} from "../products/parse-barcode";
 
-export type ListingStatus =
+export type Status =
     | "ok"
     | "paused"
     | "notFound"
@@ -29,7 +29,7 @@ export class ProductServiceClient extends EveClient {
         perPage: number,
         buyBox?: boolean,
         isBuyBoxWinner?: boolean,
-        listingStatus?: ListingStatus
+        status?: Status
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/page`,
@@ -42,7 +42,7 @@ export class ProductServiceClient extends EveClient {
                     perPage,
                     buyBox,
                     isBuyBoxWinner,
-                    listingStatus
+                    status
                 },
             },
         );
@@ -56,7 +56,7 @@ export class ProductServiceClient extends EveClient {
         search: string,
         buyBox?: boolean,
         isBuyBoxWinner?: boolean,
-        listingStatus?: ListingStatus
+        status?: Status
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/count`,
@@ -66,7 +66,7 @@ export class ProductServiceClient extends EveClient {
                     search,
                     buyBox,
                     isBuyBoxWinner,
-                    listingStatus
+                    status
                 },
             },
         );
