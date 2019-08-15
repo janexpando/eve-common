@@ -15,7 +15,7 @@ export interface ApiListingStatus {
     companyId: ObjectId;
     marketplace: MarketplaceName;
     sku: string;
-    status: ListingStatusKind;
+    listingStatus: ListingStatusKind;
     listingErrors: ApiListingError[];
 }
 
