@@ -1,4 +1,4 @@
-import { ContinentName } from './continent-names';
+import {ContinentName} from './continent-names';
 
 export type AmazonEuropeType =
     | 'amazon_de'
@@ -44,9 +44,13 @@ export const AMAZON: AmazonType[] = []
     .concat(AMAZON_EUROPE)
     .concat(AMAZON_AMERICA);
 
-export type MarketplaceName = AmazonType;
+export type MallType = 'mall_cz'
 
-export const MARKETPLACES = AMAZON;
+export const MALL: MallType[] = ['mall_cz'];
+
+export type MarketplaceName = AmazonType | MallType;
+
+export const MARKETPLACES: MarketplaceName[] = [].concat(AMAZON).concat(MALL);
 
 export const america = AMAZON_AMERICA;
 
@@ -55,12 +59,12 @@ export const europe = AMAZON_EUROPE;
 
 export function getContinentMarketplaces(continent: ContinentName): MarketplaceName[] {
     switch (continent) {
-    case 'europe':
-        return AMAZON_EUROPE;
-    case 'america':
-        return AMAZON_AMERICA;
-    default:
-        return [];
+        case 'europe':
+            return AMAZON_EUROPE;
+        case 'america':
+            return AMAZON_AMERICA;
+        default:
+            return [];
     }
 }
 
