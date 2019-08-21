@@ -2,7 +2,7 @@ import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
 import {Environment} from "../bootstrapping/environment";
 import {EveClient} from "./eve-client";
-import {MarketplaceName} from "..";
+import {ApiProductStats, MarketplaceName} from "..";
 
 export type ListingStatusKind = "ok" | "error";
 
@@ -18,6 +18,15 @@ export interface ApiListingError {
     message: string;
 }
 
+export interface ApiListingStatus {
+    companyId: ObjectId;
+    marketplace: MarketplaceName;
+    sku: string;
+    listingStatus: ListingStatusKind;
+    listingErrors: ApiListingError[];
+}
+
+
 export interface ApiProductStatuses {
     companyId: ObjectId;
     marketplace: MarketplaceName;
@@ -32,6 +41,15 @@ export interface ApiProductStatuses {
     forbidListing?: boolean;
 }
 
+export interface ApiProductStats {
+    companyId: ObjectId;
+    marketplace: MarketplaceName;
+    ok: number;
+    paused: number;
+    notFound: number;
+    error: number;
+    missingBarcode: number;
+}
 
 @Injectable()
 export class ProductStatusesClient extends EveClient {
@@ -40,8 +58,26 @@ export class ProductStatusesClient extends EveClient {
         this.baseUrl = this.env.PRODUCT_SERVICE_URL;
     }
 
-    async get(companyId: ObjectId, marketplace: MarketplaceName, sku: string): Promise<ApiProductStatuses> {
+    async getListingStatus(companyId: ObjectId, sku: string): Promise<ApiListingStatus[]> {
+        const url = `/company/${companyId}/listing-status/${encodeURIComponent(sku)}`;
+        let response = await this.got.get(url);
+        return response.body;
+    }
+
+    async getForbidListings(companyId: ObjectId, sku: string) {
+        const url = `/company/${companyId}/blacklist/${encodeURIComponent(sku)}`;
+        let response = await this.got.get(url);
+        return response.body;
+    }
+
+    async getProductStatuses(companyId: ObjectId, marketplace: MarketplaceName, sku: string): Promise<ApiProductStatuses> {
         const url = `/company/${companyId}/marketplace/${marketplace}/sku/${encodeURIComponent(sku)}/product-statuses`;
+        let response = await this.got.get(url);
+        return response.body;
+    }
+
+    async getProductStats(companyId: ObjectId, marketplace: MarketplaceName): Promise<ApiProductStats> {
+        const url = `/company/${companyId}/marketplace/${marketplace}/product-stats`;
         let response = await this.got.get(url);
         return response.body;
     }

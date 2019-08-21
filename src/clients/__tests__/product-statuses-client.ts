@@ -91,8 +91,8 @@ test.serial('get product statuses', async t => {
             'Connection',
             'close' ] as any);
 
-    let result1 = await client.get(companyId, marketplace, sku1);
-    let result2 = await client.get(companyId, marketplace, sku2);
+    let result1 = await client.getProductStatuses(companyId, marketplace, sku1);
+    let result2 = await client.getProductStatuses(companyId, marketplace, sku2);
 
     delete (result1 as any).__v;
     delete (result1 as any)._id;

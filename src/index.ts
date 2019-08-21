@@ -27,14 +27,12 @@ export * from './products/parse-barcode';
 
 export * from './clients/amazon-error-rates-client';
 export * from './clients/amazon-product-client';
-export * from './clients/blacklist-client';
 export * from './clients/marketplace-client';
 export * from './clients/company-client';
 export * from './clients/company-error-client';
 export * from './clients/developer-config-client';
 export * from './clients/eve-client';
 export * from './clients/financial-events-client';
-export * from './clients/listing-status-client';
 export * from './clients/mongo-logger-client';
 export * from './clients/mws-credentials-client';
 export * from './clients/order-downloader-client';
@@ -42,12 +40,12 @@ export * from './clients/product-feed-result-client';
 export * from './clients/product-lookup-client';
 export * from './clients/product-pricing-client';
 export * from './clients/product-service-client';
-export * from './clients/product-stats-client';
 export * from './clients/product-sync-client';
 export * from './clients/sendinblue-client';
 export * from './clients/settings-client';
 export * from './clients/pricing-report-client'
 export * from './clients/shoptet-service-client';
+export * from './clients/product-statuses-client';
 
 export * from './stream/array-to-readable';
 export * from './stream/string-to-readable';

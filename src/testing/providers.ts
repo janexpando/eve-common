@@ -1,10 +1,9 @@
-import {ConsoleLogger, DbDriver, ENVIRONMENT_PROVIDER} from "..";
+import {ConsoleLogger, DbDriver, ENVIRONMENT_PROVIDER, ProductStatusesClient} from "..";
 import {Provider} from "injection-js";
 import {MwsProvider} from "../mws/mws-provider";
 import {MwsCredentialsClient} from "../clients/mws-credentials-client";
 import {CompanyClient} from "../clients/company-client";
 import {AmazonProductClient} from "../clients/amazon-product-client";
-import {BlacklistClient} from "../clients/blacklist-client";
 import {DeveloperConfigClient} from "../clients/developer-config-client";
 import {FinancialEventsClient} from "../clients/financial-events-client";
 import {MarketplaceClient} from "../clients/marketplace-client";
@@ -23,7 +22,6 @@ export const PROVIDERS: Provider[] = [
         ConsoleLogger,
         MwsProvider,
         AmazonProductClient,
-        BlacklistClient,
         CompanyClient,
         DeveloperConfigClient,
         FinancialEventsClient,
@@ -37,5 +35,6 @@ export const PROVIDERS: Provider[] = [
         SettingsClient,
         ShoptetServiceClient,
         MwsCreator,
+        ProductStatusesClient
     ]
 ;
