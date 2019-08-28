@@ -1,9 +1,12 @@
-export function getMarketplaceCurrency(marketplace) {
+import {MarketplaceName} from "../models/marketplace-names";
+
+export function getMarketplaceCurrency(marketplace: MarketplaceName) {
     if (!marketplace || marketplace.trim() === '')
         throw new Error('marketplace parameter is empty');
     switch (marketplace) {
         case 'amazon_de':
             return 'EUR';
+        // @ts-ignore
         case 'amazon_gb':
         case 'amazon_uk':
             return 'GBP';
@@ -29,6 +32,8 @@ export function getMarketplaceCurrency(marketplace) {
             return 'JPY';
         case 'amazon_au':
             return 'AUD';
+        case "mall_cz":
+            return 'CZK';
         default:
             throw new Error(`${marketplace} is not a valid amazon marketplace`);
     }
