@@ -24,6 +24,10 @@ export class ShoptetServiceClient extends EveClient {
     }
 }
 
+export interface ApiInvoice {
+    id: string;
+    url: string;
+}
 
 export interface ApiAddress {
     name: string;
@@ -76,7 +80,7 @@ export interface ApiOrder {
     shippingPrice?: number;
     currencyCode: CurrencyCode;
     paymentMethod: ApiPaymentMethod;
-    invoiceUrls: string[];
+    invoices: ApiInvoice[];
     shipServiceLevel: string;
     buyer: ApiAddress;
     items: ApiOrderItem[];

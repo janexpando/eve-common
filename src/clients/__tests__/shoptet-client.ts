@@ -42,7 +42,7 @@ test.serial('send orders', async t => {
         shipServiceLevel: 'expedited',
         isBusinessOrder: false,
         isComplete: false,
-        invoiceUrls: [],
+        invoices: [],
         isPremiumOrder: false,
         isPrime: false,
     };
@@ -79,7 +79,7 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
                 'shipServiceLevel': 'expedited',
                 'isBusinessOrder': false,
                 'isComplete': false,
-                'invoiceUrls': [],
+                'invoices': [],
                 'isPremiumOrder': false,
                 'isPrime': false,
             }],
