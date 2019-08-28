@@ -1,5 +1,5 @@
 import nock = require('nock');
-import {Environment, ENVIRONMENT_PROVIDER, MarketplaceName} from "../..";
+import {AmazonType, Environment, ENVIRONMENT_PROVIDER, MarketplaceName} from "../..";
 import {provideInjector, test} from "../../testing";
 import {ListingStatusKind, ProductStatusesClient, ProductStatusKind} from "../product-statuses-client";
 import {ObjectId} from "bson";
@@ -212,10 +212,10 @@ test.serial('get product stats summary', async t => {
             'close' ] as any);
 
     let companyId = new ObjectId("5d5d3fe4ff54a60ef331dcbb");
-    let marketplace1 = "amazon_de" as MarketplaceName;
-    let marketplace2 = "amazon_it" as MarketplaceName;
-    let marketplace3 = "amazon_fr" as MarketplaceName;
-    let marketplaces = ["amazon_de", "amazon_it"] as MarketplaceName[];
+    let marketplace1 = "amazon_de" as AmazonType;
+    let marketplace2 = "amazon_it" as AmazonType;
+    let marketplace3 = "amazon_fr" as AmazonType;
+    let marketplaces = ["amazon_de", "amazon_it"] as AmazonType[];
 
     let productStatusesToBeCreated = [{ status: "ok", sku: "SKU1", marketplace: marketplace1 }, {
         status: "ok",

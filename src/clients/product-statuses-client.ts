@@ -2,7 +2,7 @@ import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
 import {Environment} from "../bootstrapping/environment";
 import {EveClient} from "./eve-client";
-import {ApiProductStats, MarketplaceName} from "..";
+import {AmazonType, ApiProductStats, MarketplaceName} from "..";
 
 export type ListingStatusKind = "ok" | "error";
 
@@ -43,7 +43,7 @@ export interface ApiProductStatuses {
 
 export interface ApiProductStats {
     companyId: ObjectId;
-    marketplace: MarketplaceName | MarketplaceName[];
+    marketplace: AmazonType | AmazonType[];
     ok: number;
     paused: number;
     notFound: number;
