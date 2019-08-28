@@ -43,7 +43,7 @@ export interface ApiProductStatuses {
 
 export interface ApiProductStats {
     companyId: ObjectId;
-    marketplace: MarketplaceName;
+    marketplace: MarketplaceName | MarketplaceName[];
     ok: number;
     paused: number;
     notFound: number;
@@ -76,9 +76,11 @@ export class ProductStatusesClient extends EveClient {
         return response.body;
     }
 
-    async getProductStats(companyId: ObjectId, marketplace: MarketplaceName): Promise<ApiProductStats> {
-        const url = `/company/${companyId}/marketplace/${marketplace}/product-stats`;
-        let response = await this.got.get(url);
+    async getProductStats(companyId: ObjectId, marketplace: MarketplaceName | MarketplaceName[]): Promise<ApiProductStats> {
+        const url = `/company/${companyId}/product-stats`;
+        let response = await this.got.post(url, {
+            body: { marketplace }
+        });
         return response.body;
     }
 }
