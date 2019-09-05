@@ -1,5 +1,5 @@
 import nock = require('nock');
-import {AmazonType, Environment, ENVIRONMENT_PROVIDER, MarketplaceName} from "../..";
+import {AmazonType, ApiProductStats, Environment, ENVIRONMENT_PROVIDER, MarketplaceName} from "../..";
 import {provideInjector, test} from "../../testing";
 import {ListingStatusKind, ProductStatusesClient, ProductStatusKind} from "../product-statuses-client";
 import {ObjectId} from "bson";
@@ -166,8 +166,8 @@ test.serial('get product stats summary', async t => {
     // nock.recorder.rec();
 
     nock(`${env.PRODUCT_SERVICE_URL}`, {"encodedQueryParams":true})
-        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplace":"amazon_de"})
-        .reply(200, {"companyId":"5d5d3fe4ff54a60ef331dcbb","marketplace":"amazon_de","ok":2,"paused":3,"notFound":0,"error":0,"missingBarcode":0}, [ 'X-DNS-Prefetch-Control',
+        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplaces":["amazon_de"]})
+        .reply(200, {"companyId":"5d5d3fe4ff54a60ef331dcbb","marketplaces":["amazon_de"],"ok":2,"paused":3,"notFound":0,"error":0,"missingBarcode":0}, [ 'X-DNS-Prefetch-Control',
             'off',
             'X-Frame-Options',
             'SAMEORIGIN',
@@ -189,8 +189,8 @@ test.serial('get product stats summary', async t => {
             'close' ] as any);
 
     nock(`${env.PRODUCT_SERVICE_URL}`, {"encodedQueryParams":true})
-        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplace":["amazon_de","amazon_it"]})
-        .reply(200, {"companyId":"5d5d3fe4ff54a60ef331dcbb","marketplace":["amazon_de","amazon_it"],"ok":2,"paused":4,"notFound":1,"error":0,"missingBarcode":0}, [ 'X-DNS-Prefetch-Control',
+        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplaces":["amazon_de","amazon_it"]})
+        .reply(200, {"companyId":"5d5d3fe4ff54a60ef331dcbb","marketplaces":["amazon_de","amazon_it"],"ok":2,"paused":4,"notFound":1,"error":0,"missingBarcode":0}, [ 'X-DNS-Prefetch-Control',
             'off',
             'X-Frame-Options',
             'SAMEORIGIN',
@@ -243,15 +243,15 @@ test.serial('get product stats summary', async t => {
         productStatuses.push(createProductStatusWithStatus(product.status as ProductStatusKind, product.sku, product.marketplace));
     }
 
-    let result1 = await client.getProductStats(companyId, marketplace1);
+    let result1 = await client.getProductStats(companyId, [marketplace1]);
     let result2 = await client.getProductStats(companyId, marketplaces);
 
     result1 = cleanUpResult(result1);
     result2 = cleanUpResult(result2);
 
-    let productStats1 = {
+    let productStats1: ApiProductStats = {
         companyId,
-        marketplace: marketplace1,
+        marketplaces: [marketplace1],
         ok: 2,
         paused: 3,
         notFound: 0,
@@ -259,9 +259,9 @@ test.serial('get product stats summary', async t => {
         missingBarcode: 0
     };
 
-    let productStats2 = {
+    let productStats2: ApiProductStats = {
         companyId,
-        marketplace: marketplaces,
+        marketplaces: marketplaces,
         ok: 2,
         paused: 4,
         notFound: 1,
