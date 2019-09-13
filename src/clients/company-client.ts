@@ -12,6 +12,7 @@ export interface ApiCompany {
     feedType: ApiFeedType;
     feedUrl: string;
     active: boolean;
+    blocked: boolean;
 }
 
 export interface ApiSellerId {
