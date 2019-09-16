@@ -70,9 +70,11 @@ export class ProductStatusesClient extends EveClient {
         return response.body;
     }
 
-    async getProductStatuses(companyId: ObjectId, marketplace: MarketplaceName, sku: string): Promise<ApiProductStatuses> {
-        const url = `/company/${companyId}/marketplace/${marketplace}/sku/${encodeURIComponent(sku)}/product-statuses`;
-        let response = await this.got.get(url);
+    async getProductStatuses(companyId: ObjectId, marketplaces: MarketplaceName[], sku: string): Promise<ApiProductStatuses[]> {
+        const url = `/company/${companyId}/sku/${encodeURIComponent(sku)}/product-statuses`;
+        let response = await this.got.post(url, {
+            body: { marketplaces }
+        });
         return response.body;
     }
 
