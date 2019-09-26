@@ -88,12 +88,12 @@ export class ProductServiceClient extends EveClient {
         return response.body;
     }
 
-    async getProductsFromLastUpdated(companyId: ObjectId, lastUpdated: Date) {
+    async getProductsFromLastUpdated(companyId: ObjectId, lastUpdated: Date): Promise<ApiVariant[]> {
         let response = await this.got.get(`/company/${companyId}/products/fromLastUpdated/${lastUpdated.toISOString()}`);
         return response.body;
     }
 
-    async getVariants(companyId: ObjectId, skus: string[]) {
+    async getVariants(companyId: ObjectId, skus: string[]): Promise<ApiVariant[]> {
         let response = await this.got.get(`/company/${companyId}/products/variants`, {
             body: {skus}
         });
