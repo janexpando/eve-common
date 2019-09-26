@@ -88,6 +88,11 @@ export class ProductServiceClient extends EveClient {
         return response.body;
     }
 
+    async getProductsFromLastUpdated(companyId: ObjectId, lastUpdated: Date) {
+        let response = await this.got.get(`/company/${companyId}/products/fromLastUpdated/${lastUpdated.toISOString()}`);
+        return response.body;
+    }
+
     async requestShallowPricingReport(companyId: ObjectId, marketplace: MarketplaceName, credentials: IMwsCredentials) {
         let response = await this.got.post(
             `/company/${companyId}/marketplace/${marketplace}/shallow-pricing-report`,
