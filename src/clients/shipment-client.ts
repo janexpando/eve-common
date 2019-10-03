@@ -39,12 +39,14 @@ export class ShipmentClient extends EveClient {
         companyId: ObjectId,
         marketplace: AmazonType,
         credentials: IMwsCredentials,
+        callback: string,
         from: Date,
         to?: Date,
     ) {
         let body: any = {
             marketplace,
             credentials,
+            callback,
             from,
         };
 
@@ -53,15 +55,6 @@ export class ShipmentClient extends EveClient {
 
         await this.got.post(`${this.env.ORDER_DOWNLOADER_URL}/company/${companyId}/shipments/download`, {
             body,
-        });
-    }
-
-    async storeShipments(
-        companyId: ObjectId,
-        shipments: ApiShipment[],
-    ) {
-        await this.got.post(`/company/${companyId}/shipments`, {
-            body: shipments,
         });
     }
 }
