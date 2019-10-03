@@ -1,13 +1,11 @@
 import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
 import {EveClient} from "./eve-client";
-import {Environment} from "../bootstrapping/environment";
-import {AmazonType, MarketplaceName} from "../models/marketplace-names";
 import {Dict} from "../types";
-import {ApiBarcode} from "../products/parse-barcode";
 import {IMwsCredentials} from "./product-pricing-client";
+import {AmazonType, ApiBarcode, Environment, MarketplaceName} from "..";
 
-export type Status =
+export type ProductStatus =
     | "ok"
     | "paused"
     | "notFound"
@@ -30,7 +28,7 @@ export class ProductServiceClient extends EveClient {
         perPage: number,
         buyBox?: boolean,
         isBuyBoxWinner?: boolean,
-        status?: Status
+        status?: ProductStatus[]
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/page`,
@@ -57,7 +55,7 @@ export class ProductServiceClient extends EveClient {
         search: string,
         buyBox?: boolean,
         isBuyBoxWinner?: boolean,
-        status?: Status
+        status?: ProductStatus[]
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/count`,
