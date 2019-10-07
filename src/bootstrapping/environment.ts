@@ -24,6 +24,7 @@ export class Environment {
     SHOPTET_SERVICE_URL: string;
     PRODUCT_SERVICE_URL: string;
     COMPANY_SERVICE_URL: string;
+    MALL_SERVICE_URL: string;
     ORDER_DOWNLOADER_URL: string;
     PRICING_SERVICE_URL: string;
     SENDINBLUE_TOKEN: string;
@@ -41,6 +42,7 @@ export class Environment {
         SHOPTET_SERVICE_URL: string().required(),
         PRODUCT_SERVICE_URL: string().required(),
         COMPANY_SERVICE_URL: string().required(),
+        MALL_SERVICE_URL: string().required(),
         ORDER_DOWNLOADER_URL: string().required(),
         PRICING_SERVICE_URL: string().required(),
         SENDINBLUE_TOKEN: string().required(),
