@@ -1,6 +1,6 @@
 {
   "name": "eve-common",
-  "version": "4.9.31",
+  "version": "5.0.0",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -74,11 +74,13 @@
     "all": true
   },
   "dependencies": {
+    "@types/lodash": "^4.14.141",
     "@types/nock": "^10.0.3",
     "@types/pino": "^5.8.8",
     "fast-safe-stringify": "^2.0.6",
     "koa-bearer-token": "^1.0.0",
     "koa-compose": "^4.1.0",
+    "lodash": "^4.17.15",
     "pino": "^5.12.6",
     "request-promise-native": "^1.0.5",
     "ts-essentials": "^2.0.0"
