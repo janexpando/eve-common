@@ -101,7 +101,7 @@ export interface ApiOrder {
     canceledDate?: Date;
 }
 
-const optionalString = () => string().allow("").optional();
+const optionalString = () => string().allow(null, "").optional();
 
 export const ADDRESS_JOI_SCHEMA = object({
     name: optionalString(),
@@ -121,7 +121,7 @@ export const ADDRESS_JOI_SCHEMA = object({
 export const ORDER_ITEM_JOI_SCHEMA = object({
     sku: string().required(),
     asin: string(),
-    marketplaceItemId: string().required(),
+    marketplaceItemId: optionalString(),
     name: string(),
     price: number(),
     itemPrice: number().allow(null),
@@ -151,16 +151,16 @@ export const ORDER_JOI_SCHEMA = object({
     shippingPrice: number().optional(),
     totalDiscount: number(),
     currencyCode: string().allow(CURRENCY_CODES),
-    shipServiceLevel: string(),
-    paymentMethod: string(),
+    shipServiceLevel: optionalString(),
+    paymentMethod: optionalString(),
     invoices: array().items(ORDER_INVOICE_JOI_SCHEMA),
     buyer: ADDRESS_JOI_SCHEMA,
     items: array().items(ORDER_ITEM_JOI_SCHEMA).optional(),
     lastChanged: date(),
-    latestShipDate: date(),
-    latestDeliveryDate: date(),
+    latestShipDate: date().allow(null),
+    latestDeliveryDate: date().allow(null),
 
-    purchaseDate: date(),
+    purchaseDate: date().allow(null),
     isPremiumOrder: bool(),
     isPrime: bool(),
     isBusinessOrder: bool(),
