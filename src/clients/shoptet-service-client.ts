@@ -86,6 +86,7 @@ export interface ApiOrder {
     lastChanged: Date;
     latestShipDate: Date;
     latestDeliveryDate: Date;
+    marketplaceLastChanged: Date;
 
     purchaseDate: Date;
     isPremiumOrder: boolean;
@@ -94,7 +95,6 @@ export interface ApiOrder {
     isComplete: boolean;
     isRefunded: boolean;
 
-    marketplaceLastChanged: Date;
     pendingDate?: Date;
     unshippedDate?: Date;
     shippedDate?: Date;
