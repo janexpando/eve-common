@@ -120,7 +120,7 @@ export const ADDRESS_JOI_SCHEMA = object({
 
 export const ORDER_ITEM_JOI_SCHEMA = object({
     sku: string().required(),
-    asin: string(),
+    asin: optionalString(),
     marketplaceItemId: optionalString(),
     name: string(),
     price: number(),
