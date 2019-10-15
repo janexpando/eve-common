@@ -27,10 +27,18 @@ export class SendinblueClient {
         templateId: number;
         attributes?: object;
         email: string;
+        cc?: string[];
+        bcc?: string[];
     }): Promise<got.Response<any>> {
         const body: any = {
             emailTo: [options.email],
         };
+        if(options.cc){
+            body.emailCc = options.cc;
+        }
+        if(options.bcc){
+            body.emailBcc = options.bcc;
+        }
         if (options.attributes && Object.keys(options.attributes).length > 0) {
             body.attributes = options.attributes;
         }
