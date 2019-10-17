@@ -28,6 +28,7 @@ export interface ApiSyncSettings {
     zeroUnmatchedProducts: boolean;
     downloadPricing: boolean;
     formulas: Dict<ApiFormula, MarketplaceName>;
+    autopricing: Dict<boolean, MarketplaceName>;
 }
 
 export interface ApiFormula {
