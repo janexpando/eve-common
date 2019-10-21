@@ -45,6 +45,11 @@ test.serial('send orders', async t => {
         invoices: [],
         isPremiumOrder: false,
         isPrime: false,
+        shippingPrice: 0,
+        latestShipDate: new Date('2019-01-01T12:00:00Z'),
+        latestDeliveryDate: new Date('2019-01-01T12:00:00Z'),
+        totalDiscount: 0,
+        isRefunded: false,
     };
     delete order.marketplaceLastChanged;
     let orders: ApiOrder[] = [order];
@@ -82,6 +87,11 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
                 'invoices': [],
                 'isPremiumOrder': false,
                 'isPrime': false,
+                'shippingPrice': 0,
+                'latestShipDate': '2019-01-01T12:00:00.000Z',
+                'latestDeliveryDate': '2019-01-01T12:00:00.000Z',
+                'totalDiscount': 0,
+                'isRefunded': false,
             }],
         })
         .reply(200, {}, ['Content-Type',

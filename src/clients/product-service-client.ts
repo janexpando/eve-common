@@ -86,6 +86,17 @@ export class ProductServiceClient extends EveClient {
         return response.body;
     }
 
+    async frontendUpdateProductVariants(companyId: ObjectId, variants: ApiVariant[]) {
+        let response = await this.got.patch(
+            `/company/${companyId}/products/variantsUpdate`,
+            {
+                body: variants,
+            },
+        );
+
+        return response.body;
+    }
+
     async getProductsFromLastUpdated(companyId: ObjectId, lastUpdated: Date): Promise<ApiVariant[]> {
         let response = await this.got.get(`/company/${companyId}/products/fromLastUpdated/${lastUpdated.toISOString()}`);
         return response.body;

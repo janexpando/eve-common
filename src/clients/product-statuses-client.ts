@@ -1,6 +1,6 @@
 import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
-import {Environment} from "../bootstrapping/environment";
+import {Environment} from "..";
 import {EveClient} from "./eve-client";
 import { ApiProductStats, MarketplaceName} from "..";
 
@@ -74,6 +74,14 @@ export class ProductStatusesClient extends EveClient {
         const url = `/company/${companyId}/sku/${encodeURIComponent(sku)}/product-statuses`;
         let response = await this.got.post(url, {
             body: { marketplaces }
+        });
+        return response.body;
+    }
+
+    async getManyProductStatuses(companyId: ObjectId, marketplace: MarketplaceName[], sku: string[]): Promise<ApiProductStatuses[]> {
+        const url = `/company/${companyId}/product-statuses`;
+        let response = await this.got.post(url, {
+            body: { marketplace, sku }
         });
         return response.body;
     }

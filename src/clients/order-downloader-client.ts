@@ -17,7 +17,7 @@ interface IMwsCredentials {
 interface OrdersDownloadBody {
     credentials: IMwsCredentials;
     callback: string;
-    marketplace: AmazonType;
+    marketplaces: AmazonType[];
     fromLastUpdate: Date;
 }
 
@@ -25,35 +25,27 @@ interface OrdersDownloadBody {
 export class OrderDownloaderClient extends EveClient {
 
     constructor(protected env: Environment,
-                private mwsCredentialsKeeper: MwsCredentialsClient,
-                private developerConfigKeeper: DeveloperConfigClient,
                 private logger: ConsoleLogger) {
         super(env);
     }
 
     async downloadOrders(
         companyId: ObjectId,
-        marketplace: AmazonType,
+        marketplaces: AmazonType[],
         fromLastUpdate: Date,
+        credentials: IMwsCredentials
     ) {
-        let { developerId, token, sellerId } = await this.mwsCredentialsKeeper.getCredentials(companyId, marketplace);
-        let { accessKey, secretKey } = await this.developerConfigKeeper.getMwsConfig(developerId);
         this.logger.json({
             companyId,
-            marketplace,
+            marketplaces,
             fromLastUpdate,
             message: 'Requesting order downloader',
         });
         await this.got.post(`${this.env.ORDER_DOWNLOADER_URL}/company/${companyId}/orders/download`, {
             body: {
-                marketplace,
+                marketplaces,
                 fromLastUpdate,
-                credentials: {
-                    sellerId,
-                    token,
-                    accessKey,
-                    secretKey,
-                },
+                credentials,
                 callback: `${this.env.SERVICE_URL}/company/${companyId}/orders`,
             } as OrdersDownloadBody,
         });

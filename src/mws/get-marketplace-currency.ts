@@ -1,10 +1,14 @@
 import {MarketplaceName} from "../models/marketplace-names";
+import {CurrencyCode} from "..";
 
-export function getMarketplaceCurrency(marketplace: MarketplaceName) {
+export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCode {
     if (!marketplace || marketplace.trim() === '')
         throw new Error('marketplace parameter is empty');
     switch (marketplace) {
         case 'amazon_de':
+        case 'amazon_it':
+        case 'amazon_fr':
+        case 'amazon_es':
             return 'EUR';
         // @ts-ignore
         case 'amazon_gb':
@@ -12,16 +16,10 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName) {
             return 'GBP';
         case 'amazon_mx':
             return 'MXN';
-        case 'amazon_it':
-            return 'EUR';
-        case 'amazon_fr':
-            return 'EUR';
         case 'amazon_us':
             return 'USD';
         case 'amazon_ca':
             return 'CAD';
-        case 'amazon_es':
-            return 'EUR';
         case 'amazon_br':
             return 'BRL';
         case 'amazon_in':

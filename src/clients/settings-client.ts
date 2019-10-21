@@ -20,6 +20,15 @@ export class SettingsClient extends EveClient {
     }
 }
 
+export interface ApiAutopricingSettings{
+    active: boolean;
+    progressStrategy: number;
+    fallbackStrategy: number;
+    penaltyDrain: number;
+    amplification: number;
+    countInShipping: boolean;
+}
+
 export interface ApiSyncSettings {
     companyId: ObjectId;
     synchronizePrices: boolean;
@@ -28,6 +37,7 @@ export interface ApiSyncSettings {
     zeroUnmatchedProducts: boolean;
     downloadPricing: boolean;
     formulas: Dict<ApiFormula, MarketplaceName>;
+    autopricing?: Dict<ApiAutopricingSettings, MarketplaceName>;
 }
 
 export interface ApiFormula {
