@@ -44,25 +44,6 @@ export class MarketplaceClient extends EveClient {
         return response.body;
     }
 
-    async updateCurrentListingStatistics(companyId: ObjectId, name: MarketplaceName, statistics: ApiListingStatistics): Promise<{success: boolean}> {
-        let response = await this.got.put(`/company/${companyId}/marketplace/${name}/listing-statistics/current`,{
-            body: statistics
-        });
-        return response.body;
-    }
-
-    async getPreviousListingStatistics(companyId: ObjectId, name: MarketplaceName): Promise<ApiListingStatistics>{
-        let response = await this.got.get(`/company/${companyId}/marketplace/${name}/listing-statistics/previous`);
-        return response.body;
-    }
-
-    async updatePreviousListingStatistics(companyId: ObjectId, name: MarketplaceName, statistics: ApiListingStatistics): Promise<{success: boolean}>{
-        let response = await this.got.put(`/company/${companyId}/marketplace/${name}/listing-statistics/previous`,{
-            body: statistics
-        });
-        return response.body;
-    }
-
     async patchMarketplaceStatus(companyId: ObjectId, name: MarketplaceName, marketplace: ApiMarketplacePatch): Promise<{success: boolean}>{
         let response = await this.got.patch(`/company/${companyId}/marketplace/${name}`,{
             body: marketplace
