@@ -32,7 +32,7 @@ export class ProductAutopricingClient extends EveClient {
 
     async get(companyId: ObjectId, marketplace: MarketplaceName, skus: string[]): Promise<ApiProductAutopricing[]> {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing`;
-        let response = await this.got.post(url, {body: {skus}});
+        let response = await this.got.get(url, {body: {skus}});
         if (response.body && response.body.length > 0) {
             response.body.forEach(x => {
                 x.companyId = new ObjectId(x.companyId);
