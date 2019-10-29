@@ -62,6 +62,11 @@ export interface ApiInvoice {
     url: string;
 }
 
+export interface IAutopricing {
+    sku: string;
+    delta: number;
+}
+
 export const ORDER_STATUSES = ["Unshipped", "Pending", "Shipped", "Canceled"];
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled'
 export declare type ApiOrderFulfilmentChannel = 'FBA' | 'Seller';
@@ -99,6 +104,9 @@ export interface ApiOrder {
     unshippedDate?: Date;
     shippedDate?: Date;
     canceledDate?: Date;
+
+    autopricing?: IAutopricing[];
+    autopricingTotal?: number;
 }
 
 const optionalString = () => string().allow(null, "").optional();
@@ -140,6 +148,11 @@ export const ORDER_INVOICE_JOI_SCHEMA = object({
     url: string().allow(null, ""),
 });
 
+export const ORDER_AUTOPRICING_SCHEMA = object({
+    sku: number(),
+    delta: number(),
+});
+
 export const ORDER_JOI_SCHEMA = object({
     companyId: string().required(),
     marketplaceOrderId: string().required(),
@@ -172,4 +185,7 @@ export const ORDER_JOI_SCHEMA = object({
     unshippedDate: date().allow(null),
     shippedDate: date().allow(null),
     canceledDate: date().allow(null),
+
+    autopricing: array().items(ORDER_AUTOPRICING_SCHEMA).allow(null).optional(),
+    autopricingTotal: number().allow(null).optional(),
 }).options({stripUnknown: true});

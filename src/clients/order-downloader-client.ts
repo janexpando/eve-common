@@ -1,8 +1,6 @@
 import { ObjectId } from 'bson';
 import { Injectable } from 'injection-js';
 import {EveClient} from "./eve-client";
-import {DeveloperConfigClient} from "./developer-config-client";
-import {MwsCredentialsClient} from "./mws-credentials-client";
 import {AmazonType} from "../models/marketplace-names";
 import {Environment} from "../bootstrapping/environment";
 import {ConsoleLogger} from "../logging/console-logger";
