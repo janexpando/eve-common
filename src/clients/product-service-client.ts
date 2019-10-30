@@ -86,11 +86,11 @@ export class ProductServiceClient extends EveClient {
         return response.body;
     }
 
-    async frontendUpdateProductVariants(companyId: ObjectId, variants: ApiVariant[]) {
+    async frontendUpdateProductVariants(companyId: ObjectId, marketplaces: MarketplaceName[], variants: ApiVariant[]) {
         let response = await this.got.patch(
             `/company/${companyId}/products/variantsUpdate`,
             {
-                body: variants,
+                body: {marketplaces, variants},
             },
         );
 
