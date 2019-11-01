@@ -65,6 +65,7 @@ export interface ApiInvoice {
 export interface IAutopricing {
     sku: string;
     delta: number;
+    base: number;
 }
 
 export const ORDER_STATUSES = ["Unshipped", "Pending", "Shipped", "Canceled"];
@@ -151,6 +152,7 @@ export const ORDER_INVOICE_JOI_SCHEMA = object({
 export const ORDER_AUTOPRICING_SCHEMA = object({
     sku: number(),
     delta: number(),
+    base: number(),
 });
 
 export const ORDER_JOI_SCHEMA = object({
