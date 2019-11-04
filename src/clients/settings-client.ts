@@ -20,13 +20,15 @@ export class SettingsClient extends EveClient {
     }
 }
 
-export interface ApiAutopricingSettings{
+export interface ApiAutopricingSettings {
     active: boolean;
     progressStrategy: number;
     fallbackStrategy: number;
     penaltyDrain: number;
     amplification: number;
     countInShipping: boolean;
+    defaultTopCap: number;
+    defaultBottomCap: number;
 }
 
 export interface ApiSyncSettings {
@@ -37,6 +39,7 @@ export interface ApiSyncSettings {
     zeroUnmatchedProducts: boolean;
     downloadPricing: boolean;
     formulas: Dict<ApiFormula, MarketplaceName>;
+    japoId: string;
     autopricing?: Dict<ApiAutopricingSettings, MarketplaceName>;
 }
 
