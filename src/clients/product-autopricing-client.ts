@@ -9,6 +9,8 @@ export interface ApiProductAutopricing {
     marketplace: MarketplaceName;
     sku: string;
     active?: boolean;
+    lastActivated?: Date;
+    lastDeactivated?: Date;
 
     current?: number;
     currentShipping?: number;
@@ -21,6 +23,9 @@ export interface ApiProductAutopricing {
     buybox?: boolean;
     highestInBuybox?: number;
     lowestNonBuybox?: number;
+    topCap?: number;
+    bottomCap?: number;
+    forceUpdate?: boolean;
 }
 
 @Injectable()
@@ -33,13 +38,25 @@ export class ProductAutopricingClient extends EveClient {
     async get(companyId: ObjectId, marketplace: MarketplaceName, skus: string[]): Promise<ApiProductAutopricing[]> {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing`;
         let response = await this.got.get(url, {body: {skus}});
-        if (response.body && response.body.length > 0) {
-            response.body.forEach(x => {
+        let items = response.body as ApiProductAutopricing[];
+        if (items && items.length > 0) {
+            items.forEach(x => {
                 x.companyId = new ObjectId(x.companyId);
-                if (x.lastUpdated)
-                    x.lastUpdated = new Date(x.lastUpdated);
+                if (x.lastUpdated) x.lastUpdated = new Date(x.lastUpdated);
+                if (x.lastActivated) x.lastActivated = new Date(x.lastActivated);
+                if (x.lastDeactivated) x.lastDeactivated = new Date(x.lastDeactivated);
             });
         }
-        return response.body;
+        return items;
+    }
+
+    async setActiveState(companyId: ObjectId, marketplace: MarketplaceName, skus: string[], active: boolean) {
+        const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing/active`;
+        await this.got.patch(url, {body: {skus, active}});
+    }
+
+    async setCaps(companyId: ObjectId, marketplace: MarketplaceName, skus: string[], topCap: number, bottomCap: number) {
+        const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing/caps`;
+        await this.got.patch(url, {body: {skus, topCap, bottomCap}});
     }
 }
