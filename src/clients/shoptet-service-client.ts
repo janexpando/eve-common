@@ -69,6 +69,7 @@ export interface IAutopricing {
 }
 
 export const ORDER_STATUSES = ["Unshipped", "Pending", "Shipped", "Canceled"];
+export const AUTOPRICING_STATUSES = ['None', 'Pending', 'Done'];
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled'
 export declare type ApiOrderFulfilmentChannel = 'FBA' | 'Seller';
 export declare type ApiOrderPaymentMethod = string;
@@ -108,6 +109,7 @@ export interface ApiOrder {
 
     autopricing?: IAutopricing[];
     autopricingTotal?: number;
+    autopricingStatus?: 'None' | 'Pending' | 'Done';
 }
 
 const optionalString = () => string().allow(null, "").optional();
@@ -190,4 +192,5 @@ export const ORDER_JOI_SCHEMA = object({
 
     autopricing: array().items(ORDER_AUTOPRICING_SCHEMA).allow(null).optional(),
     autopricingTotal: number().allow(null).optional(),
+    autopricingStatus: string().allow(AUTOPRICING_STATUSES).optional(),
 }).options({stripUnknown: true});
