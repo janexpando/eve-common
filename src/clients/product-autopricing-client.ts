@@ -19,6 +19,7 @@ export interface ApiProductAutopricing {
 
     penalty?: number;
     autoprice?: number;
+    baseprice?: number;
     lastUpdated?: Date;
     buybox?: boolean;
     highestInBuybox?: number;
