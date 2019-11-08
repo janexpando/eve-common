@@ -19,7 +19,7 @@ export interface ApiProductAutopricing {
 
     penalty?: number;
     autoprice?: number;
-    baseprice?: number;
+    selling?: number;
     lastUpdated?: Date;
     buybox?: boolean;
     highestInBuybox?: number;
@@ -40,7 +40,7 @@ export class ProductAutopricingClient extends EveClient {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing`;
         let response = await this.got.get(url, {body: {skus}});
         let items = response.body as ApiProductAutopricing[];
-        if (items && items.length > 0) {
+        if (items && (items.length > 0)) {
             items.forEach(x => {
                 x.companyId = new ObjectId(x.companyId);
                 if (x.lastUpdated) x.lastUpdated = new Date(x.lastUpdated);

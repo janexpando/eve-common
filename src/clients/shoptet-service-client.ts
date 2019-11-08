@@ -1,4 +1,4 @@
-import { Injectable } from 'injection-js';
+import {Injectable} from 'injection-js';
 import {EveClient} from "./eve-client";
 import {ObjectId} from "bson";
 import {Environment} from "../bootstrapping/environment";
@@ -69,7 +69,7 @@ export interface IAutopricing {
 }
 
 export const ORDER_STATUSES = ["Unshipped", "Pending", "Shipped", "Canceled"];
-export const AUTOPRICING_STATUSES = ['None', 'Pending', 'Done'];
+export const AUTOPRICING_STATUSES = ['None', 'Pending', 'PendingTax', 'Done'];
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled'
 export declare type ApiOrderFulfilmentChannel = 'FBA' | 'Seller';
 export declare type ApiOrderPaymentMethod = string;
@@ -109,7 +109,7 @@ export interface ApiOrder {
 
     autopricing?: IAutopricing[];
     autopricingTotal?: number;
-    autopricingStatus?: 'None' | 'Pending' | 'Done';
+    autopricingStatus?: 'None' | 'Pending' | 'PendingTax' | 'Done';
 }
 
 const optionalString = () => string().allow(null, "").optional();
