@@ -38,7 +38,7 @@
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "mongoose": "^5.4.8",
-    "nock": "^10.0.6",
+    "nock": "^11.7.0",
     "nyc": "^13.1.0",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.0",
@@ -75,7 +75,6 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.141",
-    "@types/nock": "^10.0.3",
     "@types/pino": "^5.8.8",
     "fast-safe-stringify": "^2.0.6",
     "koa-bearer-token": "^1.0.0",
