@@ -7,13 +7,13 @@ import {ObjectId} from "bson";
 provideInjector(test, [ProductStatusesClient, ENVIRONMENT_PROVIDER]);
 
 function makeCreateProductStatusWithStatus(companyId: ObjectId) {
-    return function createProductStatusWithStatus(status: ProductStatusKind, sku: string, marketplace: MarketplaceName) {
+    return function createProductStatusWithStatus(status: ProductStatusKind, sku: string, marketplace: MarketplaceName, hasStock: boolean) {
         return {
             companyId,
             marketplace,
             sku,
             hasAsin: true,
-            hasStock: true,
+            hasStock,
             hasValidBarcode: true,
             isBuyBoxWinner: true,
             listingStatus: "ok" as ListingStatusKind,
@@ -39,7 +39,7 @@ test.serial('get product stats summary', async t => {
     // nock.recorder.rec();
 
     nock(`${env.PRODUCT_SERVICE_URL}`, {"encodedQueryParams":true})
-        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplaces":["amazon_de"]})
+        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplaces":["amazon_de"],"hasStockFilter":null})
         .reply(200, {"companyId":"5d5d3fe4ff54a60ef331dcbb","marketplaces":["amazon_de"],"ok":2,"paused":3,"notFound":0,"error":0,"missingBarcode":0}, [ 'X-DNS-Prefetch-Control',
             'off',
             'X-Frame-Options',
@@ -55,15 +55,15 @@ test.serial('get product stats summary', async t => {
             'Content-Type',
             'application/json; charset=utf-8',
             'Content-Length',
-            '126',
+            '129',
             'Date',
-            'Wed, 28 Aug 2019 12:39:42 GMT',
+            'Mon, 11 Nov 2019 10:32:44 GMT',
             'Connection',
             'close' ] as any);
 
     nock(`${env.PRODUCT_SERVICE_URL}`, {"encodedQueryParams":true})
-        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplaces":["amazon_de","amazon_it"]})
-        .reply(200, {"companyId":"5d5d3fe4ff54a60ef331dcbb","marketplaces":["amazon_de","amazon_it"],"ok":2,"paused":4,"notFound":1,"error":0,"missingBarcode":0}, [ 'X-DNS-Prefetch-Control',
+        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplaces":["amazon_de","amazon_it"],"hasStockFilter":true})
+        .reply(200, {"companyId":"5d5d3fe4ff54a60ef331dcbb","marketplaces":["amazon_de","amazon_it"],"ok":1,"paused":3,"notFound":1,"error":0,"missingBarcode":0}, [ 'X-DNS-Prefetch-Control',
             'off',
             'X-Frame-Options',
             'SAMEORIGIN',
@@ -78,9 +78,32 @@ test.serial('get product stats summary', async t => {
             'Content-Type',
             'application/json; charset=utf-8',
             'Content-Length',
-            '140',
+            '141',
             'Date',
-            'Wed, 28 Aug 2019 12:39:42 GMT',
+            'Mon, 11 Nov 2019 10:32:44 GMT',
+            'Connection',
+            'close' ] as any);
+
+    nock(`${env.PRODUCT_SERVICE_URL}`, {"encodedQueryParams":true})
+        .post('/company/5d5d3fe4ff54a60ef331dcbb/product-stats', {"marketplaces":["amazon_de","amazon_it"],"hasStockFilter":false})
+        .reply(200, {"companyId":"5d5d3fe4ff54a60ef331dcbb","marketplaces":["amazon_de","amazon_it"],"ok":1,"paused":1,"notFound":0,"error":0,"missingBarcode":0}, [ 'X-DNS-Prefetch-Control',
+            'off',
+            'X-Frame-Options',
+            'SAMEORIGIN',
+            'Strict-Transport-Security',
+            'max-age=15552000; includeSubDomains',
+            'X-Download-Options',
+            'noopen',
+            'X-Content-Type-Options',
+            'nosniff',
+            'X-XSS-Protection',
+            '1; mode=block',
+            'Content-Type',
+            'application/json; charset=utf-8',
+            'Content-Length',
+            '141',
+            'Date',
+            'Mon, 11 Nov 2019 10:32:44 GMT',
             'Connection',
             'close' ] as any);
 
@@ -90,22 +113,24 @@ test.serial('get product stats summary', async t => {
     let marketplace3 = "amazon_fr" as AmazonType;
     let marketplaces = ["amazon_de", "amazon_it"] as AmazonType[];
 
-    let productStatusesToBeCreated = [{ status: "ok", sku: "SKU1", marketplace: marketplace1 }, {
+    let productStatusesToBeCreated = [{ status: "ok", sku: "SKU1", marketplace: marketplace1, hasStock: true }, {
         status: "ok",
         sku: "SKU2",
-        marketplace: marketplace1
-    }, { status: "paused", sku: "SKU1", marketplace: marketplace1 }, {
+        marketplace: marketplace1,
+        hasStock: false
+    }, { status: "paused", sku: "SKU4", marketplace: marketplace1, hasStock: false }, {
         status: "paused",
         sku: "SKU2",
-        marketplace: marketplace1
-    }, { status: "paused", sku: "SKU3", marketplace: marketplace1 }, {
+        marketplace: marketplace1,
+        hasStock: true
+    }, { status: "paused", sku: "SKU3", marketplace: marketplace1, hasStock: true }, {
         status: "paused",
         sku: "SKU1",
-        marketplace: marketplace2
-    }, { status: "notFound", sku: "SKU1", marketplace: marketplace2 }, {
+        marketplace: marketplace2, hasStock: true
+    }, { status: "notFound", sku: "SKU1", marketplace: marketplace2, hasStock: true }, {
         status: "error",
         sku: "SKU1",
-        marketplace: marketplace3
+        marketplace: marketplace3, hasStock: true
     }];
 
     let productStatuses = [];
@@ -113,14 +138,16 @@ test.serial('get product stats summary', async t => {
     let createProductStatusWithStatus = makeCreateProductStatusWithStatus(companyId);
 
     for (let product of productStatusesToBeCreated) {
-        productStatuses.push(createProductStatusWithStatus(product.status as ProductStatusKind, product.sku, product.marketplace));
+        productStatuses.push(createProductStatusWithStatus(product.status as ProductStatusKind, product.sku, product.marketplace, product.hasStock));
     }
 
-    let result1 = await client.getProductStats(companyId, [marketplace1]);
-    let result2 = await client.getProductStats(companyId, marketplaces);
+    let result1 = await client.getProductStats(companyId, [marketplace1], null);
+    let result2 = await client.getProductStats(companyId, marketplaces, true);
+    let result3 = await client.getProductStats(companyId, marketplaces, false);
 
     result1 = cleanUpResult(result1);
     result2 = cleanUpResult(result2);
+    result3 = cleanUpResult(result3);
 
     let productStats1: ApiProductStats = {
         companyId,
@@ -135,13 +162,24 @@ test.serial('get product stats summary', async t => {
     let productStats2: ApiProductStats = {
         companyId,
         marketplaces: marketplaces,
-        ok: 2,
-        paused: 4,
+        ok: 1,
+        paused: 3,
         notFound: 1,
+        error: 0,
+        missingBarcode: 0
+    };
+
+    let productStats3: ApiProductStats = {
+        companyId,
+        marketplaces: marketplaces,
+        ok: 1,
+        paused: 1,
+        notFound: 0,
         error: 0,
         missingBarcode: 0
     };
 
     t.deepEqual(result1, productStats1);
     t.deepEqual(result2, productStats2);
+    t.deepEqual(result3, productStats3);
 });
