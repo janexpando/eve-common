@@ -31,6 +31,11 @@ export interface ApiAutopricingSettings {
     defaultBottomCap: number;
 }
 
+export interface ApiShoptetSettings {
+    lowerStockOnOrder: boolean;
+    synchronizeOrders: boolean;
+}
+
 export interface ApiSyncSettings {
     companyId: ObjectId;
     synchronizePrices: boolean;
@@ -41,6 +46,7 @@ export interface ApiSyncSettings {
     formulas: Dict<ApiFormula, MarketplaceName>;
     japoId: string;
     autopricing?: Dict<ApiAutopricingSettings, MarketplaceName>;
+    shoptet?: ApiShoptetSettings;
 }
 
 export interface ApiFormula {
