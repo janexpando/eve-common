@@ -8,15 +8,14 @@ export interface ApiProductAutopricingHistory {
     companyId: ObjectId;
     marketplace: MarketplaceName;
     sku: string;
-    active: boolean;
 
-    current: number;
-    currentShipping: number;
-    otherLowest: number;
-    otherLowestShipping: number;
-
-    autoprice: number;
-    selling: number;
+    active?: boolean;
+    current?: number;
+    currentShipping?: number;
+    otherLowest?: number;
+    otherLowestShipping?: number;
+    autoprice?: number;
+    selling?: number;
 
     isListingUpdate: boolean,
     date: Date;

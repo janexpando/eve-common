@@ -66,6 +66,8 @@ export interface IAutopricing {
     sku: string;
     delta: number;
     base: number;
+    autoprice?: number;
+    date?: Date;
 }
 
 export const ORDER_STATUSES = ["Unshipped", "Pending", "Shipped", "Canceled"];
@@ -155,6 +157,8 @@ export const ORDER_AUTOPRICING_SCHEMA = object({
     sku: number(),
     delta: number(),
     base: number(),
+    autoprice: number().allow(null),
+    date: date().allow(null)
 });
 
 export const ORDER_JOI_SCHEMA = object({
