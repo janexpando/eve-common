@@ -196,5 +196,5 @@ export const ORDER_JOI_SCHEMA = object({
 
     autopricing: array().items(ORDER_AUTOPRICING_SCHEMA).allow(null).optional(),
     autopricingTotal: number().allow(null).optional(),
-    autopricingStatus: string().allow(AUTOPRICING_STATUSES).optional(),
+    autopricingStatus: string().allow([null, ...AUTOPRICING_STATUSES]).optional(),
 }).options({stripUnknown: true});
