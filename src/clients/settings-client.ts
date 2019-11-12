@@ -31,9 +31,69 @@ export interface ApiAutopricingSettings {
     defaultBottomCap: number;
 }
 
+export type ApiCarrierName =
+    'AFLFedex'
+    | 'Aramex'
+    | 'BluePackage'
+    | 'BlueDart'
+    | 'CanadaPost'
+    | 'Chronopost'
+    | 'CityLink'
+    | 'DHL'
+    | 'DHLGlobalMail'
+    | 'DPD'
+    | 'DTDC'
+    | 'Delhivery'
+    | 'DeutschePost'
+    | 'FEDEXJP'
+    | 'Fastway'
+    | 'FedEx'
+    | 'FedExSmartPost'
+    | 'FirstFlight'
+    | 'GLS'
+    | 'GO'
+    | 'HermesLogistikGruppe'
+    | 'IndiaPost'
+    | 'JPEXPRESS'
+    | 'LaPoste'
+    | 'Lasership'
+    | 'NITTSU'
+    | 'Newgistics'
+    | 'NipponExpress'
+    | 'OSM'
+    | 'OnTrac'
+    | 'OverniteExpress'
+    | 'Parcelforce'
+    | 'Parcelnet'
+    | 'PosteItaliane'
+    | 'Professional'
+    | 'RoyalMail'
+    | 'SAGAWA'
+    | 'SDA'
+    | 'SagawaExpress'
+    | 'Smartmail'
+    | 'Streamlite'
+    | 'TNT'
+    | 'Target'
+    | 'UPS'
+    | 'UPSMI'
+    | 'UPSMailInnovations'
+    | 'USPS'
+    | 'YAMATO'
+    | 'YamatoTransport'
+    | 'Other';
+
+
 export interface ApiShoptetSettings {
     lowerStockOnOrder: boolean;
     synchronizeOrders: boolean;
+
+    // shipment method, that will be used in shoptet orders
+    shipmentMethod?: string;
+
+    // carrier will be used to send fulfillments
+    carrier?: ApiCarrierName;
+    carrierName?: string;
 }
 
 export interface ApiSyncSettings {
