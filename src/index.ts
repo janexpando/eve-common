@@ -54,3 +54,5 @@ export * from './stream/string-to-readable';
 export * from './stream/temp-file';
 export * from './stream/transform/chunk-aggregator';
 export * from './stream/transform/noop';
+
+export * from './forex/money-exchange';
