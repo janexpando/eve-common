@@ -28,7 +28,8 @@ export class ProductServiceClient extends EveClient {
         perPage: number,
         buyBox?: boolean,
         isBuyBoxWinner?: boolean,
-        status?: ProductStatus[]
+        status?: ProductStatus[],
+        hasStock?: boolean
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/page`,
@@ -41,7 +42,8 @@ export class ProductServiceClient extends EveClient {
                     perPage,
                     buyBox,
                     isBuyBoxWinner,
-                    status
+                    status,
+                    hasStock
                 },
             },
         );
@@ -55,7 +57,8 @@ export class ProductServiceClient extends EveClient {
         search: string,
         buyBox?: boolean,
         isBuyBoxWinner?: boolean,
-        status?: ProductStatus[]
+        status?: ProductStatus[],
+        hasStock?: boolean
     ) {
         let response = await this.got.post(
             `/company/${companyId}/products/count`,
@@ -65,7 +68,8 @@ export class ProductServiceClient extends EveClient {
                     search,
                     buyBox,
                     isBuyBoxWinner,
-                    status
+                    status,
+                    hasStock
                 },
             },
         );
