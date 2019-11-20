@@ -49,6 +49,12 @@ export interface ApiProductStats {
     notFound: number;
     error: number;
     missingBarcode: number;
+    buyBox?: ApiBuyBoxStats
+}
+
+export interface ApiBuyBoxStats {
+    isInBuyBoxCount: number
+    notInBuyBoxCount: number
 }
 
 @Injectable()
