@@ -155,8 +155,8 @@ export const ORDER_INVOICE_JOI_SCHEMA = object({
 
 export const ORDER_AUTOPRICING_SCHEMA = object({
     sku: string(),
-    delta: number(),
-    base: number(),
+    delta: number().allow(null),
+    base: number().allow(null),
     autoprice: number().allow(null),
     date: date().allow(null)
 });
