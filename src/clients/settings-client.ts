@@ -88,6 +88,8 @@ export interface ApiShoptetSettings {
     lowerStockOnOrder: boolean;
     synchronizeOrders: boolean;
 
+    synchronizeFbaOrders: boolean;
+
     // shipment method, that will be used in shoptet orders
     shipmentMethod?: string;
 
