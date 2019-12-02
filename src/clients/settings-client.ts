@@ -98,17 +98,28 @@ export interface ApiShoptetSettings {
     carrierName?: string;
 }
 
-export interface ApiSyncSettings {
-    companyId: ObjectId;
+export interface IMallSettings {
     synchronizePrices: boolean;
     synchronizeStock: boolean;
     listNewProducts: boolean;
-    zeroUnmatchedProducts: boolean;
+}
+
+export interface IAmazonSettings {
+    synchronizePrices: boolean;
+    synchronizeStock: boolean;
+    listNewProducts: boolean;
     downloadPricing: boolean;
+    zeroUnmatchedProducts: boolean;
+}
+
+export interface ApiSyncSettings {
+    companyId: ObjectId;
     formulas: Dict<ApiFormula, MarketplaceName>;
     japoId: string;
     autopricing?: Dict<ApiAutopricingSettings, MarketplaceName>;
     shoptet?: ApiShoptetSettings;
+    mall?: IMallSettings;
+    amazon?: IAmazonSettings;
 }
 
 export interface ApiFormula {
