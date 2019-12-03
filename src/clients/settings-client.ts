@@ -98,13 +98,12 @@ export interface ApiShoptetSettings {
     carrierName?: string;
 }
 
-export interface IMallSettings {
+export interface ApiMallSettings {
     synchronizePrices: boolean;
     synchronizeStock: boolean;
-    listNewProducts: boolean;
 }
 
-export interface IAmazonSettings {
+export interface ApiAmazonSettings {
     synchronizePrices: boolean;
     synchronizeStock: boolean;
     listNewProducts: boolean;
@@ -118,8 +117,8 @@ export interface ApiSyncSettings {
     japoId: string;
     autopricing?: Dict<ApiAutopricingSettings, MarketplaceName>;
     shoptet?: ApiShoptetSettings;
-    mall?: IMallSettings;
-    amazon?: IAmazonSettings;
+    mall?: ApiMallSettings;
+    amazon?: ApiAmazonSettings;
 }
 
 export interface ApiFormula {
