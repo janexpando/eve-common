@@ -16,6 +16,7 @@ export interface ApiProductAutopricingHistory {
     otherLowestShipping?: number;
     autoprice?: number;
     selling?: number;
+    buybox?: boolean;
 
     isListingUpdate: boolean,
     date: Date;
