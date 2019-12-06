@@ -84,6 +84,11 @@ export type ApiCarrierName =
     | 'Other';
 
 
+interface ApiDeliveryMethodsMapping {
+    mallMethod: string;
+    shoptetMethod: string;
+}
+
 export interface ApiShoptetSettings {
     lowerStockOnOrder: boolean;
     synchronizeOrders: boolean;
@@ -94,7 +99,9 @@ export interface ApiShoptetSettings {
     // carrier will be used to send fulfillments
     carrier?: ApiCarrierName;
     carrierName?: string;
+    deliveryMethodsMapping?: ApiDeliveryMethodsMapping[]
 }
+
 
 export interface ApiSyncSettings {
     companyId: ObjectId;
