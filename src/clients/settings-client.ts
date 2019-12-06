@@ -83,6 +83,10 @@ export type ApiCarrierName =
     | 'YamatoTransport'
     | 'Other';
 
+export interface ApiDeliveryMethodsMapping {
+    mallMethod: string;
+    shoptetMethod: string;
+}
 
 export interface ApiShoptetSettings {
     lowerStockOnOrder: boolean;
@@ -96,6 +100,7 @@ export interface ApiShoptetSettings {
     // carrier will be used to send fulfillments
     carrier?: ApiCarrierName;
     carrierName?: string;
+    deliveryMethodsMapping?: ApiDeliveryMethodsMapping[]
 }
 
 export interface ApiMallSettings {
