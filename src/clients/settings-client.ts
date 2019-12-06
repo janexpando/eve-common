@@ -84,14 +84,11 @@ export type ApiCarrierName =
     | 'Other';
 
 
-interface ApiDeliveryMethodsMapping {
-    mallMethod: string;
-    shoptetMethod: string;
-}
-
 export interface ApiShoptetSettings {
     lowerStockOnOrder: boolean;
     synchronizeOrders: boolean;
+
+    synchronizeFbaOrders: boolean;
 
     // shipment method, that will be used in shoptet orders
     shipmentMethod?: string;
@@ -99,21 +96,29 @@ export interface ApiShoptetSettings {
     // carrier will be used to send fulfillments
     carrier?: ApiCarrierName;
     carrierName?: string;
-    deliveryMethodsMapping?: ApiDeliveryMethodsMapping[]
 }
 
+export interface ApiMallSettings {
+    synchronizePrices: boolean;
+    synchronizeStock: boolean;
+}
 
-export interface ApiSyncSettings {
-    companyId: ObjectId;
+export interface ApiAmazonSettings {
     synchronizePrices: boolean;
     synchronizeStock: boolean;
     listNewProducts: boolean;
-    zeroUnmatchedProducts: boolean;
     downloadPricing: boolean;
+    zeroUnmatchedProducts: boolean;
+}
+
+export interface ApiSyncSettings {
+    companyId: ObjectId;
     formulas: Dict<ApiFormula, MarketplaceName>;
     japoId: string;
     autopricing?: Dict<ApiAutopricingSettings, MarketplaceName>;
     shoptet?: ApiShoptetSettings;
+    mall?: ApiMallSettings;
+    amazon?: ApiAmazonSettings;
 }
 
 export interface ApiFormula {

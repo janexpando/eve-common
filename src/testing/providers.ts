@@ -16,6 +16,7 @@ import {SettingsClient} from "../clients/settings-client";
 import {ShoptetServiceClient} from "../clients/shoptet-service-client";
 import {MwsCreator} from "../mws/mws-creator";
 import {ShipmentClient} from "../clients/shipment-client";
+import {ReturnClient} from "../clients/return-client";
 
 export const PROVIDERS: Provider[] = [
         ENVIRONMENT_PROVIDER,
@@ -35,6 +36,7 @@ export const PROVIDERS: Provider[] = [
         SendinblueClient,
         SettingsClient,
         ShipmentClient,
+        ReturnClient,
         ShoptetServiceClient,
         MwsCreator,
         ProductStatusesClient

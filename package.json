@@ -1,6 +1,6 @@
 {
   "name": "eve-common",
-  "version": "5.5.0",
+  "version": "6.0.3",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

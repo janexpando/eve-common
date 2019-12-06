@@ -16,6 +16,7 @@ export interface ApiProductAutopricingHistory {
     otherLowestShipping?: number;
     autoprice?: number;
     selling?: number;
+    buybox?: boolean;
 
     isListingUpdate: boolean,
     date: Date;
@@ -29,7 +30,7 @@ export class ProductAutopricingHistoryClient extends EveClient {
     }
 
     async get(companyId: ObjectId, marketplace: MarketplaceName, sku: string, before?: Date, after?: Date, isListingUpdate?: boolean): Promise<ApiProductAutopricingHistory[]> {
-        const url = `/company/${companyId}/marketplace/${marketplace}/sku/${sku}/product-autopricing-history`;
+        const url = `/company/${companyId}/marketplace/${marketplace}/sku/${encodeURIComponent(sku)}/product-autopricing-history`;
         let response = await this.got.get(url, {body: {before, after ,isListingUpdate}});
         let items = response.body as ApiProductAutopricingHistory[];
         if (items && (items.length > 0)) {
