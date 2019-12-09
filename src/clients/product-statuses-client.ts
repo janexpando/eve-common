@@ -2,7 +2,7 @@ import {Injectable} from 'injection-js';
 import {ObjectId} from 'bson';
 import {ApiVariant, Environment} from "..";
 import {EveClient} from "./eve-client";
-import { ApiProductStats, MarketplaceName} from "..";
+import { MarketplaceName} from "..";
 
 export type ListingStatusKind = "ok" | "error";
 
@@ -76,7 +76,7 @@ export class ProductStatusesClient extends EveClient {
         return response.body;
     }
 
-    async blockProducts(companyId: ObjectId, variants: ApiVariant[]) {
+    async  blockProducts(companyId: ObjectId, variants: ApiVariant[]) {
         let response = await this.got.patch(
             `/company/${companyId}/products/block`,
             {

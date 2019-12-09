@@ -29,6 +29,7 @@ export function getMarketplaceHost(marketplace: AmazonType): string {
     if (marketplace === 'amazon_cn') return 'mws.amazonservices.com.cn';
     if (marketplace === 'amazon_jp') return 'mws.amazonservices.jp';
     if (marketplace === 'amazon_au') return 'mws.amazonservices.com.au';
+    if (marketplace === 'amazon_sg') return 'mws-fe.amazonservices.com';
 
     throw new Error(`${marketplace} is not a valid amazon marketplace`);
 }

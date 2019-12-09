@@ -32,6 +32,8 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'AUD';
         case "mall_cz":
             return 'CZK';
+        case "amazon_sg":
+            return 'SGD';
         default:
             throw new Error(`${marketplace} is not a valid amazon marketplace`);
     }

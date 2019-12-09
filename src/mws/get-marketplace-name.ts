@@ -1,4 +1,6 @@
-export function getMarketplaceName(marketplaceId) {
+import {MarketplaceName} from "../models/marketplace-names";
+
+export function getMarketplaceName(marketplaceId: string): MarketplaceName {
     if (!marketplaceId || marketplaceId.trim() === '')
         throw new Error('marketplaceId parameter is empty');
     switch (marketplaceId) {
@@ -28,6 +30,8 @@ export function getMarketplaceName(marketplaceId) {
             return 'amazon_jp';
         case 'A39IBJ37TRP1C6':
             return 'amazon_au';
+        case 'A19VAU5U5O7RUS':
+            return 'amazon_sg';
         default:
             throw new Error(
                 `${marketplaceId} is not a valid amazon marketplace`,
