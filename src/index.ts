@@ -9,6 +9,7 @@ export * from './utils/aggregate';
 export * from './utils/iterator-to-array';
 export * from './models/continent-names';
 export * from './models/marketplace-names';
+export * from './models/mws-region';
 export * from './models/currency';
 export * from './mws/mws-creator';
 export * from './mws/get-marketplace-currency';
