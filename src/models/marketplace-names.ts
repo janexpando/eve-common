@@ -69,7 +69,7 @@ export function getContinentMarketplaces(continent: MwsRegion): MarketplaceName[
             return AMAZON_EUROPE;
         case 'america':
             return AMAZON_AMERICA;
-        case "far-east":
+        case "far_east":
             return AMAZON_FAR_EAST;
         default:
             return [];
@@ -82,6 +82,6 @@ export function getContinent(marketplace: MarketplaceName): MwsRegion {
     if (AMAZON_AMERICA.includes(marketplace as AmazonAmericaType))
         return 'america';
     if(AMAZON_FAR_EAST.includes(marketplace as AmazonFarEast))
-        return 'far-east';
+        return 'far_east';
     return null; //TODO: we need to resolve all continents
 }
