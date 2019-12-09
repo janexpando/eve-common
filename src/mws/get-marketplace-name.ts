@@ -1,6 +1,6 @@
-import {MarketplaceName} from "../models/marketplace-names";
+import {AmazonType} from "../models/marketplace-names";
 
-export function getMarketplaceName(marketplaceId: string): MarketplaceName {
+export function getMarketplaceName(marketplaceId: string): AmazonType {
     if (!marketplaceId || marketplaceId.trim() === '')
         throw new Error('marketplaceId parameter is empty');
     switch (marketplaceId) {
