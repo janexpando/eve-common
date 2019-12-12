@@ -22,6 +22,7 @@ export class SettingsClient extends EveClient {
 
 export interface ApiAutopricingSettings {
     active: boolean;
+    autoActivation: boolean;
     progressStrategy: number;
     fallbackStrategy: number;
     penaltyDrain: number;
