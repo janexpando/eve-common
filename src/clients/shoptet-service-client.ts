@@ -112,6 +112,9 @@ export interface ApiOrder {
     autopricing?: IAutopricing[];
     autopricingTotal?: number;
     autopricingStatus?: 'None' | 'Pending' | 'PendingTax' | 'Done';
+
+    /** For Mall-Shoptet delivery method mapping */
+    mallDeliveryMethod?: string;
 }
 
 const optionalString = () => string().allow(null, "").optional();
@@ -197,4 +200,5 @@ export const ORDER_JOI_SCHEMA = object({
     autopricing: array().items(ORDER_AUTOPRICING_SCHEMA).allow(null).optional(),
     autopricingTotal: number().allow(null).optional(),
     autopricingStatus: string().allow([null, ...AUTOPRICING_STATUSES]).optional(),
+    mallDeliveryMethod: string().allow(null)
 }).options({stripUnknown: true});
