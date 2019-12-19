@@ -19,6 +19,8 @@ export * from './mws/get-marketplace-name';
 export * from './microservices/auth-checker';
 export * from './microservices/callback-responder';
 export * from './microservices/job-queue';
+export * from './microservices/thanos';
+export * from './microservices/thanos-controller';
 
 export * from './time/time';
 export * from './time/time-bending';
@@ -49,6 +51,7 @@ export * from './clients/settings-client';
 export * from './clients/pricing-report-client'
 export * from './clients/shoptet-service-client';
 export * from './clients/product-statuses-client';
+export * from './clients/thanos-client';
 
 export * from './stream/array-to-readable';
 export * from './stream/string-to-readable';
