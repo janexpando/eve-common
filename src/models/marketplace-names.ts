@@ -50,9 +50,9 @@ export const AMAZON: AmazonType[] = []
     .concat(AMAZON_AMERICA)
     .concat(AMAZON_FAR_EAST);
 
-export type MallType = 'mall_cz'
+export type MallType = 'mall_cz' | 'mall_pl' | 'mall_sk';
 
-export const MALL: MallType[] = ['mall_cz'];
+export const MALL: MallType[] = ['mall_cz', 'mall_pl', 'mall_sk'];
 
 export type MarketplaceName = AmazonType | MallType;
 
