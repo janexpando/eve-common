@@ -6,7 +6,7 @@ import createRouter = require('koa-joi-router');
 import {Thanos} from "./thanos";
 
 @Injectable()
-export class SettingsController {
+export class ThanosController {
     constructor(
         private authChecker: AuthChecker,
         private thanos: Thanos
