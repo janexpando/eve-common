@@ -9,6 +9,7 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
         case 'amazon_it':
         case 'amazon_fr':
         case 'amazon_es':
+        case 'mall_sk':
             return 'EUR';
         // @ts-ignore
         case 'amazon_gb':
@@ -32,6 +33,8 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'AUD';
         case "mall_cz":
             return 'CZK';
+        case "mall_pl":
+            return 'PLN';
         case "amazon_sg":
             return 'SGD';
         default:

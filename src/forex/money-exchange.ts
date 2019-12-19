@@ -12,7 +12,8 @@ const exchangeRates: Record<CurrencyCode, number> = {
     JPY: 119.75,
     MXN: 21.44,
     USD: 1.1,
-    SGD: 1.5
+    SGD: 1.5,
+    PLN: 4.27
 };
 
 export function convertCurrency(value: number, from: CurrencyCode, to: CurrencyCode): number {
