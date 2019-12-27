@@ -46,7 +46,8 @@
     "rxjs": "^6.5.3",
     "timekeeper": "^2.2.0",
     "ts-node": "^8.5.4",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.3",
+    "prettier": "^1.19.1"
   },
   "ava": {
     "compileEnhancements": false,
