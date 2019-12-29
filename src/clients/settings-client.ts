@@ -2,7 +2,7 @@ import {ObjectId} from 'bson';
 import {EveClient} from "./eve-client";
 import {Environment} from "../bootstrapping/environment";
 import {Dict} from "../types";
-import {MarketplaceName} from "../models/marketplace-names";
+import {MallType, MarketplaceName} from "../models/marketplace-names";
 import {Injectable} from "injection-js";
 
 @Injectable()
@@ -85,6 +85,7 @@ export type ApiCarrierName =
     | 'Other';
 
 export interface ApiDeliveryMethodsMapping {
+    mallMarketplace: MallType;
     mallMethod: string;
     shoptetMethod: string;
 }
