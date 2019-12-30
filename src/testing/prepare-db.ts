@@ -4,6 +4,10 @@ import {TestInterface} from "ava";
 import {InjectorContext} from "./injector";
 
 async function truncateCollections() {
+    let config = await mongoose.connection.db.collection("dbconfig").findOne({});
+    if(config && config.production) {
+        throw new Error("You are trying to run unit tests on production you dumb fuck. This could erase whole database.")
+    }
     for (let modelName of mongoose.modelNames()) {
         await mongoose.models[modelName].deleteMany({});
     }
