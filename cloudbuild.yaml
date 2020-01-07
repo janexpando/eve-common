@@ -1,4 +1,4 @@
-timeout: 200s
+timeout: 300s
 steps:
   # we need running database to test our code
   - name: gcr.io/cloud-builders/docker
@@ -47,5 +47,7 @@ steps:
 #      - npm version --no-git-tag-version $(npm view eve-common@latest version)
 #      - npm version --no-git-tag-version prerelease
       - npm publish
+  - name: gcr.io/cloud-builders/docker
+    args:
       - stop
       - test-db
