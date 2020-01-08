@@ -47,7 +47,7 @@ steps:
     args:
       - '-c'
       - |
-            echo "//registry.npmjs.org/:_authToken=${_NPM_TOKEN}" >> /gcr.io/$PROJECT_ID/.npmrc
+            echo \"//registry.npmjs.org/:_authToken=${_NPM_TOKEN}\" > /gcr.io/eve-common/.npmrc
   - name: gcr.io/cloud-builders/npm:current
     args:
       - publish
