@@ -40,9 +40,9 @@ steps:
       - SLACK_ORDERS_WEBHOOK_URL=http://abc.com
       - MALL_SERVICE_URL=http://127.0.0.1:3333
   - name: 'ubuntu'
-    volumes:
-    - name: 'vol1'
-      path: '/'
+#    volumes:
+#    - name: 'vol1'
+#      path: '/'
     entrypoint: 'bash'
     args:
       - '-c'
