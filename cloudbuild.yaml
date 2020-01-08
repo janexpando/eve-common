@@ -39,14 +39,18 @@ steps:
       - PORT=8083
       - SLACK_ORDERS_WEBHOOK_URL=http://abc.com
       - MALL_SERVICE_URL=http://127.0.0.1:3333
-  - name: gcr.io/cloud-builders/docker
+  - name: 'ubuntu'
+    volumes:
+    - name: 'vol1'
+      path: '/'
+    entrypoint: 'bash'
     args:
-      - echo _auth=$_NPM_TOKEN >> .npmrc
-      - echo email=devops@expan.do >> .npmrc
-      - echo always-auth=true >> .npmrc
-#      - npm version --no-git-tag-version $(npm view eve-common@latest version)
-#      - npm version --no-git-tag-version prerelease
-      - npm publish
+      - '-c'
+      - |
+            echo "//registry.npmjs.org/:_authToken=${_NPM_TOKEN}" >> /gcr.io/$PROJECT_ID/.npmrc
+  - name: gcr.io/cloud-builders/npm:current
+    args:
+      - publish
   - name: gcr.io/cloud-builders/docker
     args:
       - stop
