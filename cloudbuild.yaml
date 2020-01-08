@@ -44,9 +44,9 @@ steps:
     args:
       - '-c'
       - |
-            echo \"_auth=${_NPM_TOKEN}\" > .npmrc;
-            echo \"email=devops@expan.do\" >> .npmrc;
-            echo \"always-auth=true\" >> .npmrc;
+            echo _auth=${_NPM_TOKEN} > .npmrc;
+            echo email=devops@expan.do >> .npmrc;
+            echo always-auth=true >> .npmrc;
             cat .npmrc;
   - name: gcr.io/cloud-builders/npm:current
     args:
