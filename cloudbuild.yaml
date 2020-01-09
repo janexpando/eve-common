@@ -44,10 +44,10 @@ steps:
     args:
       - '-c'
       - |
-            echo _auth=${_NPM_TOKEN} > .npmrc;
+            echo //registry.npmjs.org/:_authToken=${_NPM_TOKEN} > .npmrc;
             echo email=devops@expan.do >> .npmrc;
             echo always-auth=true >> .npmrc;
-            cat .npmrc;
+            cat .npmrc
     volumes:
       - name: 'home'
         path: /root/
