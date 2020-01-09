@@ -15,30 +15,30 @@ steps:
     args:
       - run
       - build
-#  - name: gcr.io/cloud-builders/npm:current
-#    args:
-#      - run
-#      - ava
-#    env:
-#      - EVE_AUTH_BEARER=Expando123
-#      - GATEWAY_URL=http://127.0.0.1:3333
-#      - FRONTEND_URL=http://localhost:3000
-#      - COMPANY_SERVICE_URL=http://127.0.0.1:3333
-#      - ORDER_DOWNLOADER_URL=http://127.0.0.1:8080
-#      - PRICING_SERVICE_URL=http://127.0.0.1:8081
-#      - SHOPTET_SERVICE_URL=http://127.0.0.1:8082
-#      - PRODUCT_SERVICE_URL=http://127.0.0.1:8083
-#      - MALL_SERVICE_URL=http://127.0.0.1:8084
-#      - SERVICE_URL=http://127.0.0.1:3333
-#      - SLACK_ORDERS_WEBHOOK_URL=http://127.0.0.1:3333
-#      - SENDINBLUE_TOKEN=xy
-#      - GCLOUD_PROJECT=expando-eve
-#      - GCLOUD_BUCKET_NAME=expando-eve-test
-#      - MONGODB_URI=mongodb://test-db:27017/eve
-#      - NODE_ENV=test
-#      - PORT=8083
-#      - SLACK_ORDERS_WEBHOOK_URL=http://abc.com
-#      - MALL_SERVICE_URL=http://127.0.0.1:3333
+  - name: gcr.io/cloud-builders/npm:current
+    args:
+      - run
+      - ava
+    env:
+      - EVE_AUTH_BEARER=Expando123
+      - GATEWAY_URL=http://127.0.0.1:3333
+      - FRONTEND_URL=http://localhost:3000
+      - COMPANY_SERVICE_URL=http://127.0.0.1:3333
+      - ORDER_DOWNLOADER_URL=http://127.0.0.1:8080
+      - PRICING_SERVICE_URL=http://127.0.0.1:8081
+      - SHOPTET_SERVICE_URL=http://127.0.0.1:8082
+      - PRODUCT_SERVICE_URL=http://127.0.0.1:8083
+      - MALL_SERVICE_URL=http://127.0.0.1:8084
+      - SERVICE_URL=http://127.0.0.1:3333
+      - SLACK_ORDERS_WEBHOOK_URL=http://127.0.0.1:3333
+      - SENDINBLUE_TOKEN=xy
+      - GCLOUD_PROJECT=expando-eve
+      - GCLOUD_BUCKET_NAME=expando-eve-test
+      - MONGODB_URI=mongodb://test-db:27017/eve
+      - NODE_ENV=test
+      - PORT=8083
+      - SLACK_ORDERS_WEBHOOK_URL=http://abc.com
+      - MALL_SERVICE_URL=http://127.0.0.1:3333
   - name: 'ubuntu'
     entrypoint: 'bash'
     args:
