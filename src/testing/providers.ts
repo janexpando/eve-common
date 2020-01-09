@@ -1,22 +1,23 @@
 import {ConsoleLogger, DbDriver, ENVIRONMENT_PROVIDER, ProductStatusesClient} from "..";
 import {Provider} from "injection-js";
 import {MwsProvider} from "../mws/mws-provider";
-import {MwsCredentialsClient} from "../clients/mws-credentials-client";
-import {CompanyClient} from "../clients/company-client";
-import {AmazonProductClient} from "../clients/amazon-product-client";
-import {DeveloperConfigClient} from "../clients/developer-config-client";
-import {FinancialEventsClient} from "../clients/financial-events-client";
-import {MarketplaceClient} from "../clients/marketplace-client";
-import {OrderDownloaderClient} from "../clients/order-downloader-client";
-import {ProductPricingClient} from "../clients/product-pricing-client";
-import {ProductServiceClient} from "../clients/product-service-client";
-import {ProductSyncClient} from "../clients/product-sync-client";
-import {SendinblueClient} from "../clients/sendinblue-client";
-import {SettingsClient} from "../clients/settings-client";
-import {ShoptetServiceClient} from "../clients/shoptet-service-client";
-import {MwsCreator} from "../mws/mws-creator";
+import {MwsCredentialsClient} from "..";
+import {CompanyClient} from "..";
+import {AmazonProductClient} from "..";
+import {DeveloperConfigClient} from "..";
+import {FinancialEventsClient} from "..";
+import {MarketplaceClient} from "..";
+import {OrderDownloaderClient} from "..";
+import {ProductPricingClient} from "..";
+import {ProductServiceClient} from "..";
+import {ProductSyncClient} from "..";
+import {SendinblueClient} from "..";
+import {SettingsClient} from "..";
+import {ShoptetServiceClient} from "..";
+import {MwsCreator} from "..";
 import {ShipmentClient} from "../clients/shipment-client";
 import {ReturnClient} from "../clients/return-client";
+import {MailerClient} from "../clients/mailer-client";
 
 export const PROVIDERS: Provider[] = [
         ENVIRONMENT_PROVIDER,
@@ -39,6 +40,7 @@ export const PROVIDERS: Provider[] = [
         ReturnClient,
         ShoptetServiceClient,
         MwsCreator,
-        ProductStatusesClient
+        ProductStatusesClient,
+        MailerClient
     ]
 ;
