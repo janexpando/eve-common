@@ -1,5 +1,5 @@
 import { provideInjector, test } from "../../testing";
-import { MailerClient } from "../mailer-client";
+import { NotificationsClient } from "../notifications-client";
 import { ObjectId } from "bson";
 import * as nock from "nock";
 import { Environment } from "../..";
@@ -7,14 +7,14 @@ import { Environment } from "../..";
 provideInjector(test);
 
 test.serial(
-  "trigger send notification email about suspended account",
+  "notify about suspended account",
   async t => {
     // nock.recorder.rec();
-    const client = t.context.injector.get(MailerClient);
+    const client = t.context.injector.get(NotificationsClient);
     const environment = t.context.injector.get(Environment);
     const companyId = new ObjectId("5e17324d235a3bf11c1e926e");
     nock(`${environment.GATEWAY_URL}`, { encodedQueryParams: true })
-      .post("/mailer/send-mail/suspended-account", {
+      .post("/notification/suspended-account", {
         companyId: "5e17324d235a3bf11c1e926e"
       })
       .reply(200, { success: true }, [

@@ -17,7 +17,7 @@ import {ShoptetServiceClient} from "..";
 import {MwsCreator} from "..";
 import {ShipmentClient} from "../clients/shipment-client";
 import {ReturnClient} from "../clients/return-client";
-import {MailerClient} from "../clients/mailer-client";
+import {NotificationsClient} from "../clients/notifications-client";
 
 export const PROVIDERS: Provider[] = [
         ENVIRONMENT_PROVIDER,
@@ -41,6 +41,6 @@ export const PROVIDERS: Provider[] = [
         ShoptetServiceClient,
         MwsCreator,
         ProductStatusesClient,
-        MailerClient
+        NotificationsClient
     ]
 ;
