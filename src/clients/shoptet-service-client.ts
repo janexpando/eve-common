@@ -1,9 +1,9 @@
 import {Injectable} from 'injection-js';
 import {EveClient} from "./eve-client";
 import {ObjectId} from "bson";
-import {Environment} from "../bootstrapping/environment";
-import {MarketplaceName, MARKETPLACES} from "../models/marketplace-names";
-import {CURRENCY_CODES, CurrencyCode} from "../models/currency";
+import {Environment} from "..";
+import {MarketplaceName, MARKETPLACES} from "..";
+import {CURRENCY_CODES, CurrencyCode} from "..";
 import {array, bool, date, number, object, string} from "joi";
 
 @Injectable()
@@ -73,7 +73,7 @@ export interface IAutopricing {
 export const ORDER_STATUSES = ["Unshipped", "Pending", "Shipped", "Canceled"];
 export const AUTOPRICING_STATUSES = ['None', 'Pending', 'PendingTax', 'Done'];
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled'
-export declare type ApiOrderFulfilmentChannel = 'FBA' | 'Seller';
+export declare type ApiOrderFulfillmentChannel = 'FBA' | 'Seller';
 export declare type ApiOrderPaymentMethod = string;
 
 export interface ApiOrder {
@@ -81,7 +81,7 @@ export interface ApiOrder {
     marketplaceOrderId: string;
     status: ApiOrderStatus;
     marketplace: MarketplaceName;
-    fulfillmentChannel: ApiOrderFulfilmentChannel;
+    fulfillmentChannel: ApiOrderFulfillmentChannel;
     totalPrice: number;
     totalItemTax: number;
     shippingPrice: number;
