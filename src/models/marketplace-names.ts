@@ -62,18 +62,6 @@ export const america = AMAZON_AMERICA;
 
 export const europe = AMAZON_EUROPE;
 
-export type MarketplaceType = 'amazon' | 'mall';
-
-export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall'];
-
-export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceType {
-    if(AMAZON.includes(marketplace as AmazonType))
-        return 'amazon';
-    if(MALL.includes(marketplace as MallType))
-        return 'mall';
-    return null;
-}
-
 export function getContinentMarketplaces(continent: MwsRegion): MarketplaceName[] {
     switch (continent) {
         case 'europe':
@@ -96,3 +84,19 @@ export function getContinent(marketplace: MarketplaceName): MwsRegion {
         return 'far_east';
     return null; //TODO: we need to resolve all continents
 }
+
+export type MarketplaceType = 'amazon' | 'mall';
+
+export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall'];
+
+export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceType {
+    if(AMAZON.includes(marketplace as AmazonType))
+        return 'amazon';
+    if(MALL.includes(marketplace as MallType))
+        return 'mall';
+    return null;
+}
+
+export type DestinationType = 'shoptet';
+
+export const DESTINATIONS: DestinationType[] = ['shoptet'];
