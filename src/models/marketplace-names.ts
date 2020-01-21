@@ -1,4 +1,3 @@
-import {ContinentName} from './continent-names';
 import {MwsRegion} from "./mws-region";
 
 export type AmazonEuropeType =
@@ -96,7 +95,3 @@ export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceTyp
         return 'mall';
     return null;
 }
-
-export type DestinationType = 'shoptet';
-
-export const DESTINATIONS: DestinationType[] = ['shoptet'];
