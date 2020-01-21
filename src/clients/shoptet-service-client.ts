@@ -1,7 +1,7 @@
 import {Injectable} from 'injection-js';
 import {EveClient} from "./eve-client";
 import {ObjectId} from "bson";
-import {Environment} from "..";
+import {Environment, MarketplaceType, ServiceName} from "..";
 import {MarketplaceName, MARKETPLACES} from "..";
 import {CURRENCY_CODES, CurrencyCode} from "..";
 import {array, bool, date, number, object, string} from "joi";
@@ -13,12 +13,13 @@ export class ShoptetServiceClient extends EveClient {
         this.baseUrl = env.SHOPTET_SERVICE_URL;
     }
 
-    async postOrders(companyId: ObjectId, orders: ApiOrder[]) {
+    async postOrders(companyId: ObjectId, orders: ApiOrder[], settings: ApiImportSettings) {
         return this.got.post(
             `/company/${companyId}/orders`,
             {
                 body: {
                     orders,
+                    settings
                 },
             },
         );
@@ -117,6 +118,27 @@ export interface ApiOrder {
     mallDeliveryMethod?: string;
 }
 
+interface ApiDeliveryMethodsMapping {
+    marketplace: MarketplaceName;
+    method: string;
+    destinationMethod: string;
+}
+
+export interface ApiImportSettings {
+    companyId: ObjectId;
+    marketplaceType: MarketplaceType;
+    service: ServiceName;
+    defaultOrderStatus: string;
+    importOrderJustOnce: boolean;
+    lowerStockOnOrder: boolean;
+    synchronizeOrders: boolean;
+    shipmentMethod?: string;
+    synchronizeFbaOrders: boolean;
+    carrier?: ApiCarrierName;
+    carrierName?: string;
+    deliveryMethodsMapping?: [ApiDeliveryMethodsMapping];
+}
+
 const optionalString = () => string().allow(null, "").optional();
 
 export const ADDRESS_JOI_SCHEMA = object({
@@ -202,3 +224,55 @@ export const ORDER_JOI_SCHEMA = object({
     autopricingStatus: string().allow([null, ...AUTOPRICING_STATUSES]).optional(),
     mallDeliveryMethod: string().allow(null)
 }).options({stripUnknown: true});
+
+export type ApiCarrierName =
+    'AFLFedex'
+    | 'Aramex'
+    | 'BluePackage'
+    | 'BlueDart'
+    | 'CanadaPost'
+    | 'Chronopost'
+    | 'CityLink'
+    | 'DHL'
+    | 'DHLGlobalMail'
+    | 'DPD'
+    | 'DTDC'
+    | 'Delhivery'
+    | 'DeutschePost'
+    | 'FEDEXJP'
+    | 'Fastway'
+    | 'FedEx'
+    | 'FedExSmartPost'
+    | 'FirstFlight'
+    | 'GLS'
+    | 'GO'
+    | 'HermesLogistikGruppe'
+    | 'IndiaPost'
+    | 'JPEXPRESS'
+    | 'LaPoste'
+    | 'Lasership'
+    | 'NITTSU'
+    | 'Newgistics'
+    | 'NipponExpress'
+    | 'OSM'
+    | 'OnTrac'
+    | 'OverniteExpress'
+    | 'Parcelforce'
+    | 'Parcelnet'
+    | 'PosteItaliane'
+    | 'Professional'
+    | 'RoyalMail'
+    | 'SAGAWA'
+    | 'SDA'
+    | 'SagawaExpress'
+    | 'Smartmail'
+    | 'Streamlite'
+    | 'TNT'
+    | 'Target'
+    | 'UPS'
+    | 'UPSMI'
+    | 'UPSMailInnovations'
+    | 'USPS'
+    | 'YAMATO'
+    | 'YamatoTransport'
+    | 'Other';
