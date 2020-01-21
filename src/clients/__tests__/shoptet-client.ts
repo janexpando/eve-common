@@ -1,7 +1,7 @@
 import * as nock from 'nock';
 import {ObjectId} from 'bson';
 import {provideInjector, test} from "../../testing";
-import {ApiOrder, ShoptetServiceClient} from "../shoptet-service-client";
+import {ApiImportSettings, ApiOrder, ShoptetServiceClient} from "../shoptet-service-client";
 import {Environment, ENVIRONMENT_PROVIDER} from "../..";
 
 provideInjector(test, [ShoptetServiceClient, ENVIRONMENT_PROVIDER]);
@@ -51,10 +51,24 @@ test.serial('send orders', async t => {
         totalDiscount: 0,
         isRefunded: false,
     };
+    let settings: ApiImportSettings = {
+        companyId,
+        carrier: "Other",
+        carrierName: "carrier",
+        defaultOrderStatus: "dos",
+        deliveryMethodsMapping:[],
+        importOrderJustOnce: false,
+        lowerStockOnOrder: true,
+        marketplaceType: "amazon",
+        service: "shoptet",
+        shipmentMethod: "sm",
+        synchronizeFbaOrders: false,
+        synchronizeOrders: true
+    };
     delete order.marketplaceLastChanged;
     let orders: ApiOrder[] = [order];
     nocks(companyId, order, t.context.injector.get(Environment));
-    let response = await client.postOrders(companyId, orders);
+    let response = await client.postOrders(companyId, orders, settings);
     t.is(response.statusCode, 200);
 });
 
@@ -93,6 +107,20 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
                 'totalDiscount': 0,
                 'isRefunded': false,
             }],
+            'settings':{
+                'companyId': companyId.toHexString(),
+                'carrier': "Other",
+                'carrierName': "carrier",
+                'defaultOrderStatus': "dos",
+                'deliveryMethodsMapping':[],
+                'importOrderJustOnce': false,
+                'lowerStockOnOrder': true,
+                'marketplaceType': "amazon",
+                'service': "shoptet",
+                'shipmentMethod': "sm",
+                'synchronizeFbaOrders': false,
+                'synchronizeOrders': true
+            }
         })
         .reply(200, {}, ['Content-Type',
             "application/json; charset=utf-8",

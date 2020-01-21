@@ -2,7 +2,7 @@ import {ObjectId} from 'bson';
 import {EveClient} from "./eve-client";
 import {Environment} from "../bootstrapping/environment";
 import {Dict} from "../types";
-import {MallType, MarketplaceName} from "../models/marketplace-names";
+import {MarketplaceName} from "../models/marketplace-names";
 import {Injectable} from "injection-js";
 
 @Injectable()
@@ -84,26 +84,6 @@ export type ApiCarrierName =
     | 'YamatoTransport'
     | 'Other';
 
-export interface ApiDeliveryMethodsMapping {
-    mallMarketplace: MallType;
-    mallMethod: string;
-    shoptetMethod: string;
-}
-
-export interface ApiShoptetSettings {
-    lowerStockOnOrder: boolean;
-    synchronizeOrders: boolean;
-
-    synchronizeFbaOrders: boolean;
-
-    // shipment method, that will be used in shoptet orders
-    shipmentMethod?: string;
-
-    // carrier will be used to send fulfillments
-    carrier?: ApiCarrierName;
-    carrierName?: string;
-    deliveryMethodsMapping?: ApiDeliveryMethodsMapping[]
-}
 
 export interface ApiMallSettings {
     synchronizePrices: boolean;
@@ -123,7 +103,6 @@ export interface ApiSyncSettings {
     formulas: Dict<ApiFormula, MarketplaceName>;
     japoId: string;
     autopricing?: Dict<ApiAutopricingSettings, MarketplaceName>;
-    shoptet?: ApiShoptetSettings;
     mall?: ApiMallSettings;
     amazon?: ApiAmazonSettings;
 }
