@@ -121,7 +121,7 @@ export interface ApiOrder {
 interface ApiDeliveryMethodsMapping {
     marketplace: MarketplaceName;
     method: string;
-    destinationMethod: string;
+    serviceMethod: string;
 }
 
 export interface ApiImportSettings {
