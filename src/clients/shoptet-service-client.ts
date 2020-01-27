@@ -24,6 +24,34 @@ export class ShoptetServiceClient extends EveClient {
             },
         );
     }
+
+    async getShoptetShipmentMethods(companyId: ObjectId): Promise<IShoptetShipmentMethod[]> {
+        let response = await this.got.get(
+            `/company/${companyId}/shoptet-shipment-methods`,
+        );
+        return response.body;
+    }
+
+    async getShoptetOrderStatuses(companyId: ObjectId): Promise<IShoptetOrderStatus[]> {
+        let response = await this.got.get(
+            `/company/${companyId}/shoptet-order-statuses`,
+        );
+        return response.body;
+    }
+}
+
+export interface IShoptetOrderStatus {
+    code: number;
+    order: number;
+    name: string;
+    markAsPaid: boolean;
+}
+
+export interface IShoptetShipmentMethod {
+    guid: string;
+    order: number;
+    name: string;
+    visible: boolean;
 }
 
 export interface ApiAddress {
