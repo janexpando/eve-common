@@ -1,22 +1,11 @@
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
 
-export type ProductFeedType =
-    | "GOOGLE_PRODUCT"
-    | "SHOPIFY"
-    | "SHOPTET"
-    | "NONE"
-    | "CUSTOM";
+export type ProductFeedType = 'GOOGLE_PRODUCT' | 'SHOPIFY' | 'SHOPTET' | 'NONE' | 'CUSTOM';
 
-export const PRODUCT_FEED_TYPE: ProductFeedType[] = [
-    "GOOGLE_PRODUCT",
-    "SHOPIFY",
-    "SHOPTET",
-    "NONE",
-    "CUSTOM"
-];
+export const PRODUCT_FEED_TYPE: ProductFeedType[] = ['GOOGLE_PRODUCT', 'SHOPIFY', 'SHOPTET', 'NONE', 'CUSTOM'];
 
 export interface ApiProductFeedResult {
     companyId: ObjectId;

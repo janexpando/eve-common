@@ -1,9 +1,9 @@
-import {ObjectId} from 'bson';
-import {EveClient} from "./eve-client";
-import {Environment} from "../bootstrapping/environment";
-import {Dict} from "../types";
-import {MarketplaceName} from "../models/marketplace-names";
-import {Injectable} from "injection-js";
+import { ObjectId } from 'bson';
+import { EveClient } from './eve-client';
+import { Environment } from '../bootstrapping/environment';
+import { Dict } from '../types';
+import { MarketplaceName } from '../models/marketplace-names';
+import { Injectable } from 'injection-js';
 
 @Injectable()
 export class SettingsClient extends EveClient {
@@ -33,7 +33,7 @@ export interface ApiAutopricingSettings {
 }
 
 export type ApiCarrierName =
-    'AFLFedex'
+    | 'AFLFedex'
     | 'Aramex'
     | 'BluePackage'
     | 'BlueDart'
@@ -83,7 +83,6 @@ export type ApiCarrierName =
     | 'YAMATO'
     | 'YamatoTransport'
     | 'Other';
-
 
 export interface ApiMallSettings {
     synchronizePrices: boolean;

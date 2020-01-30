@@ -1,8 +1,7 @@
-import {Injectable} from "injection-js";
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {ObjectId} from "bson";
-
+import { Injectable } from 'injection-js';
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { ObjectId } from 'bson';
 
 export type ApiFeedType = 'GOOGLE_PRODUCT' | 'SHOPIFY' | 'SHOPTET' | 'CUSTOM';
 
@@ -31,7 +30,7 @@ export interface ICompanyMwsMarketplace {
     marketplaceId: string;
 }
 
-export type MarketplaceStatus = "online" | "offline" | "error";
+export type MarketplaceStatus = 'online' | 'offline' | 'error';
 
 @Injectable()
 export class CompanyClient extends EveClient {

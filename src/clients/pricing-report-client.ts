@@ -1,9 +1,9 @@
-import {Injectable} from "injection-js";
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {ObjectId} from "bson";
-import {MarketplaceName} from "..";
-import {number, object} from "joi";
+import { Injectable } from 'injection-js';
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { ObjectId } from 'bson';
+import { MarketplaceName } from '..';
+import { number, object } from 'joi';
 
 export interface ApiShallowPricingReport {
     found: number;
@@ -23,8 +23,8 @@ export const ApiShallowPricingReportJoi = object({
         isCheaper: number(),
         isPricier: number(),
         isPricierWithinThreshold: number(),
-        freeShipping: number()
-    })
+        freeShipping: number(),
+    }),
 });
 
 @Injectable()
@@ -34,15 +34,16 @@ export class PricingReportClient extends EveClient {
         this.baseUrl = this.env.COMPANY_SERVICE_URL;
     }
 
-    async sendShallowPricingReport(companyId: ObjectId, marketplace: MarketplaceName, pricingReport: ApiShallowPricingReport) {
-        let response = await this.got.post(
-            `/company/${companyId}/marketplace/${marketplace}/shallow-pricing-report`,
-            {
-                body: {
-                    pricingReport
-                }
+    async sendShallowPricingReport(
+        companyId: ObjectId,
+        marketplace: MarketplaceName,
+        pricingReport: ApiShallowPricingReport,
+    ) {
+        let response = await this.got.post(`/company/${companyId}/marketplace/${marketplace}/shallow-pricing-report`, {
+            body: {
+                pricingReport,
             },
-        );
+        });
 
         return response.body;
     }

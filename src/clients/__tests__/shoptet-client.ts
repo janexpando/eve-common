@@ -1,11 +1,10 @@
 import * as nock from 'nock';
-import {ObjectId} from 'bson';
-import {provideInjector, test} from "../../testing";
-import {ApiImportSettings, ApiOrder, ShoptetServiceClient} from "../shoptet-service-client";
-import {Environment, ENVIRONMENT_PROVIDER} from "../..";
+import { ObjectId } from 'bson';
+import { provideInjector, test } from '../../testing';
+import { ApiImportSettings, ApiOrder, ShoptetServiceClient } from '../shoptet-service-client';
+import { Environment, ENVIRONMENT_PROVIDER } from '../..';
 
 provideInjector(test, [ShoptetServiceClient, ENVIRONMENT_PROVIDER]);
-
 
 test.serial('send orders', async t => {
     t.plan(1);
@@ -28,7 +27,7 @@ test.serial('send orders', async t => {
             stateOrRegion: 'Praha',
             email: 'vojta@expan.do',
             taxId: 'abcd',
-            taxCountry: 'CZ'
+            taxCountry: 'CZ',
         },
         currencyCode: 'EUR',
         items: [],
@@ -53,17 +52,17 @@ test.serial('send orders', async t => {
     };
     let settings: ApiImportSettings = {
         companyId,
-        carrier: "Other",
-        carrierName: "carrier",
-        defaultOrderStatus: "dos",
-        deliveryMethodsMapping:[],
+        carrier: 'Other',
+        carrierName: 'carrier',
+        defaultOrderStatus: 'dos',
+        deliveryMethodsMapping: [],
         importOrderJustOnce: false,
         lowerStockOnOrder: true,
-        marketplaceType: "amazon",
-        service: "shoptet",
-        shipmentMethod: "sm",
+        marketplaceType: 'amazon',
+        service: 'shoptet',
+        shipmentMethod: 'sm',
         synchronizeFbaOrders: false,
-        synchronizeOrders: true
+        synchronizeOrders: true,
     };
     delete order.marketplaceLastChanged;
     let orders: ApiOrder[] = [order];
@@ -74,61 +73,72 @@ test.serial('send orders', async t => {
 
 function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
     // nock.recorder.rec();
-    nock(environment.SHOPTET_SERVICE_URL, {'encodedQueryParams': true})
+    nock(environment.SHOPTET_SERVICE_URL, { encodedQueryParams: true })
         .post(`/company/${companyId.toHexString()}/orders`, {
-            'orders': [{
-                'companyId': order.companyId.toHexString(),
-                'marketplace': 'amazon_uk',
-                'marketplaceOrderId': '000000',
-                'lastChanged': '2019-01-01T12:00:00.000Z',
-                'buyer': {
-                    'name': 'Vojtěch Zogata', 'addressLine': ['Havlíčkova 13'], 'city': 'Praha', 'countryCode': 'CZ',
-                    'country': 'Czechia', 'district': '1', 'phone': '123 456 789', 'zipCode': '190 00',
-                    'stateOrRegion': 'Praha', 'email': 'vojta@expan.do', taxId: 'abcd',
-                    taxCountry: 'CZ'
+            orders: [
+                {
+                    companyId: order.companyId.toHexString(),
+                    marketplace: 'amazon_uk',
+                    marketplaceOrderId: '000000',
+                    lastChanged: '2019-01-01T12:00:00.000Z',
+                    buyer: {
+                        name: 'Vojtěch Zogata',
+                        addressLine: ['Havlíčkova 13'],
+                        city: 'Praha',
+                        countryCode: 'CZ',
+                        country: 'Czechia',
+                        district: '1',
+                        phone: '123 456 789',
+                        zipCode: '190 00',
+                        stateOrRegion: 'Praha',
+                        email: 'vojta@expan.do',
+                        taxId: 'abcd',
+                        taxCountry: 'CZ',
+                    },
+                    currencyCode: 'EUR',
+                    items: [],
+                    fulfillmentChannel: 'FBA',
+                    status: 'Shipped',
+                    totalPrice: 500,
+                    totalItemTax: 0,
+                    paymentMethod: 'Other',
+                    purchaseDate: '2019-01-01T11:00:00.000Z',
+                    shipServiceLevel: 'expedited',
+                    isBusinessOrder: false,
+                    isComplete: false,
+                    invoices: [],
+                    isPremiumOrder: false,
+                    isPrime: false,
+                    shippingPrice: 0,
+                    latestShipDate: '2019-01-01T12:00:00.000Z',
+                    latestDeliveryDate: '2019-01-01T12:00:00.000Z',
+                    totalDiscount: 0,
+                    isRefunded: false,
                 },
-                'currencyCode': 'EUR',
-                'items': [],
-                'fulfillmentChannel': 'FBA',
-                'status': 'Shipped',
-                'totalPrice': 500,
-                'totalItemTax': 0,
-                'paymentMethod': 'Other',
-                'purchaseDate': '2019-01-01T11:00:00.000Z',
-                'shipServiceLevel': 'expedited',
-                'isBusinessOrder': false,
-                'isComplete': false,
-                'invoices': [],
-                'isPremiumOrder': false,
-                'isPrime': false,
-                'shippingPrice': 0,
-                'latestShipDate': '2019-01-01T12:00:00.000Z',
-                'latestDeliveryDate': '2019-01-01T12:00:00.000Z',
-                'totalDiscount': 0,
-                'isRefunded': false,
-            }],
-            'settings':{
-                'companyId': companyId.toHexString(),
-                'carrier': "Other",
-                'carrierName': "carrier",
-                'defaultOrderStatus': "dos",
-                'deliveryMethodsMapping':[],
-                'importOrderJustOnce': false,
-                'lowerStockOnOrder': true,
-                'marketplaceType': "amazon",
-                'service': "shoptet",
-                'shipmentMethod': "sm",
-                'synchronizeFbaOrders': false,
-                'synchronizeOrders': true
-            }
+            ],
+            settings: {
+                companyId: companyId.toHexString(),
+                carrier: 'Other',
+                carrierName: 'carrier',
+                defaultOrderStatus: 'dos',
+                deliveryMethodsMapping: [],
+                importOrderJustOnce: false,
+                lowerStockOnOrder: true,
+                marketplaceType: 'amazon',
+                service: 'shoptet',
+                shipmentMethod: 'sm',
+                synchronizeFbaOrders: false,
+                synchronizeOrders: true,
+            },
         })
-        .reply(200, {}, ['Content-Type',
-            "application/json; charset=utf-8",
+        .reply(200, {}, [
+            'Content-Type',
+            'application/json; charset=utf-8',
             'Content-Length',
             '2',
             'Date',
             'Fri, 26 Apr 2019 13:20:04 GMT',
             'Connection',
-            'close'] as any);
-
+            'close',
+        ] as any);
 }

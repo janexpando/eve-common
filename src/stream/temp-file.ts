@@ -7,14 +7,14 @@ export interface TempFileOptions {
 }
 
 export class TempFile {
-    tempDir:string;
+    tempDir: string;
     file: string;
 
     constructor(public options?: TempFileOptions) {
-        if(!options) options = {};
+        if (!options) options = {};
         let prefix = options.prefix || 'product-feed';
         this.tempDir = fs.mkdtempSync(prefix);
-        this.file = `${this.tempDir}/tempfile`
+        this.file = `${this.tempDir}/tempfile`;
     }
 
     createWriteStream() {

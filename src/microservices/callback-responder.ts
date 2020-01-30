@@ -1,13 +1,12 @@
-import {Injectable} from "injection-js";
-import {ConsoleLogger, Environment} from "..";
-import * as got from "got";
+import { Injectable } from 'injection-js';
+import { ConsoleLogger, Environment } from '..';
+import * as got from 'got';
 
 export type Iterable<T> = AsyncIterableIterator<T> | IterableIterator<T> | T[];
 
 @Injectable()
 export class CallbackResponder {
-    constructor(private env: Environment, private logger: ConsoleLogger) {
-    }
+    constructor(private env: Environment, private logger: ConsoleLogger) {}
 
     async runIterable<T>(callbackUrl: string, fn: Iterable<T>): Promise<void> {
         for await (let item of fn) {
@@ -25,8 +24,8 @@ export class CallbackResponder {
             body: JSON.stringify(body),
             headers: {
                 'content-type': 'application/json',
-                Authorization: `Bearer ${this.env.EVE_AUTH_BEARER}`
-            }
+                Authorization: `Bearer ${this.env.EVE_AUTH_BEARER}`,
+            },
         });
     }
 }

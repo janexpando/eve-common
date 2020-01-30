@@ -1,17 +1,20 @@
 // I DARE YOU NOT QUESTION THIS FUNCTION !
-import {chunkArray} from "./chunk-array";
+import { chunkArray } from './chunk-array';
 
 export async function requestUniqueElements<T, G, V, R>(
     items: T[],
     getGroup: (t: T) => G,
     getValue: (t: T) => V,
     getResult: (v: V[], g: G) => Promise<R[]>,
-    canRequest: (v: V) => boolean = (v) => true,
+    canRequest: (v: V) => boolean = v => true,
     maxRequestChunkSize: number = 0,
 ): Promise<R[]> {
     let compressedValues: Map<G, Map<V, number[]>> = new Map<G, Map<V, number[]>>();
-    for (let i = 0; i < items.length; i++) // removing duplicites
-    {
+    for (
+        let i = 0;
+        i < items.length;
+        i++ // removing duplicites
+    ) {
         let item: T = items[i];
         let group: G = getGroup(item);
         let value: V = getValue(item);
@@ -19,27 +22,32 @@ export async function requestUniqueElements<T, G, V, R>(
         let g: Map<V, number[]> = compressedValues.get(group);
         if (g) {
             let k: number[] = g.get(value);
-            if (k)
-                k.push(i);
-            else
-                g.set(value, [i]);
+            if (k) k.push(i);
+            else g.set(value, [i]);
         } else
-            compressedValues.set(group, new Map<V, number[]>([[value, [i]]]));
+            compressedValues.set(
+                group,
+                new Map<V, number[]>([[value, [i]]]),
+            );
     }
 
     let groups = [...compressedValues.keys()];
     let orderedResults: R[] = new Array<R>(items.length);
     for (let group of groups) {
         let requestValues: V[] = [...compressedValues.get(group).keys()].filter(x => canRequest(x));
-        if (requestValues.length == 0)
-            continue;
+        if (requestValues.length == 0) continue;
 
-        let requestChunks: V[][] = maxRequestChunkSize ? chunkArray(requestValues, maxRequestChunkSize) : [requestValues];
+        let requestChunks: V[][] = maxRequestChunkSize
+            ? chunkArray(requestValues, maxRequestChunkSize)
+            : [requestValues];
         for (let requestChunkValues of requestChunks) {
             let requestResult: R[] = await getResult(requestChunkValues, group);
 
-            for (let k = 0; k < requestChunkValues.length; k++) // uncompressing duplicites and pairing them up with results
-            {
+            for (
+                let k = 0;
+                k < requestChunkValues.length;
+                k++ // uncompressing duplicites and pairing them up with results
+            ) {
                 let value: V = requestChunkValues[k];
                 let valueArray = compressedValues.get(group).get(value);
                 for (let l = 0; l < valueArray.length; l++) {

@@ -6,7 +6,7 @@ import {
     getWeekStart,
     getYesterdayMidnight,
 } from '../time-bending';
-import {test} from "../../testing";
+import { test } from '../../testing';
 
 test('get yesterday', t => {
     let result = getYesterdayMidnight(new Date('2019-01-21T12:00:00Z'));
@@ -17,10 +17,7 @@ test('get yesterday', t => {
 });
 
 test('get midnight', t => {
-    t.is(
-        getMidnight(new Date('2019-01-01T19:00:00Z')).getTime(),
-        new Date('2019-01-01T00:00:00Z').getTime(),
-    );
+    t.is(getMidnight(new Date('2019-01-01T19:00:00Z')).getTime(), new Date('2019-01-01T00:00:00Z').getTime());
 });
 
 test('get last week start', t => {

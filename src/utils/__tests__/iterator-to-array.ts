@@ -1,6 +1,6 @@
-import {test} from "../../testing";
-import {iteratorToArray} from "../iterator-to-array";
-import {generate, generateAsync} from "./_support";
+import { test } from '../../testing';
+import { iteratorToArray } from '../iterator-to-array';
+import { generate, generateAsync } from './_support';
 
 test('iterator to array', async t => {
     let arr = await iteratorToArray(generate());

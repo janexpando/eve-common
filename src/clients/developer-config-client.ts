@@ -1,7 +1,7 @@
-import {Injectable} from 'injection-js';
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {ContinentName} from "../models/continent-names";
+import { Injectable } from 'injection-js';
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { ContinentName } from '../models/continent-names';
 
 @Injectable()
 export class DeveloperConfigClient extends EveClient {
@@ -11,9 +11,7 @@ export class DeveloperConfigClient extends EveClient {
     }
 
     async getMwsConfig(developerId: string): Promise<ApiMwsDeveloperConfig> {
-        let response = await this.got.get(
-            `/developer-config/${developerId}`,
-        );
+        let response = await this.got.get(`/developer-config/${developerId}`);
         return response.body;
     }
 }

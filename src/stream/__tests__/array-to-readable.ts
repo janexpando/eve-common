@@ -1,7 +1,7 @@
-import {test} from "../../testing";
-import {arrayToReadable} from "../array-to-readable";
-import {Writable} from "stream";
-import {pipeline} from "../../utils";
+import { test } from '../../testing';
+import { arrayToReadable } from '../array-to-readable';
+import { Writable } from 'stream';
+import { pipeline } from '../../utils';
 
 test('array to readable stream', async t => {
     let input = ['a', 'b', 'c'];
@@ -14,9 +14,9 @@ test('array to readable stream', async t => {
                 result.push(chunk);
                 callback();
             } catch (e) {
-                callback(e)
+                callback(e);
             }
-        }
+        },
     });
     await pipeline(readable, writable);
     t.deepEqual(result, input);

@@ -1,12 +1,11 @@
-import {Injectable} from 'injection-js';
-import {ObjectId} from 'bson';
+import { Injectable } from 'injection-js';
+import { ObjectId } from 'bson';
 import Sentry = require('@sentry/node');
-import {isString} from "../utils";
+import { isString } from '../utils';
 import * as pino from 'pino';
 
 @Injectable()
 export class ConsoleLogger {
-
     private pinoLogger = pino();
 
     log(...args: any[]) {
@@ -19,20 +18,20 @@ export class ConsoleLogger {
         if (isString(error)) {
             error = {
                 message: error,
-                sentryId
-            }
+                sentryId,
+            };
         } else {
             error.sentryId = sentryId;
         }
         this.pinoLogger.error(error);
     };
 
-    debug = (obj) => {
-        this.pinoLogger.debug(obj)
+    debug = obj => {
+        this.pinoLogger.debug(obj);
     };
 
     json(obj) {
-        this.pinoLogger.info(obj)
+        this.pinoLogger.info(obj);
     }
 
     private reportError(error: Error | string): string {
@@ -47,7 +46,7 @@ export class ConsoleLogger {
         if (isString(error)) {
             error = {
                 companyId,
-                message: error
+                message: error,
             };
         } else {
             error.companyId = companyId;

@@ -9,7 +9,7 @@ export class StopWatch {
 
     stop(): number {
         if (!this.startTime) return null;
-        this.total = (Date.now() - this.startTime);
+        this.total = Date.now() - this.startTime;
         this.startTime = null;
         return this.total;
     }

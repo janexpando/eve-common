@@ -1,7 +1,7 @@
 import { Injectable } from 'injection-js';
 import got = require('got');
-import { GotInstance, GotJSONFn} from "got";
-import {Environment} from "../bootstrapping/environment";
+import { GotInstance, GotJSONFn } from 'got';
+import { Environment } from '../bootstrapping/environment';
 
 /**
  * Documentation: https://github.com/sendinblue/APIv3-nodejs-library#documentation-for-api-endpoints
@@ -33,10 +33,10 @@ export class SendinblueClient {
         const body: any = {
             emailTo: [options.email],
         };
-        if(options.cc){
+        if (options.cc) {
             body.emailCc = options.cc;
         }
-        if(options.bcc){
+        if (options.bcc) {
             body.emailBcc = options.bcc;
         }
         if (options.attributes && Object.keys(options.attributes).length > 0) {

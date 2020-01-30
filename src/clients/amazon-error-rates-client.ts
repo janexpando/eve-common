@@ -1,10 +1,10 @@
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {MarketplaceName} from "..";
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { MarketplaceName } from '..';
 
-export interface ApiAmazonErrorRates{
+export interface ApiAmazonErrorRates {
     companyId: ObjectId;
     code: string;
     marketplace: MarketplaceName;

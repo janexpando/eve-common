@@ -1,14 +1,13 @@
-import {test} from "../../testing";
-import {sleep} from "../../utils";
-import {runConcurrentJobs} from "../concurrency";
+import { test } from '../../testing';
+import { sleep } from '../../utils';
+import { runConcurrentJobs } from '../concurrency';
 
 test('run concurrent jobs', async t => {
     let count = 0;
     let concurrency = 3;
     let job = async () => {
         count++;
-        if (count > concurrency)
-            t.fail('concurrency exceeded');
+        if (count > concurrency) t.fail('concurrency exceeded');
         await sleep(100);
         count--;
     };

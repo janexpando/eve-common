@@ -1,9 +1,9 @@
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
-import {MwsCredentialsClient} from "../clients/mws-credentials-client";
-import {AmazonType, MarketplaceName} from "../models/marketplace-names";
-import {DeveloperConfigClient} from "../clients/developer-config-client";
-import {MwsCreator, MwsState} from "./mws-creator";
+import { MwsCredentialsClient } from '../clients/mws-credentials-client';
+import { AmazonType, MarketplaceName } from '../models/marketplace-names';
+import { DeveloperConfigClient } from '../clients/developer-config-client';
+import { MwsCreator, MwsState } from './mws-creator';
 
 export class CredentialsNotFound extends Error {
     constructor(companyId: ObjectId, marketplace: MarketplaceName) {
@@ -19,14 +19,8 @@ export class MwsProvider {
         private mwsCreator: MwsCreator,
     ) {}
 
-    async getMws(
-        companyId: ObjectId,
-        marketplace: AmazonType,
-    ): Promise<MwsState> {
-        let credentials = await this.credentialsKeeper.getCredentials(
-            companyId,
-            marketplace,
-        );
+    async getMws(companyId: ObjectId, marketplace: AmazonType): Promise<MwsState> {
+        let credentials = await this.credentialsKeeper.getCredentials(companyId, marketplace);
         if (!credentials) throw new CredentialsNotFound(companyId, marketplace);
         const { developerId, token, sellerId } = credentials;
         let mwsConfig = await this.mwsConfigKeeper.getMwsConfig(developerId);
@@ -35,12 +29,6 @@ export class MwsProvider {
 
         const { accessKey, secretKey } = mwsConfig;
 
-        return await this.mwsCreator.create(
-            accessKey,
-            secretKey,
-            sellerId,
-            marketplace,
-            token,
-        );
+        return await this.mwsCreator.create(accessKey, secretKey, sellerId, marketplace, token);
     }
 }

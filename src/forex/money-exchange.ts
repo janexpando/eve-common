@@ -1,4 +1,4 @@
-import {CurrencyCode} from "..";
+import { CurrencyCode } from '..';
 
 const exchangeRates: Record<CurrencyCode, number> = {
     AUD: 1.61,
@@ -13,10 +13,9 @@ const exchangeRates: Record<CurrencyCode, number> = {
     MXN: 21.44,
     USD: 1.1,
     SGD: 1.5,
-    PLN: 4.27
+    PLN: 4.27,
 };
 
 export function convertCurrency(value: number, from: CurrencyCode, to: CurrencyCode): number {
-    return (value / exchangeRates[from] * exchangeRates[to]) || 0;
+    return (value / exchangeRates[from]) * exchangeRates[to] || 0;
 }
-

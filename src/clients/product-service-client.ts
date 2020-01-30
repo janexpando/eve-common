@@ -1,16 +1,11 @@
-import {Injectable} from 'injection-js';
-import {ObjectId} from 'bson';
-import {EveClient} from "./eve-client";
-import {Dict} from "../types";
-import {IMwsCredentials} from "./product-pricing-client";
-import {AmazonType, ApiBarcode, Environment, MarketplaceName} from "..";
+import { Injectable } from 'injection-js';
+import { ObjectId } from 'bson';
+import { EveClient } from './eve-client';
+import { Dict } from '../types';
+import { IMwsCredentials } from './product-pricing-client';
+import { AmazonType, ApiBarcode, Environment, MarketplaceName } from '..';
 
-export type ProductStatus =
-    | "ok"
-    | "paused"
-    | "notFound"
-    | "error"
-    | "missingBarcode";
+export type ProductStatus = 'ok' | 'paused' | 'notFound' | 'error' | 'missingBarcode';
 
 @Injectable()
 export class ProductServiceClient extends EveClient {
@@ -29,24 +24,21 @@ export class ProductServiceClient extends EveClient {
         buyBox?: boolean,
         isBuyBoxWinner?: boolean,
         status?: ProductStatus[],
-        hasStock?: boolean
+        hasStock?: boolean,
     ) {
-        let response = await this.got.post(
-            `/company/${companyId}/products/page`,
-            {
-                body: {
-                    marketplace,
-                    search,
-                    sort,
-                    skip,
-                    perPage,
-                    buyBox,
-                    isBuyBoxWinner,
-                    status,
-                    hasStock
-                },
+        let response = await this.got.post(`/company/${companyId}/products/page`, {
+            body: {
+                marketplace,
+                search,
+                sort,
+                skip,
+                perPage,
+                buyBox,
+                isBuyBoxWinner,
+                status,
+                hasStock,
             },
-        );
+        });
 
         return response.body;
     }
@@ -58,30 +50,25 @@ export class ProductServiceClient extends EveClient {
         buyBox?: boolean,
         isBuyBoxWinner?: boolean,
         status?: ProductStatus[],
-        hasStock?: boolean
+        hasStock?: boolean,
     ) {
-        let response = await this.got.post(
-            `/company/${companyId}/products/count`,
-            {
-                body: {
-                    marketplace,
-                    search,
-                    buyBox,
-                    isBuyBoxWinner,
-                    status,
-                    hasStock
-                },
+        let response = await this.got.post(`/company/${companyId}/products/count`, {
+            body: {
+                marketplace,
+                search,
+                buyBox,
+                isBuyBoxWinner,
+                status,
+                hasStock,
             },
-        );
+        });
 
         return response.body;
     }
 
     async frontendUpdateProductVariant(companyId: ObjectId, variant: ApiVariant) {
         let response = await this.got.patch(
-            `/company/${companyId}/products/variants/${encodeURIComponent(
-                variant.sku,
-            )}`,
+            `/company/${companyId}/products/variants/${encodeURIComponent(variant.sku)}`,
             {
                 body: variant,
             },
@@ -91,26 +78,25 @@ export class ProductServiceClient extends EveClient {
     }
 
     async getProductsFromLastUpdated(companyId: ObjectId, lastUpdated: Date): Promise<ApiVariant[]> {
-        let response = await this.got.get(`/company/${companyId}/products/fromLastUpdated/${lastUpdated.toISOString()}`);
+        let response = await this.got.get(
+            `/company/${companyId}/products/fromLastUpdated/${lastUpdated.toISOString()}`,
+        );
         return response.body;
     }
 
     async getVariants(companyId: ObjectId, skus: string[]): Promise<ApiVariant[]> {
         let response = await this.got.get(`/company/${companyId}/products/variants`, {
-            body: {skus}
+            body: { skus },
         });
         return response.body;
     }
 
     async requestShallowPricingReport(companyId: ObjectId, marketplace: MarketplaceName, credentials: IMwsCredentials) {
-        let response = await this.got.post(
-            `/company/${companyId}/marketplace/${marketplace}/shallow-pricing-report`,
-            {
-                body: {
-                    credentials
-                }
+        let response = await this.got.post(`/company/${companyId}/marketplace/${marketplace}/shallow-pricing-report`, {
+            body: {
+                credentials,
             },
-        );
+        });
 
         return response.body;
     }
@@ -124,9 +110,7 @@ export interface ApiPrice {
     max?: number;
 }
 
-export interface ApiAsins extends Dict<string, AmazonType> {
-
-}
+export interface ApiAsins extends Dict<string, AmazonType> {}
 
 export interface ApiVariant {
     companyId: ObjectId;

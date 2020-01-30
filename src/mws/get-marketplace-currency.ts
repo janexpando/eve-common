@@ -1,9 +1,8 @@
-import {MarketplaceName} from "../models/marketplace-names";
-import {CurrencyCode} from "..";
+import { MarketplaceName } from '../models/marketplace-names';
+import { CurrencyCode } from '..';
 
 export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCode {
-    if (!marketplace || marketplace.trim() === '')
-        throw new Error('marketplace parameter is empty');
+    if (!marketplace || marketplace.trim() === '') throw new Error('marketplace parameter is empty');
     switch (marketplace) {
         case 'amazon_de':
         case 'amazon_it':
@@ -31,11 +30,11 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'JPY';
         case 'amazon_au':
             return 'AUD';
-        case "mall_cz":
+        case 'mall_cz':
             return 'CZK';
-        case "mall_pl":
+        case 'mall_pl':
             return 'PLN';
-        case "amazon_sg":
+        case 'amazon_sg':
             return 'SGD';
         default:
             throw new Error(`${marketplace} is not a valid amazon marketplace`);

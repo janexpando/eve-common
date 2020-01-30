@@ -1,17 +1,12 @@
-import {Injectable} from 'injection-js';
-import {ObjectId} from 'bson';
-import {ApiVariant, Environment} from "..";
-import {EveClient} from "./eve-client";
-import { MarketplaceName} from "..";
+import { Injectable } from 'injection-js';
+import { ObjectId } from 'bson';
+import { ApiVariant, Environment } from '..';
+import { EveClient } from './eve-client';
+import { MarketplaceName } from '..';
 
-export type ListingStatusKind = "ok" | "error";
+export type ListingStatusKind = 'ok' | 'error';
 
-export type ProductStatusKind =
-    | "ok"
-    | "paused"
-    | "notFound"
-    | "error"
-    | "missingBarcode";
+export type ProductStatusKind = 'ok' | 'paused' | 'notFound' | 'error' | 'missingBarcode';
 
 export interface ApiListingError {
     code: string;
@@ -25,7 +20,6 @@ export interface ApiListingStatus {
     listingStatus: ListingStatusKind;
     listingErrors: ApiListingError[];
 }
-
 
 export interface ApiProductStatuses {
     companyId: ObjectId;
@@ -49,12 +43,12 @@ export interface ApiProductStats {
     notFound: number;
     error: number;
     missingBarcode: number;
-    buyBox?: ApiBuyBoxStats
+    buyBox?: ApiBuyBoxStats;
 }
 
 export interface ApiBuyBoxStats {
-    isInBuyBoxCount: number
-    notInBuyBoxCount: number
+    isInBuyBoxCount: number;
+    notInBuyBoxCount: number;
 }
 
 @Injectable()
@@ -76,37 +70,46 @@ export class ProductStatusesClient extends EveClient {
         return response.body;
     }
 
-    async  blockProducts(companyId: ObjectId, variants: ApiVariant[]) {
-        let response = await this.got.patch(
-            `/company/${companyId}/products/block`,
-            {
-                body: {variants},
-            },
-        );
+    async blockProducts(companyId: ObjectId, variants: ApiVariant[]) {
+        let response = await this.got.patch(`/company/${companyId}/products/block`, {
+            body: { variants },
+        });
 
         return response.body;
     }
 
-    async getProductStatuses(companyId: ObjectId, marketplaces: MarketplaceName[], sku: string): Promise<ApiProductStatuses[]> {
+    async getProductStatuses(
+        companyId: ObjectId,
+        marketplaces: MarketplaceName[],
+        sku: string,
+    ): Promise<ApiProductStatuses[]> {
         const url = `/company/${companyId}/sku/${encodeURIComponent(sku)}/product-statuses`;
         let response = await this.got.post(url, {
-            body: { marketplaces }
+            body: { marketplaces },
         });
         return response.body;
     }
 
-    async getManyProductStatuses(companyId: ObjectId, marketplace: MarketplaceName[], sku: string[]): Promise<ApiProductStatuses[]> {
+    async getManyProductStatuses(
+        companyId: ObjectId,
+        marketplace: MarketplaceName[],
+        sku: string[],
+    ): Promise<ApiProductStatuses[]> {
         const url = `/company/${companyId}/product-statuses`;
         let response = await this.got.post(url, {
-            body: { marketplace, sku }
+            body: { marketplace, sku },
         });
         return response.body;
     }
 
-    async getProductStats(companyId: ObjectId, marketplaces: MarketplaceName[], hasStockFilter: boolean): Promise<ApiProductStats> {
+    async getProductStats(
+        companyId: ObjectId,
+        marketplaces: MarketplaceName[],
+        hasStockFilter: boolean,
+    ): Promise<ApiProductStats> {
         const url = `/company/${companyId}/product-stats`;
         let response = await this.got.post(url, {
-            body: { marketplaces, hasStockFilter }
+            body: { marketplaces, hasStockFilter },
         });
         return response.body;
     }

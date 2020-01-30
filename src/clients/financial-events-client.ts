@@ -1,11 +1,11 @@
 import { ObjectId } from 'bson';
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {DeveloperConfigClient} from "./developer-config-client";
-import {MwsCredentialsClient} from "./mws-credentials-client";
-import {AmazonType} from "../models/marketplace-names";
-import {ConsoleLogger} from "../logging/console-logger";
-import {Injectable} from "injection-js";
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { DeveloperConfigClient } from './developer-config-client';
+import { MwsCredentialsClient } from './mws-credentials-client';
+import { AmazonType } from '../models/marketplace-names';
+import { ConsoleLogger } from '../logging/console-logger';
+import { Injectable } from 'injection-js';
 
 interface IMwsCredentials {
     accessKey: string;
@@ -22,20 +22,18 @@ interface FinancialEventsDownloadBody {
 }
 
 @Injectable()
-export class FinancialEventsClient extends EveClient{
-    constructor(protected env: Environment,
-                private mwsCredentialsKeeper: MwsCredentialsClient,
-                private developerConfigKeeper: DeveloperConfigClient,
-                private logger: ConsoleLogger) {
+export class FinancialEventsClient extends EveClient {
+    constructor(
+        protected env: Environment,
+        private mwsCredentialsKeeper: MwsCredentialsClient,
+        private developerConfigKeeper: DeveloperConfigClient,
+        private logger: ConsoleLogger,
+    ) {
         super(env);
         this.baseUrl = this.env.ORDER_DOWNLOADER_URL;
     }
 
-    async downloadFinancialEvents(
-        companyId: ObjectId,
-        marketplace: AmazonType,
-        fromDate: Date,
-    ) {
+    async downloadFinancialEvents(companyId: ObjectId, marketplace: AmazonType, fromDate: Date) {
         let { developerId, token, sellerId } = await this.mwsCredentialsKeeper.getCredentials(companyId, marketplace);
         let { accessKey, secretKey } = await this.developerConfigKeeper.getMwsConfig(developerId);
         this.logger.json({

@@ -1,8 +1,8 @@
-import {EveClient} from "./eve-client";
-import {ObjectId} from "bson";
-import {Environment} from "../bootstrapping/environment";
-import {AmazonType} from "../models/marketplace-names";
-import {Injectable} from "injection-js";
+import { EveClient } from './eve-client';
+import { ObjectId } from 'bson';
+import { Environment } from '../bootstrapping/environment';
+import { AmazonType } from '../models/marketplace-names';
+import { Injectable } from 'injection-js';
 
 @Injectable()
 export class MwsCredentialsClient extends EveClient {

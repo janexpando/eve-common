@@ -1,7 +1,7 @@
 import stream = require('stream');
-import {test} from "../../../testing";
-import {pipeline} from "../../../utils";
-import {ChunkAggregator} from "../chunk-aggregator";
+import { test } from '../../../testing';
+import { pipeline } from '../../../utils';
+import { ChunkAggregator } from '../chunk-aggregator';
 
 test('Product listing feed aggregator exact size', async t => {
     const size = 4;
@@ -20,7 +20,7 @@ test('Product listing feed aggregator exact size', async t => {
     const testOutput = new stream.Writable({
         objectMode: true,
         write: (product, encoding, callback) => {
-            t.deepEqual(product,[
+            t.deepEqual(product, [
                 {
                     foo: 'bar',
                 },

@@ -1,6 +1,6 @@
 import 'dotenv/config';
-import {Injectable, Provider, Type} from "injection-js";
-import {attempt, object, number, string, ObjectSchema} from 'joi';
+import { Injectable, Provider, Type } from 'injection-js';
+import { attempt, object, number, string, ObjectSchema } from 'joi';
 
 export function makeCreateEnvironment<T extends Environment>(type: Type<T>) {
     return (override?: Partial<T>): T => {
@@ -8,7 +8,7 @@ export function makeCreateEnvironment<T extends Environment>(type: Type<T>) {
         env.init();
         Object.assign(env, override);
         return env;
-    }
+    };
 }
 
 @Injectable()
@@ -29,7 +29,6 @@ export class Environment {
     PRICING_SERVICE_URL: string;
     SENDINBLUE_TOKEN: string;
 
-
     protected schema: ObjectSchema = object({
         PORT: number().default(3333),
         SENTRY_DSN: string(),
@@ -46,7 +45,7 @@ export class Environment {
         ORDER_DOWNLOADER_URL: string().required(),
         PRICING_SERVICE_URL: string().required(),
         SENDINBLUE_TOKEN: string().required(),
-    }).options({stripUnknown: true});
+    }).options({ stripUnknown: true });
 
     init() {
         Object.assign(this, attempt(process.env, this.schema));
@@ -57,5 +56,5 @@ export class Environment {
 
 export const ENVIRONMENT_PROVIDER: Provider = {
     provide: Environment,
-    useValue: Environment.create()
+    useValue: Environment.create(),
 };

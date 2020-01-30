@@ -1,8 +1,8 @@
-import {Injectable} from 'injection-js';
-import {ObjectId} from 'bson';
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {AmazonType} from "..";
+import { Injectable } from 'injection-js';
+import { ObjectId } from 'bson';
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { AmazonType } from '..';
 
 export interface ApiLookupProduct {
     image: string;
@@ -35,7 +35,7 @@ export class ProductLookupClient extends EveClient {
 
     async lookup(companyId: ObjectId, marketplace: AmazonType, query: string): Promise<ApiLookupResult> {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-lookup`;
-        let response = await this.got.post(url, {body: {query}});
+        let response = await this.got.post(url, { body: { query } });
         return response.body;
     }
 }

@@ -1,9 +1,9 @@
 import { ObjectId } from 'bson';
 import { Injectable } from 'injection-js';
-import {EveClient} from "./eve-client";
-import {AmazonType} from "../models/marketplace-names";
-import {Environment} from "../bootstrapping/environment";
-import {ConsoleLogger} from "../logging/console-logger";
+import { EveClient } from './eve-client';
+import { AmazonType } from '../models/marketplace-names';
+import { Environment } from '../bootstrapping/environment';
+import { ConsoleLogger } from '../logging/console-logger';
 
 interface IMwsCredentials {
     accessKey: string;
@@ -21,9 +21,7 @@ interface OrdersDownloadBody {
 
 @Injectable()
 export class OrderDownloaderClient extends EveClient {
-
-    constructor(protected env: Environment,
-                private logger: ConsoleLogger) {
+    constructor(protected env: Environment, private logger: ConsoleLogger) {
         super(env);
     }
 
@@ -31,7 +29,7 @@ export class OrderDownloaderClient extends EveClient {
         companyId: ObjectId,
         marketplaces: AmazonType[],
         fromLastUpdate: Date,
-        credentials: IMwsCredentials
+        credentials: IMwsCredentials,
     ) {
         this.logger.json({
             companyId,

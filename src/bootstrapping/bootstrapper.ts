@@ -1,20 +1,20 @@
-import {DbDriver} from "./mongoose";
-import {Environment} from "./environment";
+import { DbDriver } from './mongoose';
+import { Environment } from './environment';
 import Sentry = require('@sentry/node');
-import {SentryOptions} from "./sentry-options";
-import {Injectable} from "injection-js";
-import {ConsoleLogger} from "..";
+import { SentryOptions } from './sentry-options';
+import { Injectable } from 'injection-js';
+import { ConsoleLogger } from '..';
 
 @Injectable()
 export class Bootstrapper {
-
-    constructor(private dbDriver: DbDriver,
-                private env: Environment,
-                private logg: ConsoleLogger,
-                private sentryOptions: SentryOptions,
-                private start: Function,
-                private disconnect: boolean = true) {
-
+    constructor(
+        private dbDriver: DbDriver,
+        private env: Environment,
+        private logg: ConsoleLogger,
+        private sentryOptions: SentryOptions,
+        private start: Function,
+        private disconnect: boolean = true,
+    ) {
         this.initSentry();
         this.dbDriver.connected.subscribe(async () => {
             try {

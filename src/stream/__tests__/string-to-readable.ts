@@ -1,7 +1,7 @@
-import {test} from "../../testing";
-import {Writable} from "stream";
-import {pipeline} from "../../utils";
-import {stringToReadable} from "../string-to-readable";
+import { test } from '../../testing';
+import { Writable } from 'stream';
+import { pipeline } from '../../utils';
+import { stringToReadable } from '../string-to-readable';
 
 test('string to readable stream', async t => {
     let input = 'sample message';
@@ -14,9 +14,9 @@ test('string to readable stream', async t => {
                 result.push(chunk.toString());
                 callback();
             } catch (e) {
-                callback(e)
+                callback(e);
             }
-        }
+        },
     });
     await pipeline(readable, writable);
     t.deepEqual(result, [input]);

@@ -1,6 +1,6 @@
-import {ObjectId} from "bson";
-import {Injectable} from "injection-js";
-import {ConsoleLogger, sleep} from "..";
+import { ObjectId } from 'bson';
+import { Injectable } from 'injection-js';
+import { ConsoleLogger, sleep } from '..';
 
 export interface ShieldOptions<T> {
     fn: () => Promise<T>;
@@ -13,8 +13,7 @@ export interface ShieldOptions<T> {
 
 @Injectable()
 export class ThrottleShield {
-    constructor(private logger: ConsoleLogger) {
-    }
+    constructor(private logger: ConsoleLogger) {}
 
     async shield<T>(options: ShieldOptions<T>): Promise<T> {
         while (true) {
@@ -28,7 +27,7 @@ export class ThrottleShield {
                             companyId: options.companyId,
                             operation: options.operation,
                             message: e.Code,
-                            procedureId: options.procedureId
+                            procedureId: options.procedureId,
                         });
                     }
                     await sleep(options.sleepTime || 10000);

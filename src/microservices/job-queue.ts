@@ -1,5 +1,5 @@
-import {model, Schema, Document, Model} from "mongoose";
-import {ObjectId} from "bson";
+import { model, Schema, Document, Model } from 'mongoose';
+import { ObjectId } from 'bson';
 
 export class JobQueue<T> {
     private lastUsedTick: number = 0;
@@ -28,7 +28,7 @@ export class JobQueue<T> {
             payload,
             finishedOn: null,
             startedOn: null,
-            timeoutOn: null
+            timeoutOn: null,
         } as IJob<T>);
     }
 
@@ -36,22 +36,26 @@ export class JobQueue<T> {
         let now = new Date();
         let timeoutOn = new Date(now.getTime() + processTime);
         return await this.model.findOneAndUpdate(
-            {received: false},
+            { received: false },
             {
                 received: true,
                 startedOn: now,
-                timeoutOn
+                timeoutOn,
             },
             {
-                sort: {version: 1},
-                new: true
-            });
+                sort: { version: 1 },
+                new: true,
+            },
+        );
     }
 
     async markFinished(_id: ObjectId) {
-        await this.model.updateOne({_id}, {
-            finishedOn: new Date()
-        })
+        await this.model.updateOne(
+            { _id },
+            {
+                finishedOn: new Date(),
+            },
+        );
     }
 
     async get(_id: ObjectId): Promise<IJob<T>> {
@@ -63,10 +67,9 @@ export class JobQueue<T> {
     }
 
     async waitingJobsCount(): Promise<number> {
-        return await this.model.count({received: false});
+        return await this.model.count({ received: false });
     }
 }
-
 
 export interface IJob<T> {
     createdOn: Date;
@@ -94,17 +97,16 @@ export function getJobState(job: IJob<any>): JobState {
     return 'processing';
 }
 
-export interface Job<T> extends Document, IJob<T> {
-}
+export interface Job<T> extends Document, IJob<T> {}
 
 const JOB_SCHEMA = new Schema({
     createdOn: {
         type: Date,
-        required: true
+        required: true,
     },
     version: {
         type: Number,
-        required: true
+        required: true,
     },
     received: {
         type: Boolean,
@@ -112,17 +114,15 @@ const JOB_SCHEMA = new Schema({
     },
     startedOn: {
         type: Date,
-        default: null
+        default: null,
     },
     timeoutOn: {
         type: Date,
-        default: null
+        default: null,
     },
     finishedOn: {
         type: Date,
-        default: null
+        default: null,
     },
-    payload: Schema.Types.Mixed
+    payload: Schema.Types.Mixed,
 });
-
-

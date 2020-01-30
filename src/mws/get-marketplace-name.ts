@@ -1,8 +1,7 @@
-import {AmazonType} from "../models/marketplace-names";
+import { AmazonType } from '../models/marketplace-names';
 
 export function getMarketplaceName(marketplaceId: string): AmazonType {
-    if (!marketplaceId || marketplaceId.trim() === '')
-        throw new Error('marketplaceId parameter is empty');
+    if (!marketplaceId || marketplaceId.trim() === '') throw new Error('marketplaceId parameter is empty');
     switch (marketplaceId) {
         case 'A1PA6795UKMFR9':
             return 'amazon_de';
@@ -33,8 +32,6 @@ export function getMarketplaceName(marketplaceId: string): AmazonType {
         case 'A19VAU5U5O7RUS':
             return 'amazon_sg';
         default:
-            throw new Error(
-                `${marketplaceId} is not a valid amazon marketplace`,
-            );
+            throw new Error(`${marketplaceId} is not a valid amazon marketplace`);
     }
 }

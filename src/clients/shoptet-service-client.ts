@@ -1,10 +1,10 @@
-import {Injectable} from 'injection-js';
-import {EveClient} from "./eve-client";
-import {ObjectId} from "bson";
-import {ApiCarrierName, Environment, MARKETPLACE_TYPES, MarketplaceType, SERVICE_NAMES, ServiceName} from "..";
-import {MarketplaceName, MARKETPLACES} from "..";
-import {CURRENCY_CODES, CurrencyCode} from "..";
-import {array, bool, date, number, object, string} from "joi";
+import { Injectable } from 'injection-js';
+import { EveClient } from './eve-client';
+import { ObjectId } from 'bson';
+import { ApiCarrierName, Environment, MARKETPLACE_TYPES, MarketplaceType, SERVICE_NAMES, ServiceName } from '..';
+import { MarketplaceName, MARKETPLACES } from '..';
+import { CURRENCY_CODES, CurrencyCode } from '..';
+import { array, bool, date, number, object, string } from 'joi';
 
 @Injectable()
 export class ShoptetServiceClient extends EveClient {
@@ -14,28 +14,21 @@ export class ShoptetServiceClient extends EveClient {
     }
 
     async postOrders(companyId: ObjectId, orders: ApiOrder[], settings: ApiImportSettings) {
-        return this.got.post(
-            `/company/${companyId}/orders`,
-            {
-                body: {
-                    orders,
-                    settings
-                },
+        return this.got.post(`/company/${companyId}/orders`, {
+            body: {
+                orders,
+                settings,
             },
-        );
+        });
     }
 
     async getShoptetShipmentMethods(companyId: ObjectId): Promise<IShoptetShipmentMethod[]> {
-        let response = await this.got.get(
-            `/company/${companyId}/shoptet-shipment-methods`,
-        );
+        let response = await this.got.get(`/company/${companyId}/shoptet-shipment-methods`);
         return response.body;
     }
 
     async getShoptetOrderStatuses(companyId: ObjectId): Promise<IShoptetOrderStatus[]> {
-        let response = await this.got.get(
-            `/company/${companyId}/shoptet-order-statuses`,
-        );
+        let response = await this.got.get(`/company/${companyId}/shoptet-order-statuses`);
         return response.body;
     }
 }
@@ -99,9 +92,9 @@ export interface IAutopricing {
     date?: Date;
 }
 
-export const ORDER_STATUSES = ["Unshipped", "Pending", "Shipped", "Canceled"];
+export const ORDER_STATUSES = ['Unshipped', 'Pending', 'Shipped', 'Canceled'];
 export const AUTOPRICING_STATUSES = ['None', 'Pending', 'PendingTax', 'Done'];
-export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled'
+export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
 export declare type ApiOrderFulfillmentChannel = 'FBA' | 'Seller';
 export declare type ApiOrderPaymentMethod = string;
 
@@ -167,8 +160,14 @@ export interface ApiImportSettings {
     deliveryMethodsMapping?: ApiDeliveryMethodsMapping[];
 }
 
-const optionalString = () => string().allow(null, "").optional();
-const optionalBool = () => bool().allow(null).optional();
+const optionalString = () =>
+    string()
+        .allow(null, '')
+        .optional();
+const optionalBool = () =>
+    bool()
+        .allow(null)
+        .optional();
 
 export const IMPORT_SETTINGS_JOI_SCHEMA = object({
     companyId: string().required(),
@@ -182,17 +181,21 @@ export const IMPORT_SETTINGS_JOI_SCHEMA = object({
     synchronizeFbaOrders: optionalBool(),
     carrier: optionalString(),
     carrierName: optionalString(),
-    deliveryMethodsMapping: array().items(object({
-        marketplace: string().allow(MARKETPLACES),
-        method: string(),
-        serviceMethod: string()
-    })).allow(null),
+    deliveryMethodsMapping: array()
+        .items(
+            object({
+                marketplace: string().allow(MARKETPLACES),
+                method: string(),
+                serviceMethod: string(),
+            }),
+        )
+        .allow(null),
 });
 
 export const ADDRESS_JOI_SCHEMA = object({
     name: optionalString(),
     email: optionalString(),
-    addressLine: array().items(string().allow("")),
+    addressLine: array().items(string().allow('')),
     city: optionalString(),
     country: optionalString(),
     district: optionalString(),
@@ -222,8 +225,8 @@ export const ORDER_ITEM_JOI_SCHEMA = object({
 });
 
 export const ORDER_INVOICE_JOI_SCHEMA = object({
-    id: string().allow(null, ""),
-    url: string().allow(null, ""),
+    id: string().allow(null, ''),
+    url: string().allow(null, ''),
 });
 
 export const ORDER_AUTOPRICING_SCHEMA = object({
@@ -231,7 +234,7 @@ export const ORDER_AUTOPRICING_SCHEMA = object({
     delta: number().allow(null),
     base: number().allow(null),
     autoprice: number().allow(null),
-    date: date().allow(null)
+    date: date().allow(null),
 });
 
 export const ORDER_JOI_SCHEMA = object({
@@ -249,7 +252,9 @@ export const ORDER_JOI_SCHEMA = object({
     paymentMethod: optionalString(),
     invoices: array().items(ORDER_INVOICE_JOI_SCHEMA),
     buyer: ADDRESS_JOI_SCHEMA,
-    items: array().items(ORDER_ITEM_JOI_SCHEMA).optional(),
+    items: array()
+        .items(ORDER_ITEM_JOI_SCHEMA)
+        .optional(),
     lastChanged: date(),
     latestShipDate: date().allow(null),
     latestDeliveryDate: date().allow(null),
@@ -267,8 +272,15 @@ export const ORDER_JOI_SCHEMA = object({
     shippedDate: date().allow(null),
     canceledDate: date().allow(null),
 
-    autopricing: array().items(ORDER_AUTOPRICING_SCHEMA).allow(null).optional(),
-    autopricingTotal: number().allow(null).optional(),
-    autopricingStatus: string().allow([null, ...AUTOPRICING_STATUSES]).optional(),
-    mallDeliveryMethod: string().allow(null)
-}).options({stripUnknown: true});
+    autopricing: array()
+        .items(ORDER_AUTOPRICING_SCHEMA)
+        .allow(null)
+        .optional(),
+    autopricingTotal: number()
+        .allow(null)
+        .optional(),
+    autopricingStatus: string()
+        .allow([null, ...AUTOPRICING_STATUSES])
+        .optional(),
+    mallDeliveryMethod: string().allow(null),
+}).options({ stripUnknown: true });

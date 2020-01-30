@@ -1,9 +1,9 @@
-import {ObjectId} from 'bson';
-import {Injectable} from 'injection-js';
-import {AmazonType} from "../models/marketplace-names";
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {IMwsCredentials} from "./product-pricing-client";
+import { ObjectId } from 'bson';
+import { Injectable } from 'injection-js';
+import { AmazonType } from '../models/marketplace-names';
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { IMwsCredentials } from './product-pricing-client';
 
 export interface ApiShipment {
     companyId: ObjectId;
@@ -30,7 +30,6 @@ export interface ApiShipment {
 
 @Injectable()
 export class ShipmentClient extends EveClient {
-
     constructor(protected env: Environment) {
         super(env);
     }
@@ -50,8 +49,7 @@ export class ShipmentClient extends EveClient {
             from,
         };
 
-        if (to)
-            body.to = to;
+        if (to) body.to = to;
 
         await this.got.post(`${this.env.ORDER_DOWNLOADER_URL}/company/${companyId}/shipments/download`, {
             body,

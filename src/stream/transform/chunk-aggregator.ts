@@ -5,9 +5,7 @@ import { Transform } from 'stream';
 export class ChunkAggregator extends Transform {
     private itemsChunk = [];
 
-    constructor(
-        @Optional() @Inject('chunkSize') public readonly chunkSize = 30000,
-    ) {
+    constructor(@Optional() @Inject('chunkSize') public readonly chunkSize = 30000) {
         super({
             readableObjectMode: true,
             writableObjectMode: true,

@@ -1,8 +1,8 @@
 import AmazonMWS = require('amazon-mws');
-import {AmazonType} from "..";
-import {getMarketplaceHost} from "./get-marketplace-host";
-import {getMarketplaceId} from "./get-marketplace-id";
-import {Injectable} from "injection-js";
+import { AmazonType } from '..';
+import { getMarketplaceHost } from './get-marketplace-host';
+import { getMarketplaceId } from './get-marketplace-id';
+import { Injectable } from 'injection-js';
 
 export interface MwsOptions {
     SellerId: string;
@@ -34,8 +34,6 @@ export interface MwsState {
 
 @Injectable()
 export class MwsCreator {
-
-
     create(accessKey: string, secretKey: string, sellerId: string, marketplace: AmazonType, token?: string): MwsState {
         let marketplaceId = getMarketplaceId(marketplace);
         const options: MwsOptions = {

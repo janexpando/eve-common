@@ -1,4 +1,4 @@
-import {DAY, WEEK} from "./time";
+import { DAY, WEEK } from './time';
 
 export function getYesterdayMidnight(date: Date = new Date()) {
     let yesterdayDate = new Date(date.valueOf() - DAY);

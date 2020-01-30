@@ -1,8 +1,8 @@
-import {Injectable} from 'injection-js';
-import {ObjectId} from 'bson';
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {MarketplaceName} from "..";
+import { Injectable } from 'injection-js';
+import { ObjectId } from 'bson';
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { MarketplaceName } from '..';
 
 export interface ApiProductAutopricing {
     companyId: ObjectId;
@@ -38,9 +38,9 @@ export class ProductAutopricingClient extends EveClient {
 
     async get(companyId: ObjectId, marketplace: MarketplaceName, skus: string[]): Promise<ApiProductAutopricing[]> {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing`;
-        let response = await this.got.get(url, {body: {skus}});
+        let response = await this.got.get(url, { body: { skus } });
         let items = response.body as ApiProductAutopricing[];
-        if (items && (items.length > 0)) {
+        if (items && items.length > 0) {
             items.forEach(x => {
                 x.companyId = new ObjectId(x.companyId);
                 if (x.lastUpdated) x.lastUpdated = new Date(x.lastUpdated);
@@ -53,11 +53,17 @@ export class ProductAutopricingClient extends EveClient {
 
     async setActiveState(companyId: ObjectId, marketplace: MarketplaceName, skus: string[], active: boolean) {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing/active`;
-        await this.got.patch(url, {body: {skus, active}});
+        await this.got.patch(url, { body: { skus, active } });
     }
 
-    async setCaps(companyId: ObjectId, marketplace: MarketplaceName, skus: string[], topCap: number, bottomCap: number) {
+    async setCaps(
+        companyId: ObjectId,
+        marketplace: MarketplaceName,
+        skus: string[],
+        topCap: number,
+        bottomCap: number,
+    ) {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing/caps`;
-        await this.got.patch(url, {body: {skus, topCap, bottomCap}});
+        await this.got.patch(url, { body: { skus, topCap, bottomCap } });
     }
 }

@@ -1,8 +1,8 @@
-import {Injectable} from 'injection-js';
-import {ObjectId} from 'bson';
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
-import {MarketplaceName} from "..";
+import { Injectable } from 'injection-js';
+import { ObjectId } from 'bson';
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
+import { MarketplaceName } from '..';
 
 @Injectable()
 export class AmazonProductClient extends EveClient {
@@ -13,7 +13,7 @@ export class AmazonProductClient extends EveClient {
 
     async getAllAsins(companyId: ObjectId, marketplace: MarketplaceName) {
         const url = `/company/${companyId}/marketplace/${marketplace}/amazon-product/asins`;
-        let response = await this.got.get(url, {body: {}});
+        let response = await this.got.get(url, { body: {} });
         return response.body;
     }
 }

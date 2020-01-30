@@ -1,7 +1,7 @@
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
-import {Environment} from "../bootstrapping/environment";
-import {EveClient} from "./eve-client";
+import { Environment } from '../bootstrapping/environment';
+import { EveClient } from './eve-client';
 
 @Injectable()
 export class MongoLoggerClient extends EveClient {
@@ -14,7 +14,7 @@ export class MongoLoggerClient extends EveClient {
         const url = `/company/${companyId}/log/last-synced`;
         let response = await this.got.get(url);
         let lastSynced = response.body && response.body.lastSynced;
-        if(!lastSynced) return lastSynced;
+        if (!lastSynced) return lastSynced;
         return new Date(lastSynced);
     }
 }

@@ -2,8 +2,8 @@ import { ProductSyncClient, ApiProductSync } from '../product-sync-client';
 import { ObjectId } from 'bson';
 import nock = require('nock');
 import timekeeper = require('timekeeper');
-import {provideInjector, test} from "../../testing";
-import {Environment, ENVIRONMENT_PROVIDER} from "../..";
+import { provideInjector, test } from '../../testing';
+import { Environment, ENVIRONMENT_PROVIDER } from '../..';
 
 provideInjector(test, [ProductSyncClient, ENVIRONMENT_PROVIDER]);
 test.serial('get product sync', async t => {
@@ -15,7 +15,7 @@ test.serial('get product sync', async t => {
 
     let date = new Date(Date.now());
     let sync = {
-        _id: "abc-123-abc",
+        _id: 'abc-123-abc',
         companyId,
         jobId: new ObjectId(),
         interval: 180,
@@ -35,9 +35,7 @@ test.serial('get product sync', async t => {
         .get(`/company/${cid}/product-sync`)
         .reply(200, restSync);
 
-    let result = await t.context.injector
-        .get(ProductSyncClient)
-        .getProductSync(companyId);
+    let result = await t.context.injector.get(ProductSyncClient).getProductSync(companyId);
 
     t.deepEqual(result, restSync);
 });

@@ -1,17 +1,13 @@
 import { Injectable } from 'injection-js';
 import { Middleware } from 'koa';
 import { ObjectId } from 'bson';
-import {AuthChecker} from "./auth-checker";
+import { AuthChecker } from './auth-checker';
 import createRouter = require('koa-joi-router');
-import {Thanos} from "./thanos";
+import { Thanos } from './thanos';
 
 @Injectable()
 export class ThanosController {
-    constructor(
-        private authChecker: AuthChecker,
-        private thanos: Thanos
-    ) {
-    }
+    constructor(private authChecker: AuthChecker, private thanos: Thanos) {}
 
     middleware(): Middleware {
         const router = createRouter();

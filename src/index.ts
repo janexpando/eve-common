@@ -48,7 +48,7 @@ export * from './clients/mongo-logger-client';
 export * from './clients/mws-credentials-client';
 export * from './clients/notifications-client';
 export * from './clients/order-downloader-client';
-export * from './clients/pricing-report-client'
+export * from './clients/pricing-report-client';
 export * from './clients/product-autopricing-client';
 export * from './clients/product-autopricing-history-client';
 export * from './clients/product-feed-result-client';
