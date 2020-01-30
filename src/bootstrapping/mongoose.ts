@@ -16,6 +16,7 @@ export class DbDriver {
         mongoose.set('useFindAndModify', false);
         mongoose.set('useCreateIndex', true);
         mongoose.set('useNewUrlParser', true);
+        if (!!process.env.MONGOOSE_DEBUG === true) mongoose.set('debug', true)
         this.db.on('connected', async () => {
             logg.log('MongoDB connected');
             this.connected.next();
