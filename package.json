@@ -75,6 +75,13 @@
     ],
     "all": true
   },
+  "prettier": {
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": true,
+    "printWidth": 120
+  },
   "dependencies": {
     "@types/lodash": "^4.14.149",
     "@types/pino": "^5.14.0",
