@@ -4,7 +4,6 @@ import { ChunkAggregator, pipeline } from '..';
 export type PipeFunction = (item: any, push: (item) => void) => Promise<any>;
 
 export async function pipelinify(functions: (PipeFunction | number | Readable | Writable)[]) {
-    // TODO tests
     let pipeFunctions = [];
 
     for (let i = 0; i < functions.length; i++) {
