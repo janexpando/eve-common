@@ -11,22 +11,36 @@ export async function pipelinify(functions: (PipeFunction | number | Readable | 
 
         if (i == 0) {
             if (functions[i] instanceof Readable) pipeFunctions.push(functions[i]);
-            else
+            else {
                 pipeFunctions.push(
                     new Readable({
                         objectMode: true,
-                        async read() {
+                        read() {
+                            this.push({});
+                            this.push(null);
+                        },
+                    }),
+                );
+                pipeFunctions.push(
+                    new Transform({
+                        objectMode: true,
+                        async transform(
+                            item: any,
+                            encoding: string,
+                            callback: (error?: Error | null, data?: any) => void,
+                        ) {
                             try {
-                                await pipeFn(null, item => {
+                                await pipeFn(item, item => {
                                     this.push(item);
                                 });
-                                this.push(null);
+                                callback();
                             } catch (e) {
-                                this.destroy(e);
+                                callback(e);
                             }
                         },
                     }),
                 );
+            }
         } else if (i == functions.length - 1) {
             if (functions[i] instanceof Writable) pipeFunctions.push(functions[i]);
             else
