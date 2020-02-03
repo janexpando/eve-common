@@ -25,6 +25,7 @@ export class ProductServiceClient extends EveClient {
         isBuyBoxWinner?: boolean,
         status?: ProductStatus[],
         hasStock?: boolean,
+        requestStatuses?: boolean,
     ) {
         let response = await this.got.post(`/company/${companyId}/products/page`, {
             body: {
@@ -37,6 +38,7 @@ export class ProductServiceClient extends EveClient {
                 isBuyBoxWinner,
                 status,
                 hasStock,
+                requestStatuses,
             },
         });
 
