@@ -31,6 +31,15 @@ export class ShoptetServiceClient extends EveClient {
         let response = await this.got.get(`/company/${companyId}/shoptet-order-statuses`);
         return response.body;
     }
+
+    async syncShoptetOrders(companyId: ObjectId, importSettings: ApiImportSettings[]){
+        let response = await this.got.post(`/company/${companyId}/shoptet-order-sync`,{
+            body: {
+                importSettings
+            }
+        });
+        return response.body;
+    }
 }
 
 export interface IShoptetOrderStatus {
@@ -158,6 +167,7 @@ export interface ApiImportSettings {
     carrier?: ApiCarrierName;
     carrierName?: string;
     deliveryMethodsMapping?: ApiDeliveryMethodsMapping[];
+    autoconfirmOrderOnStatus?: string;
 }
 
 const optionalString = () =>
@@ -190,6 +200,7 @@ export const IMPORT_SETTINGS_JOI_SCHEMA = object({
             }),
         )
         .allow(null),
+    autoconfirmOrderOnStatus: optionalString()
 });
 
 export const ADDRESS_JOI_SCHEMA = object({
