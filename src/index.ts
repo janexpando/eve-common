@@ -11,6 +11,7 @@ export * from './utils/concurrency';
 export * from './utils/grouped-maps';
 export * from './utils/handle-promises';
 export * from './utils/iterator-to-array';
+export * from './utils/local-serial-processor';
 export * from './utils/pipelinify';
 export * from './utils/unique-handling';
 export * from './models/continent-names';
