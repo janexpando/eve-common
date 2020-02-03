@@ -26,6 +26,7 @@ export class DbDriver {
         return mongoose.connect(this.env.MONGODB_URI, {
             autoReconnect: true,
             reconnectTries: Number.MAX_VALUE,
+            autoIndex: false,
         });
     }
 
