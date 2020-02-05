@@ -26,7 +26,7 @@ export class FulfillmentsClient extends EveClient {
         super(env);
     }
 
-    async updateFulfillments(companyId: ObjectId, fulfillments: ApiFulfillment) {
+    async updateFulfillments(companyId: ObjectId, fulfillments: ApiFulfillment[]) {
         let body: any = {
             fulfillments,
         };
