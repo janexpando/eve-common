@@ -1,6 +1,6 @@
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
-import { Environment } from '../bootstrapping/environment';
+import { Environment } from '..';
 import { EveClient } from './eve-client';
 import { MarketplaceName } from '..';
 
@@ -51,9 +51,12 @@ export class ProductAutopricingClient extends EveClient {
         return items;
     }
 
+    /**
+     * Update product autopricing settings from frontend (FE > gateway > product service).
+     */
     async setActiveState(companyId: ObjectId, marketplace: MarketplaceName, skus: string[], active: boolean) {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing/active`;
-        await this.got.patch(url, { body: { skus, active } });
+        return this.got.post(url, { body: { skus, active } });
     }
 
     async setCaps(

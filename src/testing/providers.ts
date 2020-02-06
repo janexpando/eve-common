@@ -1,4 +1,4 @@
-import { ConsoleLogger, DbDriver, ENVIRONMENT_PROVIDER, ProductStatusesClient } from '..';
+import {ConsoleLogger, DbDriver, ENVIRONMENT_PROVIDER, ProductAutopricingClient, ProductStatusesClient} from '..';
 import { Provider } from 'injection-js';
 import { MwsProvider } from '../mws/mws-provider';
 import { MwsCredentialsClient } from '..';
@@ -44,4 +44,5 @@ export const PROVIDERS: Provider[] = [
     ProductStatusesClient,
     NotificationsClient,
     MallServiceClient,
+    ProductAutopricingClient
 ];
