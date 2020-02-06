@@ -24,6 +24,7 @@ export interface ApiFulfillment {
 export class FulfillmentsClient extends EveClient {
     constructor(protected env: Environment) {
         super(env);
+        this.baseUrl = this.env.GATEWAY_URL;
     }
 
     async updateFulfillments(companyId: ObjectId, fulfillments: ApiFulfillment[]) {
