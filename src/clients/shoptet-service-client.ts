@@ -141,6 +141,7 @@ export interface ApiOrder {
     canceledDate?: Date;
 
     autopricing?: IAutopricing[];
+    autopricingHistory?: IAutopricing[];
     autopricingTotal?: number;
     autopricingStatus?: 'None' | 'Pending' | 'PendingTax' | 'Done';
 
@@ -284,6 +285,10 @@ export const ORDER_JOI_SCHEMA = object({
     canceledDate: date().allow(null),
 
     autopricing: array()
+        .items(ORDER_AUTOPRICING_SCHEMA)
+        .allow(null)
+        .optional(),
+    autopricingHistory: array()
         .items(ORDER_AUTOPRICING_SCHEMA)
         .allow(null)
         .optional(),
