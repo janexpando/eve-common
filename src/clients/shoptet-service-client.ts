@@ -102,7 +102,7 @@ export interface IAutopricing {
 }
 
 export const ORDER_STATUSES = ['Unshipped', 'Pending', 'Shipped', 'Canceled'];
-export const AUTOPRICING_STATUSES = ['None', 'Pending', 'PendingTax', 'Done'];
+export const AUTOPRICING_STATUSES = ['None', 'Pending', 'Done'];
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
 export declare type ApiOrderFulfillmentChannel = 'FBA' | 'Seller';
 export declare type ApiOrderPaymentMethod = string;
@@ -141,8 +141,9 @@ export interface ApiOrder {
     canceledDate?: Date;
 
     autopricing?: IAutopricing[];
+    autopricingHistory?: IAutopricing[];
     autopricingTotal?: number;
-    autopricingStatus?: 'None' | 'Pending' | 'PendingTax' | 'Done';
+    autopricingStatus?: 'None' | 'Pending' | 'Done';
 
     /** For Mall-Shoptet delivery method mapping */
     mallDeliveryMethod?: string;
@@ -284,6 +285,10 @@ export const ORDER_JOI_SCHEMA = object({
     canceledDate: date().allow(null),
 
     autopricing: array()
+        .items(ORDER_AUTOPRICING_SCHEMA)
+        .allow(null)
+        .optional(),
+    autopricingHistory: array()
         .items(ORDER_AUTOPRICING_SCHEMA)
         .allow(null)
         .optional(),
