@@ -59,6 +59,9 @@ export class ProductAutopricingClient extends EveClient {
         return this.got.post(url, { body: { skus, active } });
     }
 
+    /**
+     * Update top and bottom caps to determine min and max autopricing price.
+     */
     async setCaps(
         companyId: ObjectId,
         marketplace: MarketplaceName,
@@ -67,6 +70,6 @@ export class ProductAutopricingClient extends EveClient {
         bottomCap: number,
     ) {
         const url = `/company/${companyId}/marketplace/${marketplace}/product-autopricing/caps`;
-        await this.got.patch(url, { body: { skus, topCap, bottomCap } });
+        return await this.got.post(url, { body: { skus, topCap, bottomCap } });
     }
 }
