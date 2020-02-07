@@ -102,7 +102,7 @@ export interface IAutopricing {
 }
 
 export const ORDER_STATUSES = ['Unshipped', 'Pending', 'Shipped', 'Canceled'];
-export const AUTOPRICING_STATUSES = ['None', 'Pending', 'PendingTax', 'Done'];
+export const AUTOPRICING_STATUSES = ['None', 'Pending', 'Done'];
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
 export declare type ApiOrderFulfillmentChannel = 'FBA' | 'Seller';
 export declare type ApiOrderPaymentMethod = string;
@@ -143,7 +143,7 @@ export interface ApiOrder {
     autopricing?: IAutopricing[];
     autopricingHistory?: IAutopricing[];
     autopricingTotal?: number;
-    autopricingStatus?: 'None' | 'Pending' | 'PendingTax' | 'Done';
+    autopricingStatus?: 'None' | 'Pending' | 'Done';
 
     /** For Mall-Shoptet delivery method mapping */
     mallDeliveryMethod?: string;
