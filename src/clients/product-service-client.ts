@@ -102,6 +102,13 @@ export class ProductServiceClient extends EveClient {
 
         return response.body;
     }
+
+    async deleteProducts(companyId: ObjectId, skus: string[]) {
+        let response = await this.got.post(`/company/${companyId}/products/delete`, {
+            body: { skus },
+        });
+        return response.body;
+    }
 }
 
 export interface ApiPrice {
