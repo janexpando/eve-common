@@ -28,7 +28,11 @@ export type MallType = 'mall_cz' | 'mall_pl' | 'mall_sk';
 
 export const MALL: MallType[] = ['mall_cz', 'mall_pl', 'mall_sk'];
 
-export type MarketplaceName = AmazonType | MallType;
+export type AlzaType = 'alza_cz';
+
+export const ALZA: AlzaType[] = ['alza_cz'];
+
+export type MarketplaceName = AmazonType | MallType | AlzaType;
 
 export const MARKETPLACES: MarketplaceName[] = [].concat(AMAZON).concat(MALL);
 
@@ -56,12 +60,13 @@ export function getContinent(marketplace: MarketplaceName): MwsRegion {
     return null; //TODO: we need to resolve all continents
 }
 
-export type MarketplaceType = 'amazon' | 'mall';
+export type MarketplaceType = 'amazon' | 'mall' | 'alza';
 
-export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall'];
+export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall', "alza"];
 
 export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceType {
     if (AMAZON.includes(marketplace as AmazonType)) return 'amazon';
     if (MALL.includes(marketplace as MallType)) return 'mall';
+    if (ALZA.includes(marketplace as AlzaType)) return 'alza';
     return null;
 }
