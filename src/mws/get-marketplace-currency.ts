@@ -31,6 +31,7 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
         case 'amazon_au':
             return 'AUD';
         case 'mall_cz':
+        case "alza_cz":
             return 'CZK';
         case 'mall_pl':
             return 'PLN';
