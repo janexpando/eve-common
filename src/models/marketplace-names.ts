@@ -34,7 +34,7 @@ export const ALZA: AlzaType[] = ['alza_cz'];
 
 export type MarketplaceName = AmazonType | MallType | AlzaType;
 
-export const MARKETPLACES: MarketplaceName[] = [].concat(AMAZON).concat(MALL);
+export const MARKETPLACES: MarketplaceName[] = [].concat(AMAZON).concat(MALL).concat(ALZA);
 
 export const america = AMAZON_AMERICA;
 
