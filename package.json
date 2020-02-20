@@ -91,9 +91,7 @@
     "lodash": "^4.17.15",
     "pino": "^5.14.0",
     "request-promise-native": "^1.0.8",
-    "ts-essentials": "^2.0.12"
-  },
-  "peerDependencies": {
+    "ts-essentials": "^2.0.12",
     "got": "^9.6.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
