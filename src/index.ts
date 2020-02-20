@@ -48,7 +48,7 @@ export * from './clients/marketplace-client';
 export * from './clients/mongo-logger-client';
 export * from './clients/mws-credentials-client';
 export * from './clients/notifications-client';
-export * from './clients/order-downloader-client';
+export * from './clients/order-client';
 export * from './clients/pricing-report-client';
 export * from './clients/product-autopricing-client';
 export * from './clients/product-autopricing-history-client';
@@ -70,3 +70,8 @@ export * from './stream/transform/chunk-aggregator';
 export * from './stream/transform/noop';
 
 export * from './forex/money-exchange';
+export {Order} from "./order/order";
+export {ORDER_STATUSES} from "./order/order";
+export {ApiOrderStatus} from "./order/order";
+export {OrderPaymentMethod} from "./order/order";
+export {OrderFulfillmentChannel} from "./order/order";

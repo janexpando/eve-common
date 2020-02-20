@@ -7,7 +7,7 @@ import { AmazonProductClient } from '..';
 import { DeveloperConfigClient } from '..';
 import { FinancialEventsClient } from '..';
 import { MarketplaceClient } from '..';
-import { OrderDownloaderClient } from '..';
+import { OrderClient } from '..';
 import { ProductPricingClient } from '..';
 import { ProductServiceClient } from '..';
 import { ProductSyncClient } from '..';
@@ -31,7 +31,7 @@ export const PROVIDERS: Provider[] = [
     FinancialEventsClient,
     MarketplaceClient,
     MwsCredentialsClient,
-    OrderDownloaderClient,
+    OrderClient,
     ProductPricingClient,
     ProductServiceClient,
     ProductSyncClient,
