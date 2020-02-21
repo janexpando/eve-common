@@ -233,8 +233,8 @@ test.serial('store orders', async t => {
             companyId,
             marketplaceOrderId: ordersToStore[1].marketplaceOrderId,
         });
-        t.deepEqual(ordersToStore[0].marketplaceOrderId, order1.marketplaceOrderId);
-        t.deepEqual(ordersToStore[1].marketplaceOrderId, order2.marketplaceOrderId);
+        t.deepEqual(ordersToStore[0]?.marketplaceOrderId, order1?.marketplaceOrderId);
+        t.deepEqual(ordersToStore[1]?.marketplaceOrderId, order2?.marketplaceOrderId);
     } catch (e) {
         console.log(e);
     }
