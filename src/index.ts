@@ -70,8 +70,13 @@ export * from './stream/transform/chunk-aggregator';
 export * from './stream/transform/noop';
 
 export * from './forex/money-exchange';
-export {Order} from "./order/order";
-export {ORDER_STATUSES} from "./order/order";
-export {ApiOrderStatus} from "./order/order";
-export {OrderPaymentMethod} from "./order/order";
-export {OrderFulfillmentChannel} from "./order/order";
+export {Order} from "./order/order-model";
+export {ORDER_STATUSES} from "./order/order-model";
+export {ApiOrderStatus} from "./order/order-model";
+export {OrderPaymentMethod} from "./order/order-model";
+export {OrderFulfillmentChannel} from "./order/order-model";
+export {ORDER_JOI_SCHEMA} from "./order/order-joi-schema";
+export {ORDER_ITEM_JOI_SCHEMA} from "./order/order-joi-schema";
+export {ORDER_AUTOPRICING_SCHEMA} from "./order/order-joi-schema";
+export {ORDER_INVOICE_JOI_SCHEMA} from "./order/order-joi-schema";
+export {ADDRESS_JOI_SCHEMA} from "./order/order-joi-schema";

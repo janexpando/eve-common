@@ -26,6 +26,16 @@ export class OrderClient extends EveClient {
         super(env);
     }
 
+    async storeOrders(companyId: ObjectId, orders: Order[]) {
+        try {
+            await this.got.post(`${this.env.GATEWAY_URL}/company/${companyId}/orders`, {
+                body: orders,
+            });
+        } catch (e) {
+            this.logger.companyError(companyId, e);
+        }
+    }
+
     //TODO TEST
     async downloadOrders(
         companyId: ObjectId,
@@ -44,20 +54,8 @@ export class OrderClient extends EveClient {
                 marketplaces,
                 fromLastUpdate,
                 credentials,
-                callback: `${this.env.SERVICE_URL}/company/${companyId}/orders`,
+                callback: `${this.env.GATEWAY_URL}/company/${companyId}/orders`,
             } as OrdersDownloadBody,
         });
-    }
-
-    async storeOrders(companyId: ObjectId, orders: Order[]) {
-        try {
-            await this.got.post(`${this.env.GATEWAY_URL}/company/${companyId}/orders/store`, {
-                body: {
-                    orders,
-                },
-            });
-        } catch (e) {
-            this.logger.companyError(companyId, e);
-        }
     }
 }
