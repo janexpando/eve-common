@@ -1,9 +1,10 @@
 import { ObjectId } from 'bson';
 import { Injectable } from 'injection-js';
 import { EveClient } from './eve-client';
-import { AmazonType } from '../models/marketplace-names';
-import { Environment } from '../bootstrapping/environment';
-import { ConsoleLogger } from '../logging/console-logger';
+import { AmazonType } from '..';
+import { Environment } from '..';
+import { ConsoleLogger } from '..';
+import { Order } from '..';
 
 interface IMwsCredentials {
     accessKey: string;
@@ -20,11 +21,22 @@ interface OrdersDownloadBody {
 }
 
 @Injectable()
-export class OrderDownloaderClient extends EveClient {
+export class OrderClient extends EveClient {
     constructor(protected env: Environment, private logger: ConsoleLogger) {
         super(env);
     }
 
+    async storeOrders(companyId: ObjectId, orders: Order[]) {
+        try {
+            await this.got.post(`${this.env.GATEWAY_URL}/company/${companyId}/orders`, {
+                body: orders,
+            });
+        } catch (e) {
+            this.logger.companyError(companyId, e);
+        }
+    }
+
+    //TODO TEST
     async downloadOrders(
         companyId: ObjectId,
         marketplaces: AmazonType[],
@@ -42,7 +54,7 @@ export class OrderDownloaderClient extends EveClient {
                 marketplaces,
                 fromLastUpdate,
                 credentials,
-                callback: `${this.env.SERVICE_URL}/company/${companyId}/orders`,
+                callback: `${this.env.GATEWAY_URL}/company/${companyId}/orders`,
             } as OrdersDownloadBody,
         });
     }
