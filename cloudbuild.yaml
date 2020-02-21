@@ -1,4 +1,4 @@
-timeout: 600s
+timeout: 900s
 steps:
   # we need running database to test our code
   - name: gcr.io/cloud-builders/docker
