@@ -1,12 +1,11 @@
 import { ObjectId } from 'bson';
-import { prepareDB, provideInjector, test } from '../../testing';
-import { DbDriver, Environment, ENVIRONMENT_PROVIDER, Order, OrderClient } from '../..';
+import { provideInjector, test } from '../../testing';
+import { Environment, ENVIRONMENT_PROVIDER, Order, OrderClient } from '../..';
 import nock = require('nock');
 
 provideInjector(test, [OrderClient, ENVIRONMENT_PROVIDER]);
-prepareDB(test);
 
-test('store orders', async t => {
+test.serial('store orders', async t => {
     // nock.recorder.rec();
 
     const cid = '5c52d0bfbf23ae00046927a8';
