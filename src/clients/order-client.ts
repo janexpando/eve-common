@@ -28,9 +28,10 @@ export class OrderClient extends EveClient {
 
     async storeOrders(companyId: ObjectId, orders: Order[]) {
         try {
-            await this.got.post(`${this.env.GATEWAY_URL}/company/${companyId}/orders`, {
+            const result = await this.got.post(`${this.env.GATEWAY_URL}/company/${companyId}/orders`, {
                 body: orders,
             });
+            return result
         } catch (e) {
             this.logger.companyError(companyId, e);
         }
