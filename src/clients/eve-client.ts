@@ -1,6 +1,6 @@
 import { Injectable } from 'injection-js';
 import { Environment } from '../bootstrapping/environment';
-import { GotInstance, GotJSONFn } from "../../node_modules/@types/got/index";
+import { GotInstance, GotJSONFn } from "../../node_modules/got/source";
 import got = require('got');
 
 @Injectable()
