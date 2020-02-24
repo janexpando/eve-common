@@ -1,7 +1,7 @@
 import { Injectable } from 'injection-js';
-import got = require('got');
-import { GotInstance, GotJSONFn } from 'got';
 import { Environment } from '../bootstrapping/environment';
+import got = require('got');
+import { GotInstance, GotJSONFn } from "../../node_modules/@types/got/index";
 
 /**
  * Documentation: https://github.com/sendinblue/APIv3-nodejs-library#documentation-for-api-endpoints
