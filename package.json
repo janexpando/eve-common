@@ -91,17 +91,17 @@
     "lodash": "^4.17.15",
     "pino": "^5.14.0",
     "request-promise-native": "^1.0.8",
-    "ts-essentials": "^2.0.12"
+    "ts-essentials": "^2.0.12",
+    "got": "^9.6.0",
+    "@sentry/node": "^4.5.3",
+    "amazon-mws": "0.0.23"
   },
   "peerDependencies": {
-    "got": "^9.6.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "reflect-metadata": "^0.1.13",
-    "amazon-mws": "0.0.23",
     "injection-js": "^2.2.1",
     "mongoose": "^5.4.8",
-    "@sentry/node": "^4.5.3",
     "koa-joi-router": "^5.2.0",
     "dotenv": "^6.2.0",
     "rxjs": "^6.4.0",
