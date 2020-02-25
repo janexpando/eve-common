@@ -1,6 +1,6 @@
-import {Injectable} from 'injection-js';
-import {EveClient} from './eve-client';
-import {ObjectId} from 'bson';
+import { Injectable } from 'injection-js';
+import { EveClient } from './eve-client';
+import { ObjectId } from 'bson';
 import {
     ApiCarrierName,
     Environment,
@@ -10,9 +10,9 @@ import {
     MarketplaceType,
     Order,
     SERVICE_NAMES,
-    ServiceName
+    ServiceName,
 } from '..';
-import {array, bool, object, string} from 'joi';
+import { array, bool, object, string } from 'joi';
 
 @Injectable()
 export class ShoptetServiceClient extends EveClient {
@@ -40,14 +40,34 @@ export class ShoptetServiceClient extends EveClient {
         return response.body;
     }
 
-    async syncShoptetOrders(companyId: ObjectId, importSettings: ShoptetOrdersImportSettings[]){
-        let response = await this.got.post(`/company/${companyId}/shoptet-order-sync`,{
+    async syncShoptetOrders(companyId: ObjectId, importSettings: ShoptetOrdersImportSettings[]) {
+        let response = await this.got.post(`/company/${companyId}/shoptet-order-sync`, {
             body: {
-                importSettings
-            }
+                importSettings,
+            },
         });
         return response.body;
     }
+
+    async getApiAccessToken(companyId: ObjectId): Promise<ApiShoptetAccessToken> {
+        let response = await this.got.post(`/company/${companyId}/api-access-token`, {
+            body: {},
+        });
+        let token: ApiShoptetAccessToken = response.body.token;
+        if (token) {
+            token.companyId = new ObjectId(token.companyId);
+            token.expiresAt = new Date(token.expiresAt);
+            token.lastUsedAt = new Date(token.lastUsedAt);
+        }
+        return token;
+    }
+}
+
+export interface ApiShoptetAccessToken {
+    companyId: ObjectId;
+    accessToken: string;
+    expiresAt: Date;
+    lastUsedAt: Date;
 }
 
 export interface IShoptetOrderStatus {
@@ -146,6 +166,5 @@ export const IMPORT_SETTINGS_JOI_SCHEMA = object({
             }),
         )
         .allow(null),
-    autoconfirmOrderOnStatus: optionalString()
+    autoconfirmOrderOnStatus: optionalString(),
 });
-
