@@ -206,3 +206,99 @@ test.serial('store orders', async t => {
 
     t.deepEqual(response?.body, { message: 'received' });
 });
+
+test.serial('store orders throws error', async t => {
+    // nock.recorder.rec()
+    const cid = '5c52d0bfbf23ae00046927a8';
+    let companyId = new ObjectId(cid);
+
+    const ordersToStore: Order[] = [
+        {
+            companyId,
+            marketplace: 'amazon_uk',
+            marketplaceOrderId: '000000',
+            lastChanged: new Date('2019-01-01T12:00:00Z'),
+            buyer: {
+                name: 'Vojtěch Zogata',
+                addressLine: ['Havlíčkova 13'],
+                city: 'Praha',
+                countryCode: 'CZ',
+                country: 'Czechia',
+                district: '1',
+                phone: '123 456 789',
+                zipCode: '190 00',
+                stateOrRegion: 'Praha',
+                email: 'vojta@expan.do',
+                taxId: 'abcd',
+                taxCountry: 'CZ',
+            },
+            currencyCode: 'EUR',
+            items: [],
+            fulfillmentChannel: 'FBA',
+            status: 'Shipped',
+            totalPrice: 500,
+            totalItemTax: 0,
+            paymentMethod: 'Other',
+            purchaseDate: new Date('2019-01-01T11:00:00Z'),
+            marketplaceLastChanged: new Date('2019-01-01T11:00:00Z'),
+            shipServiceLevel: 'expedited',
+            isBusinessOrder: false,
+            isComplete: false,
+            invoices: [],
+            isPremiumOrder: false,
+            isPrime: false,
+            shippingPrice: 0,
+            latestShipDate: new Date('2019-01-01T12:00:00Z'),
+            latestDeliveryDate: new Date('2019-01-01T12:00:00Z'),
+            totalDiscount: 0,
+            isRefunded: false,
+        },
+        {
+            companyId,
+            marketplace: 'amazon_de',
+            marketplaceOrderId: '000001',
+            lastChanged: new Date('2019-01-01T12:00:00Z'),
+            buyer: {
+                name: 'Vojtěch Zogata',
+                addressLine: ['Havlíčkova 13'],
+                city: 'Praha',
+                countryCode: 'CZ',
+                country: 'Czechia',
+                district: '1',
+                phone: '123 456 789',
+                zipCode: '190 00',
+                stateOrRegion: 'Praha',
+                email: 'vojta@expan.do',
+                taxId: 'abcd',
+                taxCountry: 'CZ',
+            },
+            currencyCode: 'EUR',
+            items: [],
+            fulfillmentChannel: 'FBA',
+            status: 'Shipped',
+            totalPrice: 500,
+            totalItemTax: 0,
+            paymentMethod: 'Other',
+            purchaseDate: new Date('2019-01-01T11:00:00Z'),
+            marketplaceLastChanged: new Date('2019-01-01T11:00:00Z'),
+            shipServiceLevel: 'expedited',
+            isBusinessOrder: false,
+            isComplete: false,
+            invoices: [],
+            isPremiumOrder: false,
+            isPrime: false,
+            shippingPrice: 0,
+            latestShipDate: new Date('2019-01-01T12:00:00Z'),
+            latestDeliveryDate: new Date('2019-01-01T12:00:00Z'),
+            totalDiscount: 0,
+            isRefunded: false,
+        },
+    ];
+
+    const orderClient = t.context.injector.get(OrderClient);
+    try {
+        await orderClient.storeOrders(companyId, ordersToStore);
+    } catch (e) {
+        t.deepEqual(e.message, 'Orders with id: 000000,000001 not received successfully.');
+    }
+});
