@@ -32,6 +32,7 @@ export class OrderClient extends EveClient {
             });
         } catch (e) {
             this.logger.companyError(companyId, e);
+            throw Error(`Orders with id: ${orders.map(order => order.marketplaceOrderId)} not received successfully.`);
         }
     }
 
