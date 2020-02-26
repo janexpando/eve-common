@@ -1,5 +1,35 @@
 import {ObjectId} from "bson";
-import {ApiAddress, ApiInvoice, CurrencyCode, IAutopricing, MarketplaceName} from "..";
+import { CurrencyCode, MarketplaceName } from '..';
+
+export interface ApiAddress {
+    name: string;
+    email: string;
+    addressLine: string[];
+    city: string;
+    country: string;
+    district: string;
+    stateOrRegion: string;
+    zipCode: string;
+    countryCode: string;
+    phone: string;
+    taxId: string;
+    taxCountry: string;
+}
+
+export interface ApiInvoice {
+    id: string;
+    url: string;
+}
+
+export const AUTOPRICING_STATUSES = ['None', 'Pending', 'Done'];
+
+export interface IAutopricing {
+    sku: string;
+    delta: number;
+    base: number;
+    autoprice?: number;
+    date?: Date;
+}
 
 export interface OrderItem {
     sku: string;
@@ -26,7 +56,7 @@ export declare type OrderPaymentMethod = string;
 
 export declare type OrderFulfillmentChannel = 'FBA' | 'Seller';
 
-export interface Order {
+export interface ApiOrder {
     companyId: ObjectId;
     marketplaceOrderId: string;
     status: ApiOrderStatus;
