@@ -1,10 +1,9 @@
 import { ObjectId } from 'bson';
 import { Injectable } from 'injection-js';
 import { EveClient } from './eve-client';
-import { AmazonType } from '..';
+import { AmazonType, ApiOrder } from '..';
 import { Environment } from '..';
 import { ConsoleLogger } from '..';
-import { Order } from '..';
 
 interface IMwsCredentials {
     accessKey: string;
@@ -26,7 +25,7 @@ export class OrderClient extends EveClient {
         super(env);
     }
 
-    async storeOrders(companyId: ObjectId, orders: Order[]) {
+    async storeOrders(companyId: ObjectId, orders: ApiOrder[]) {
         try {
             return await this.got.post(`${this.env.GATEWAY_URL}/company/${companyId}/orders`, {
                 body: orders,

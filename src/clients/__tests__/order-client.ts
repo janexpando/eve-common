@@ -1,7 +1,9 @@
 import { ObjectId } from 'bson';
 import { provideInjector, test } from '../../testing';
-import { Environment, ENVIRONMENT_PROVIDER, Order, OrderClient } from '../..';
 import nock = require('nock');
+import { OrderClient } from '../order-client';
+import { Environment, ENVIRONMENT_PROVIDER } from '../..';
+import { ApiOrder } from '../../order/order-model';
 
 provideInjector(test, [OrderClient, ENVIRONMENT_PROVIDER]);
 
@@ -118,7 +120,7 @@ test.serial('store orders', async t => {
             'close',
         ]);
 
-    const ordersToStore: Order[] = [
+    const ordersToStore: ApiOrder[] = [
         {
             companyId,
             marketplace: 'amazon_uk',

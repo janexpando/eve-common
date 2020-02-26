@@ -1,9 +1,10 @@
 import * as nock from 'nock';
 import { ObjectId } from 'bson';
 import { provideInjector, test } from '../../testing';
-import { ShoptetOrdersImportSettings, ShoptetServiceClient } from '../shoptet-service-client';
+import { ShoptetServiceClient } from '../shoptet-service-client';
 import { Environment, ENVIRONMENT_PROVIDER } from '../..';
-import {Order} from "../..";
+import { ApiImportSettings } from '../../settings/import-settings-model';
+import { ApiOrder } from '../../order/order-model';
 
 provideInjector(test, [ShoptetServiceClient, ENVIRONMENT_PROVIDER]);
 
@@ -11,7 +12,7 @@ test.serial('send orders', async t => {
     t.plan(1);
     let client = t.context.injector.get(ShoptetServiceClient);
     let companyId = new ObjectId();
-    let order: Order = {
+    let order: ApiOrder = {
         companyId,
         marketplace: 'amazon_uk',
         marketplaceOrderId: '000000',
@@ -51,7 +52,7 @@ test.serial('send orders', async t => {
         totalDiscount: 0,
         isRefunded: false,
     };
-    let settings: ShoptetOrdersImportSettings = {
+    let settings: ApiImportSettings = {
         companyId,
         carrier: 'Other',
         carrierName: 'carrier',
@@ -66,13 +67,13 @@ test.serial('send orders', async t => {
         synchronizeOrders: true,
     };
     delete order.marketplaceLastChanged;
-    let orders: Order[] = [order];
+    let orders: ApiOrder[] = [order];
     nocks(companyId, order, t.context.injector.get(Environment));
     let response = await client.postOrders(companyId, orders, settings);
     t.is(response.statusCode, 200);
 });
 
-function nocks(companyId: ObjectId, order: Order, environment: Environment) {
+function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
     // nock.recorder.rec();
     nock(environment.SHOPTET_SERVICE_URL, { encodedQueryParams: true })
         .post(`/company/${companyId.toHexString()}/orders`, {

@@ -1,6 +1,11 @@
 import { array, bool, date, number, object, string } from 'joi';
-import { ORDER_STATUSES } from './order-model';
-import { AUTOPRICING_STATUSES, CURRENCY_CODES, MARKETPLACES, optionalString } from '..';
+import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
+import { CURRENCY_CODES, MARKETPLACES } from '..';
+
+export const optionalString = () =>
+    string()
+        .allow(null, '')
+        .optional();
 
 export const ORDER_ITEM_JOI_SCHEMA = object({
     sku: string().required(),
