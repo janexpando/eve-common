@@ -214,7 +214,7 @@ test.serial('store orders throws error', async t => {
     const cid = '5c52d0bfbf23ae00046927a8';
     let companyId = new ObjectId(cid);
 
-    const ordersToStore: Order[] = [
+    const ordersToStore: ApiOrder[] = [
         {
             companyId,
             marketplace: 'amazon_uk',
