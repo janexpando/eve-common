@@ -2,7 +2,7 @@ import { provideInjector, test } from '../../testing';
 import { NotificationsClient } from '../notifications-client';
 import { ObjectId } from 'bson';
 import * as nock from 'nock';
-import { Environment } from '../..';
+import { AmazonType, Environment } from '../..';
 
 provideInjector(test);
 
@@ -11,9 +11,11 @@ test.serial('notify about suspended account', async t => {
     const client = t.context.injector.get(NotificationsClient);
     const environment = t.context.injector.get(Environment);
     const companyId = new ObjectId('5e17324d235a3bf11c1e926e');
+    const marketplace = "amazon_de" as AmazonType;
     nock(`${environment.GATEWAY_URL}`, { encodedQueryParams: true })
         .post('/notification/suspended-account', {
             companyId: '5e17324d235a3bf11c1e926e',
+            marketplace: "amazon_de"
         })
         .reply(200, { success: true }, [
             'X-DNS-Prefetch-Control',
@@ -37,6 +39,6 @@ test.serial('notify about suspended account', async t => {
             'Connection',
             'close',
         ]);
-    const response = await client.notifySuspendedAmazonMarketplace(companyId);
+    const response = await client.notifySuspendedAmazonMarketplace(companyId, marketplace);
     t.deepEqual(response, { success: true });
 });

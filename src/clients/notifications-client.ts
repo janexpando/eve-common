@@ -1,5 +1,5 @@
 import { EveClient } from './eve-client';
-import { Environment } from '..';
+import { AmazonType, Environment } from '..';
 import { ObjectId } from 'bson';
 import { Injectable } from 'injection-js';
 
@@ -10,10 +10,11 @@ export class NotificationsClient extends EveClient {
         this.baseUrl = this.env.GATEWAY_URL;
     }
 
-    async notifySuspendedAmazonMarketplace(companyId: ObjectId) {
+    async notifySuspendedAmazonMarketplace(companyId: ObjectId, marketplace: AmazonType) {
         const response = await this.got.post(`/notification/suspended-account`, {
             body: {
                 companyId,
+                marketplace
             },
             json: true,
         });
