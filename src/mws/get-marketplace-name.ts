@@ -31,6 +31,8 @@ export function getMarketplaceName(marketplaceId: string): AmazonType {
             return 'amazon_au';
         case 'A19VAU5U5O7RUS':
             return 'amazon_sg';
+        case 'A1805IZSGTT6HS':
+            return 'amazon_nl';
         default:
             throw new Error(`${marketplaceId} is not a valid amazon marketplace`);
     }

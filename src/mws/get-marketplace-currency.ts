@@ -9,6 +9,7 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
         case 'amazon_fr':
         case 'amazon_es':
         case 'mall_sk':
+        case 'amazon_nl':
             return 'EUR';
         // @ts-ignore
         case 'amazon_gb':

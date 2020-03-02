@@ -6,7 +6,8 @@ export function isEuropeanMarketplace(marketplace) {
         marketplace === 'amazon_uk' ||
         marketplace === 'amazon_fr' ||
         marketplace === 'amazon_de' ||
-        marketplace === 'amazon_it'
+        marketplace === 'amazon_it' ||
+        marketplace === 'amazon_nl'
     );
 }
 

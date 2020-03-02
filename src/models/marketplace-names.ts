@@ -1,8 +1,8 @@
 import { MwsRegion } from './mws-region';
 
-export type AmazonEuropeType = 'amazon_de' | 'amazon_uk' | 'amazon_it' | 'amazon_fr' | 'amazon_es';
+export type AmazonEuropeType = 'amazon_de' | 'amazon_uk' | 'amazon_it' | 'amazon_fr' | 'amazon_es' | 'amazon_nl';
 
-export const AMAZON_EUROPE: AmazonEuropeType[] = ['amazon_de', 'amazon_uk', 'amazon_it', 'amazon_fr', 'amazon_es'];
+export const AMAZON_EUROPE: AmazonEuropeType[] = ['amazon_de', 'amazon_uk', 'amazon_it', 'amazon_fr', 'amazon_es', 'amazon_nl'];
 
 export type AmazonAmericaType = 'amazon_mx' | 'amazon_us' | 'amazon_ca' | 'amazon_br';
 
