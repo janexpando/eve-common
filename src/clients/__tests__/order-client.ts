@@ -209,98 +209,99 @@ test.serial('store orders', async t => {
     t.deepEqual(response?.body, { message: 'received' });
 });
 
-test.serial('store orders throws error', async t => {
-    // nock.recorder.rec()
+test.serial('Get order', async t => {
+    // nock.recorder.rec();
     const cid = '5c52d0bfbf23ae00046927a8';
-    let companyId = new ObjectId(cid);
-
-    const ordersToStore: ApiOrder[] = [
-        {
-            companyId,
-            marketplace: 'amazon_uk',
-            marketplaceOrderId: '000000',
-            lastChanged: new Date('2019-01-01T12:00:00Z'),
-            buyer: {
-                name: 'Vojtěch Zogata',
-                addressLine: ['Havlíčkova 13'],
-                city: 'Praha',
-                countryCode: 'CZ',
-                country: 'Czechia',
-                district: '1',
-                phone: '123 456 789',
-                zipCode: '190 00',
-                stateOrRegion: 'Praha',
-                email: 'vojta@expan.do',
-                taxId: 'abcd',
-                taxCountry: 'CZ',
-            },
-            currencyCode: 'EUR',
-            items: [],
-            fulfillmentChannel: 'FBA',
-            status: 'Shipped',
-            totalPrice: 500,
-            totalItemTax: 0,
-            paymentMethod: 'Other',
-            purchaseDate: new Date('2019-01-01T11:00:00Z'),
-            marketplaceLastChanged: new Date('2019-01-01T11:00:00Z'),
-            shipServiceLevel: 'expedited',
-            isBusinessOrder: false,
-            isComplete: false,
-            invoices: [],
-            isPremiumOrder: false,
-            isPrime: false,
-            shippingPrice: 0,
-            latestShipDate: new Date('2019-01-01T12:00:00Z'),
-            latestDeliveryDate: new Date('2019-01-01T12:00:00Z'),
-            totalDiscount: 0,
-            isRefunded: false,
-        },
-        {
-            companyId,
-            marketplace: 'amazon_de',
-            marketplaceOrderId: '000001',
-            lastChanged: new Date('2019-01-01T12:00:00Z'),
-            buyer: {
-                name: 'Vojtěch Zogata',
-                addressLine: ['Havlíčkova 13'],
-                city: 'Praha',
-                countryCode: 'CZ',
-                country: 'Czechia',
-                district: '1',
-                phone: '123 456 789',
-                zipCode: '190 00',
-                stateOrRegion: 'Praha',
-                email: 'vojta@expan.do',
-                taxId: 'abcd',
-                taxCountry: 'CZ',
-            },
-            currencyCode: 'EUR',
-            items: [],
-            fulfillmentChannel: 'FBA',
-            status: 'Shipped',
-            totalPrice: 500,
-            totalItemTax: 0,
-            paymentMethod: 'Other',
-            purchaseDate: new Date('2019-01-01T11:00:00Z'),
-            marketplaceLastChanged: new Date('2019-01-01T11:00:00Z'),
-            shipServiceLevel: 'expedited',
-            isBusinessOrder: false,
-            isComplete: false,
-            invoices: [],
-            isPremiumOrder: false,
-            isPrime: false,
-            shippingPrice: 0,
-            latestShipDate: new Date('2019-01-01T12:00:00Z'),
-            latestDeliveryDate: new Date('2019-01-01T12:00:00Z'),
-            totalDiscount: 0,
-            isRefunded: false,
-        },
-    ];
-
+    const companyId = new ObjectId(cid);
+    const marketplace = 'amazon_it';
+    const marketplaceOrderId = 'marketplaceOrderId';
+    const environment = t.context.injector.get(Environment);
     const orderClient = t.context.injector.get(OrderClient);
-    try {
-        await orderClient.storeOrders(companyId, ordersToStore);
-    } catch (e) {
-        t.deepEqual(e.message, 'Orders with id: 000000,000001 not received successfully.');
-    }
+    nock(environment.GATEWAY_URL, { encodedQueryParams: true })
+        .get(`/company/${cid}/marketplace/${marketplace}/marketplaceOrderId/${marketplaceOrderId}/order`)
+        .reply(
+            200,
+            {
+                _id: '5c89092c4f96ed4e1aae3820',
+                companyId: '5c52d0bfbf23ae00046927a8',
+                marketplaceOrderId: 'marketplaceOrderId',
+                status: 'Shipped',
+                marketplace: 'amazon_it',
+                fulfillmentChannel: 'FBA',
+                totalPrice: 22.3,
+                currencyCode: 'EUR',
+                paymentMethod: 'Other',
+                buyer: {
+                    name: 'gsgrwger',
+                    addressLine: ['awegw'],
+                    email: 'asdfawef',
+                    city: 'city',
+                    country: 'IT',
+                    zipCode: '123',
+                    countryCode: 'IT',
+                    stateOrRegion: 'asdf',
+                },
+                items: [
+                    {
+                        marketplaceItemId: 'asdfasdf',
+                        sku: 'sdf',
+                        asin: 'sdaf',
+                        price: 11.15,
+                        itemPrice: 11.15,
+                        tax: 0,
+                        name: 'product name',
+                        quantity: 1,
+                        promotionDiscount: 0,
+                        promotionDiscountTax: 0,
+                    },
+                    {
+                        marketplaceItemId: 'asdfasdf',
+                        sku: 'asdf',
+                        asin: 'qwegq',
+                        price: 11.15,
+                        itemPrice: 11.15,
+                        tax: 0,
+                        name: 'product name2',
+                        quantity: 1,
+                        promotionDiscount: 0,
+                        promotionDiscountTax: 0,
+                    },
+                ],
+                lastChanged: '2019-03-14T17:11:37.684Z',
+                purchaseDate: '2019-03-13T13:29:52.711Z',
+                shipServiceLevel: 'Expedited',
+                isBusinessOrder: false,
+                isPremiumOrder: false,
+                isPrime: false,
+                isComplete: false,
+                marketplaceLastChanged: '2019-03-13T16:39:44.242Z',
+                totalItemTax: 0,
+                isRefunded: false,
+                invoices: [],
+            },
+            [
+                'X-DNS-Prefetch-Control',
+                'off',
+                'Strict-Transport-Security',
+                'max-age=15552000; includeSubDomains',
+                'X-Download-Options',
+                'noopen',
+                'X-Content-Type-Options',
+                'nosniff',
+                'X-XSS-Protection',
+                '1; mode=block',
+                'Vary',
+                'Origin',
+                'Content-Type',
+                'application/json; charset=utf-8',
+                'Content-Length',
+                '1453',
+                'Date',
+                'Fri, 06 Mar 2020 17:10:20 GMT',
+                'Connection',
+                'close',
+            ],
+        );
+    const response = await orderClient.getOrder(companyId, marketplace, marketplaceOrderId);
+    t.is(response.statusCode, 200);
 });

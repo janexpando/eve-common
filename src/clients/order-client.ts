@@ -1,7 +1,7 @@
 import { ObjectId } from 'bson';
 import { Injectable } from 'injection-js';
 import { EveClient } from './eve-client';
-import { AmazonType, ApiOrder } from '..';
+import { AmazonType, ApiOrder, MarketplaceName } from '..';
 import { Environment } from '..';
 import { ConsoleLogger } from '..';
 
@@ -32,7 +32,11 @@ export class OrderClient extends EveClient {
             });
         } catch (e) {
             this.logger.companyError(companyId, e);
-            throw Error(`Orders with id: ${orders.map(order => order.marketplaceOrderId)} not received successfully.`);
+            throw Error(
+                `Orders for companyId ${companyId} with id: ${orders.map(
+                    order => order.marketplaceOrderId,
+                )} not received successfully. ${e}`,
+            );
         }
     }
 
@@ -57,5 +61,18 @@ export class OrderClient extends EveClient {
                 callback: `${this.env.GATEWAY_URL}/company/${companyId}/orders`,
             } as OrdersDownloadBody,
         });
+    }
+
+    async getOrder(companyId: ObjectId, marketplace: MarketplaceName, marketplaceOrderId: string) {
+        try {
+            return await this.got.get(
+                `${this.env.GATEWAY_URL}/company/${companyId}/marketplace/${marketplace}/marketplaceOrderId/${marketplaceOrderId}/order`,
+            );
+        } catch (e) {
+            this.logger.companyError(companyId, e);
+            throw Error(
+                `Getting order request failed for company ${companyId}, marketplace ${marketplace}, marketplaceOrderId ${marketplaceOrderId}. ${e}`,
+            );
+        }
     }
 }
