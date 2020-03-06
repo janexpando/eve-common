@@ -113,7 +113,6 @@ export class ProductServiceClient extends EveClient {
 
 export interface ApiPrice {
     base: number;
-    currencyBase: string;
     selling?: number;
     min?: number;
     max?: number;
