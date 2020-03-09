@@ -303,5 +303,5 @@ test.serial('Get order', async t => {
             ],
         );
     const response = await orderClient.getOrder(companyId, marketplace, marketplaceOrderId);
-    t.is(response.statusCode, 200);
+    t.is(response.marketplaceOrderId, "marketplaceOrderId");
 });

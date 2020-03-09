@@ -63,11 +63,12 @@ export class OrderClient extends EveClient {
         });
     }
 
-    async getOrder(companyId: ObjectId, marketplace: MarketplaceName, marketplaceOrderId: string) {
+    async getOrder(companyId: ObjectId, marketplace: MarketplaceName, marketplaceOrderId: string): Promise<ApiOrder> {
         try {
-            return await this.got.get(
+            const response = await this.got.get(
                 `${this.env.GATEWAY_URL}/company/${companyId}/marketplace/${marketplace}/marketplaceOrderId/${marketplaceOrderId}/order`,
             );
+            return response.body;
         } catch (e) {
             this.logger.companyError(companyId, e);
             throw Error(
