@@ -71,9 +71,7 @@ export class OrderClient extends EveClient {
             return response.body;
         } catch (e) {
             this.logger.companyError(companyId, e);
-            throw Error(
-                `Getting order request failed for company ${companyId}, marketplace ${marketplace}, marketplaceOrderId ${marketplaceOrderId}. ${e}`,
-            );
+            throw e;
         }
     }
 }
