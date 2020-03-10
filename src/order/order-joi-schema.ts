@@ -1,10 +1,6 @@
 import { array, bool, date, number, object, string } from 'joi';
 import {
     AUTOPRICING_STATUSES,
-    DropshipCurrencyCode,
-    DropshipParcelShop,
-    DropshipShipmentDeliveryType,
-    DropshipShippingCarrier,
     ORDER_STATUSES,
 } from './order-model';
 import { CURRENCY_CODES, MARKETPLACES } from '..';
@@ -48,12 +44,14 @@ export const ADDRESS_JOI_SCHEMA = object({
     phone: optionalString(),
     taxId: optionalString(),
     taxCountry: optionalString(),
-
-    /** Data related to Alza order */
+    regNo: string().optional(), // ičo
+    vatNo: string().optional(), // dič
     companyName: string()
         .allow('')
         .optional(),
-    note: string().allow('').optional(),
+    note: string()
+        .allow('')
+        .optional(),
 });
 export const ORDER_INVOICE_JOI_SCHEMA = object({
     id: string().allow(null, ''),
@@ -120,29 +118,24 @@ export const ORDER_JOI_SCHEMA = object({
     mallDeliveryMethod: string().allow(null),
 
     /** Data related to Alza order */
-    customerId: number().optional(), // Alza customer id assigned by Alza
-    supplierBranchId: number().optional(), // Alza branch id assigned by Alza
-    regNo: string().optional(), // ičo
-    vatNo: string().optional(), // dič
-    shippingCarrierIdentification: string()
-        .valid(...Object.values(DropshipShippingCarrier))
-        .optional(),
+    shippingCarrierIdentification: string().optional(),
     parcelShop: object({
-        parcelShopIdentification: string()
-            .valid(...Object.values(DropshipParcelShop))
-            .optional(),
+        parcelShopIdentification: string().optional(),
         parcelShopBranchCode: string().optional(),
     }),
-    shipmentDeliveryType: string()
-        .valid(...Object.values(DropshipShipmentDeliveryType))
+    demandedExpeditionDate: date()
+        .allow('')
         .optional(),
-    demandedExpeditionDate: date().allow('').optional(),
-    cashOnDeliveryValue: number().optional(),
-    cashOnDeliveryValueCurrency: string()
-        .valid(...Object.values(DropshipCurrencyCode))
-        .optional(),
-    paymentVS: string().optional(),
+    cashOnDelivery: object({
+        value: number().optional(),
+        currency: string()
+            .allow(CURRENCY_CODES)
+            .optional(),
+        variableSymbol: string().optional(),
+    }).optional(),
     deliveryBranchId: number().optional(),
     shipmentValue: number().optional(),
-    shipmentValueCurrency: string().valid(...Object.values(DropshipCurrencyCode)).optional(),
+    shipmentValueCurrency: string()
+        .allow(CURRENCY_CODES)
+        .optional(),
 }).options({ stripUnknown: true });

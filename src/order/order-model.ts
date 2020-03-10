@@ -14,8 +14,8 @@ export interface ApiAddress {
     phone: string;
     taxId: string;
     taxCountry: string;
-
-    // alza specific fields
+    regNo?: string;
+    vatNo?: string;
     companyName?: string;
     note?: string;
 }
@@ -60,54 +60,6 @@ export declare type OrderPaymentMethod = string;
 
 export declare type OrderFulfillmentChannel = 'FBA' | 'Seller';
 
-export enum DropshipShippingCarrier {
-    CZPOSTD = 'CZPOSTD',
-    CZPOSTP = 'CZPOSTP',
-    DHL = 'DHL',
-    DPD = 'DPD',
-    GEIS = 'GEIS',
-    GEISPOINT = 'GEISPOINT',
-    GEISCARGO = 'GEISCARGO',
-    GLS = 'GLS',
-    GO = 'GO',
-    MagyarPOST = 'MagyarPOST',
-    MagyarPOSTHD = 'MagyarPOSTHD',
-    MagyarPOSTPO = 'MagyarPOSTPO',
-    MagyarPOSTPP = 'MagyarPOSTPP',
-    MagyarPOSTPT = 'MagyarPOSTPT',
-    Najbert = 'Najbert',
-    PPL = 'PPL',
-    PPLPARCELSHOP = 'PPLPARCELSHOP',
-    RHENUS = 'RHENUS',
-    SKPOSTD = 'SKPOSTD',
-    SKPOSTP = 'SKPOSTP',
-    SKYNET = 'SKYNET',
-    TOPTRANS = 'TOPTRANS',
-    UPS = 'UPS',
-    ZASILKOVNA = 'ZASILKOVNA',
-    ZavolejSiKuryra = 'ZavolejSiKuryra',
-    Supplier = 'Supplier',
-}
-
-export enum DropshipParcelShop {
-    GEISPOINT = 'GEISPOINT',
-    PPLPARCELSHOP = 'PPLPARCELSHOP',
-    ZASILKOVNA = 'ZASILKOVNA',
-}
-
-export enum DropshipShipmentDeliveryType {
-    B2C = 'B2C',
-    B2B = 'B2B',
-    Branch = 'Branch',
-    ParcelShop = 'ParcelShop',
-}
-
-export enum DropshipCurrencyCode {
-    CZK = 'CZK',
-    EUR = 'EUR',
-    USD = 'USD',
-}
-
 export interface ApiOrder {
     companyId: ObjectId;
     marketplaceOrderId: string;
@@ -149,20 +101,17 @@ export interface ApiOrder {
     mallDeliveryMethod?: string;
 
     // alza specific fields
-    customerId?: number; // Alza customer id assigned by Alza
-    supplierBranchId?: number; // Alza branch id assigned by Alza
-    regNo?: string; // ičo
-    vatNo?: string; // dič
-    shippingCarrierIdentification?: DropshipShippingCarrier;
-    parcelShop?: { parcelShopIdentification?: DropshipParcelShop; parcelShopBranchCode?: string };
-    shipmentDeliveryType?: DropshipShipmentDeliveryType;
+    shippingCarrierIdentification?: string;
+    parcelShop?: { parcelShopIdentification?: string; parcelShopBranchCode?: string };
     demandedExpeditionDate?: Date;
-    cashOnDeliveryValue?: number;
-    cashOnDeliveryValueCurrency?: DropshipCurrencyCode;
-    paymentVS?: string;
+    cashOnDelivery?: {
+        value?: number;
+        currency?: CurrencyCode;
+        variableSymbol?: string;
+    };
     deliveryBranchId?: number;
     shipmentValue?: number;
-    shipmentValueCurrency?: DropshipCurrencyCode;
+    shipmentValueCurrency?: CurrencyCode;
 }
 
 export const ORDER_STATUSES = ['Unshipped', 'Pending', 'Shipped', 'Canceled'];
