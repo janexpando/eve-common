@@ -1,5 +1,12 @@
 import { array, bool, date, number, object, string } from 'joi';
-import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
+import {
+    AUTOPRICING_STATUSES,
+    DropshipCurrencyCode,
+    DropshipParcelShop,
+    DropshipShipmentDeliveryType,
+    DropshipShippingCarrier,
+    ORDER_STATUSES,
+} from './order-model';
 import { CURRENCY_CODES, MARKETPLACES } from '..';
 
 export const optionalString = () =>
@@ -41,6 +48,12 @@ export const ADDRESS_JOI_SCHEMA = object({
     phone: optionalString(),
     taxId: optionalString(),
     taxCountry: optionalString(),
+
+    /** Data related to Alza order */
+    companyName: string()
+        .allow('')
+        .optional(),
+    note: string().allow('').optional(),
 });
 export const ORDER_INVOICE_JOI_SCHEMA = object({
     id: string().allow(null, ''),
@@ -111,4 +124,25 @@ export const ORDER_JOI_SCHEMA = object({
     supplierBranchId: number().optional(), // Alza branch id assigned by Alza
     regNo: string().optional(), // ičo
     vatNo: string().optional(), // dič
+    shippingCarrierIdentification: string()
+        .valid(...Object.values(DropshipShippingCarrier))
+        .optional(),
+    parcelShop: object({
+        parcelShopIdentification: string()
+            .valid(...Object.values(DropshipParcelShop))
+            .optional(),
+        parcelShopBranchCode: string().optional(),
+    }),
+    shipmentDeliveryType: string()
+        .valid(...Object.values(DropshipShipmentDeliveryType))
+        .optional(),
+    demandedExpeditionDate: date().allow('').optional(),
+    cashOnDeliveryValue: number().optional(),
+    cashOnDeliveryValueCurrency: string()
+        .valid(...Object.values(DropshipCurrencyCode))
+        .optional(),
+    paymentVS: string().optional(),
+    deliveryBranchId: number().optional(),
+    shipmentValue: number().optional(),
+    shipmentValueCurrency: string().valid(...Object.values(DropshipCurrencyCode)).optional(),
 }).options({ stripUnknown: true });
