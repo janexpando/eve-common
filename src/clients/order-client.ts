@@ -32,11 +32,7 @@ export class OrderClient extends EveClient {
             });
         } catch (e) {
             this.logger.companyError(companyId, e);
-            throw Error(
-                `Orders for companyId ${companyId} with id: ${orders.map(
-                    order => order.marketplaceOrderId,
-                )} not received successfully. ${e}`,
-            );
+            throw e;
         }
     }
 
