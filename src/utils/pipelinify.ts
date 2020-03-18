@@ -3,7 +3,7 @@ import { ChunkAggregator, pipeline } from '..';
 
 export type PipeFunction = (item: any, push: (item) => void) => Promise<any>;
 
-export async function pipelinify(functions: (PipeFunction | number | Readable | Writable)[]) {
+export async function pipelinify(functions: (PipeFunction | number | Readable | Transform | Writable)[]) {
     let pipeFunctions = [];
 
     for (let i = 0; i < functions.length; i++) {
@@ -60,21 +60,27 @@ export async function pipelinify(functions: (PipeFunction | number | Readable | 
         } else if (typeof functions[i] == 'number') {
             pipeFunctions.push(new ChunkAggregator(functions[i] as number));
         } else {
-            pipeFunctions.push(
-                new Transform({
-                    objectMode: true,
-                    async transform(item: any, encoding: string, callback: (error?: Error | null, data?: any) => void) {
-                        try {
-                            await pipeFn(item, item => {
-                                this.push(item);
-                            });
-                            callback();
-                        } catch (e) {
-                            callback(e);
-                        }
-                    },
-                }),
-            );
+            if (functions[i] instanceof Transform) pipeFunctions.push(functions[i]);
+            else
+                pipeFunctions.push(
+                    new Transform({
+                        objectMode: true,
+                        async transform(
+                            item: any,
+                            encoding: string,
+                            callback: (error?: Error | null, data?: any) => void,
+                        ) {
+                            try {
+                                await pipeFn(item, item => {
+                                    this.push(item);
+                                });
+                                callback();
+                            } catch (e) {
+                                callback(e);
+                            }
+                        },
+                    }),
+                );
         }
     }
 
