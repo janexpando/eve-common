@@ -97,6 +97,7 @@ export const ORDER_JOI_SCHEMA = object({
     isComplete: bool(),
     isRefunded: bool(),
     packages: array().items(PACKAGE_SCHEMA).optional(),
+    packagesSummaryPdfUrl: string().optional(),
 
     marketplaceLastChanged: date().allow(null),
     pendingDate: date().allow(null),
