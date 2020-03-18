@@ -80,6 +80,7 @@ export interface ApiOrder {
     latestShipDate: Date;
     latestDeliveryDate: Date;
     marketplaceLastChanged: Date;
+    packages?: { id: string; pdfUrl: string }[];
 
     purchaseDate: Date;
     isPremiumOrder: boolean;

@@ -64,6 +64,10 @@ export const ORDER_AUTOPRICING_SCHEMA = object({
     autoprice: number().allow(null),
     date: date().allow(null),
 });
+export const PACKAGE_SCHEMA = object({
+    id: string(),
+    pdfUlr: string().required()
+}).optional()
 export const ORDER_JOI_SCHEMA = object({
     companyId: string().required(),
     marketplaceOrderId: string().required(),
@@ -92,6 +96,7 @@ export const ORDER_JOI_SCHEMA = object({
     isBusinessOrder: bool(),
     isComplete: bool(),
     isRefunded: bool(),
+    packages: array().items(PACKAGE_SCHEMA).optional(),
 
     marketplaceLastChanged: date().allow(null),
     pendingDate: date().allow(null),
