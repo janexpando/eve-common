@@ -65,7 +65,8 @@ export const ORDER_AUTOPRICING_SCHEMA = object({
     date: date().allow(null),
 });
 export const PACKAGE_SCHEMA = object({
-    id: string(),
+    number: string(),
+    fullNumber: string().optional(),
     pdfUlr: string().required()
 }).optional()
 export const ORDER_JOI_SCHEMA = object({

@@ -80,7 +80,7 @@ export interface ApiOrder {
     latestShipDate: Date;
     latestDeliveryDate: Date;
     marketplaceLastChanged: Date;
-    packages?: { id: string; pdfUrl: string }[];
+    packages?: { number: string; fullNumber: string; pdfUrl: string }[];
     packagesSummaryPdfUrl?: string;
 
     purchaseDate: Date;
