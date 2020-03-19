@@ -1,8 +1,5 @@
 import { array, bool, date, number, object, string } from 'joi';
-import {
-    AUTOPRICING_STATUSES,
-    ORDER_STATUSES,
-} from './order-model';
+import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
 import { CURRENCY_CODES, MARKETPLACES } from '..';
 
 export const optionalString = () =>
@@ -64,11 +61,28 @@ export const ORDER_AUTOPRICING_SCHEMA = object({
     autoprice: number().allow(null),
     date: date().allow(null),
 });
+
+export const PACKAGE_ITEM_SCHEMA = object({
+    marketplaceItemId: string().required(),
+    quantity: number().required(),
+});
+
 export const PACKAGE_SCHEMA = object({
-    number: string(),
-    fullNumber: string().optional(),
-    pdfUlr: string().required()
-}).optional()
+    number: string().required(),
+    fullNumber: string().required(),
+    pdf: string().required(),
+    weight: number().required(),
+    items: array().items(PACKAGE_ITEM_SCHEMA).required()
+});
+
+export const SHIPMENT_SCHEMA = object({
+    shipmentNumber: string().required(),
+    packages: array()
+        .items(PACKAGE_SCHEMA)
+        .required(),
+    pdf: string().required(),
+});
+
 export const ORDER_JOI_SCHEMA = object({
     companyId: string().required(),
     marketplaceOrderId: string().required(),
@@ -97,8 +111,6 @@ export const ORDER_JOI_SCHEMA = object({
     isBusinessOrder: bool(),
     isComplete: bool(),
     isRefunded: bool(),
-    packages: array().items(PACKAGE_SCHEMA).optional(),
-    packagesSummaryPdfUrl: string().optional(),
 
     marketplaceLastChanged: date().allow(null),
     pendingDate: date().allow(null),
@@ -145,4 +157,5 @@ export const ORDER_JOI_SCHEMA = object({
     shipmentValueCurrency: string()
         .allow(CURRENCY_CODES)
         .optional(),
+    shipment: SHIPMENT_SCHEMA,
 }).options({ stripUnknown: true });
