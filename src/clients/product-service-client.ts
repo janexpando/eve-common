@@ -86,6 +86,11 @@ export class ProductServiceClient extends EveClient {
         return response.body;
     }
 
+    async getAllProducts(companyId: ObjectId, page: number, perPage = 1000): Promise<ApiVariant[]> {
+        const response = await this.got.get(`/company/${companyId}/products/all?page=${page}&perPage=${perPage}`);
+        return response.body;
+    }
+
     async getVariants(companyId: ObjectId, skus: string[]): Promise<ApiVariant[]> {
         let response = await this.got.get(`/company/${companyId}/products/variants`, {
             body: { skus },
