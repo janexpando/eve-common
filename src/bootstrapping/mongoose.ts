@@ -14,7 +14,6 @@ export class DbDriver {
         mongoose.set('useUnifiedTopology', true);
         mongoose.set('useNewUrlParser', true);
         mongoose.set('useCreateIndex', true);
-        mongoose.set('useNewUrlParser', true);
         if (!!process.env.MONGOOSE_DEBUG === true) mongoose.set('debug', true);
         this.db.on('connected', async () => {
             logg.log('MongoDB connected');
