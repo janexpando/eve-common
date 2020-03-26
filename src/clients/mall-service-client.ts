@@ -40,12 +40,18 @@ export class MallServiceClient extends EveClient {
         return response.body;
     }
 
-    async updateCredentials(companyId: ObjectId, marketplace: MallType, authorizationKey: string): Promise<ApiMallDeliveryMethod[]> {
+    async updateCredentials(companyId: ObjectId, marketplace: MallType, authorizationKey: string, active: boolean): Promise<ApiMallDeliveryMethod[]> {
         let response = await this.got.put(`/company/${companyId}/mall-credentials/${marketplace}`, {
             body: {
-                authorizationKey
+                authorizationKey,
+                active
             }
         });
+        return response.body;
+    }
+
+    async getStatuses(companyId: ObjectId, marketplace: MallType): Promise<{marketplace: MallType, status: 'online' | 'offline'}[]> {
+        let response = await this.got.get(`/company/${companyId}/statuses`);
         return response.body;
     }
 }
