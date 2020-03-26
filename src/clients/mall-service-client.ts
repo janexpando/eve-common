@@ -50,7 +50,7 @@ export class MallServiceClient extends EveClient {
         return response.body;
     }
 
-    async getStatuses(companyId: ObjectId, marketplace: MallType): Promise<{marketplace: MallType, status: 'online' | 'offline'}[]> {
+    async getStatuses(companyId: ObjectId): Promise<{marketplace: MallType, status: 'online' | 'offline'}[]> {
         let response = await this.got.get(`/company/${companyId}/statuses`);
         return response.body;
     }
