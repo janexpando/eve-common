@@ -20,5 +20,5 @@ export interface ApiMwsDeveloperConfig {
     accessKey: string;
     secretKey: string;
     developerId: string;
-    continent: MarketplaceRegion;
+    region: MarketplaceRegion;
 }

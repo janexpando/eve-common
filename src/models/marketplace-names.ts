@@ -38,8 +38,8 @@ export const MARKETPLACES: MarketplaceName[] = []
     .concat(MALL)
     .concat(ALZA);
 
-export function getRegionMarketplaces(continent: MarketplaceRegion): MarketplaceName[] {
-    switch (continent) {
+export function getRegionMarketplaces(region: MarketplaceRegion): MarketplaceName[] {
+    switch (region) {
         case 'amazon_europe':
             return AMAZON_EUROPE;
         case 'amazon_america':

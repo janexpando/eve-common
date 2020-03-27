@@ -25,7 +25,7 @@ test.serial('mws function returns instance of the mws object for existing pair c
             developerId,
             accessKey: 'accessKey',
             secretKey: 'secretKey',
-            continent: 'europe',
+            region: 'amazon_europe',
         });
 
     let token = 'amzn.mws.3ca8c68a-99ab-c228-bd69-e7e60db7a100';
