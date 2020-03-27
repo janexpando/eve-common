@@ -1,7 +1,7 @@
 import { Injectable } from 'injection-js';
 import { Environment } from '../bootstrapping/environment';
 import { EveClient } from './eve-client';
-import { ContinentName } from '../models/continent-names';
+import { MarketplaceRegion } from '../models/marketplace-region';
 
 @Injectable()
 export class DeveloperConfigClient extends EveClient {
@@ -20,5 +20,5 @@ export interface ApiMwsDeveloperConfig {
     accessKey: string;
     secretKey: string;
     developerId: string;
-    continent: ContinentName;
+    continent: MarketplaceRegion;
 }

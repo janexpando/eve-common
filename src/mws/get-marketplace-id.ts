@@ -24,8 +24,6 @@ export function getMarketplaceId(marketplace: AmazonType) {
             return 'A2Q3Y263D00KWC';
         case 'amazon_in':
             return 'A21TJRUUN4KGV';
-        case 'amazon_cn':
-            return 'AAHKV2X7AFYLW';
         case 'amazon_jp':
             return 'A1VC38T7YXB528';
         case 'amazon_au':

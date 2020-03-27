@@ -25,8 +25,6 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'BRL';
         case 'amazon_in':
             return 'INR';
-        case 'amazon_cn':
-            return 'CNY';
         case 'amazon_jp':
             return 'JPY';
         case 'amazon_au':
@@ -38,6 +36,8 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'PLN';
         case 'amazon_sg':
             return 'SGD';
+        case 'mall_ro':
+            return 'RON';
         default:
             throw new Error(`${marketplace} is not a valid amazon marketplace`);
     }

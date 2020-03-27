@@ -23,8 +23,6 @@ export function getMarketplaceName(marketplaceId: string): AmazonType {
             return 'amazon_br';
         case 'A21TJRUUN4KGV':
             return 'amazon_in';
-        case 'AAHKV2X7AFYLW':
-            return 'amazon_cn';
         case 'A1VC38T7YXB528':
             return 'amazon_jp';
         case 'A39IBJ37TRP1C6':

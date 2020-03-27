@@ -38,7 +38,6 @@ steps:
       - NODE_ENV=test
       - PORT=8083
       - SLACK_ORDERS_WEBHOOK_URL=http://abc.com
-      - MALL_SERVICE_URL=http://127.0.0.1:3333
   - name: 'ubuntu'
     entrypoint: 'bash'
     args:
