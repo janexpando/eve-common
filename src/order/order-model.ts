@@ -58,7 +58,7 @@ export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canc
 
 export declare type OrderPaymentMethod = string;
 
-export declare type OrderFulfillmentChannel = 'FBA' | 'Seller';
+export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier';
 
 export interface ApiPackageItem {
     marketplaceItemId: string;
