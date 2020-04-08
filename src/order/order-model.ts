@@ -60,32 +60,6 @@ export declare type OrderPaymentMethod = string;
 
 export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier';
 
-export interface ApiPackageItem {
-    marketplaceItemId: string;
-    quantity: number;
-}
-
-export interface ApiPackage {
-    number: string;
-    fullNumber: string;
-    pdf: string;
-    weight: number;
-    items: ApiPackageItem[];
-}
-
-export interface ApiPackage {
-    number: string;
-    fullNumber: string;
-    pdf: string;
-    weight: number;
-}
-
-export interface ApiShipment {
-    shipmentNumber: string;
-    packages: ApiPackage[];
-    pdf: string;
-}
-
 export interface ApiOrder {
     companyId: ObjectId;
     marketplaceOrderId: string;
@@ -106,7 +80,7 @@ export interface ApiOrder {
     latestShipDate: Date;
     latestDeliveryDate: Date;
     marketplaceLastChanged: Date;
-    shipment?: ApiShipment;
+    packageLabels?: string;
 
     purchaseDate: Date;
     isPremiumOrder: boolean;

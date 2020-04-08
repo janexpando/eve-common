@@ -62,27 +62,6 @@ export const ORDER_AUTOPRICING_SCHEMA = object({
     date: date().allow(null),
 });
 
-export const PACKAGE_ITEM_SCHEMA = object({
-    marketplaceItemId: string().required(),
-    quantity: number().required(),
-});
-
-export const PACKAGE_SCHEMA = object({
-    number: string().required(),
-    fullNumber: string().required(),
-    pdf: string().required(),
-    weight: number().required(),
-    items: array().items(PACKAGE_ITEM_SCHEMA).required()
-});
-
-export const SHIPMENT_SCHEMA = object({
-    shipmentNumber: string().required(),
-    packages: array()
-        .items(PACKAGE_SCHEMA)
-        .required(),
-    pdf: string().required(),
-});
-
 export const ORDER_JOI_SCHEMA = object({
     companyId: string().required(),
     marketplaceOrderId: string().required(),
@@ -157,5 +136,5 @@ export const ORDER_JOI_SCHEMA = object({
     shipmentValueCurrency: string()
         .allow(CURRENCY_CODES)
         .optional(),
-    shipment: SHIPMENT_SCHEMA,
+    packageLabels: string().optional(),
 }).options({ stripUnknown: true });
