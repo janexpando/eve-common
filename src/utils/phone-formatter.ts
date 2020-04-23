@@ -7,7 +7,6 @@ const muteErrors = (call: Function) => {
     try {
         return call();
     } catch (e) {
-        console.error(e);
         return null;
     }
 };
