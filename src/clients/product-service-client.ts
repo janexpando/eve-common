@@ -137,6 +137,7 @@ export interface ApiVariant {
     asins: ApiAsins;
     shippingTemplate?: string;
     locks?: string[];
+    updatedAt?: Date;
     /**
      * Parent product info
      */
