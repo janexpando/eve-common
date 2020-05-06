@@ -10,10 +10,10 @@ export class CompanyErrorClient extends EveClient {
         this.baseUrl = this.env.COMPANY_SERVICE_URL;
     }
 
-    async set(companyId: ObjectId, code: string, messages: string[] = []) {
+    async set(companyId: ObjectId, code: string, messages: string[] = [], devMessage?: string) {
         let response = await this.got.post(`/company/${companyId}/company-error`, {
             json: true,
-            body: { code, messages },
+            body: { code, messages, devMessage },
         });
     }
 }
