@@ -14,7 +14,8 @@ const exchangeRates: Record<CurrencyCode, number> = {
     USD: 1.1,
     SGD: 1.5,
     PLN: 4.27,
-    RON: 4.83
+    RON: 4.83,
+    HUF: 353.83
 };
 
 export function convertCurrency(value: number, from: CurrencyCode, to: CurrencyCode): number {

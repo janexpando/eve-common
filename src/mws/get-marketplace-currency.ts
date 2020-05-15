@@ -30,7 +30,7 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
         case 'amazon_au':
             return 'AUD';
         case 'mall_cz':
-        case "alza_cz":
+        case 'alza_cz':
             return 'CZK';
         case 'mall_pl':
             return 'PLN';
@@ -38,6 +38,8 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'SGD';
         case 'mall_ro':
             return 'RON';
+        case 'mall_hu':
+            return 'HUF';
         default:
             throw new Error(`${marketplace} is not a valid amazon marketplace`);
     }

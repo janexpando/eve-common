@@ -12,7 +12,8 @@ export type CurrencyCode =
     | 'AUD'
     | 'SGD'
     | 'PLN'
-    | 'RON';
+    | 'RON'
+    | 'HUF';
 export const CURRENCY_CODES = [
     'EUR',
     'GBP',
@@ -27,5 +28,6 @@ export const CURRENCY_CODES = [
     'AUD',
     'SGD',
     'PLN',
-    'RON'
+    'RON',
+    'HUF'
 ];

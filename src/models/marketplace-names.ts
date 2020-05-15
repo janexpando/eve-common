@@ -26,8 +26,8 @@ export const AMAZON: AmazonType[] = []
     .concat(AMAZON_AMERICA)
     .concat(AMAZON_FAR_EAST);
 
-export type MallType = 'mall_cz' | 'mall_pl' | 'mall_sk' | 'mall_ro';
-export const MALL: MallType[] = ['mall_cz', 'mall_pl', 'mall_sk', 'mall_ro'];
+export type MallType = 'mall_cz' | 'mall_pl' | 'mall_sk' | 'mall_ro' | 'mall_hu';
+export const MALL: MallType[] = ['mall_cz', 'mall_pl', 'mall_sk', 'mall_ro', 'mall_hu'];
 
 export type AlzaType = 'alza_cz';
 export const ALZA: AlzaType[] = ['alza_cz'];
@@ -72,6 +72,7 @@ export function getRegion(marketplace: MarketplaceName): MarketplaceRegion {
     if('mall_sk' == marketplace) return 'mall_sk';
     if('mall_pl' == marketplace) return 'mall_pl';
     if('mall_ro' == marketplace) return 'mall_ro';
+    if('mall_hu' == marketplace) return 'mall_hu';
     if('alza_cz' == marketplace) return 'alza_cz';
     return null;
 }
