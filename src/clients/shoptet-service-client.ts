@@ -39,8 +39,12 @@ export class ShoptetServiceClient extends EveClient {
         return response.body;
     }
 
-    async getApiAccessToken(companyId: ObjectId): Promise<ApiShoptetAccessToken> {
-        let response = await this.got.post(`/company/${companyId}/api-access-token`, {
+    async getApiAccessToken(companyId: ObjectId, addon?: string): Promise<ApiShoptetAccessToken> {
+        const url = addon
+            ? `/company/${companyId}/api-access-token/${addon}`
+            : `/company/${companyId}/api-access-token`;
+
+        let response = await this.got.post(url, {
             body: {},
         });
         let token: ApiShoptetAccessToken = response.body.token;
@@ -58,6 +62,7 @@ export interface ApiShoptetAccessToken {
     accessToken: string;
     expiresAt: Date;
     lastUsedAt: Date;
+    addon: string;
 }
 
 export interface IShoptetOrderStatus {
