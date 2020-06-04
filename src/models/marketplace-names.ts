@@ -68,12 +68,12 @@ export function getRegion(marketplace: MarketplaceName): MarketplaceRegion {
     if (AMAZON_AMERICA.includes(marketplace as AmazonAmericaType)) return 'amazon_america';
     if (AMAZON_FAR_EAST.includes(marketplace as AmazonFarEast)) return 'amazon_far_east';
     if (AMAZON_OTHER.includes(marketplace as AmazonOtherType)) return 'amazon_other';
-    if('mall_cz' == marketplace) return 'mall_cz';
-    if('mall_sk' == marketplace) return 'mall_sk';
-    if('mall_pl' == marketplace) return 'mall_pl';
-    if('mall_ro' == marketplace) return 'mall_ro';
-    if('mall_hu' == marketplace) return 'mall_hu';
-    if('alza_cz' == marketplace) return 'alza_cz';
+    if ('mall_cz' == marketplace) return 'mall_cz';
+    if ('mall_sk' == marketplace) return 'mall_sk';
+    if ('mall_pl' == marketplace) return 'mall_pl';
+    if ('mall_ro' == marketplace) return 'mall_ro';
+    if ('mall_hu' == marketplace) return 'mall_hu';
+    if ('alza_cz' == marketplace) return 'alza_cz';
     return null;
 }
 
@@ -85,4 +85,17 @@ export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceTyp
     if (MALL.includes(marketplace as MallType)) return 'mall';
     if (ALZA.includes(marketplace as AlzaType)) return 'alza';
     return null;
+}
+
+export function getMarketplaceNamesForMarketplaceType(marketplaceType: MarketplaceType): MarketplaceName[] {
+    switch (marketplaceType) {
+        case 'alza':
+            return ALZA;
+        case 'amazon':
+            return AMAZON;
+        case 'mall':
+            return MALL;
+        default:
+            return [];
+    }
 }
