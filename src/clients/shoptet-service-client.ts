@@ -1,7 +1,7 @@
 import { Injectable } from 'injection-js';
 import { EveClient } from './eve-client';
 import { ObjectId } from 'bson';
-import { Environment, ApiOrder } from '..';
+import { Environment, ApiOrder, CurrencyCode } from '..';
 import { ApiImportSettings } from '../settings/import-settings-model';
 
 @Injectable()
@@ -55,6 +55,35 @@ export class ShoptetServiceClient extends EveClient {
         }
         return token;
     }
+
+    async getShopInfo(companyId: ObjectId): Promise<ApiShop> {
+        const url = `/company/${companyId}/shop-info`;
+
+        const response = await this.got.get(url);
+        return response.body;
+    }
+}
+
+export enum Addon {
+    Amazon = 'amazon',
+    Alza = 'alza',
+    Mall = 'mall',
+}
+
+export interface ApiShopAddon {
+    oAuthToken: string;
+    active: boolean;
+}
+
+export interface ApiShop {
+    companyId: ObjectId;
+    addons: {
+        [key in Addon]?: ApiShopAddon;
+    };
+    shopId: number;
+    hostname: string;
+    urls: Record<string, string>;
+    currencies: CurrencyCode[];
 }
 
 export interface ApiShoptetAccessToken {
