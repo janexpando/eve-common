@@ -62,6 +62,11 @@ export class ShoptetServiceClient extends EveClient {
         const response = await this.got.get(url);
         return response.body;
     }
+
+    async getShoptetPaymentMethods(companyId: ObjectId): Promise<ApiShoptetPaymentMethod[]> {
+        let response = await this.got.get(`/company/${companyId}/shoptet-payment-methods`);
+        return response.body;
+    }
 }
 
 export enum Addon {
@@ -92,6 +97,22 @@ export interface ApiShoptetAccessToken {
     expiresAt: Date;
     lastUsedAt: Date;
     addon: string;
+}
+
+export interface ApiShoptetPaymentMethod {
+    guid: string;
+    name: string;
+    description: string;
+    paymentType: {
+        id: number;
+        code: string;
+        name: string;
+    };
+    visible: boolean;
+    priority: number;
+    wholesale: boolean;
+    logoUrl: string;
+    eetEligible: boolean;
 }
 
 export interface IShoptetOrderStatus {
