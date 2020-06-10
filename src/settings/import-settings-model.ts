@@ -7,7 +7,7 @@ interface ApiDeliveryMethodsMapping {
     serviceMethod: string;
 }
 interface ApiPaymentMethodsMapping {
-    method: 'online' | 'onCashDelivery';
+    method: 'online' | 'cashOnDelivery';
     serviceMethod: string;
 }
 export interface ApiImportSettings {
