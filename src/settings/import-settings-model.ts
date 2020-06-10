@@ -1,17 +1,15 @@
 import { ObjectId } from 'bson';
-import {
-    ApiCarrierName,
-    MarketplaceName,
-    MarketplaceType,
-    ServiceName,
-} from '..';
+import { ApiCarrierName, MarketplaceName, MarketplaceType, ServiceName } from '..';
 
 interface ApiDeliveryMethodsMapping {
     marketplace: MarketplaceName;
     method: string;
     serviceMethod: string;
 }
-
+interface ApiPaymentMethodsMapping {
+    method: 'online' | 'onCashDelivery';
+    serviceMethod: string;
+}
 export interface ApiImportSettings {
     companyId: ObjectId;
     marketplaceType: MarketplaceType;
@@ -26,4 +24,5 @@ export interface ApiImportSettings {
     carrierName?: string;
     deliveryMethodsMapping?: ApiDeliveryMethodsMapping[];
     autoconfirmOrderOnStatus?: string;
+    paymentMethodsMapping?: ApiPaymentMethodsMapping[];
 }
