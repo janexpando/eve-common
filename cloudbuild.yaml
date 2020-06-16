@@ -1,63 +1,64 @@
 timeout: 900s
 steps:
-  # we need running database to test our code
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - run
-      - -d
-      - --name=test-db
-      - --network=cloudbuild
-      - mongo
-  - name: gcr.io/cloud-builders/npm:current
-    args:
-      - install
-  - name: gcr.io/cloud-builders/npm:current
-    args:
-      - run
-      - build
-  - name: gcr.io/cloud-builders/npm:current
-    args:
-      - run
-      - ava
-    env:
-      - EVE_AUTH_BEARER=Expando123
-      - GATEWAY_URL=http://127.0.0.1:3333
-      - FRONTEND_URL=http://localhost:3000
-      - COMPANY_SERVICE_URL=http://127.0.0.1:3333
-      - ORDER_DOWNLOADER_URL=http://127.0.0.1:8080
-      - PRICING_SERVICE_URL=http://127.0.0.1:8081
-      - SHOPTET_SERVICE_URL=http://127.0.0.1:8082
-      - PRODUCT_SERVICE_URL=http://127.0.0.1:8083
-      - MALL_SERVICE_URL=http://127.0.0.1:8084
-      - SERVICE_URL=http://127.0.0.1:3333
-      - SLACK_ORDERS_WEBHOOK_URL=http://127.0.0.1:3333
-      - SENDINBLUE_TOKEN=xy
-      - GCLOUD_PROJECT=expando-eve
-      - GCLOUD_BUCKET_NAME=expando-eve-test
-      - MONGODB_URI=mongodb://test-db:27017/eve
-      - NODE_ENV=test
-      - PORT=8083
-      - SLACK_ORDERS_WEBHOOK_URL=http://abc.com
-  - name: 'ubuntu'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-            echo //registry.npmjs.org/:_authToken=${_NPM_TOKEN} > .npmrc ;
-            echo email=devops@expan.do >> .npmrc ;
-            echo always-auth=true >> .npmrc ;
-            cat .npmrc ;
-    volumes:
-      - name: 'home'
-        path: /root/
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['publish']
-    env:
-      - HOME=/root/
-    volumes:
-      - name: 'home'
-        path: /root/
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - stop
-      - test-db
+    # we need running database to test our code
+    - name: gcr.io/cloud-builders/docker
+      args:
+          - run
+          - -d
+          - --name=test-db
+          - --network=cloudbuild
+          - mongo
+    - name: gcr.io/cloud-builders/npm:current
+      args:
+          - install
+    - name: gcr.io/cloud-builders/npm:current
+      args:
+          - run
+          - build
+    - name: gcr.io/cloud-builders/npm:current
+      args:
+          - run
+          - ava
+      env:
+          - EVE_AUTH_BEARER=Expando123
+          - GATEWAY_URL=http://127.0.0.1:3333
+          - FRONTEND_URL=http://localhost:3000
+          - COMPANY_SERVICE_URL=http://127.0.0.1:3333
+          - ORDER_DOWNLOADER_URL=http://127.0.0.1:8080
+          - PRICING_SERVICE_URL=http://127.0.0.1:8081
+          - SHOPTET_SERVICE_URL=http://127.0.0.1:8082
+          - PRODUCT_SERVICE_URL=http://127.0.0.1:8083
+          - MALL_SERVICE_URL=http://127.0.0.1:8084
+          - SERVICE_URL=http://127.0.0.1:3333
+          - ALZA_SERVICE_URL=http://127.0.0.1:1994
+          - SLACK_ORDERS_WEBHOOK_URL=http://127.0.0.1:3333
+          - SENDINBLUE_TOKEN=xy
+          - GCLOUD_PROJECT=expando-eve
+          - GCLOUD_BUCKET_NAME=expando-eve-test
+          - MONGODB_URI=mongodb://test-db:27017/eve
+          - NODE_ENV=test
+          - PORT=8083
+          - SLACK_ORDERS_WEBHOOK_URL=http://abc.com
+    - name: 'ubuntu'
+      entrypoint: 'bash'
+      args:
+          - '-c'
+          - |
+              echo //registry.npmjs.org/:_authToken=${_NPM_TOKEN} > .npmrc ;
+              echo email=devops@expan.do >> .npmrc ;
+              echo always-auth=true >> .npmrc ;
+              cat .npmrc ;
+      volumes:
+          - name: 'home'
+            path: /root/
+    - name: 'gcr.io/cloud-builders/npm'
+      args: ['publish']
+      env:
+          - HOME=/root/
+      volumes:
+          - name: 'home'
+            path: /root/
+    - name: gcr.io/cloud-builders/docker
+      args:
+          - stop
+          - test-db
