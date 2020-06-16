@@ -25,6 +25,7 @@ export class ThanosClient {
             this.snapServiceCompany(this.env.PRODUCT_SERVICE_URL, companyId),
             this.snapServiceCompany(this.env.SHOPTET_SERVICE_URL, companyId),
             this.snapServiceCompany(this.env.MALL_SERVICE_URL, companyId),
+            this.snapServiceCompany(this.env.ALZA_SERVICE_URL + '/v1', companyId),
             this.snapServiceCompany(this.env.GATEWAY_URL, companyId, true),
         ]);
     }

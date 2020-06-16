@@ -27,6 +27,7 @@ export class Environment {
     MALL_SERVICE_URL: string;
     ORDER_DOWNLOADER_URL: string;
     PRICING_SERVICE_URL: string;
+    ALZA_SERVICE_URL: string;
     SENDINBLUE_TOKEN: string;
 
     protected schema: ObjectSchema = object({
@@ -45,6 +46,7 @@ export class Environment {
         ORDER_DOWNLOADER_URL: string().required(),
         PRICING_SERVICE_URL: string().required(),
         SENDINBLUE_TOKEN: string().required(),
+        ALZA_SERVICE_URL: string().required(),
     }).options({ stripUnknown: true });
 
     init() {
