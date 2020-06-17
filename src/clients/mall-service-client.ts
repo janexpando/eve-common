@@ -1,5 +1,5 @@
 import { EveClient } from './eve-client';
-import { Environment } from '..';
+import { ApiOrderStatus, Environment } from '..';
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
 import { MallType } from '..';
@@ -14,7 +14,7 @@ export interface ApiMallFulfillment {
 
 export interface ApiMallFulfillmentResponse {
     fulfilled: boolean;
-    correctOrderStatus?: string;
+    correctOrderStatus?: ApiOrderStatus;
 }
 
 @Injectable()
