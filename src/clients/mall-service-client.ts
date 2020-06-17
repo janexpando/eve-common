@@ -14,6 +14,7 @@ export interface ApiMallFulfillment {
 
 export interface ApiMallFulfillmentResponse {
     fulfilled: boolean;
+    correctOrderStatus?: string;
 }
 
 @Injectable()
