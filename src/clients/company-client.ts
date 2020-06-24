@@ -3,7 +3,7 @@ import { Environment } from '../bootstrapping/environment';
 import { EveClient } from './eve-client';
 import { ObjectId } from 'bson';
 
-export type ApiFeedType = 'GOOGLE_PRODUCT' | 'SHOPIFY' | 'SHOPTET' | 'CUSTOM';
+export type ApiFeedType = 'GOOGLE_PRODUCT' | 'SHOPIFY' | 'SHOPTET' | 'CUSTOM' | 'DATABASE';
 
 export interface ApiCompany {
     _id: string;
