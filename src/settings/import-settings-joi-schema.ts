@@ -27,5 +27,13 @@ export const IMPORT_SETTINGS_JOI_SCHEMA = object({
             }),
         )
         .allow(null),
+    paymentMethodsMapping: array()
+        .items(
+            object({
+                method: string(),
+                serviceMethod: string(),
+            }),
+        )
+        .allow(null),
     autoconfirmOrderOnStatus: optionalString(),
 });
