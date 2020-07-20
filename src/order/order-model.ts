@@ -51,7 +51,7 @@ export interface OrderItem {
     shippingPrice: number;
     shippingTax: number;
 
-    alzaBarCodes?: string[];
+    deliveryItemIds?: string[];
 }
 
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
