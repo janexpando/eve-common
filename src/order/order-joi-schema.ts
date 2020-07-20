@@ -23,7 +23,7 @@ export const ORDER_ITEM_JOI_SCHEMA = object({
     shippingTax: number(),
     shippingPrice: number(),
 
-    alzaBarCodes: array()
+    deliveryItemIds: array()
         .items(string())
         .allow(null)
         .optional(),
