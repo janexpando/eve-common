@@ -41,18 +41,21 @@ export class OrderClient extends EveClient {
         companyId: ObjectId,
         marketplaces: AmazonType[],
         fromLastUpdate: Date,
+        toLastUpdate: Date,
         credentials: IMwsCredentials,
     ) {
         this.logger.json({
             companyId,
             marketplaces,
             fromLastUpdate,
+            toLastUpdate,
             message: 'Requesting order downloader',
         });
         await this.got.post(`${this.env.ORDER_DOWNLOADER_URL}/company/${companyId}/orders/download`, {
             body: {
                 marketplaces,
                 fromLastUpdate,
+                toLastUpdate,
                 credentials,
                 callback: `${this.env.GATEWAY_URL}/company/${companyId}/orders`,
             } as OrdersDownloadBody,
