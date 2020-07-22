@@ -47,7 +47,6 @@ export * from './clients/company-error-client';
 export * from './clients/developer-config-client';
 export * from './clients/eve-client';
 export * from './clients/feed-client';
-export * from './clients/feed-sample-client';
 export * from './clients/financial-events-client';
 export * from './clients/mall-service-client';
 export * from './clients/marketplace-client';

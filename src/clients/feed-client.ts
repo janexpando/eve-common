@@ -25,7 +25,7 @@ export interface ApiInputFeed {
     decompress?: boolean;
     encoding?: string;
     item?: string;
-    mapping: {
+    mapping?: {
         [key: string]: string;
     };
     auth?: string;
