@@ -3,18 +3,58 @@ import { ObjectId } from 'bson';
 import { Environment } from '../bootstrapping/environment';
 import { EveClient } from './eve-client';
 
-export interface ApiFeed {
-    feedUrl?: string;
+export const FEED_SETUP_STATES = ['NoFeed', 'ItemSelection', 'Mapping', 'Done'] as const;
+export type FeedSetupState = typeof FEED_SETUP_STATES[number];
+
+export const FEED_STATUSES = [
+    'Ok',
+    'NoData',
+    'UrlUnreachable',
+    'MissingFields',
+    'BadItem',
+    'PossibleBadItem',
+    'Timeout',
+    'ErrorWhileDownloading',
+    'NoProducts',
+    'IncorrectData',
+] as const;
+export type FeedStatus = typeof FEED_STATUSES[number];
+
+export interface ApiInputFeed {
+    feedUrl: string;
     decompress?: boolean;
     encoding?: string;
     item?: string;
-    mapping?: {
+    mapping: {
         [key: string]: string;
     };
     auth?: string;
     js?: string;
     useCommaDelimiter?: true;
     anyDecimal?: true;
+}
+
+export interface ApiFeed extends ApiInputFeed {
+    companyId: ObjectId;
+    setupState: FeedSetupState;
+    status: FeedStatus;
+    feedSample?: string;
+    elementNames?: string[];
+    pathValues?: {
+        path: string;
+        values: string[];
+    }[];
+}
+
+export interface ApiFeedValidationParams {
+    type: 'STOCK' | 'PRICE' | 'BARCODE';
+    values: string[];
+}
+
+export interface ApiFeedValidationResult {
+    value: string;
+    parsedValue: string;
+    status: 'success' | 'error';
 }
 
 @Injectable()
@@ -28,15 +68,20 @@ export class FeedClient extends EveClient {
         return `/company/${companyId.toHexString()}/feed`;
     }
 
-    async setFeed(companyId: ObjectId, payload: ApiFeed): Promise<ApiFeed> {
+    async set(companyId: ObjectId, payload: ApiInputFeed): Promise<ApiFeed> {
         const url = FeedClient.getUrl(companyId);
         const response = await this.got.put(url, { body: payload });
-        return response.body.feed;
+        return response.body;
     }
 
-    async getFeed(companyId: ObjectId): Promise<ApiFeed> {
+    async get(companyId: ObjectId): Promise<ApiFeed> {
         const url = FeedClient.getUrl(companyId);
         const response = await this.got.get(url);
-        return response.body.feed;
+        return response.body;
+    }
+
+    async validateFeed(field: ApiFeedValidationParams): Promise<ApiFeedValidationResult[]> {
+        const response = await this.got.post('/feed/validate', { body: field });
+        return response.body.results;
     }
 }
