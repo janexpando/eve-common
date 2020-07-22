@@ -7,9 +7,32 @@ import { ApiCarrierName } from './settings-client';
 
 export type ApiFulfillmentStatus = 'Registered' | 'Shipped' | 'AtDepot' | 'Delivered' | 'Canceled' | 'Failed';
 
+interface IMonetaryValue {
+    value: number;
+    currency: string;
+}
+
+interface IParcelShop {
+    parcelShopIdentification?: string;
+    parcelShopBranchCode?: string;
+}
+
+interface IPackageItem {
+    marketplaceItemId: string;
+    quantity: number;
+}
+
+export interface IPackage {
+    number?: string;
+    fullNumber?: string;
+    weight: number;
+    items: IPackageItem[];
+}
+
 export interface ApiFulfillment {
     companyId: ObjectId;
     marketplaceOrderId: string;
+    fulfillmentId?: string;
     marketplace: MarketplaceName;
     status: ApiFulfillmentStatus;
     carrier?: ApiCarrierName;
@@ -18,6 +41,10 @@ export interface ApiFulfillment {
     carrierName?: string;
     shipMethod?: string;
     trackingUrl?: string;
+    cashOnDelivery?: IMonetaryValue;
+    shipmentValue?: IMonetaryValue;
+    parcelShop?: IParcelShop;
+    packages?: IPackage[];
     syncError?: string;
 }
 
@@ -36,6 +63,14 @@ export class FulfillmentsClient extends EveClient {
         await this.got.post(`/company/${companyId}/fulfillments`, {
             body,
         });
+    }
+
+    async getFulfillment(
+        companyId: ObjectId,
+        marketplace: MarketplaceName,
+        marketplaceOrderId: string,
+    ): Promise<ApiFulfillment> {
+        return (await this.got.get(`/company/${companyId}/fulfillments/${marketplace}/${marketplaceOrderId}`)).body;
     }
 
     async confirmFulfillment(
