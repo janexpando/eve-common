@@ -18,6 +18,7 @@ export interface ApiFulfillment {
     carrierName?: string;
     shipMethod?: string;
     trackingUrl?: string;
+    syncError?: string;
 }
 
 @Injectable()
@@ -34,6 +35,19 @@ export class FulfillmentsClient extends EveClient {
 
         await this.got.post(`/company/${companyId}/fulfillments`, {
             body,
+        });
+    }
+
+    async confirmFulfillment(
+        companyId: ObjectId,
+        marketplace: MarketplaceName,
+        marketplaceOrderId: string,
+        syncError?: string,
+    ) {
+        return this.got.patch(`/company/${companyId}/fulfillments/${marketplace}/${marketplaceOrderId}`, {
+            body: {
+                syncError: syncError || null,
+            },
         });
     }
 }
