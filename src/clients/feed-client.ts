@@ -74,9 +74,9 @@ export class FeedClient extends EveClient {
         return response.body;
     }
 
-    async get(companyId: ObjectId): Promise<ApiFeed> {
+    async get(companyId: ObjectId, excludeSampleData: boolean = false): Promise<ApiFeed> {
         const url = FeedClient.getUrl(companyId);
-        const response = await this.got.get(url);
+        const response = await this.got.get(url, { query: { excludeSampleData } });
         return response.body;
     }
 
