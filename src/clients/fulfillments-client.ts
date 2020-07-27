@@ -13,8 +13,8 @@ interface IMonetaryValue {
 }
 
 interface IParcelShop {
-    parcelShopIdentification?: string;
-    parcelShopBranchCode?: string;
+    parcelShopIdentification: string;
+    parcelShopBranchCode: string;
 }
 
 interface IPackageItem {
