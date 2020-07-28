@@ -10,15 +10,19 @@ export const FEED_STATUSES = [
     'Ok',
     'NoData',
     'UrlUnreachable',
-    'MissingFields',
+    'BadMapping',
     'BadItem',
     'PossibleBadItem',
     'Timeout',
-    'ErrorWhileDownloading',
+    'Unauthorized',
     'NoProducts',
     'IncorrectData',
+    'ErrorWhileDownloading',
 ] as const;
 export type FeedStatus = typeof FEED_STATUSES[number];
+
+export const VALIDATION_FIELD_TYPES = ['STOCK', 'PRICE', 'BARCODE', 'SKU'];
+export type ValidationFieldType = typeof VALIDATION_FIELD_TYPES[number];
 
 export interface ApiInputFeed {
     feedUrl: string;
@@ -47,7 +51,7 @@ export interface ApiFeed extends ApiInputFeed {
 }
 
 export interface ApiFeedValidationParams {
-    type: 'STOCK' | 'PRICE' | 'BARCODE';
+    type: ValidationFieldType;
     values: string[];
 }
 
