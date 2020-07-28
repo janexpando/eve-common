@@ -114,6 +114,16 @@ export class ProductServiceClient extends EveClient {
         });
         return response.body;
     }
+
+    async updateStockQuantities(
+        companyId: ObjectId,
+        stockChanges: { sku: string; quantity: number }[],
+    ): Promise<{ updatedCount: number }> {
+        let response = await this.got.patch(`/company/${companyId}/products/stock-quantities`, {
+            body: stockChanges,
+        });
+        return response.body;
+    }
 }
 
 export interface ApiPrice {
