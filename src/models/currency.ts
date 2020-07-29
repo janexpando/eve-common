@@ -13,7 +13,26 @@ export type CurrencyCode =
     | 'SGD'
     | 'PLN'
     | 'RON'
-    | 'HUF';
+    | 'HUF'
+    | 'HKD'
+    | 'ISK'
+    | 'PHP'
+    | 'DKK'
+    | 'SEK'
+    | 'IDR'
+    | 'RUB'
+    | 'HRK'
+    | 'THB'
+    | 'CHF'
+    | 'BGN'
+    | 'TRY'
+    | 'NOK'
+    | 'NZD'
+    | 'ZAR'
+    | 'ILS'
+    | 'KRW'
+    | 'MYR';
+
 export const CURRENCY_CODES = [
     'EUR',
     'GBP',
@@ -29,5 +48,23 @@ export const CURRENCY_CODES = [
     'SGD',
     'PLN',
     'RON',
-    'HUF'
+    'HUF',
+    'HKD',
+    'ISK',
+    'PHP',
+    'DKK',
+    'SEK',
+    'IDR',
+    'RUB',
+    'HRK',
+    'THB',
+    'CHF',
+    'BGN',
+    'TRY',
+    'NOK',
+    'NZD',
+    'ZAR',
+    'ILS',
+    'KRW',
+    'MYR',
 ];
