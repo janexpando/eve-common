@@ -13,6 +13,7 @@ export * from './utils/handle-promises';
 export * from './utils/iterator-to-array';
 export * from './utils/local-serial-processor';
 export * from './utils/pipelinify';
+export * from './utils/queue-processor';
 export * from './utils/unique-handling';
 export * from './utils/phone-formatter';
 export * from './models/marketplace-names';
