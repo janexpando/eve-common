@@ -15,7 +15,25 @@ const exchangeRates: Record<CurrencyCode, number> = {
     SGD: 1.5,
     PLN: 4.27,
     RON: 4.83,
-    HUF: 353.83
+    HUF: 353.83,
+    HKD: 9.0869,
+    ISK: 159.0,
+    PHP: 57.538,
+    DKK: 7.4427,
+    SEK: 10.287,
+    IDR: 17042.29,
+    RUB: 84.9125,
+    HRK: 7.494,
+    THB: 36.899,
+    CHF: 1.0766,
+    BGN: 1.9558,
+    TRY: 8.1748,
+    NOK: 10.6573,
+    NZD: 1.764,
+    ZAR: 19.3269,
+    ILS: 3.9985,
+    KRW: 1400.22,
+    MYR: 4.9755,
 };
 
 export function convertCurrency(value: number, from: CurrencyCode, to: CurrencyCode): number {
