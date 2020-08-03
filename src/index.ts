@@ -68,6 +68,7 @@ export * from './clients/sendinblue-client';
 export * from './clients/settings-client';
 export * from './clients/shoptet-service-client';
 export * from './clients/thanos-client';
+export * from './clients/exchange-rates-client';
 
 export * from './stream/array-to-readable';
 export * from './stream/string-to-readable';
