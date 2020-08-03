@@ -36,6 +36,10 @@ const exchangeRates: Record<CurrencyCode, number> = {
     MYR: 4.9755,
 };
 
+/**
+ * DEPRECATED: Please avoid using this. Use real live exchange rates
+ *             via `clients/exchange-rates-client`.
+ */
 export function convertCurrency(value: number, from: CurrencyCode, to: CurrencyCode): number {
     return (value / exchangeRates[from]) * exchangeRates[to] || 0;
 }
