@@ -37,12 +37,12 @@ export class ExchangeRatesClient extends EveClient {
         this.baseUrl = this.env.GATEWAY_URL;
     }
 
-    async exchangeRatesFor(baseCurrency: CurrencyCode, day?: Date): Promise<ApiExchangeRates> {
+    async getExchangeRates(baseCurrency: CurrencyCode, day?: Date): Promise<ApiExchangeRates> {
         const response = await this.got.get(`/exchange-rates/${formatDaySpec(day)}/${baseCurrency}`);
         return response.body;
     }
 
-    async quoteRateFor(
+    async getQuoteRate(
         baseCurrency: CurrencyCode,
         quoteCurrency: CurrencyCode,
         day?: Date,
