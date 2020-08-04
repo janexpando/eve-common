@@ -16,6 +16,7 @@ export * from './utils/pipelinify';
 export * from './utils/queue-processor';
 export * from './utils/unique-handling';
 export * from './utils/phone-formatter';
+export * from './utils/feature-toggles';
 export * from './models/marketplace-names';
 export * from './models/service-names';
 export * from './models/marketplace-region';
@@ -69,6 +70,7 @@ export * from './clients/settings-client';
 export * from './clients/shoptet-service-client';
 export * from './clients/thanos-client';
 export * from './clients/exchange-rates-client';
+export * from './clients/feature-toggle-client';
 
 export * from './stream/array-to-readable';
 export * from './stream/string-to-readable';
