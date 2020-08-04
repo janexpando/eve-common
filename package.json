@@ -1,6 +1,6 @@
 {
   "name": "eve-common",
-  "version": "7.12.1",
+  "version": "8.0.0",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
