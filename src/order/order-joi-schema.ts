@@ -136,5 +136,7 @@ export const ORDER_JOI_SCHEMA = object({
     shipmentValueCurrency: string()
         .allow(CURRENCY_CODES)
         .optional(),
-    packageLabels: string().optional(),
+    packageLabels: string()
+        .allow(null)
+        .optional(),
 }).options({ stripUnknown: true });
