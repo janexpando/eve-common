@@ -21,7 +21,7 @@ export const FEED_STATUSES = [
 ] as const;
 export type FeedStatus = typeof FEED_STATUSES[number];
 
-export const VALIDATION_FIELD_TYPES = ['STOCK', 'PRICE', 'BARCODE', 'SKU'];
+export const VALIDATION_FIELD_TYPES = ['STOCK', 'PRICE', 'BARCODE', 'SKU', 'OPTIONAL_STRING'];
 export type ValidationFieldType = typeof VALIDATION_FIELD_TYPES[number];
 
 export interface ApiInputFeed {
