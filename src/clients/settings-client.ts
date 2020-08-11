@@ -148,6 +148,7 @@ export interface ApiAmazonSettings {
     listNewProducts: boolean;
     downloadPricing: boolean;
     zeroUnmatchedProducts: boolean;
+    ignoreZeroStockProducts: boolean;
 }
 
 export interface ApiSyncSettings {
