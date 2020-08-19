@@ -54,6 +54,11 @@ export interface OrderItem {
     deliveryItemIds?: string[];
 }
 
+export interface ApiOrderDelivery {
+    shippingCarrier?: string;
+    shippingCarrierService?: string;
+}
+
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
 
 export declare type OrderPaymentMethod = string;
@@ -75,6 +80,7 @@ export interface ApiOrder {
     paymentMethod: OrderPaymentMethod;
     invoices: ApiInvoice[];
     buyer: ApiAddress;
+    delivery?: ApiOrderDelivery;
     items: OrderItem[];
     lastChanged: Date;
     latestShipDate: Date;
