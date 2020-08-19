@@ -50,6 +50,10 @@ export const ADDRESS_JOI_SCHEMA = object({
         .allow('')
         .optional(),
 });
+export const DELIVERY_JOI_SCHEMA = object({
+    shippingCarrier: string().optional(),
+    shippingCarrierService: string().optional(),
+});
 export const ORDER_INVOICE_JOI_SCHEMA = object({
     id: string().allow(null, ''),
     url: string().allow(null, ''),
@@ -77,6 +81,7 @@ export const ORDER_JOI_SCHEMA = object({
     paymentMethod: optionalString(),
     invoices: array().items(ORDER_INVOICE_JOI_SCHEMA),
     buyer: ADDRESS_JOI_SCHEMA,
+    delivery: DELIVERY_JOI_SCHEMA,
     items: array()
         .items(ORDER_ITEM_JOI_SCHEMA)
         .optional(),
