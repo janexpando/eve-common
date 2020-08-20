@@ -41,6 +41,9 @@ test.serial('store orders', async t => {
                 status: 'Shipped',
                 totalPrice: 500,
                 totalItemTax: 0,
+                payment: {
+                    paymentMethod: 'CreditCard'
+                },
                 paymentMethod: 'Other',
                 purchaseDate: '2019-01-01T11:00:00.000Z',
                 marketplaceLastChanged: '2019-01-01T11:00:00.000Z',
@@ -81,6 +84,9 @@ test.serial('store orders', async t => {
                 status: 'Shipped',
                 totalPrice: 500,
                 totalItemTax: 0,
+                payment: {
+                    paymentMethod: 'CreditCard'
+                },
                 paymentMethod: 'Other',
                 purchaseDate: '2019-01-01T11:00:00.000Z',
                 marketplaceLastChanged: '2019-01-01T11:00:00.000Z',
@@ -236,6 +242,9 @@ test.serial('Get order', async t => {
                 fulfillmentChannel: 'FBA',
                 totalPrice: 22.3,
                 currencyCode: 'EUR',
+                payment: {
+                    paymentMethod: 'CreditCard'
+                },
                 paymentMethod: 'Other',
                 buyer: {
                     name: 'gsgrwger',
