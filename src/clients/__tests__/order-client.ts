@@ -146,6 +146,9 @@ test.serial('store orders', async t => {
             status: 'Shipped',
             totalPrice: 500,
             totalItemTax: 0,
+            payment: {
+                paymentMethod: 'CreditCard',
+            },
             paymentMethod: 'Other',
             purchaseDate: new Date('2019-01-01T11:00:00Z'),
             marketplaceLastChanged: new Date('2019-01-01T11:00:00Z'),
@@ -186,6 +189,9 @@ test.serial('store orders', async t => {
             status: 'Shipped',
             totalPrice: 500,
             totalItemTax: 0,
+            payment: {
+                paymentMethod: 'CreditCard',
+            },
             paymentMethod: 'Other',
             purchaseDate: new Date('2019-01-01T11:00:00Z'),
             marketplaceLastChanged: new Date('2019-01-01T11:00:00Z'),
@@ -303,5 +309,5 @@ test.serial('Get order', async t => {
             ],
         );
     const response = await orderClient.getOrder(companyId, marketplace, marketplaceOrderId);
-    t.is(response.marketplaceOrderId, "marketplaceOrderId");
+    t.is(response.marketplaceOrderId, 'marketplaceOrderId');
 });

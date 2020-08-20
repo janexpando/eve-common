@@ -37,6 +37,9 @@ test.serial('send orders', async t => {
         status: 'Shipped',
         totalPrice: 500,
         totalItemTax: 0,
+        payment: {
+            paymentMethod: 'CreditCard',
+        },
         paymentMethod: 'Other',
         purchaseDate: new Date('2019-01-01T11:00:00Z'),
         marketplaceLastChanged: new Date('2019-01-01T11:00:00Z'),
