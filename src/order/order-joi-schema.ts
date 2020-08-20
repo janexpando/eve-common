@@ -2,6 +2,8 @@ import { array, bool, date, number, object, string } from 'joi';
 import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
 import { CURRENCY_CODES, MARKETPLACES } from '..';
 
+export const PAYMENT_METHODS = ['CreditCard', 'CashOnDelivery'];
+
 export const optionalString = () =>
     string()
         .allow(null, '')
@@ -64,6 +66,16 @@ export const ORDER_AUTOPRICING_SCHEMA = object({
     base: number().allow(null),
     autoprice: number().allow(null),
     date: date().allow(null),
+});
+
+export const ORDER_PAYMENT_SCHEMA = object({
+    cashOnDelivery: object({
+        toPay: number(),
+        servicePrice: number(),
+    }),
+    paymentMethod: string()
+        .valid(PAYMENT_METHODS)
+        .required(),
 });
 
 export const ORDER_JOI_SCHEMA = object({
@@ -129,6 +141,9 @@ export const ORDER_JOI_SCHEMA = object({
     demandedExpeditionDate: date()
         .allow('')
         .optional(),
+
+    payment: ORDER_PAYMENT_SCHEMA.required(),
+
     cashOnDelivery: object({
         value: number().optional(),
         currency: string()

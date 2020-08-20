@@ -59,9 +59,17 @@ export interface ApiOrderDelivery {
     shippingCarrierService?: string;
 }
 
+export interface IPayment {
+    cashOnDelivery?: {
+        toPay?: number;
+        servicePrice?: number;
+    };
+    paymentMethod: OrderPaymentMethod;
+}
+
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
 
-export declare type OrderPaymentMethod = string;
+export declare type OrderPaymentMethod = 'CreditCard' | 'CashOnDelivery';
 
 export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier';
 
@@ -77,7 +85,7 @@ export interface ApiOrder {
     totalDiscount: number;
     currencyCode: CurrencyCode;
     shipServiceLevel: string;
-    paymentMethod: OrderPaymentMethod;
+    paymentMethod: string;
     invoices: ApiInvoice[];
     buyer: ApiAddress;
     delivery?: ApiOrderDelivery;
@@ -111,6 +119,8 @@ export interface ApiOrder {
     shippingCarrierIdentification?: string;
     parcelShop?: { parcelShopIdentification?: string; parcelShopBranchCode?: string };
     demandedExpeditionDate?: Date;
+
+    payment: IPayment;
     cashOnDelivery?: {
         value?: number;
         currency?: CurrencyCode;
