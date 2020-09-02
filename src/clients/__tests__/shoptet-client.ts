@@ -131,6 +131,8 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
                 carrier: 'Other',
                 carrierName: 'carrier',
                 defaultOrderStatus: 'dos',
+                orderDeliveredOnStatus: '',
+                orderShippingOnStatus: '',
                 deliveryMethodsMapping: [],
                 importOrderJustOnce: false,
                 lowerStockOnOrder: true,
