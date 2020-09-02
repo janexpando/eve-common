@@ -1,6 +1,6 @@
 import { array, bool, date, number, object, string } from 'joi';
 import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
-import { CURRENCY_CODES, MARKETPLACES, PriceSchema } from '..';
+import { CURRENCY_CODES, MARKETPLACES } from '..';
 
 export const PAYMENT_METHODS = ['CreditCard', 'CashOnDelivery'];
 
@@ -10,11 +10,11 @@ export const optionalString = () =>
         .optional();
 
 export const PriceSchema = object({
-    withTax: number().allow(null),
-    withoutTax: number().allow(null),
-    tax: number().allow(null),
-    appliedDiscount: number().allow(null),
-    appliedDiscountTax: number().allow(null),
+    withTax: number(),
+    withoutTax: number(),
+    tax: number(),
+    appliedDiscount: number(),
+    appliedDiscountTax: number(),
 });
 
 export const ORDER_ITEM_JOI_SCHEMA = object({
