@@ -9,6 +9,14 @@ export const optionalString = () =>
         .allow(null, '')
         .optional();
 
+export const PriceSchema = object({
+    withTax: number(),
+    withoutTax: number(),
+    tax: number(),
+    appliedDiscount: number(),
+    appliedDiscountTax: number(),
+});
+
 export const ORDER_ITEM_JOI_SCHEMA = object({
     sku: string().required(),
     asin: optionalString(),
@@ -29,7 +37,10 @@ export const ORDER_ITEM_JOI_SCHEMA = object({
         .items(string())
         .allow(null)
         .optional(),
+    deliveryPrice: PriceSchema,
+    lineItemPrice: PriceSchema,
 });
+
 export const ADDRESS_JOI_SCHEMA = object({
     name: optionalString(),
     email: optionalString(),
@@ -159,4 +170,10 @@ export const ORDER_JOI_SCHEMA = object({
     packageLabels: string()
         .allow(null)
         .optional(),
+    price: object({
+        items: PriceSchema,
+        delivery: PriceSchema,
+        payment: PriceSchema,
+        total: PriceSchema
+    })
 }).options({ stripUnknown: true });

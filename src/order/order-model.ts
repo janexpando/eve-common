@@ -27,6 +27,14 @@ export interface ApiInvoice {
 
 export const AUTOPRICING_STATUSES = ['None', 'Pending', 'Done'];
 
+export interface IPrice {
+    withTax?: number;
+    withoutTax?: number;
+    tax?: number;
+    appliedDiscount?: number;
+    appliedDiscountTax?: number;
+}
+
 export interface IAutopricing {
     sku: string;
     delta: number;
@@ -50,8 +58,9 @@ export interface OrderItem {
     shippingDiscountTax: number;
     shippingPrice: number;
     shippingTax: number;
-
     deliveryItemIds?: string[];
+    lineItemPrice?: IPrice;
+    deliveryPrice?: IPrice;
 }
 
 export interface ApiOrderDelivery {
@@ -114,6 +123,12 @@ export interface ApiOrder {
     autopricingStatus?: 'None' | 'Pending' | 'Done';
 
     mallDeliveryMethod?: string;
+    price?: {
+        items?: IPrice;
+        delivery?: IPrice;
+        payment?: IPrice;
+        total?: IPrice;
+    };
 
     // alza specific fields
     shippingCarrierIdentification?: string;
