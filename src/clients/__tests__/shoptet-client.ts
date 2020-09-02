@@ -60,6 +60,8 @@ test.serial('send orders', async t => {
         carrier: 'Other',
         carrierName: 'carrier',
         defaultOrderStatus: 'dos',
+        orderDeliveredOnStatus: '',
+        orderShippingOnStatus: '',
         deliveryMethodsMapping: [],
         importOrderJustOnce: false,
         lowerStockOnOrder: true,

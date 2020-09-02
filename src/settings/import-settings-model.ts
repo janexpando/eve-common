@@ -15,6 +15,8 @@ export interface ApiImportSettings {
     marketplaceType: MarketplaceType;
     service: ServiceName;
     defaultOrderStatus?: string;
+    orderDeliveredOnStatus?: string;
+    orderShippingOnStatus?: string;
     importOrderJustOnce?: boolean;
     lowerStockOnOrder?: boolean;
     synchronizeOrders?: boolean;
