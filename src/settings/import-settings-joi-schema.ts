@@ -11,6 +11,8 @@ export const IMPORT_SETTINGS_JOI_SCHEMA = object({
     marketplaceType: string().allow(MARKETPLACE_TYPES),
     service: string().allow(SERVICE_NAMES),
     defaultOrderStatus: optionalString(),
+    orderDeliveredOnStatus: optionalString(),
+    orderShippingOnStatus: optionalString(),
     importOrderJustOnce: optionalBool(),
     lowerStockOnOrder: optionalBool(),
     synchronizeOrders: optionalBool(),
