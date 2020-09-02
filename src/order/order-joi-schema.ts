@@ -1,6 +1,6 @@
 import { array, bool, date, number, object, string } from 'joi';
 import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
-import { CURRENCY_CODES, MARKETPLACES } from '..';
+import { CURRENCY_CODES, MARKETPLACES, PriceSchema } from '..';
 
 export const PAYMENT_METHODS = ['CreditCard', 'CashOnDelivery'];
 
@@ -8,6 +8,14 @@ export const optionalString = () =>
     string()
         .allow(null, '')
         .optional();
+
+export const PriceSchema = object({
+    withTax: number().allow(null),
+    withoutTax: number().allow(null),
+    tax: number().allow(null),
+    appliedDiscount: number().allow(null),
+    appliedDiscountTax: number().allow(null),
+});
 
 export const ORDER_ITEM_JOI_SCHEMA = object({
     sku: string().required(),
@@ -29,7 +37,10 @@ export const ORDER_ITEM_JOI_SCHEMA = object({
         .items(string())
         .allow(null)
         .optional(),
+    deliveryPrice: PriceSchema,
+    lineItemPrice: PriceSchema,
 });
+
 export const ADDRESS_JOI_SCHEMA = object({
     name: optionalString(),
     email: optionalString(),
@@ -159,4 +170,10 @@ export const ORDER_JOI_SCHEMA = object({
     packageLabels: string()
         .allow(null)
         .optional(),
+    price: object({
+        items: PriceSchema,
+        delivery: PriceSchema,
+        payment: PriceSchema,
+        total: PriceSchema
+    })
 }).options({ stripUnknown: true });
