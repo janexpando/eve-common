@@ -3,6 +3,7 @@ import { ApiOrderStatus, Environment } from '..';
 import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
 import { MallType } from '..';
+import { ApiFulfillmentStatus } from './fulfillments-client';
 
 export interface ApiMallFulfillment {
     companyId: ObjectId;
@@ -10,6 +11,7 @@ export interface ApiMallFulfillment {
     marketplace: MallType;
     trackingNumber: string;
     trackingUrl: string;
+    status?: ApiFulfillmentStatus; // make required
 }
 
 export interface ApiMallFulfillmentResponse {
