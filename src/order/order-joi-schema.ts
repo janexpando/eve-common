@@ -9,12 +9,11 @@ export const optionalString = () =>
         .allow(null, '')
         .optional();
 
-export const PriceSchema = object({
+export const PRICE_JOI_SCHEMA = object({
     withTax: number(),
     withoutTax: number(),
     tax: number(),
-    appliedDiscount: number(),
-    appliedDiscountTax: number(),
+    taxRatePercent: number(),
 });
 
 export const ORDER_ITEM_JOI_SCHEMA = object({
@@ -37,8 +36,11 @@ export const ORDER_ITEM_JOI_SCHEMA = object({
         .items(string())
         .allow(null)
         .optional(),
-    deliveryPrice: PriceSchema,
-    lineItemPrice: PriceSchema,
+    lineItemPrice: PRICE_JOI_SCHEMA,
+    lineItemDiscount: PRICE_JOI_SCHEMA,
+    deliveryPrice: PRICE_JOI_SCHEMA,
+    deliveryDiscount: PRICE_JOI_SCHEMA,
+    marketplaceCommission: PRICE_JOI_SCHEMA,
 });
 
 export const ADDRESS_JOI_SCHEMA = object({
@@ -170,10 +172,12 @@ export const ORDER_JOI_SCHEMA = object({
     packageLabels: string()
         .allow(null)
         .optional(),
+
     price: object({
-        items: PriceSchema,
-        delivery: PriceSchema,
-        payment: PriceSchema,
-        total: PriceSchema
-    })
+        items: PRICE_JOI_SCHEMA,
+        delivery: PRICE_JOI_SCHEMA,
+        payment: PRICE_JOI_SCHEMA,
+        totalDiscount: PRICE_JOI_SCHEMA,
+        total: PRICE_JOI_SCHEMA,
+    }),
 }).options({ stripUnknown: true });
