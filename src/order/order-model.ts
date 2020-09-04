@@ -31,8 +31,7 @@ export interface IPrice {
     withTax?: number;
     withoutTax?: number;
     tax?: number;
-    appliedDiscount?: number;
-    appliedDiscountTax?: number;
+    taxRatePercent?: number;
 }
 
 export interface IAutopricing {
@@ -59,8 +58,12 @@ export interface OrderItem {
     shippingPrice: number;
     shippingTax: number;
     deliveryItemIds?: string[];
+
     lineItemPrice?: IPrice;
+    lineItemDiscount?: IPrice;
     deliveryPrice?: IPrice;
+    deliveryDiscount?: IPrice;
+    marketplaceCommission?: IPrice;
 }
 
 export interface ApiOrderDelivery {
@@ -127,6 +130,7 @@ export interface ApiOrder {
         items?: IPrice;
         delivery?: IPrice;
         payment?: IPrice;
+        totalDiscount?: IPrice;
         total?: IPrice;
     };
 
