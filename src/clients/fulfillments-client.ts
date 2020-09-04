@@ -5,7 +5,7 @@ import { Environment } from '../bootstrapping/environment';
 import { EveClient } from './eve-client';
 import { ApiCarrierName } from './settings-client';
 
-export type ApiFulfillmentStatus = 'Registered' | 'Shipped' | 'AtDepot' | 'Delivered' | 'Canceled' | 'Failed';
+export type ApiFulfillmentStatus = 'Registered' | 'Shipped' | 'AtDepot' | 'Delivered' | 'Canceled' | 'Failed' | 'OutForDelivery';
 
 interface IMonetaryValue {
     value: number;
