@@ -59,7 +59,7 @@ export interface OrderItem {
     shippingTax: number;
     deliveryItemIds?: string[];
 
-    lineItemPrice?: IPrice;
+    lineItemPrice: IPrice;
     lineItemDiscount?: IPrice;
     deliveryPrice?: IPrice;
     deliveryDiscount?: IPrice;
@@ -131,7 +131,7 @@ export interface ApiOrder {
         delivery?: IPrice;
         payment?: IPrice;
         totalDiscount?: IPrice;
-        total?: IPrice;
+        total: IPrice;
     };
 
     // alza specific fields
