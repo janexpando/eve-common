@@ -11,7 +11,7 @@ export interface ApiMallFulfillment {
     marketplace: MallType;
     trackingNumber: string;
     trackingUrl: string;
-    status?: ApiFulfillmentStatus; // make required
+    status: ApiFulfillmentStatus;
 }
 
 export interface ApiMallFulfillmentResponse {
