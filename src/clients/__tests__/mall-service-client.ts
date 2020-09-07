@@ -17,6 +17,7 @@ test.serial('fulfill mall order', async t => {
         marketplace: 'mall_cz',
         trackingNumber: 'trackingNumber',
         trackingUrl: 'trackingUrl',
+        status: 'Shipped'
     };
     nock(env.MALL_SERVICE_URL, { encodedQueryParams: true })
         .post('/company/5e1dcb382efb3a6fa7ea48ca/fulfillment', {
@@ -26,6 +27,7 @@ test.serial('fulfill mall order', async t => {
                 marketplace: 'mall_cz',
                 trackingNumber: 'trackingNumber',
                 trackingUrl: 'trackingUrl',
+                status: 'Shipped'
             },
         })
         .reply(200, { fulfilled: true }, ['Date', 'Tue, 14 Jan 2020 14:07:52 GMT', 'Connection', 'close']);
