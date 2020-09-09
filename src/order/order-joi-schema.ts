@@ -96,6 +96,7 @@ export const ORDER_JOI_SCHEMA = object({
     marketplaceOrderId: string().required(),
     status: string().allow(ORDER_STATUSES),
     marketplace: string().allow(MARKETPLACES),
+    fulfillmentId: string(),
     fulfillmentChannel: string(),
     totalPrice: number(),
     totalItemTax: number(),
