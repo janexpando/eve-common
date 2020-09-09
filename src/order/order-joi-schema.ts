@@ -52,6 +52,7 @@ export const ADDRESS_JOI_SCHEMA = object({
         .allow('')
         .optional(),
 });
+
 export const DELIVERY_JOI_SCHEMA = object({
     shippingCarrier: string().optional(),
     shippingCarrierService: string().optional(),
