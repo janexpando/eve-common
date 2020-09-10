@@ -180,5 +180,5 @@ export const ORDER_JOI_SCHEMA = object({
         payment: PRICE_JOI_SCHEMA,
         totalDiscount: PRICE_JOI_SCHEMA,
         total: PRICE_JOI_SCHEMA,
-    }),
+    }).required(),
 }).options({ stripUnknown: true });

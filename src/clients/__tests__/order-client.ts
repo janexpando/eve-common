@@ -58,6 +58,11 @@ test.serial('store orders', async t => {
                 latestDeliveryDate: '2019-01-01T12:00:00.000Z',
                 totalDiscount: 0,
                 isRefunded: false,
+                price: {
+                    total: {
+                        withTax: 5000
+                    }
+                }
             },
             {
                 companyId: '5c52d0bfbf23ae00046927a8',
@@ -101,6 +106,11 @@ test.serial('store orders', async t => {
                 latestDeliveryDate: '2019-01-01T12:00:00.000Z',
                 totalDiscount: 0,
                 isRefunded: false,
+                price: {
+                    total: {
+                        withTax: 5000
+                    }
+                }
             },
         ] as any)
         .reply(200, { message: 'received' }, [
@@ -169,6 +179,11 @@ test.serial('store orders', async t => {
             latestDeliveryDate: new Date('2019-01-01T12:00:00Z'),
             totalDiscount: 0,
             isRefunded: false,
+            price: {
+                total: {
+                    withTax: 5000
+                }
+            }
         },
         {
             companyId,
@@ -212,6 +227,11 @@ test.serial('store orders', async t => {
             latestDeliveryDate: new Date('2019-01-01T12:00:00Z'),
             totalDiscount: 0,
             isRefunded: false,
+            price: {
+                total: {
+                    withTax: 5000
+                }
+            }
         },
     ];
 

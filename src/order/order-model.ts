@@ -127,7 +127,7 @@ export interface ApiOrder {
     autopricingStatus?: 'None' | 'Pending' | 'Done';
 
     mallDeliveryMethod?: string;
-    price?: {
+    price: {
         items?: IPrice;
         delivery?: IPrice;
         payment?: IPrice;
