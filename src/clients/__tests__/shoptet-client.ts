@@ -54,6 +54,11 @@ test.serial('send orders', async t => {
         latestDeliveryDate: new Date('2019-01-01T12:00:00Z'),
         totalDiscount: 0,
         isRefunded: false,
+        price: {
+            total: {
+                withTax: 5000
+            }
+        }
     };
     let settings: ApiImportSettings = {
         companyId,
@@ -124,6 +129,11 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
                     latestDeliveryDate: '2019-01-01T12:00:00.000Z',
                     totalDiscount: 0,
                     isRefunded: false,
+                    price: {
+                        total: {
+                            withTax: 5000
+                        }
+                    }
                 },
             ],
             settings: {

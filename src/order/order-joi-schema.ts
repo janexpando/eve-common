@@ -36,7 +36,7 @@ export const ORDER_ITEM_JOI_SCHEMA = object({
         .items(string())
         .allow(null)
         .optional(),
-    lineItemPrice: PRICE_JOI_SCHEMA,
+    lineItemPrice: PRICE_JOI_SCHEMA.required(),
     lineItemDiscount: PRICE_JOI_SCHEMA,
     deliveryPrice: PRICE_JOI_SCHEMA,
     deliveryDiscount: PRICE_JOI_SCHEMA,
@@ -179,6 +179,6 @@ export const ORDER_JOI_SCHEMA = object({
         delivery: PRICE_JOI_SCHEMA,
         payment: PRICE_JOI_SCHEMA,
         totalDiscount: PRICE_JOI_SCHEMA,
-        total: PRICE_JOI_SCHEMA,
-    }),
+        total: PRICE_JOI_SCHEMA.required(),
+    }).required(),
 }).options({ stripUnknown: true });
