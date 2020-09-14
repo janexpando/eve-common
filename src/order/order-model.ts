@@ -90,7 +90,7 @@ export interface ApiOrder {
     marketplaceOrderId: string;
     status: ApiOrderStatus;
     marketplace: MarketplaceName;
-    fulfillmentId?: string;
+    fulfillmentId?: ObjectId;
     fulfillmentChannel: OrderFulfillmentChannel;
     totalPrice: number;
     totalItemTax: number;
