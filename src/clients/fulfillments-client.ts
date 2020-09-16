@@ -19,6 +19,7 @@ interface IParcelShop {
 
 interface IPackageItem {
     marketplaceItemId: string;
+    marketplaceOrderId: string;
     quantity: number;
 }
 
@@ -31,7 +32,7 @@ export interface IPackage {
 
 export interface ApiFulfillment {
     companyId: ObjectId;
-    marketplaceOrderId: string;
+    marketplaceOrderIds: string[];
     fulfillmentId?: string;
     marketplace: MarketplaceName;
     status: ApiFulfillmentStatus;
