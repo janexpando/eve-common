@@ -31,6 +31,7 @@ export interface IPackage {
 }
 
 export interface ApiFulfillment {
+    _id?: string;
     companyId: ObjectId;
     marketplaceOrderIds: string[];
     fulfillmentId?: string;
@@ -64,6 +65,16 @@ export class FulfillmentsClient extends EveClient {
         await this.got.post(`/company/${companyId}/fulfillments`, {
             body,
         });
+    }
+
+    async updateFulfillmentById(fulfillment: ApiFulfillment) {
+        return await this.got.patch(`/fulfillment/${fulfillment._id}`, {
+            body: fulfillment
+        })
+    }
+
+    async getFulfillmentById(fulfillmentId: string) {
+        return await this.got.get(`/fulfillment/${fulfillmentId}`)
     }
 
     async getFulfillment(
