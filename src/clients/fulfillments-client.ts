@@ -82,7 +82,7 @@ export class FulfillmentsClient extends EveClient {
     }
 
     async getFulfillmentById(fulfillmentId: string) {
-        return await this.got.get(`/fulfillment/${fulfillmentId}`);
+        return await this.got.get(`/fulfillments/${fulfillmentId}`);
     }
 
     async getFulfillment(
