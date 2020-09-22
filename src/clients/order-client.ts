@@ -62,8 +62,9 @@ export class OrderClient extends EveClient {
         });
     }
 
-    async getOrdersByFulfillmentId(fulfillmentId: string) {
-        return await this.got.get(`${this.env.GATEWAY_URL}/orders?fulfillmentId=${fulfillmentId}`)
+    async getOrdersByFulfillmentId(fulfillmentId: string): Promise<ApiOrder[]> {
+        const response = await this.got.get(`${this.env.GATEWAY_URL}/orders?fulfillmentId=${fulfillmentId}`);
+        return response.body;
     }
 
     async getOrder(companyId: ObjectId, marketplace: MarketplaceName, marketplaceOrderId: string): Promise<ApiOrder> {

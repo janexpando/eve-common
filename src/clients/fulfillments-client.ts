@@ -74,15 +74,18 @@ export class FulfillmentsClient extends EveClient {
         });
     }
 
-    async updateFulfillmentById(fulfillment: ApiFulfillment) {
+    async updateFulfillmentById(fulfillment: ApiFulfillment): Promise<ApiFulfillment> {
         if (!fulfillment._id) throw new Error('fulfillment._id is required');
-        return await this.got.patch(`/fulfillments/${fulfillment._id}`, {
+        const response = await this.got.patch(`/fulfillments/${fulfillment._id}`, {
             body: fulfillment,
         });
+
+        return response.body;
     }
 
-    async getFulfillmentById(fulfillmentId: string) {
-        return await this.got.get(`/fulfillments/${fulfillmentId}`);
+    async getFulfillmentById(fulfillmentId: string): Promise<ApiFulfillment> {
+        const response = await this.got.get(`/fulfillments/${fulfillmentId}`);
+        return response.body;
     }
 
     async getFulfillment(
