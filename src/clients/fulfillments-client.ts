@@ -5,7 +5,14 @@ import { Environment } from '../bootstrapping/environment';
 import { EveClient } from './eve-client';
 import { ApiCarrierName } from './settings-client';
 
-export type ApiFulfillmentStatus = 'Registered' | 'Shipped' | 'AtDepot' | 'Delivered' | 'Canceled' | 'Failed' | 'OutForDelivery';
+export type ApiFulfillmentStatus =
+    | 'Registered'
+    | 'Shipped'
+    | 'AtDepot'
+    | 'Delivered'
+    | 'Canceled'
+    | 'Failed'
+    | 'OutForDelivery';
 
 interface IMonetaryValue {
     value: number;
@@ -68,13 +75,14 @@ export class FulfillmentsClient extends EveClient {
     }
 
     async updateFulfillmentById(fulfillment: ApiFulfillment) {
+        if (!fulfillment._id) throw new Error('fulfillment._id is required');
         return await this.got.patch(`/fulfillment/${fulfillment._id}`, {
-            body: fulfillment
-        })
+            body: fulfillment,
+        });
     }
 
     async getFulfillmentById(fulfillmentId: string) {
-        return await this.got.get(`/fulfillment/${fulfillmentId}`)
+        return await this.got.get(`/fulfillment/${fulfillmentId}`);
     }
 
     async getFulfillment(
