@@ -76,7 +76,7 @@ export class FulfillmentsClient extends EveClient {
 
     async updateFulfillmentById(fulfillment: ApiFulfillment) {
         if (!fulfillment._id) throw new Error('fulfillment._id is required');
-        return await this.got.patch(`/fulfillment/${fulfillment._id}`, {
+        return await this.got.patch(`/fulfillments/${fulfillment._id}`, {
             body: fulfillment,
         });
     }
