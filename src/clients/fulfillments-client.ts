@@ -57,6 +57,8 @@ export interface ApiFulfillment {
     syncError?: string;
 }
 
+export type ApiInputFulfillment = Omit<ApiFulfillment, '_id'>;
+
 @Injectable()
 export class FulfillmentsClient extends EveClient {
     constructor(protected env: Environment) {
@@ -74,9 +76,11 @@ export class FulfillmentsClient extends EveClient {
         });
     }
 
-    async updateFulfillmentById(fulfillment: ApiFulfillment): Promise<ApiFulfillment> {
-        if (!fulfillment._id) throw new Error('fulfillment._id is required');
-        const response = await this.got.patch(`/fulfillments/${fulfillment._id}`, {
+    async updateFulfillmentById(
+        fulfillmentId: string | ObjectId,
+        fulfillment: ApiInputFulfillment,
+    ): Promise<ApiFulfillment> {
+        const response = await this.got.patch(`/fulfillments/${fulfillmentId}`, {
             body: fulfillment,
         });
 
