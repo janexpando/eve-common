@@ -5,7 +5,14 @@ import { Environment } from '../bootstrapping/environment';
 import { EveClient } from './eve-client';
 import { ApiCarrierName } from './settings-client';
 
-export type ApiFulfillmentStatus = 'Registered' | 'Shipped' | 'AtDepot' | 'Delivered' | 'Canceled' | 'Failed' | 'OutForDelivery';
+export type ApiFulfillmentStatus =
+    | 'Registered'
+    | 'Shipped'
+    | 'AtDepot'
+    | 'Delivered'
+    | 'Canceled'
+    | 'Failed'
+    | 'OutForDelivery';
 
 interface IMonetaryValue {
     value: number;
@@ -31,6 +38,7 @@ export interface IPackage {
 }
 
 export interface ApiFulfillment {
+    _id?: string;
     companyId: ObjectId;
     marketplaceOrderIds: string[];
     fulfillmentId?: string;
@@ -64,6 +72,20 @@ export class FulfillmentsClient extends EveClient {
         await this.got.post(`/company/${companyId}/fulfillments`, {
             body,
         });
+    }
+
+    async updateFulfillmentById(fulfillment: ApiFulfillment): Promise<ApiFulfillment> {
+        if (!fulfillment._id) throw new Error('fulfillment._id is required');
+        const response = await this.got.patch(`/fulfillments/${fulfillment._id}`, {
+            body: fulfillment,
+        });
+
+        return response.body;
+    }
+
+    async getFulfillmentById(fulfillmentId: string): Promise<ApiFulfillment> {
+        const response = await this.got.get(`/fulfillments/${fulfillmentId}`);
+        return response.body;
     }
 
     async getFulfillment(
