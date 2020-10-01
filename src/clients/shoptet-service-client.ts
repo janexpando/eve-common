@@ -118,7 +118,7 @@ export enum SHOPTET_SHIPPING_COMPANY_CODES {
 
 export interface ApiShoptetShipmentMethodInput {
     name: string;
-    shippingCompanyCode?: SHOPTET_SHIPPING_COMPANY_CODES; // Required at shoptet
+    shippingCompanyCode: SHOPTET_SHIPPING_COMPANY_CODES;
     description?: string;
     visibility?: boolean;
     wholesale?: boolean;
