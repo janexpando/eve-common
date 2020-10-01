@@ -25,6 +25,14 @@ export class ShoptetServiceClient extends EveClient {
         return response.body;
     }
 
+    async createShoptetShipmentMethods(
+        companyId: ObjectId,
+        shipmentMethods: ApiShoptetShipmentMethodInput[],
+    ): Promise<IShoptetShipmentMethod[]> {
+        let response = await this.got.post(`/company/${companyId}/shoptet-shipment-methods`, { body: shipmentMethods });
+        return response.body;
+    }
+
     async getShoptetOrderStatuses(companyId: ObjectId): Promise<IShoptetOrderStatus[]> {
         let response = await this.got.get(`/company/${companyId}/shoptet-order-statuses`);
         return response.body;
@@ -97,6 +105,23 @@ export interface ApiShoptetAccessToken {
     expiresAt: Date;
     lastUsedAt: Date;
     addon: string;
+}
+
+export enum SHOPTET_SHIPPING_COMPANY_CODES {
+    INTIME = 'intime',
+    OWN = 'own-transport',
+    CZECH_POST = 'ceska-posta',
+    PERSONAL_COLLECTION = 'personal-collection',
+    PPL_CZ = 'ppl-cz'
+    // There are more supported values
+}
+
+export interface ApiShoptetShipmentMethodInput {
+    name: string;
+    shippingCompanyCode: SHOPTET_SHIPPING_COMPANY_CODES;
+    description?: string;
+    visibility?: boolean;
+    wholesale?: boolean;
 }
 
 export interface ApiShoptetPaymentMethod {
