@@ -25,11 +25,11 @@ export class ShoptetServiceClient extends EveClient {
         return response.body;
     }
 
-    async createShoptetShipmentMethods(
+    async createShoptetShipmentMethod(
         companyId: ObjectId,
-        shipmentMethods: ApiShoptetShipmentMethodInput[],
+        shipmentMethod: ApiShoptetShipmentMethodInput,
     ): Promise<IShoptetShipmentMethod[]> {
-        let response = await this.got.post(`/company/${companyId}/shoptet-shipment-methods`, { body: shipmentMethods });
+        const response = await this.got.post(`/company/${companyId}/shoptet-shipment-methods`, { body: shipmentMethod });
         return response.body;
     }
 
