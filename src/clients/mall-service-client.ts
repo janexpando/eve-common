@@ -71,4 +71,5 @@ export interface ApiMallDeliveryMethod {
     code: string;
     title: string;
     marketplace: MallType;
+    isPickupPoint: boolean;
 }
