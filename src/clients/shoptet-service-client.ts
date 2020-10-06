@@ -112,7 +112,9 @@ export enum SHOPTET_SHIPPING_COMPANY_CODES {
     OWN = 'own-transport',
     CZECH_POST = 'ceska-posta',
     PERSONAL_COLLECTION = 'personal-collection',
-    PPL_CZ = 'ppl-cz'
+    PPL_CZ = 'ppl-cz',
+    ULOZENKA = 'ulozenka',
+    ULOZENKA_HOME = 'ulozenka-home'
     // There are more supported values
 }
 
