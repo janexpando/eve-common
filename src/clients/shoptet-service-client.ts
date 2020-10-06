@@ -28,7 +28,7 @@ export class ShoptetServiceClient extends EveClient {
     async createShoptetShipmentMethod(
         companyId: ObjectId,
         shipmentMethod: ApiShoptetShipmentMethodInput,
-    ): Promise<IShoptetShipmentMethod[]> {
+    ): Promise<IShoptetShipmentMethod> {
         const response = await this.got.post(`/company/${companyId}/shoptet-shipment-methods`, { body: shipmentMethod });
         return response.body;
     }
