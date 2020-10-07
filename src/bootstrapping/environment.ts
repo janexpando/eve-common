@@ -16,7 +16,7 @@ export class Environment {
     PORT: number;
     SENTRY_DSN: string;
     NODE_ENV: string;
-    MONGODB_URI: string;
+    DB_URI: string;
     EVE_AUTH_BEARER: string;
     SERVICE_URL: string;
     GATEWAY_URL: string;
@@ -34,7 +34,7 @@ export class Environment {
         PORT: number().default(3333),
         SENTRY_DSN: string(),
         NODE_ENV: string().required(),
-        MONGODB_URI: string().default('mongodb://127.0.0.1:27017/app'),
+        DB_URI: string().default('mongodb://127.0.0.1:27017/app'),
         EVE_AUTH_BEARER: string().required(),
         SERVICE_URL: string().default('http://127.0.0.1:3333'),
         GATEWAY_URL: string().required(),

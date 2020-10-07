@@ -24,7 +24,7 @@ export class DbDriver {
     }
 
     connect() {
-        return mongoose.connect(this.env.MONGODB_URI, {
+        return mongoose.connect(this.env.DB_URI, {
             // autoReconnect: true, // (node:22153) DeprecationWarning: The option `autoReconnect` is incompatible with the unified topology, please read more by visiting http://bit.ly/2D8WfT6
             // reconnectTries: Number.MAX_VALUE, // (node:22153) DeprecationWarning: The option `reconnectTries` is incompatible with the unified topology, please read more by visiting http://bit.ly/2D8WfT6
             autoIndex: false,
