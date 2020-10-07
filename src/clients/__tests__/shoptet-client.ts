@@ -13,6 +13,7 @@ test.serial('send orders', async t => {
     let client = t.context.injector.get(ShoptetServiceClient);
     let companyId = new ObjectId();
     let order: ApiOrder = {
+        _id: new ObjectId(),
         companyId,
         marketplace: 'amazon_uk',
         marketplaceOrderId: '000000',
@@ -56,9 +57,9 @@ test.serial('send orders', async t => {
         isRefunded: false,
         price: {
             total: {
-                withTax: 5000
-            }
-        }
+                withTax: 5000,
+            },
+        },
     };
     let settings: ApiImportSettings = {
         companyId,
@@ -89,6 +90,7 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
         .post(`/company/${companyId.toHexString()}/orders`, {
             orders: [
                 {
+                    _id: order._id.toHexString(),
                     companyId: order.companyId.toHexString(),
                     marketplace: 'amazon_uk',
                     marketplaceOrderId: '000000',
@@ -131,9 +133,9 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
                     isRefunded: false,
                     price: {
                         total: {
-                            withTax: 5000
-                        }
-                    }
+                            withTax: 5000,
+                        },
+                    },
                 },
             ],
             settings: {
