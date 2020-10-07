@@ -12,11 +12,14 @@ test.serial('store orders', async t => {
 
     const cid = '5c52d0bfbf23ae00046927a8';
     let companyId = new ObjectId(cid);
+    const orderId1 = new ObjectId();
+    const orderId2 = new ObjectId();
     const environment = t.context.injector.get(Environment);
 
     nock(environment.GATEWAY_URL, { encodedQueryParams: true })
         .post('/company/5c52d0bfbf23ae00046927a8/orders', [
             {
+                _id: orderId1.toHexString(),
                 companyId: '5c52d0bfbf23ae00046927a8',
                 marketplace: 'amazon_uk',
                 marketplaceOrderId: '000000',
@@ -42,7 +45,7 @@ test.serial('store orders', async t => {
                 totalPrice: 500,
                 totalItemTax: 0,
                 payment: {
-                    paymentMethod: 'CreditCard'
+                    paymentMethod: 'CreditCard',
                 },
                 paymentMethod: 'Other',
                 purchaseDate: '2019-01-01T11:00:00.000Z',
@@ -60,11 +63,12 @@ test.serial('store orders', async t => {
                 isRefunded: false,
                 price: {
                     total: {
-                        withTax: 5000
-                    }
-                }
+                        withTax: 5000,
+                    },
+                },
             },
             {
+                _id: orderId2.toHexString(),
                 companyId: '5c52d0bfbf23ae00046927a8',
                 marketplace: 'amazon_de',
                 marketplaceOrderId: '000001',
@@ -90,7 +94,7 @@ test.serial('store orders', async t => {
                 totalPrice: 500,
                 totalItemTax: 0,
                 payment: {
-                    paymentMethod: 'CreditCard'
+                    paymentMethod: 'CreditCard',
                 },
                 paymentMethod: 'Other',
                 purchaseDate: '2019-01-01T11:00:00.000Z',
@@ -108,9 +112,9 @@ test.serial('store orders', async t => {
                 isRefunded: false,
                 price: {
                     total: {
-                        withTax: 5000
-                    }
-                }
+                        withTax: 5000,
+                    },
+                },
             },
         ] as any)
         .reply(200, { message: 'received' }, [
@@ -138,6 +142,7 @@ test.serial('store orders', async t => {
 
     const ordersToStore: ApiOrder[] = [
         {
+            _id: orderId1,
             companyId,
             marketplace: 'amazon_uk',
             marketplaceOrderId: '000000',
@@ -181,11 +186,12 @@ test.serial('store orders', async t => {
             isRefunded: false,
             price: {
                 total: {
-                    withTax: 5000
-                }
-            }
+                    withTax: 5000,
+                },
+            },
         },
         {
+            _id: orderId2,
             companyId,
             marketplace: 'amazon_de',
             marketplaceOrderId: '000001',
@@ -229,9 +235,9 @@ test.serial('store orders', async t => {
             isRefunded: false,
             price: {
                 total: {
-                    withTax: 5000
-                }
-            }
+                    withTax: 5000,
+                },
+            },
         },
     ];
 
@@ -263,7 +269,7 @@ test.serial('Get order', async t => {
                 totalPrice: 22.3,
                 currencyCode: 'EUR',
                 payment: {
-                    paymentMethod: 'CreditCard'
+                    paymentMethod: 'CreditCard',
                 },
                 paymentMethod: 'Other',
                 buyer: {
