@@ -86,7 +86,7 @@ export declare type OrderPaymentMethod = 'CreditCard' | 'CashOnDelivery';
 export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier';
 
 export interface ApiOrder {
-    _id: ObjectId;
+    _id?: ObjectId;
     companyId: ObjectId;
     marketplaceOrderId: string;
     status: ApiOrderStatus;
