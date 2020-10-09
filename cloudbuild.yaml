@@ -35,7 +35,7 @@ steps:
           - SENDINBLUE_TOKEN=xy
           - GCLOUD_PROJECT=expando-eve
           - GCLOUD_BUCKET_NAME=expando-eve-test
-          - MONGODB_URI=mongodb://test-db:27017/eve
+          - DB_URI=mongodb://test-db:27017/eve
           - NODE_ENV=test
           - PORT=8083
           - SLACK_ORDERS_WEBHOOK_URL=http://abc.com
