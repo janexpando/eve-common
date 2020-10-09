@@ -29,7 +29,9 @@ export class ShoptetServiceClient extends EveClient {
         companyId: ObjectId,
         shipmentMethod: ApiShoptetShipmentMethodInput,
     ): Promise<IShoptetShipmentMethod> {
-        const response = await this.got.post(`/company/${companyId}/shoptet-shipment-methods`, { body: shipmentMethod });
+        const response = await this.got.post(`/company/${companyId}/shoptet-shipment-methods`, {
+            body: shipmentMethod,
+        });
         return response.body;
     }
 
@@ -75,6 +77,16 @@ export class ShoptetServiceClient extends EveClient {
         let response = await this.got.get(`/company/${companyId}/shoptet-payment-methods`);
         return response.body;
     }
+
+    async getShoptetServiceEndpoints(
+        companyId: ObjectId,
+        status?: ApiShoptetSystemEndpointStatus,
+    ): Promise<ApiShoptetSystemEndpoint[]> {
+        const response = await this.got.get(`/company/${companyId}/system-endpoints`, {
+            ...(status ? { query: status } : {}),
+        });
+        return response.body;
+    }
 }
 
 export enum Addon {
@@ -114,7 +126,7 @@ export enum SHOPTET_SHIPPING_COMPANY_CODES {
     PERSONAL_COLLECTION = 'personal-collection',
     PPL_CZ = 'ppl-cz',
     ULOZENKA = 'ulozenka',
-    ULOZENKA_HOME = 'ulozenka-home'
+    ULOZENKA_HOME = 'ulozenka-home',
     // There are more supported values
 }
 
@@ -154,4 +166,20 @@ export interface IShoptetShipmentMethod {
     order: number;
     name: string;
     visible: boolean;
+}
+
+export enum ApiShoptetSystemEndpointStatus {
+    APPROVED = 'approved',
+    PENDING = 'pending',
+}
+
+export interface ApiShoptetSystemEndpoint {
+    endpoint: string;
+    description: string;
+    group: {
+        id: number;
+        description: string;
+    };
+    access: 'read' | 'write' | 'both';
+    action: string;
 }
