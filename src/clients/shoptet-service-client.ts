@@ -181,5 +181,5 @@ export interface ApiShoptetSystemEndpoint {
         description: string;
     };
     access: 'read' | 'write' | 'both';
-    action: string;
+    action: string | null;
 }
