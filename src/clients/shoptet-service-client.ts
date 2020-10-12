@@ -77,16 +77,6 @@ export class ShoptetServiceClient extends EveClient {
         let response = await this.got.get(`/company/${companyId}/shoptet-payment-methods`);
         return response.body;
     }
-
-    async getShoptetServiceEndpoints(
-        companyId: ObjectId,
-        status?: ApiShoptetSystemEndpointStatus,
-    ): Promise<ApiShoptetSystemEndpoint[]> {
-        const response = await this.got.get(`/company/${companyId}/system-endpoints`, {
-            ...(status ? { query: status } : {}),
-        });
-        return response.body;
-    }
 }
 
 export enum Addon {
@@ -109,6 +99,7 @@ export interface ApiShop {
     hostname: string;
     urls: Record<string, string>;
     currencies: CurrencyCode[];
+    endpoints: ApiShoptetSystemEndpoint[]
 }
 
 export interface ApiShoptetAccessToken {
