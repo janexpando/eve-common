@@ -155,6 +155,11 @@ export interface IShoptetOrderStatus {
 export interface IShoptetShipmentMethod {
     guid: string;
     order: number;
+    shippingCompany: {
+        id: number;
+        code: SHOPTET_SHIPPING_COMPANY_CODES;
+        name: string;
+    };
     name: string;
     visible: boolean;
 }
