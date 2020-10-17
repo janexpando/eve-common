@@ -55,7 +55,7 @@
     "request-promise-native": "^1.0.8",
     "rxjs": "^6.5.3",
     "timekeeper": "^2.2.0",
-    "ts-essentials": "^2.0.12",
+    "ts-essentials": "^7.0.1",
     "ts-node": "^8.5.4",
     "winston": "^3.2.1"
   },
