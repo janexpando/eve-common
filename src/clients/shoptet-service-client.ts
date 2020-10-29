@@ -99,7 +99,11 @@ export interface ApiShop {
     hostname: string;
     urls: Record<string, string>;
     currencies: CurrencyCode[];
-    endpoints: ApiShoptetSystemEndpoint[];
+    endpoints: ApiShopEndpoints;
+}
+
+export type ApiShopEndpoints = {
+    [key in Addon]: ApiShoptetSystemEndpoint[];
 }
 
 export interface ApiShoptetAccessToken {
