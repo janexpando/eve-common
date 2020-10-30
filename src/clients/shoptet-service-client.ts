@@ -20,8 +20,11 @@ export class ShoptetServiceClient extends EveClient {
         });
     }
 
-    async getShoptetShipmentMethods(companyId: ObjectId, addon: Addon): Promise<IShoptetShipmentMethod[]> {
-        let response = await this.got.get(`/company/${companyId}/shoptet-shipment-methods`, { query: { addon } });
+    async getShoptetShipmentMethods(companyId: ObjectId, addon?: Addon): Promise<IShoptetShipmentMethod[]> {
+        let response = await this.got.get(
+            `/company/${companyId}/shoptet-shipment-methods`,
+            addon && { query: { addon } },
+        );
         return response.body;
     }
 
@@ -104,7 +107,7 @@ export interface ApiShop {
 
 export type ApiShopEndpoints = {
     [key in Addon]: ApiShoptetSystemEndpoint[];
-}
+};
 
 export interface ApiShoptetAccessToken {
     companyId: ObjectId;
