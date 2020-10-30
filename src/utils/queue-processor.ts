@@ -1,64 +1,99 @@
 export class QueueProcessor<T> {
-    queue: T[] = [];
-    running: { done: boolean; promise: Promise<any> }[] = [];
-    concurrency: number = 1; // TODO execute processes when increasing concurrency during execution
-    process: Promise<void> = null;
-
-    private handleResult: (r: any) => void = null;
-    private handleError: (e: any) => void = () => {};
+    private queue: T[] = [];
+    private runningJobs: { done: boolean; promise: Promise<any> }[] = [];
+    private concurrency: number = 1;
+    private waiting: number = 0;
+    private handleResult: (r: any, i: T) => void = () => {};
+    private handleError: (e: any, i: T) => void = () => {};
 
     constructor(
         private processFn: (queueItem: T) => any,
-        options?: { handleResult?: (a: any) => void; handleError?: (e: any) => void; concurrency?: number },
+        options?: {
+            handleResult?: (r: any, i: T) => void;
+            handleError?: (e: any, i: T) => void;
+            concurrency?: number;
+        },
     ) {
         if (options.handleResult) this.handleResult = options.handleResult;
         if (options.handleError) this.handleError = options.handleError;
         if (options.concurrency) this.concurrency = options.concurrency;
     }
 
-    finish(): Promise<void> {
-        return this.process;
-    }
-
+    /**
+     * Add item to a FIFO queue to be processed when available
+     */
     addToQueue(item: T) {
         if (this.canRunProcess) this.runProcess(item);
         else this.queue.push(item);
     }
 
+    /**
+     * Add item to be processed as soon as possible skipping ahead of queue.
+     * This action will not exceed the concurrency limit.
+     */
     async addRunning(item: T) {
+        this.waiting++;
         while (!this.canRunProcess) await Promise.race(this.currentPromises);
+        this.waiting--;
         this.runProcess(item);
     }
 
+    /**
+     * Set the amount of concurrent jobs.
+     * This action will automatically run new jobs if possible.
+     */
+    setConcurrency(concurrency: number) {
+        this.concurrency = concurrency;
+        this.runAvailable();
+    }
+
+    /**
+     * Awaitable call to make sure queue has been depleted and all running jobs have finished
+     */
+    async finish(): Promise<void> {
+        while (this.running) await Promise.race(this.currentPromises);
+    }
+
+    /**
+     * Number of currently running jobs
+     */
+    get running(): number {
+        return this.runningJobs.length;
+    }
+
+    /**
+     * Number of item in the queue
+     */
+    get enqueued(): number {
+        return this.queue.length;
+    }
+
     private get currentPromises() {
-        return this.running.map(x => x.promise);
+        return this.runningJobs.map(x => x.promise);
     }
 
-    private get canRunProcess() {
-        return this.running.length < this.concurrency;
-    }
-
-    private async run() {
-        while (this.queue.length || this.running.length) {
-            if (this.queue.length) await this.addRunning(this.queue.shift());
-            if (this.queue.length === 0) await Promise.race(this.currentPromises);
-        }
-        this.process = null;
+    private get canRunProcess(): boolean {
+        return this.running < this.concurrency;
     }
 
     private runProcess(item: T) {
-        let runningItem = {
+        let runningJob = {
             done: false,
             promise: null,
         };
-        runningItem.promise = this.processFn(item)
-            .then(this.handleResult)
-            .catch(this.handleError)
+        this.runningJobs.push(runningJob);
+        runningJob.promise = this.processFn(item)
+            .then(r => this.handleResult(r, item))
+            .catch(e => this.handleError(e, item))
             .finally(() => {
-                runningItem.done = true;
-                this.running = this.running.filter(x => !x.done);
+                runningJob.done = true;
+                this.runningJobs = this.runningJobs.filter(x => !x.done);
+                this.runAvailable();
             });
-        this.running.push(runningItem);
-        if (!this.process) this.process = this.run();
+    }
+
+    private runAvailable() {
+        if (this.enqueued && this.waiting === 0)
+            while (this.concurrency - this.running > 0) this.runProcess(this.queue.shift());
     }
 }
