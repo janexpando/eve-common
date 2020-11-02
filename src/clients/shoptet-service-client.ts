@@ -128,6 +128,12 @@ export enum SHOPTET_SHIPPING_COMPANY_CODES {
     // There are more supported values
 }
 
+export enum ENDPOINTS {
+    SHIPPING_METHODS = '/shipping-methods',
+    PAYMENT_METHODS = '/payment-methods'
+    // There are more supported values
+}
+
 export interface ApiShoptetShipmentMethodInput {
     name: string;
     shippingCompanyCode: SHOPTET_SHIPPING_COMPANY_CODES;
