@@ -1,7 +1,7 @@
 const util = require('util');
 import * as stream from 'stream';
 
-export function sleep(ms) {
+export function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
