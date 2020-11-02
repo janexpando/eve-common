@@ -1,7 +1,7 @@
 export class QueueProcessor<T> {
     private queue: T[] = [];
     private runningJobs: { done: boolean; promise: Promise<any> }[] = [];
-    private concurrency: number = 1;
+    private concurrent: number = 1;
     private waiting: number = 0;
     private handleResult: (r: any, i: T) => void = () => {};
     private handleError: (e: any, i: T) => void = () => {};
@@ -14,13 +14,15 @@ export class QueueProcessor<T> {
             concurrency?: number;
         },
     ) {
-        if (options.handleResult) this.handleResult = options.handleResult;
-        if (options.handleError) this.handleError = options.handleError;
-        if (options.concurrency) this.concurrency = options.concurrency;
+        if (options) {
+            if (options.handleResult) this.handleResult = options.handleResult;
+            if (options.handleError) this.handleError = options.handleError;
+            if (options.concurrency) this.concurrent = options.concurrency;
+        }
     }
 
     /**
-     * Add item to a FIFO queue to be processed when available
+     * Add item to a FIFO queue - will be processed when available
      */
     addToQueue(item: T) {
         if (this.canRunProcess) this.runProcess(item);
@@ -42,9 +44,16 @@ export class QueueProcessor<T> {
      * Set the amount of concurrent jobs.
      * This action will automatically run new jobs if possible.
      */
-    setConcurrency(concurrency: number) {
-        this.concurrency = concurrency;
+    set concurrency(concurrency: number) {
+        this.concurrent = concurrency;
         this.runAvailable();
+    }
+
+    /**
+     * Get the amount of concurrent jobs.
+     */
+    get concurrency(): number {
+        return this.concurrent;
     }
 
     /**
@@ -73,7 +82,7 @@ export class QueueProcessor<T> {
     }
 
     private get canRunProcess(): boolean {
-        return this.running < this.concurrency;
+        return this.running < this.concurrent;
     }
 
     private runProcess(item: T) {
@@ -94,6 +103,6 @@ export class QueueProcessor<T> {
 
     private runAvailable() {
         if (this.enqueued && this.waiting === 0)
-            while (this.concurrency - this.running > 0) this.runProcess(this.queue.shift());
+            while (this.concurrent - this.running > 0) this.runProcess(this.queue.shift());
     }
 }

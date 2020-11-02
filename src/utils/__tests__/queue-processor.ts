@@ -120,3 +120,10 @@ test('priority', async t => {
 
     t.deepEqual(output, ['1', 'high priority', '2', '3', '0']);
 });
+
+test('concurrency change', async t => {
+    const processor: QueueProcessor<ITest> = new QueueProcessor<ITest>(async item => await sleep(item.processDuration));
+    t.is(processor.concurrency, 1);
+    processor.concurrency = 3;
+    t.is(processor.concurrency, 3);
+});
