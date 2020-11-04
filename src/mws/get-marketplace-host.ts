@@ -1,17 +1,19 @@
 import { AmazonType } from '..';
 
-export function isEuropeanMarketplace(marketplace) {
+export function isEuropeanMarketplace(marketplace: AmazonType): Boolean {
     return (
         marketplace === 'amazon_es' ||
         marketplace === 'amazon_uk' ||
         marketplace === 'amazon_fr' ||
         marketplace === 'amazon_de' ||
         marketplace === 'amazon_it' ||
-        marketplace === 'amazon_nl'
+        marketplace === 'amazon_nl' ||
+        marketplace === 'amazon_se' ||
+        marketplace === 'amazon_tr'
     );
 }
 
-export function isNorthAmericanMarketplace(marketplace) {
+export function isNorthAmericanMarketplace(marketplace: AmazonType): Boolean {
     return marketplace === 'amazon_us' || marketplace === 'amazon_ca' || marketplace === 'amazon_mx';
 }
 

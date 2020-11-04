@@ -102,7 +102,7 @@ test('handles', async t => {
     t.is(fail, 1);
 });
 
-test('priority', async t => {
+test.serial('priority', async t => {
     let output = [];
 
     const processor: QueueProcessor<ITest> = new QueueProcessor<ITest>(
