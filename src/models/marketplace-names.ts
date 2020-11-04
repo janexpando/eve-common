@@ -8,6 +8,8 @@ export const AMAZON_EUROPE: AmazonEuropeType[] = [
     'amazon_fr',
     'amazon_es',
     'amazon_nl',
+    'amazon_se',
+    'amazon_tr'
 ];
 
 export type AmazonAmericaType = 'amazon_mx' | 'amazon_us' | 'amazon_ca' | 'amazon_br';
