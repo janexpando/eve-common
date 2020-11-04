@@ -29,13 +29,17 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'JPY';
         case 'amazon_au':
             return 'AUD';
+        case 'amazon_sg':
+            return 'SGD';
+        case 'amazon_se':
+            return 'SEK';
+        case 'amazon_tr':
+            return 'TRY';
         case 'mall_cz':
         case 'alza_cz':
             return 'CZK';
         case 'mall_pl':
             return 'PLN';
-        case 'amazon_sg':
-            return 'SGD';
         case 'mall_ro':
             return 'RON';
         case 'mall_hu':

@@ -1,6 +1,6 @@
 import { MarketplaceRegion } from './marketplace-region';
 
-export type AmazonEuropeType = 'amazon_de' | 'amazon_uk' | 'amazon_it' | 'amazon_fr' | 'amazon_es' | 'amazon_nl';
+export type AmazonEuropeType = 'amazon_de' | 'amazon_uk' | 'amazon_it' | 'amazon_fr' | 'amazon_es' | 'amazon_nl' | 'amazon_se' | 'amazon_tr';
 export const AMAZON_EUROPE: AmazonEuropeType[] = [
     'amazon_de',
     'amazon_uk',
