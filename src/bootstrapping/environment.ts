@@ -48,7 +48,7 @@ export class Environment {
         PRICING_SERVICE_URL: string().required(),
         SENDINBLUE_TOKEN: string().required(),
         ALZA_SERVICE_URL: string().required(),
-        EMAG_SERVICE_URL: string().required(),
+        EMAG_SERVICE_URL: string(),
     }).options({ stripUnknown: true });
 
     init() {
