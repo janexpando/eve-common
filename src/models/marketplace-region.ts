@@ -8,7 +8,11 @@ export type MarketplaceRegion =
     | 'mall_pl'
     | 'mall_ro'
     | 'mall_hu'
-    | 'alza_cz';
+    | 'alza_cz'
+    | 'emag_pl'
+    | 'emag_hu'
+    | 'emag_ro'
+    | 'emag_bg';
 export const MARKETPLACE_REGIONS: MarketplaceRegion[] = [
     'amazon_america',
     'amazon_europe',
@@ -20,4 +24,8 @@ export const MARKETPLACE_REGIONS: MarketplaceRegion[] = [
     'mall_ro',
     'mall_hu',
     'alza_cz',
+    'emag_pl',
+    'emag_hu',
+    'emag_ro',
+    'emag_bg',
 ];
