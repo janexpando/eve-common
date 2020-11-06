@@ -44,6 +44,14 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'RON';
         case 'mall_hu':
             return 'HUF';
+        case 'emag_pl':
+            return 'PLN';
+        case 'emag_hu':
+            return 'HUF';
+        case 'emag_ro':
+            return 'RON';
+        case 'emag_bg':
+            return 'BGN';
         default:
             throw new Error(`${marketplace} is not a valid amazon marketplace`);
     }

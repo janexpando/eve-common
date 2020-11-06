@@ -34,11 +34,15 @@ export const MALL: MallType[] = ['mall_cz', 'mall_pl', 'mall_sk', 'mall_ro', 'ma
 export type AlzaType = 'alza_cz';
 export const ALZA: AlzaType[] = ['alza_cz'];
 
-export type MarketplaceName = AmazonType | MallType | AlzaType;
+export type EmagType = 'emag_pl' | 'emag_hu' | 'emag_ro' | 'emag_bg';
+export const EMAG: EmagType[] = ['emag_pl', 'emag_hu', 'emag_ro', 'emag_bg'];
+
+export type MarketplaceName = AmazonType | MallType | AlzaType | EmagType;
 export const MARKETPLACES: MarketplaceName[] = []
     .concat(AMAZON)
     .concat(MALL)
-    .concat(ALZA);
+    .concat(ALZA)
+    .concat(EMAG);
 
 export function getRegionMarketplaces(region: MarketplaceRegion): MarketplaceName[] {
     switch (region) {
@@ -76,10 +80,15 @@ export function getRegion(marketplace: MarketplaceName): MarketplaceRegion {
     if ('mall_ro' == marketplace) return 'mall_ro';
     if ('mall_hu' == marketplace) return 'mall_hu';
     if ('alza_cz' == marketplace) return 'alza_cz';
+    if ('emag_pl' == marketplace) return 'emag_pl';
+    if ('emag_hu' == marketplace) return 'emag_hu';
+    if ('emag_ro' == marketplace) return 'emag_ro';
+    if ('emag_bg' == marketplace) return 'emag_bg';
+
     return null;
 }
 
-export type MarketplaceType = 'amazon' | 'mall' | 'alza';
+export type MarketplaceType = 'amazon' | 'mall' | 'alza' | 'emag';
 export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall', 'alza'];
 
 export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceType {
@@ -97,6 +106,8 @@ export function getMarketplaceNamesForMarketplaceType(marketplaceType: Marketpla
             return AMAZON;
         case 'mall':
             return MALL;
+        case 'emag':
+            return EMAG;
         default:
             return [];
     }

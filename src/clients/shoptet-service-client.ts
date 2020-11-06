@@ -86,6 +86,8 @@ export enum Addon {
     Amazon = 'amazon',
     Alza = 'alza',
     Mall = 'mall',
+    //TODO miky emag
+    // Emag = 'emag',
 }
 
 export interface ApiShopAddon {
