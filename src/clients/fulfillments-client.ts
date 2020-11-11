@@ -92,13 +92,9 @@ export class FulfillmentsClient extends EveClient {
         return response.body;
     }
 
-    async confirmFulfillmentById(fulfillmentId: string, fulfillment: ApiInputFulfillment, syncError?: string) {
-        return this.got.patch(`/fulfillments/${fulfillmentId}`, {
+    async confirmFulfillmentById(fulfillmentId: string, syncError?: string) {
+        return this.got.patch(`/fulfillments/${fulfillmentId}/confirmation`, {
             body: {
-                companyId: fulfillment.companyId,
-                marketplace: fulfillment.marketplace,
-                marketplaceOrderIds: fulfillment.marketplaceOrderIds,
-                lastConfirmed: new Date(),
                 syncError: syncError || null,
             },
         });
