@@ -32,6 +32,7 @@ test.serial('send orders', async t => {
         marketplace: 'amazon_uk',
         marketplaceOrderId: '000000',
         lastChanged: new Date('2019-01-01T12:00:00Z'),
+        buyer: address,
         buyerAddress: {
             billing: address,
             shipping: address,
@@ -99,6 +100,20 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
                     marketplace: 'amazon_uk',
                     marketplaceOrderId: '000000',
                     lastChanged: '2019-01-01T12:00:00.000Z',
+                    buyer: {
+                        name: 'Vojtěch Zogata',
+                        addressLine: ['Havlíčkova 13'],
+                        city: 'Praha',
+                        countryCode: 'CZ',
+                        country: 'Czechia',
+                        district: '1',
+                        phone: '123 456 789',
+                        zipCode: '190 00',
+                        stateOrRegion: 'Praha',
+                        email: 'vojta@expan.do',
+                        taxId: 'abcd',
+                        taxCountry: 'CZ',
+                    },
                     buyerAddress: {
                         billing: {
                             name: 'Vojtěch Zogata',

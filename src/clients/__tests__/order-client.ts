@@ -39,6 +39,7 @@ test.serial('store orders', async t => {
                 marketplace: 'amazon_uk',
                 marketplaceOrderId: '000000',
                 lastChanged: '2019-01-01T12:00:00.000Z',
+                buyer: address,
                 buyerAddress: {
                     billing: address,
                     shipping: address,
@@ -79,6 +80,7 @@ test.serial('store orders', async t => {
                 marketplace: 'amazon_de',
                 marketplaceOrderId: '000001',
                 lastChanged: '2019-01-01T12:00:00.000Z',
+                buyer: address,
                 buyerAddress: {
                     billing: address,
                     shipping: address,
@@ -143,6 +145,7 @@ test.serial('store orders', async t => {
             marketplace: 'amazon_uk',
             marketplaceOrderId: '000000',
             lastChanged: new Date('2019-01-01T12:00:00Z'),
+            buyer: address,
             buyerAddress: {
                 billing: address,
                 shipping: address,
@@ -183,6 +186,7 @@ test.serial('store orders', async t => {
             marketplace: 'amazon_de',
             marketplaceOrderId: '000001',
             lastChanged: new Date('2019-01-01T12:00:00Z'),
+            buyer: address,
             buyerAddress: {
                 billing: address,
                 shipping: address,
@@ -233,6 +237,20 @@ test.serial('Get order', async t => {
     const marketplaceOrderId = 'marketplaceOrderId';
     const environment = t.context.injector.get(Environment);
     const orderClient = t.context.injector.get(OrderClient);
+    const address: ApiAddress = {
+        name: 'gsgrwger',
+        addressLine: ['awegw'],
+        email: 'asdfawef',
+        city: 'city',
+        country: 'IT',
+        zipCode: '123',
+        countryCode: 'IT',
+        stateOrRegion: 'asdf',
+        district: 'asdf',
+        phone: '123',
+        taxCountry: 'CZ',
+        taxId: '321'
+    }
     nock(environment.GATEWAY_URL, { encodedQueryParams: true })
         .get(`/company/${cid}/marketplace/${marketplace}/marketplaceOrderId/${marketplaceOrderId}/order`)
         .reply(
@@ -251,15 +269,10 @@ test.serial('Get order', async t => {
                     paymentStatus: 'Paid',
                 },
                 paymentMethod: 'Other',
-                buyer: {
-                    name: 'gsgrwger',
-                    addressLine: ['awegw'],
-                    email: 'asdfawef',
-                    city: 'city',
-                    country: 'IT',
-                    zipCode: '123',
-                    countryCode: 'IT',
-                    stateOrRegion: 'asdf',
+                buyer: address,
+                buyerAddress: {
+                    billing: address,
+                    shipping: address
                 },
                 items: [
                     {

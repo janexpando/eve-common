@@ -104,7 +104,8 @@ export interface ApiOrder {
     shipServiceLevel: string;
     paymentMethod: string;
     invoices: ApiInvoice[];
-    buyerAddress: { billing?: ApiAddress; shipping: ApiAddress };
+    buyer: ApiAddress;
+    buyerAddress?: { billing?: ApiAddress; shipping: ApiAddress };
     delivery?: ApiOrderDelivery;
     items: OrderItem[];
     lastChanged: Date;
