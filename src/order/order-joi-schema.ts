@@ -2,7 +2,9 @@ import { array, bool, date, number, object, string } from 'joi';
 import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
 import { CURRENCY_CODES, MARKETPLACES } from '..';
 
-export const PAYMENT_METHODS = ['CreditCard', 'CashOnDelivery'];
+export const PAYMENT_METHODS = ['CreditCard', 'CashOnDelivery', 'BankTransfer'];
+
+export const PAYMENT_STATUS = ['NotPaid', 'Paid'];
 
 export const optionalString = () =>
     string()
@@ -89,6 +91,7 @@ export const ORDER_PAYMENT_SCHEMA = object({
     paymentMethod: string()
         .valid(PAYMENT_METHODS)
         .required(),
+    paymentStatus: string().valid(PAYMENT_STATUS),
 });
 
 export const ORDER_JOI_SCHEMA = object({
@@ -106,7 +109,7 @@ export const ORDER_JOI_SCHEMA = object({
     shipServiceLevel: optionalString(),
     paymentMethod: optionalString(),
     invoices: array().items(ORDER_INVOICE_JOI_SCHEMA),
-    buyer: ADDRESS_JOI_SCHEMA,
+    buyerAddress: object({ billing: ADDRESS_JOI_SCHEMA, shipping: ADDRESS_JOI_SCHEMA }),
     delivery: DELIVERY_JOI_SCHEMA,
     items: array()
         .items(ORDER_ITEM_JOI_SCHEMA)

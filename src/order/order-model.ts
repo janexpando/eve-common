@@ -71,19 +71,22 @@ export interface ApiOrderDelivery {
     shippingCarrierService?: string;
 }
 
+export declare type OrderPaymentMethod = 'CreditCard' | 'CashOnDelivery' | 'BankTransfer';
+
+export declare type OrderPaymentStatus = 'Paid' | 'NotPaid';
+
 export interface IPayment {
     cashOnDelivery?: {
         toPay?: number;
         servicePrice?: number;
     };
     paymentMethod: OrderPaymentMethod;
+    paymentStatus?: OrderPaymentStatus;
 }
 
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
 
-export declare type OrderPaymentMethod = 'CreditCard' | 'CashOnDelivery';
-
-export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier';
+export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier' | 'eMag';
 
 export interface ApiOrder {
     _id?: ObjectId;
@@ -101,7 +104,7 @@ export interface ApiOrder {
     shipServiceLevel: string;
     paymentMethod: string;
     invoices: ApiInvoice[];
-    buyer: ApiAddress;
+    buyerAddress: { billing?: ApiAddress; shipping: ApiAddress };
     delivery?: ApiOrderDelivery;
     items: OrderItem[];
     lastChanged: Date;
