@@ -109,6 +109,7 @@ export const ORDER_JOI_SCHEMA = object({
     shipServiceLevel: optionalString(),
     paymentMethod: optionalString(),
     invoices: array().items(ORDER_INVOICE_JOI_SCHEMA),
+    buyer: ADDRESS_JOI_SCHEMA,
     buyerAddress: object({ billing: ADDRESS_JOI_SCHEMA, shipping: ADDRESS_JOI_SCHEMA }),
     delivery: DELIVERY_JOI_SCHEMA,
     items: array()
