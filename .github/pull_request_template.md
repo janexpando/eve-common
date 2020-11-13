@@ -10,6 +10,11 @@
 
 ### Submitter
 
+Don't forget to **bump version** (if necessary) **after merge PR** 
+ * `npm version major` (breaking change) or
+ * `npm version minor` (feature) or
+ * `npm version patch` (bugfix)
+
 <details>
   <summary><strong>General</strong></summary>
 
