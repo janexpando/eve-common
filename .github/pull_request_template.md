@@ -2,7 +2,10 @@
 
 
 
-
+:warning: TODO Don't forget to **bump version after PR merge** 
+ * `npm version major` (breaking change) or
+ * `npm version minor` (feature) or
+ * `npm version patch` (bugfix)
 
 <br />
 
