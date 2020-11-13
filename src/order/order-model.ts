@@ -117,7 +117,7 @@ export interface ApiOrder {
     shipServiceLevel: string;
     paymentMethod: string;
     invoices: ApiInvoice[];
-    buyer: ApiAddress,
+    buyer: ApiAddress;
     billingAddress?: ApiOrderAddress & { taxId?: string; taxCountry?: string; vatNo?: string };
     delivery?: ApiOrderDelivery;
     deliveryAddress?: ApiOrderAddress;
