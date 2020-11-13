@@ -20,6 +20,19 @@ export interface ApiAddress {
     note?: string;
 }
 
+export interface ApiOrderAddress {
+    companyName?: string;
+    name: string;
+    email?: string;
+    phone: string;
+    addressLine: string[];
+    city: string;
+    province?: string;
+    zip: string;
+    countryCode: string;
+    note?: string;
+}
+
 export interface ApiInvoice {
     id: string;
     url: string;
@@ -104,9 +117,10 @@ export interface ApiOrder {
     shipServiceLevel: string;
     paymentMethod: string;
     invoices: ApiInvoice[];
-    buyer: ApiAddress;
-    buyerAddress?: { billing?: ApiAddress; shipping: ApiAddress };
+    buyer: ApiAddress,
+    billingAddress?: ApiOrderAddress & { taxId?: string; taxCountry?: string; vatNo?: string };
     delivery?: ApiOrderDelivery;
+    deliveryAddress?: ApiOrderAddress;
     items: OrderItem[];
     lastChanged: Date;
     latestShipDate: Date;
