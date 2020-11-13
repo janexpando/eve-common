@@ -95,6 +95,7 @@ export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceTyp
     if (AMAZON.includes(marketplace as AmazonType)) return 'amazon';
     if (MALL.includes(marketplace as MallType)) return 'mall';
     if (ALZA.includes(marketplace as AlzaType)) return 'alza';
+    if (EMAG.includes(marketplace as EmagType)) return 'emag';
     return null;
 }
 
