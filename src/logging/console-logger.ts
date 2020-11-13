@@ -26,6 +26,10 @@ export class ConsoleLogger {
         this.pinoLogger.error(error);
     };
 
+    fatal = obj => {
+        this.pinoLogger.fatal(obj);
+    };
+
     debug = obj => {
         this.pinoLogger.debug(obj);
     };
