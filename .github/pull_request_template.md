@@ -2,18 +2,16 @@
 
 
 
-
+:warning: TODO Don't forget to **bump version after PR merge** 
+ * `npm version major` (breaking change) or
+ * `npm version minor` (feature) or
+ * `npm version patch` (bugfix)
 
 <br />
 
 ---
 
 ### Submitter
-
-Don't forget to **bump version** (if necessary) **after merge PR** 
- * `npm version major` (breaking change) or
- * `npm version minor` (feature) or
- * `npm version patch` (bugfix)
 
 <details>
   <summary><strong>General</strong></summary>
