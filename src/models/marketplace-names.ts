@@ -89,7 +89,7 @@ export function getRegion(marketplace: MarketplaceName): MarketplaceRegion {
 }
 
 export type MarketplaceType = 'amazon' | 'mall' | 'alza' | 'emag';
-export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall', 'alza'];
+export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall', 'alza', 'emag'];
 
 export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceType {
     if (AMAZON.includes(marketplace as AmazonType)) return 'amazon';
