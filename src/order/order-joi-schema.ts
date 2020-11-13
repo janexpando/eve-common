@@ -70,27 +70,20 @@ export const ADDRESS_JOI_SCHEMA = object({
 });
 
 export const ORDER_ADDRESS_JOI_SCHEMA = object({
-    companyName: string().allow(''),
-    name: string()
-        .allow('')
+    companyName: string(),
+    name: string().required(),
+    email: string(),
+    phone: string().required(),
+    addressLine: array()
+        .items(string())
         .required(),
-    email: string().allow(''),
-    phone: string()
-        .allow('')
-        .required(),
-    addressLine: array().items(string().allow('')).required(),
-    city: string()
-        .allow('')
-        .required(),
-    province: string().allow(''),
-    zip: string()
-        .allow('')
-        .required(),
+    city: string().required(),
+    province: string(),
+    zip: string().required(),
     countryCode: string()
         .valid(COUNTRY_CODES)
-        .allow('')
         .required(),
-    note: string().allow(''),
+    note: string(),
 });
 
 export const DELIVERY_JOI_SCHEMA = object({
