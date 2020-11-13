@@ -20,6 +20,19 @@ export interface ApiAddress {
     note?: string;
 }
 
+export interface ApiOrderAddress {
+    companyName?: string;
+    name: string;
+    email?: string;
+    phone: string;
+    addressLine: string[];
+    city: string;
+    province?: string;
+    zip: string;
+    countryCode: string;
+    note?: string;
+}
+
 export interface ApiInvoice {
     id: string;
     url: string;
@@ -71,19 +84,22 @@ export interface ApiOrderDelivery {
     shippingCarrierService?: string;
 }
 
+export declare type OrderPaymentMethod = 'CreditCard' | 'CashOnDelivery' | 'BankTransfer';
+
+export declare type OrderPaymentStatus = 'Paid' | 'NotPaid';
+
 export interface IPayment {
     cashOnDelivery?: {
         toPay?: number;
         servicePrice?: number;
     };
     paymentMethod: OrderPaymentMethod;
+    paymentStatus?: OrderPaymentStatus;
 }
 
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
 
-export declare type OrderPaymentMethod = 'CreditCard' | 'CashOnDelivery';
-
-export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier';
+export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier' | 'eMag';
 
 export interface ApiOrder {
     _id?: ObjectId;
@@ -102,7 +118,9 @@ export interface ApiOrder {
     paymentMethod: string;
     invoices: ApiInvoice[];
     buyer: ApiAddress;
+    billingAddress?: ApiOrderAddress & { taxId?: string; taxCountry?: string; vatNo?: string };
     delivery?: ApiOrderDelivery;
+    deliveryAddress?: ApiOrderAddress;
     items: OrderItem[];
     lastChanged: Date;
     latestShipDate: Date;

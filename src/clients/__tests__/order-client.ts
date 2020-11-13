@@ -2,7 +2,7 @@ import { ObjectId } from 'bson';
 import { provideInjector, test } from '../../testing';
 import nock = require('nock');
 import { OrderClient } from '../order-client';
-import { Environment, ENVIRONMENT_PROVIDER } from '../..';
+import { ApiAddress, ApiOrderAddress, Environment, ENVIRONMENT_PROVIDER } from '../..';
 import { ApiOrder } from '../../order/order-model';
 
 provideInjector(test, [OrderClient, ENVIRONMENT_PROVIDER]);
@@ -16,6 +16,31 @@ test.serial('store orders', async t => {
     const orderId2 = new ObjectId();
     const environment = t.context.injector.get(Environment);
 
+    const buyer: ApiAddress = {
+        name: 'Vojtěch Zogata',
+        addressLine: ['Havlíčkova 13'],
+        city: 'Praha',
+        countryCode: 'CZ',
+        country: 'Czechia',
+        district: '1',
+        zipCode: '190 00',
+        stateOrRegion: 'Praha',
+        email: 'vojta@expan.do',
+        phone: '123 456 789',
+        taxId: 'abcd',
+        taxCountry: 'CZ',
+    };
+
+    const deliveryAddress: ApiOrderAddress = {
+        name: 'Vojtěch Zogata',
+        email: 'vojta@expan.do',
+        phone: '123 456 789',
+        addressLine: ['Havlíčkova 13'],
+        city: 'Praha',
+        zip: '190 00',
+        countryCode: 'CZ',
+    };
+
     nock(environment.GATEWAY_URL, { encodedQueryParams: true })
         .post('/company/5c52d0bfbf23ae00046927a8/orders', [
             {
@@ -24,20 +49,8 @@ test.serial('store orders', async t => {
                 marketplace: 'amazon_uk',
                 marketplaceOrderId: '000000',
                 lastChanged: '2019-01-01T12:00:00.000Z',
-                buyer: {
-                    name: 'Vojtěch Zogata',
-                    addressLine: ['Havlíčkova 13'],
-                    city: 'Praha',
-                    countryCode: 'CZ',
-                    country: 'Czechia',
-                    district: '1',
-                    phone: '123 456 789',
-                    zipCode: '190 00',
-                    stateOrRegion: 'Praha',
-                    email: 'vojta@expan.do',
-                    taxId: 'abcd',
-                    taxCountry: 'CZ',
-                },
+                buyer,
+                deliveryAddress,
                 currencyCode: 'EUR',
                 items: [],
                 fulfillmentChannel: 'FBA',
@@ -46,6 +59,7 @@ test.serial('store orders', async t => {
                 totalItemTax: 0,
                 payment: {
                     paymentMethod: 'CreditCard',
+                    paymentStatus: 'Paid',
                 },
                 paymentMethod: 'Other',
                 purchaseDate: '2019-01-01T11:00:00.000Z',
@@ -73,20 +87,8 @@ test.serial('store orders', async t => {
                 marketplace: 'amazon_de',
                 marketplaceOrderId: '000001',
                 lastChanged: '2019-01-01T12:00:00.000Z',
-                buyer: {
-                    name: 'Vojtěch Zogata',
-                    addressLine: ['Havlíčkova 13'],
-                    city: 'Praha',
-                    countryCode: 'CZ',
-                    country: 'Czechia',
-                    district: '1',
-                    phone: '123 456 789',
-                    zipCode: '190 00',
-                    stateOrRegion: 'Praha',
-                    email: 'vojta@expan.do',
-                    taxId: 'abcd',
-                    taxCountry: 'CZ',
-                },
+                buyer,
+                deliveryAddress,
                 currencyCode: 'EUR',
                 items: [],
                 fulfillmentChannel: 'FBA',
@@ -95,6 +97,7 @@ test.serial('store orders', async t => {
                 totalItemTax: 0,
                 payment: {
                     paymentMethod: 'CreditCard',
+                    paymentStatus: 'Paid',
                 },
                 paymentMethod: 'Other',
                 purchaseDate: '2019-01-01T11:00:00.000Z',
@@ -139,7 +142,6 @@ test.serial('store orders', async t => {
             'Connection',
             'close',
         ]);
-
     const ordersToStore: ApiOrder[] = [
         {
             _id: orderId1,
@@ -147,20 +149,8 @@ test.serial('store orders', async t => {
             marketplace: 'amazon_uk',
             marketplaceOrderId: '000000',
             lastChanged: new Date('2019-01-01T12:00:00Z'),
-            buyer: {
-                name: 'Vojtěch Zogata',
-                addressLine: ['Havlíčkova 13'],
-                city: 'Praha',
-                countryCode: 'CZ',
-                country: 'Czechia',
-                district: '1',
-                phone: '123 456 789',
-                zipCode: '190 00',
-                stateOrRegion: 'Praha',
-                email: 'vojta@expan.do',
-                taxId: 'abcd',
-                taxCountry: 'CZ',
-            },
+            buyer,
+            deliveryAddress,
             currencyCode: 'EUR',
             items: [],
             fulfillmentChannel: 'FBA',
@@ -169,6 +159,7 @@ test.serial('store orders', async t => {
             totalItemTax: 0,
             payment: {
                 paymentMethod: 'CreditCard',
+                paymentStatus: 'Paid',
             },
             paymentMethod: 'Other',
             purchaseDate: new Date('2019-01-01T11:00:00Z'),
@@ -196,20 +187,8 @@ test.serial('store orders', async t => {
             marketplace: 'amazon_de',
             marketplaceOrderId: '000001',
             lastChanged: new Date('2019-01-01T12:00:00Z'),
-            buyer: {
-                name: 'Vojtěch Zogata',
-                addressLine: ['Havlíčkova 13'],
-                city: 'Praha',
-                countryCode: 'CZ',
-                country: 'Czechia',
-                district: '1',
-                phone: '123 456 789',
-                zipCode: '190 00',
-                stateOrRegion: 'Praha',
-                email: 'vojta@expan.do',
-                taxId: 'abcd',
-                taxCountry: 'CZ',
-            },
+            buyer,
+            deliveryAddress,
             currencyCode: 'EUR',
             items: [],
             fulfillmentChannel: 'FBA',
@@ -218,6 +197,7 @@ test.serial('store orders', async t => {
             totalItemTax: 0,
             payment: {
                 paymentMethod: 'CreditCard',
+                paymentStatus: 'Paid',
             },
             paymentMethod: 'Other',
             purchaseDate: new Date('2019-01-01T11:00:00Z'),
@@ -255,6 +235,32 @@ test.serial('Get order', async t => {
     const marketplaceOrderId = 'marketplaceOrderId';
     const environment = t.context.injector.get(Environment);
     const orderClient = t.context.injector.get(OrderClient);
+
+    const buyer: ApiAddress = {
+        name: 'gsgrwger',
+        email: 'asdfawef',
+        phone: '123',
+        taxCountry: 'CZ',
+        taxId: '321',
+        addressLine: ['awegw'],
+        city: 'city',
+        country: 'IT',
+        zipCode: '123',
+        countryCode: 'IT',
+        stateOrRegion: 'asdf',
+        district: 'asdf',
+    };
+
+    const deliveryAddress: ApiOrderAddress = {
+        name: 'gsgrwger',
+        email: 'asdfawef',
+        phone: '123',
+        addressLine: ['awegw'],
+        city: 'city',
+        zip: '123',
+        countryCode: 'IT',
+    };
+
     nock(environment.GATEWAY_URL, { encodedQueryParams: true })
         .get(`/company/${cid}/marketplace/${marketplace}/marketplaceOrderId/${marketplaceOrderId}/order`)
         .reply(
@@ -270,18 +276,11 @@ test.serial('Get order', async t => {
                 currencyCode: 'EUR',
                 payment: {
                     paymentMethod: 'CreditCard',
+                    paymentStatus: 'Paid',
                 },
                 paymentMethod: 'Other',
-                buyer: {
-                    name: 'gsgrwger',
-                    addressLine: ['awegw'],
-                    email: 'asdfawef',
-                    city: 'city',
-                    country: 'IT',
-                    zipCode: '123',
-                    countryCode: 'IT',
-                    stateOrRegion: 'asdf',
-                },
+                buyer,
+                deliveryAddress,
                 items: [
                     {
                         marketplaceItemId: 'asdfasdf',

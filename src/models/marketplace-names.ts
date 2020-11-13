@@ -55,7 +55,7 @@ export function getRegionMarketplaces(region: MarketplaceRegion): MarketplaceNam
         case 'amazon_other':
             return AMAZON_OTHER;
         case 'mall_cz':
-            return ['alza_cz'];
+            return ['mall_cz'];
         case 'mall_sk':
             return ['mall_sk'];
         case 'mall_pl':

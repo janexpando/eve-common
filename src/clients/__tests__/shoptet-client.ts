@@ -2,7 +2,7 @@ import * as nock from 'nock';
 import { ObjectId } from 'bson';
 import { provideInjector, test } from '../../testing';
 import { ShoptetServiceClient } from '../shoptet-service-client';
-import { Environment, ENVIRONMENT_PROVIDER } from '../..';
+import { ApiAddress, ApiOrderAddress, Environment, ENVIRONMENT_PROVIDER } from '../..';
 import { ApiImportSettings } from '../../settings/import-settings-model';
 import { ApiOrder } from '../../order/order-model';
 
@@ -10,28 +10,39 @@ provideInjector(test, [ShoptetServiceClient, ENVIRONMENT_PROVIDER]);
 
 test.serial('send orders', async t => {
     t.plan(1);
-    let client = t.context.injector.get(ShoptetServiceClient);
-    let companyId = new ObjectId();
-    let order: ApiOrder = {
+    const client = t.context.injector.get(ShoptetServiceClient);
+    const companyId = new ObjectId();
+    const buyer: ApiAddress = {
+        name: 'Vojtěch Zogata',
+        email: 'vojta@expan.do',
+        phone: '123 456 789',
+        addressLine: ['Havlíčkova 13'],
+        city: 'Praha',
+        countryCode: 'CZ',
+        country: 'Czechia',
+        district: '1',
+        zipCode: '190 00',
+        stateOrRegion: 'Praha',
+        taxId: 'abcd',
+        taxCountry: 'CZ',
+    };
+    const deliveryAddress: ApiOrderAddress = {
+        name: 'Vojtěch Zogata',
+        email: 'vojta@expan.do',
+        phone: '123 456 789',
+        addressLine: ['Havlíčkova 13'],
+        city: 'Praha',
+        zip: '190 00',
+        countryCode: 'CZ',
+    };
+    const order: ApiOrder = {
         _id: new ObjectId(),
         companyId,
         marketplace: 'amazon_uk',
         marketplaceOrderId: '000000',
         lastChanged: new Date('2019-01-01T12:00:00Z'),
-        buyer: {
-            name: 'Vojtěch Zogata',
-            addressLine: ['Havlíčkova 13'],
-            city: 'Praha',
-            countryCode: 'CZ',
-            country: 'Czechia',
-            district: '1',
-            phone: '123 456 789',
-            zipCode: '190 00',
-            stateOrRegion: 'Praha',
-            email: 'vojta@expan.do',
-            taxId: 'abcd',
-            taxCountry: 'CZ',
-        },
+        buyer,
+        deliveryAddress,
         currencyCode: 'EUR',
         items: [],
         fulfillmentChannel: 'FBA',
@@ -97,17 +108,26 @@ function nocks(companyId: ObjectId, order: ApiOrder, environment: Environment) {
                     lastChanged: '2019-01-01T12:00:00.000Z',
                     buyer: {
                         name: 'Vojtěch Zogata',
+                        email: 'vojta@expan.do',
+                        phone: '123 456 789',
                         addressLine: ['Havlíčkova 13'],
                         city: 'Praha',
                         countryCode: 'CZ',
                         country: 'Czechia',
                         district: '1',
-                        phone: '123 456 789',
                         zipCode: '190 00',
                         stateOrRegion: 'Praha',
-                        email: 'vojta@expan.do',
                         taxId: 'abcd',
                         taxCountry: 'CZ',
+                    },
+                    deliveryAddress: {
+                        name: 'Vojtěch Zogata',
+                        email: 'vojta@expan.do',
+                        phone: '123 456 789',
+                        addressLine: ['Havlíčkova 13'],
+                        city: 'Praha',
+                        zip: '190 00',
+                        countryCode: 'CZ',
                     },
                     currencyCode: 'EUR',
                     items: [],

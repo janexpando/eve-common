@@ -1,8 +1,11 @@
-import { array, bool, date, number, object, string } from 'joi';
+import { allow, alternatives, array, bool, date, number, object, string } from 'joi';
 import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
 import { CURRENCY_CODES, MARKETPLACES } from '..';
+import { COUNTRY_CODES } from '../models/country-codes';
 
-export const PAYMENT_METHODS = ['CreditCard', 'CashOnDelivery'];
+export const PAYMENT_METHODS = ['CreditCard', 'CashOnDelivery', 'BankTransfer'];
+
+export const PAYMENT_STATUS = ['NotPaid', 'Paid'];
 
 export const optionalString = () =>
     string()
@@ -65,6 +68,24 @@ export const ADDRESS_JOI_SCHEMA = object({
         .allow('')
         .optional(),
 });
+
+export const ORDER_ADDRESS_JOI_SCHEMA = object({
+    companyName: string(),
+    name: string().required(),
+    email: string(),
+    phone: string().required(),
+    addressLine: array()
+        .items(string())
+        .required(),
+    city: string().required(),
+    province: string(),
+    zip: string().required(),
+    countryCode: string()
+        .valid(COUNTRY_CODES)
+        .required(),
+    note: string(),
+});
+
 export const DELIVERY_JOI_SCHEMA = object({
     shippingCarrier: string().optional(),
     shippingCarrierService: string().optional(),
@@ -89,6 +110,7 @@ export const ORDER_PAYMENT_SCHEMA = object({
     paymentMethod: string()
         .valid(PAYMENT_METHODS)
         .required(),
+    paymentStatus: string().valid(PAYMENT_STATUS),
 });
 
 export const ORDER_JOI_SCHEMA = object({
@@ -107,7 +129,15 @@ export const ORDER_JOI_SCHEMA = object({
     paymentMethod: optionalString(),
     invoices: array().items(ORDER_INVOICE_JOI_SCHEMA),
     buyer: ADDRESS_JOI_SCHEMA,
+    billingAddress: ORDER_ADDRESS_JOI_SCHEMA.concat(
+        object({
+            taxId: string(),
+            taxCountry: string(),
+            vatNo: string(),
+        }),
+    ),
     delivery: DELIVERY_JOI_SCHEMA,
+    deliveryAddress: ORDER_ADDRESS_JOI_SCHEMA,
     items: array()
         .items(ORDER_ITEM_JOI_SCHEMA)
         .optional(),
