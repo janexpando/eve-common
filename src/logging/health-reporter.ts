@@ -36,7 +36,8 @@ export class HealthReporter {
 
     /**
      * Report that a health check for given `healthMetric` was successfully
-     * done. Absence of heartbeat series may result in an alarm situation.
+     * done. Absence of heartbeat series may result in an alarm situation
+     * triggered by downstream components.
      */
     public heartbeat(healthMetric: string) {
         this.consoleLogger.log({ message: 'heartbeat', healthMetric });
