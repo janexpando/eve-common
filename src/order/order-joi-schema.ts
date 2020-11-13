@@ -19,6 +19,14 @@ export const PRICE_JOI_SCHEMA = object({
     taxRatePercent: number(),
 });
 
+export const ORDER_PRICE_JOI_SCHEMA = object({
+    items: PRICE_JOI_SCHEMA,
+    delivery: PRICE_JOI_SCHEMA,
+    payment: PRICE_JOI_SCHEMA,
+    totalDiscount: PRICE_JOI_SCHEMA,
+    total: PRICE_JOI_SCHEMA,
+});
+
 export const ORDER_ITEM_JOI_SCHEMA = object({
     sku: string().required(),
     asin: optionalString(),
@@ -204,11 +212,5 @@ export const ORDER_JOI_SCHEMA = object({
         .allow(null)
         .optional(),
 
-    price: object({
-        items: PRICE_JOI_SCHEMA,
-        delivery: PRICE_JOI_SCHEMA,
-        payment: PRICE_JOI_SCHEMA,
-        totalDiscount: PRICE_JOI_SCHEMA,
-        total: PRICE_JOI_SCHEMA.required(),
-    }).required(),
+    price: ORDER_PRICE_JOI_SCHEMA.required(),
 }).options({ stripUnknown: true });
