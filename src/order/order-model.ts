@@ -86,7 +86,7 @@ export interface ApiOrderDelivery {
 
 export declare type OrderPaymentMethod = 'CreditCard' | 'CashOnDelivery' | 'BankTransfer';
 
-export declare type OrderPaymentStatus = 'Paid' | 'NotPaid';
+export declare type OrderPaymentStatus = 'Paid' | 'Unpaid';
 
 export interface IPayment {
     cashOnDelivery?: {

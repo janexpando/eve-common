@@ -5,7 +5,7 @@ import { COUNTRY_CODES } from '../models/country-codes';
 
 export const PAYMENT_METHODS = ['CreditCard', 'CashOnDelivery', 'BankTransfer'];
 
-export const PAYMENT_STATUS = ['NotPaid', 'Paid'];
+export const PAYMENT_STATUS = ['Unpaid', 'Paid'];
 
 export const optionalString = () =>
     string()
