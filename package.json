@@ -29,7 +29,7 @@
     "@types/lodash": "^4.14.149",
     "@types/mongoose": "^5.5.32",
     "@types/node": "^12.12.14",
-    "@types/pino": "^5.14.0",
+    "@types/pino": "^6.3.4",
     "amazon-mws": "0.0.23",
     "ava": "^2.4.0",
     "bson": "^4.0.2",
