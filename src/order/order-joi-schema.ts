@@ -90,6 +90,7 @@ export const ORDER_ADDRESS_JOI_SCHEMA = object({
     zip: string().required(),
     countryCode: string()
         .valid(COUNTRY_CODES)
+        .allow("-")
         .required(),
     note: string(),
 });
