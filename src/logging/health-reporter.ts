@@ -24,7 +24,7 @@ export class HealthReporter {
      * of alert messages sent by downstream components.
      */
     public reportIncident(priority: IncidentPriority, summary: string, details: IncidentReportDetails = {}) {
-        this.consoleLogger.fatal({
+        this.consoleLogger.error({
             p: priority,
             summary,
             incidentDetailsUrl: details.incidentDetailsUrl || 'about:blank',
