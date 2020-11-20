@@ -41,7 +41,7 @@ test.serial('incidents are being reported correctly (incl. details)', async t =>
 
     const parsedLog = JSON.parse(capturedLogs[0]);
 
-    t.is(parsedLog.level, 60, `Didn't log as 'fatal'`);
+    t.is(parsedLog.level, 50, `Didn't log as 'error'`);
     t.is(parsedLog.p, 'P0', `Didn't use correct priority`);
     t.true(parsedLog.summary.includes('Orders'), `Didn't use correct summary`);
     t.true(parsedLog.incidentDetailsUrl.includes('incidents/order-download'), `Didn't use correct URL`);
@@ -68,7 +68,7 @@ test.serial('incidents are being reported correctly (w/o details)', async t => {
 
     const parsedLog = JSON.parse(capturedLogs[0]);
 
-    t.is(parsedLog.level, 60, `Didn't log as 'fatal'`);
+    t.is(parsedLog.level, 50, `Didn't log as 'error'`);
     t.is(parsedLog.p, 'P1', `Didn't use correct priority`);
     t.true(parsedLog.summary.includes('weird state'), `Didn't use correct summary`);
     t.is(parsedLog.incidentDetailsUrl, 'about:blank', `Didn't use correct URL`);
