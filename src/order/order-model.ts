@@ -99,7 +99,7 @@ export interface IPayment {
 
 export declare type ApiOrderStatus = 'Unshipped' | 'Pending' | 'Shipped' | 'Canceled';
 
-export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier' | 'eMag';
+export declare type OrderFulfillmentChannel = 'FBA' | 'Seller' | 'MediatedCarrier' | 'eMAG';
 
 export interface ApiOrder {
     _id?: ObjectId;
