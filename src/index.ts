@@ -53,6 +53,7 @@ export * from './clients/financial-events-client';
 export * from './clients/mall-service-client';
 export * from './clients/marketplace-client';
 export * from './clients/mongo-logger-client';
+export * from './clients/pickup-list-client';
 export * from './clients/mws-credentials-client';
 export * from './clients/notifications-client';
 export * from './clients/order-client';
@@ -79,5 +80,5 @@ export * from './stream/transform/chunk-aggregator';
 export * from './stream/transform/noop';
 
 export * from './forex/money-exchange';
-export * from "./order/order-model";
-export * from "./order/order-joi-schema";
+export * from './order/order-model';
+export * from './order/order-joi-schema';
