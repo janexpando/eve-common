@@ -18,7 +18,7 @@ export class PickupListClient extends EveClient {
         this.baseUrl = this.env.GATEWAY_URL;
     }
 
-    async updateList(pickupListNumber: number, list: ApiPickupListInput[]): Promise<{ pickupListNumber: number }> {
+    async updateList(pickupListNumber: number, list: ApiPickupListInput): Promise<{ pickupListNumber: number }> {
         const response = await this.got.patch(`/pickup-lists/${pickupListNumber}`, {
             body: { ...list },
         });
