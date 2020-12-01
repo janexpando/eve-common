@@ -96,7 +96,7 @@ export const ORDER_ADDRESS_JOI_SCHEMA = object({
 });
 
 export const DELIVERY_JOI_SCHEMA = object({
-    shippingCarrier: string().optional(),
+    shippingCarrier: string().allow(null).optional(),
     shippingCarrierService: string().optional(),
 });
 export const ORDER_INVOICE_JOI_SCHEMA = object({
