@@ -125,6 +125,7 @@ export interface ApiOrder {
     lastChanged: Date;
     latestShipDate: Date;
     latestDeliveryDate: Date;
+    selectedShipDate?: Date | null;
     marketplaceLastChanged: Date;
     packageLabels?: string | null;
 
@@ -157,7 +158,6 @@ export interface ApiOrder {
     // alza specific fields
     shippingCarrierIdentification?: string;
     parcelShop?: { parcelShopIdentification?: string; parcelShopBranchCode?: string };
-    demandedExpeditionDate?: Date;
     payment: IPayment;
     cashOnDelivery?: {
         value?: number;
