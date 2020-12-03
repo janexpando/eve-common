@@ -158,6 +158,7 @@ export interface ApiOrder {
     // alza specific fields
     shippingCarrierIdentification?: string;
     parcelShop?: { parcelShopIdentification?: string; parcelShopBranchCode?: string };
+    demandedExpeditionDate?: Date;
     payment: IPayment;
     cashOnDelivery?: {
         value?: number;

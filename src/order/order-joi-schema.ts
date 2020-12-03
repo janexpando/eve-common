@@ -194,6 +194,9 @@ export const ORDER_JOI_SCHEMA = object({
         parcelShopIdentification: string().optional(),
         parcelShopBranchCode: string().optional(),
     }),
+    demandedExpeditionDate: date()
+        .allow('')
+        .optional(),
 
     payment: ORDER_PAYMENT_SCHEMA.required(),
 
