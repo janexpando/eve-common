@@ -64,3 +64,13 @@ export function getLastMonthStart(date: Date = new Date()) {
 
     return new Date(`${yyyy}-${mm}-01`);
 }
+
+export function addWorkingDays(initialDate: Date, days: number) {
+    if (!days) return initialDate;
+
+    const newDate = new Date(initialDate.valueOf());
+    newDate.setDate(newDate.getDate() + 1);
+
+    const dayOfWeek = newDate.getDay();
+    return dayOfWeek === 0 || dayOfWeek === 6 ? addWorkingDays(newDate, days) : addWorkingDays(newDate, days - 1);
+}
