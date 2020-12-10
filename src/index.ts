@@ -17,6 +17,7 @@ export * from './utils/queue-processor';
 export * from './utils/unique-handling';
 export * from './utils/phone-formatter';
 export * from './utils/feature-toggles';
+export * from './utils/polling';
 export * from './models/marketplace-names';
 export * from './models/service-names';
 export * from './models/marketplace-region';
