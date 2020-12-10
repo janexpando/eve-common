@@ -8,6 +8,11 @@ export async function poll<T>(
     if (pollTimeoutInMs < 2000) throw new Error('Polling timeout has to be at least 2000 ms');
     if (pollIntervalInMs < 500) throw new Error('Polling interval has to be at least 500 ms');
 
+    const clearTimers = (poller, timeout) => {
+        clearTimeout(timeout);
+        clearInterval(poller);
+    };
+
     return new Promise((resolve, reject) => {
         const timeout = setTimeout(() => {
             clearTimers(poller, timeout);
@@ -28,9 +33,4 @@ export async function poll<T>(
             }
         }, pollIntervalInMs);
     });
-}
-
-function clearTimers(poller: NodeJS.Timeout, timeout: NodeJS.Timeout) {
-    clearTimeout(timeout);
-    clearInterval(poller);
 }
