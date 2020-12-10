@@ -8,6 +8,7 @@ export interface ApiPickupListInput {
     carrier: string;
     pickupListPdf: string;
     collectionTime?: Date;
+    pickupTime?: Date;
     orderIds: ObjectId[];
 }
 
@@ -18,8 +19,11 @@ export class PickupListClient extends EveClient {
         this.baseUrl = this.env.GATEWAY_URL;
     }
 
-    async updateList(pickupListNumber: number, list: ApiPickupListInput): Promise<{ pickupListNumber: number }> {
-        const response = await this.got.patch(`/pickup-lists/${pickupListNumber}`, {
+    async updateList(
+        carrierPickupListId: number,
+        list: ApiPickupListInput,
+    ): Promise<{ pickupListNumber?: number; carrierPickupListId?: number }> {
+        const response = await this.got.patch(`/pickup-lists/${carrierPickupListId}`, {
             body: { ...list },
         });
 
