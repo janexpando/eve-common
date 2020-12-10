@@ -1,10 +1,9 @@
+type PollOptions = { pollTimeoutInMs?: number; pollIntervalInMs?: number };
+
 export async function poll<T>(
     pollFn: () => T | Promise<T>,
     predicate: (value: T) => boolean,
-    { pollTimeoutInMs, pollIntervalInMs }: { pollTimeoutInMs?: number; pollIntervalInMs?: number } = {
-        pollTimeoutInMs: 10_000,
-        pollIntervalInMs: 500,
-    },
+    { pollTimeoutInMs, pollIntervalInMs }: PollOptions = { pollTimeoutInMs: 10_000, pollIntervalInMs: 500 },
 ): Promise<T> {
     if (pollTimeoutInMs < 2000) throw new Error('Polling timeout has to be at least 2000 ms');
     if (pollIntervalInMs < 500) throw new Error('Polling interval has to be at least 500 ms');
