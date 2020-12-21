@@ -38,10 +38,7 @@ export class MallServiceClient extends EveClient {
         return response.body;
     }
 
-    async getCredentials(
-        companyId: ObjectId,
-        marketplace: MallType,
-    ): Promise<{ companyId: ObjectId; authorizationKey: string; webhookId: string }> {
+    async getCredentials(companyId: ObjectId, marketplace: MallType): Promise<ApiMallCredentials> {
         let response = await this.got.get(`/company/${companyId}/mall-credentials/${marketplace}`);
         return response.body;
     }
@@ -61,6 +58,12 @@ export class MallServiceClient extends EveClient {
         return response.body;
     }
 
+    async deleteCredentials(companyId: ObjectId, marketplace: MallType): Promise<ApiMallCredentials> {
+        const response = await this.got.delete(`/company/${companyId}/mall-credentials/${marketplace}`);
+
+        return response.body;
+    }
+
     async getStatuses(companyId: ObjectId): Promise<{ marketplace: MallType; status: 'online' | 'offline' }[]> {
         let response = await this.got.get(`/company/${companyId}/statuses`);
         return response.body;
@@ -72,4 +75,12 @@ export interface ApiMallDeliveryMethod {
     title: string;
     marketplace: MallType;
     isPickupPoint: boolean;
+}
+
+export interface ApiMallCredentials {
+    companyId: ObjectId;
+    authorizationKey: string;
+    webhookId: string;
+    marketplace: MallType;
+    active: boolean;
 }
