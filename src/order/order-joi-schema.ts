@@ -163,6 +163,7 @@ export const ORDER_JOI_SCHEMA = object({
     isBusinessOrder: bool(),
     isComplete: bool(),
     isRefunded: bool(),
+    isUnshipped: bool().optional(),
 
     marketplaceLastChanged: date().allow(null),
     pendingDate: date().allow(null),

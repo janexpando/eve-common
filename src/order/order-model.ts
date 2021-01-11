@@ -135,6 +135,7 @@ export interface ApiOrder {
     isBusinessOrder: boolean;
     isComplete: boolean;
     isRefunded: boolean;
+    isUnshipped?: boolean;
 
     pendingDate?: Date;
     unshippedDate?: Date;
