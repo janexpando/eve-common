@@ -9,7 +9,6 @@ export interface ApiCompany {
     _id: string;
     name: string;
     feedType: ApiFeedType;
-    feedUrl: string;
     active: boolean;
     blocked: boolean;
 }
