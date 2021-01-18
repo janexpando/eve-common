@@ -70,12 +70,24 @@ export class ProductStatusesClient extends EveClient {
         return response.body;
     }
 
+    //deprecated - delete
     async blockProducts(
         companyId: ObjectId,
         variants: ApiVariant[],
     ): Promise<{ totalCount: number; foundCount: number; notFoundSkus: string[] }> {
         let response = await this.got.patch(`/company/${companyId}/products/block`, {
             body: { variants },
+        });
+
+        return response.body;
+    }
+
+    async updateForbidListings(
+        companyId: ObjectId,
+        productVariants: ApiVariant[],
+    ): Promise<{ totalCount: number; foundCount: number; notFoundSkus: string[] }> {
+        let response = await this.got.patch(`/company/${companyId}/products/updateForbidListings`, {
+            body: { productVariants },
         });
 
         return response.body;
