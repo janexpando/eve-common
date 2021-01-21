@@ -32,7 +32,7 @@ export interface ApiAutopricingSettings {
     defaultBottomCap: number;
 }
 
-export type ApiCarrierName =
+export type GenericCarrierName =
     | 'AFLFedex'
     | 'Aramex'
     | 'BluePackage'
@@ -84,7 +84,7 @@ export type ApiCarrierName =
     | 'YamatoTransport'
     | 'Other';
 
-export const API_CARRIER_NAME: ApiCarrierName[] = [
+export const GENERIC_CARRIER_NAMES: GenericCarrierName[] = [
     'AFLFedex',
     'Aramex',
     'BluePackage',
@@ -136,6 +136,71 @@ export const API_CARRIER_NAME: ApiCarrierName[] = [
     'YamatoTransport',
     'Other',
 ];
+
+export type AlzaCarrierName =
+    | 'CZPOSTD'
+    | 'CZPOSTP'
+    | 'DHL'
+    | 'DPD'
+    | 'GEIS'
+    | 'GEISPOINT'
+    | 'GEISCARGO'
+    | 'GLS'
+    | 'GO'
+    | 'MagyarPOST'
+    | 'MagyarPOSTHD'
+    | 'MagyarPOSTPO'
+    | 'MagyarPOSTPP'
+    | 'MagyarPOSTPT'
+    | 'Najbert'
+    | 'PPL'
+    | 'PPLPARCELSHOP'
+    | 'RHENUS'
+    | 'SKPOSTD'
+    | 'SKPOSTP'
+    | 'SKYNET'
+    | 'TOPTRANS'
+    | 'UPS'
+    | 'HELICARUP'
+    | 'HELICARSTD'
+    | 'ZASILKOVNA'
+    | 'ZavolejSiKuryra'
+    | 'Supplier';
+
+export const ALZA_CARRIER_NAMES: AlzaCarrierName[] = [
+    'CZPOSTD',
+    'CZPOSTP',
+    'DHL',
+    'DPD',
+    'GEIS',
+    'GEISPOINT',
+    'GEISCARGO',
+    'GLS',
+    'GO',
+    'MagyarPOST',
+    'MagyarPOSTHD',
+    'MagyarPOSTPO',
+    'MagyarPOSTPP',
+    'MagyarPOSTPT',
+    'Najbert',
+    'PPL',
+    'PPLPARCELSHOP',
+    'RHENUS',
+    'SKPOSTD',
+    'SKPOSTP',
+    'SKYNET',
+    'TOPTRANS',
+    'UPS',
+    'HELICARUP',
+    'HELICARSTD',
+    'ZASILKOVNA',
+    'ZavolejSiKuryra',
+    'Supplier',
+];
+
+export type ApiCarrierName = GenericCarrierName | AlzaCarrierName;
+
+export const API_CARRIER_NAMES = [...GENERIC_CARRIER_NAMES, ...ALZA_CARRIER_NAMES];
 
 export interface ApiMallSettings {
     synchronizePrices: boolean;
