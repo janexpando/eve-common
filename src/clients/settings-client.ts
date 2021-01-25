@@ -138,21 +138,22 @@ export const GENERIC_CARRIER_NAMES: GenericCarrierName[] = [
 ];
 
 export type AlzaCarrierName =
+    | 'COURIER'
     | 'CZPOSTD'
     | 'CZPOSTP'
+    | 'CZPOSTB'
     | 'DHL'
     | 'DPD'
+    | 'FOFRSTD'
     | 'GEIS'
     | 'GEISPOINT'
     | 'GEISCARGO'
     | 'GLS'
     | 'GO'
-    | 'MagyarPOST'
     | 'MagyarPOSTHD'
     | 'MagyarPOSTPO'
     | 'MagyarPOSTPP'
     | 'MagyarPOSTPT'
-    | 'Najbert'
     | 'PPL'
     | 'PPLPARCELSHOP'
     | 'RHENUS'
@@ -168,21 +169,22 @@ export type AlzaCarrierName =
     | 'Supplier';
 
 export const ALZA_CARRIER_NAMES: AlzaCarrierName[] = [
+    'COURIER',
     'CZPOSTD',
     'CZPOSTP',
+    'CZPOSTB',
     'DHL',
     'DPD',
+    'FOFRSTD',
     'GEIS',
     'GEISPOINT',
     'GEISCARGO',
     'GLS',
     'GO',
-    'MagyarPOST',
     'MagyarPOSTHD',
     'MagyarPOSTPO',
     'MagyarPOSTPP',
     'MagyarPOSTPT',
-    'Najbert',
     'PPL',
     'PPLPARCELSHOP',
     'RHENUS',
