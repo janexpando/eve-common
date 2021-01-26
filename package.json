@@ -6,7 +6,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "install:skipdev": "npm install --production",
-    "test": "npm run check && nyc ava",
+    "test": "tsc --noEmit && NODE_PATH=.:src ava --serial **/__tests__/**/*.js",
+    "test:old-and-slow": "npm run check && nyc ava",
     "build": "tsc || true",
     "test:watch": "ava --watch",
     "ava": "ava",
@@ -31,7 +32,7 @@
     "@types/node": "^12.12.14",
     "@types/pino": "^5.14.0",
     "amazon-mws": "0.0.23",
-    "ava": "^2.4.0",
+    "ava": "1.2.1",
     "bson": "^4.0.2",
     "codecov": "^3.6.1",
     "dotenv": "^8.2.0",
