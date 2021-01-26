@@ -19,6 +19,8 @@ steps:
       args:
           - run
           - ava
+          - --serial
+          - "**/__tests__/**/*.js"
       env:
           - EVE_AUTH_BEARER=Expando123
           - GATEWAY_URL=http://127.0.0.1:3333

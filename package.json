@@ -6,7 +6,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "install:skipdev": "npm install --production",
-    "test": "tsc --noEmit && NODE_PATH=.:src ava --serial **/__tests__/**/*.js",
+    "test": "NODE_PATH=.:src ava --serial **/__tests__/**/*.js",
     "test:old-and-slow": "npm run check && nyc ava",
     "build": "tsc || true",
     "test:watch": "ava --watch",
