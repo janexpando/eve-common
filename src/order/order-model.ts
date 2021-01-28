@@ -82,6 +82,9 @@ export interface OrderItem {
 export interface ApiOrderDelivery {
     shippingCarrier?: string;
     shippingCarrierService?: string;
+    // temporary field to distinguish original "Supplier" shippingCarrierService to keep
+    // actual value of delivery method in shippingCarrierService field
+    // applies for Alza orders
     isSupplier?: boolean;
 }
 
