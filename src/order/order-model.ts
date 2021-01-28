@@ -82,6 +82,7 @@ export interface OrderItem {
 export interface ApiOrderDelivery {
     shippingCarrier?: string;
     shippingCarrierService?: string;
+    isSupplier?: boolean;
 }
 
 export declare type OrderPaymentMethod = 'CreditCard' | 'CashOnDelivery' | 'BankTransfer';
