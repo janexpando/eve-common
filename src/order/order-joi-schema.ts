@@ -1,4 +1,4 @@
-import { allow, alternatives, array, bool, date, number, object, string } from 'joi';
+import { array, bool, date, number, object, string } from 'joi';
 import { AUTOPRICING_STATUSES, ORDER_STATUSES } from './order-model';
 import { CURRENCY_CODES, MARKETPLACES } from '..';
 import { COUNTRY_CODES } from '../models/country-codes';
@@ -90,14 +90,17 @@ export const ORDER_ADDRESS_JOI_SCHEMA = object({
     zip: string().required(),
     countryCode: string()
         .valid(COUNTRY_CODES)
-        .allow("-")
+        .allow('-')
         .required(),
     note: string(),
 });
 
 export const DELIVERY_JOI_SCHEMA = object({
-    shippingCarrier: string().allow(null).optional(),
+    shippingCarrier: string()
+        .allow(null)
+        .optional(),
     shippingCarrierService: string().optional(),
+    isSupplier: bool().optional(),
 });
 export const ORDER_INVOICE_JOI_SCHEMA = object({
     id: string().allow(null, ''),
