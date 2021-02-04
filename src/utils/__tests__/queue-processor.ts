@@ -127,3 +127,57 @@ test('concurrency change', async t => {
     processor.concurrency = 3;
     t.is(processor.concurrency, 3);
 });
+
+test('correct execution order', async t => {
+    const log = [];
+    const processor: QueueProcessor<ITest> = new QueueProcessor<ITest>(
+        async item => {
+            await sleep(item.processDuration);
+            log.push(`#${item.index} finished`);
+        },
+        {
+            concurrency: 3,
+            handleResult: (r, item) => {
+                log.push(`#${item.index} result handled`);
+            },
+        },
+    );
+
+    log.push(`started filling queue`);
+
+    for (let i = 0; i < 5; i++) {
+        log.push(`adding #${i}`);
+        processor.addToQueue({ processDuration: 10, index: i, message: `msg ${i}` });
+        log.push(`added #${i}`);
+    }
+
+    log.push(`finished filling queue`);
+    await processor.finish();
+    log.push(`queue finished`);
+
+    t.deepEqual(log, [
+        "started filling queue",
+        "adding #0",
+        "added #0",
+        "adding #1",
+        "added #1",
+        "adding #2",
+        "added #2",
+        "adding #3",
+        "added #3",
+        "adding #4",
+        "added #4",
+        "finished filling queue",
+        "#0 finished",
+        "#0 result handled",
+        "#1 finished",
+        "#1 result handled",
+        "#2 finished",
+        "#2 result handled",
+        "#3 finished",
+        "#3 result handled",
+        "#4 finished",
+        "#4 result handled",
+        "queue finished"
+    ])
+});
