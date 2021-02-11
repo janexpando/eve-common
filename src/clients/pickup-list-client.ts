@@ -7,8 +7,8 @@ export interface ApiPickupListInput {
     companyId: ObjectId;
     carrier: string;
     pickupListPdf: string;
-    pickupListGroupPdf: string;
-    carrierPickupListGroupId: number;
+    pickupListGroupPdf?: string;
+    carrierPickupListGroupId?: number;
     pickupTime?: Date;
     orderIds: ObjectId[];
 }
