@@ -2,11 +2,11 @@ import { Injectable } from 'injection-js';
 import { ObjectId } from 'bson';
 import { Environment } from '../bootstrapping/environment';
 import { EveClient } from './eve-client';
-import { ConsoleLogger, MarketplaceName, OrderStatus } from '..';
+import { MarketplaceName, OrderStatus } from '..';
 
 @Injectable()
 export class EmagServiceClient extends EveClient {
-    constructor(protected env: Environment, private logger: ConsoleLogger) {
+    constructor(protected env: Environment) {
         super(env);
         this.baseUrl = this.env.EMAG_SERVICE_URL;
     }
