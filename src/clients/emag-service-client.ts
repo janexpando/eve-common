@@ -16,22 +16,30 @@ export class EmagServiceClient extends EveClient {
             return await this.finalizeOrder(companyId, marketplace, orderId);
         } else {
             // TODO miky implement more when emag service ready
-            throw `Unsupported status change to ${status}`;
+            return {
+                success: false,
+                message: 'Changing order status',
+                error: `Unsupported status: "${status}"`,
+            };
         }
     }
 
     private async finalizeOrder(companyId: ObjectId, marketplace: MarketplaceName, orderId: number) {
         const url = `/companies/${companyId}/orders/${orderId}/finalize`;
-        let response = await this.got.patch(url, {
-            body: {
-                marketplace,
-            },
-        });
+        let response;
 
-        if (response.statusCode !== 200) {
-            const errorString = `${response.body.message}: ${response.body.error}`;
-            this.logger.companyError(companyId, errorString);
-            throw errorString;
+        try {
+            response = await this.got.patch(url, {
+                body: {
+                    marketplace,
+                },
+            });
+        } catch (e) {
+            return {
+                success: false,
+                message: `Finalize order ${orderId}`,
+                error: e.message,
+            };
         }
 
         return response.body;
