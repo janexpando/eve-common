@@ -4,6 +4,12 @@ import { Environment } from '../bootstrapping/environment';
 import { EveClient } from './eve-client';
 import { MarketplaceName, OrderStatus } from '..';
 
+export interface IEmagResponse {
+    success: boolean;
+    message?: string;
+    error?: string;
+}
+
 @Injectable()
 export class EmagServiceClient extends EveClient {
     constructor(protected env: Environment) {
@@ -11,7 +17,7 @@ export class EmagServiceClient extends EveClient {
         this.baseUrl = this.env.EMAG_SERVICE_URL;
     }
 
-    async setOrdersStatus(companyId: ObjectId, marketplace: MarketplaceName, orderId: number, status: OrderStatus) {
+    async setOrdersStatus(companyId: ObjectId, marketplace: MarketplaceName, orderId: number, status: OrderStatus): Promise<IEmagResponse> {
         if (status === OrderStatus.Shipped) {
             return await this.finalizeOrder(companyId, marketplace, orderId);
         } else {
@@ -24,7 +30,7 @@ export class EmagServiceClient extends EveClient {
         }
     }
 
-    private async finalizeOrder(companyId: ObjectId, marketplace: MarketplaceName, orderId: number) {
+    private async finalizeOrder(companyId: ObjectId, marketplace: MarketplaceName, orderId: number): Promise<IEmagResponse> {
         const url = `/companies/${companyId}/orders/${orderId}/finalize`;
         let response;
 
