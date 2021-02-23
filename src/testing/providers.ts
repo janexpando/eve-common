@@ -21,6 +21,7 @@ import { NotificationsClient } from '..';
 import { MallServiceClient } from '..';
 import { HealthReporter } from '../logging/health-reporter';
 import { ImportSettingsClient } from '../clients/import-settings-client';
+import { EmagServiceClient } from '../clients/emag-service-client';
 
 export const PROVIDERS: Provider[] = [
     ENVIRONMENT_PROVIDER,
@@ -48,5 +49,6 @@ export const PROVIDERS: Provider[] = [
     MallServiceClient,
     ProductAutopricingClient,
     HealthReporter,
-    ImportSettingsClient
+    ImportSettingsClient,
+    EmagServiceClient
 ];
