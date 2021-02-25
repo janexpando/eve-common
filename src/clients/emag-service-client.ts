@@ -17,7 +17,12 @@ export class EmagServiceClient extends EveClient {
         this.baseUrl = this.env.EMAG_SERVICE_URL;
     }
 
-    async setOrdersStatus(companyId: ObjectId, marketplace: MarketplaceName, orderId: number, status: OrderStatus): Promise<IEmagResponse> {
+    async setOrdersStatus(
+        companyId: ObjectId,
+        marketplace: MarketplaceName,
+        orderId: string,
+        status: OrderStatus,
+    ): Promise<IEmagResponse> {
         if (status === OrderStatus.Shipped) {
             return await this.finalizeOrder(companyId, marketplace, orderId);
         } else {
@@ -30,7 +35,11 @@ export class EmagServiceClient extends EveClient {
         }
     }
 
-    private async finalizeOrder(companyId: ObjectId, marketplace: MarketplaceName, orderId: number): Promise<IEmagResponse> {
+    private async finalizeOrder(
+        companyId: ObjectId,
+        marketplace: MarketplaceName,
+        orderId: string,
+    ): Promise<IEmagResponse> {
         const url = `/companies/${companyId}/orders/${orderId}/finalize`;
         let response;
 
