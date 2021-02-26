@@ -27,4 +27,5 @@ export interface ApiImportSettings {
     deliveryMethodsMapping?: ApiDeliveryMethodsMapping[];
     autoconfirmOrderOnStatus?: string;
     paymentMethodsMapping?: ApiPaymentMethodsMapping[];
+    importFromPurchaseDate?: Date;
 }
