@@ -52,6 +52,8 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'RON';
         case 'emag_bg':
             return 'BGN';
+        case 'real_de':
+            return 'EUR';
         default:
             throw new Error(`${marketplace} is not a valid amazon marketplace`);
     }
