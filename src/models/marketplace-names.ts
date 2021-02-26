@@ -37,12 +37,16 @@ export const ALZA: AlzaType[] = ['alza_cz'];
 export type EmagType = 'emag_pl' | 'emag_hu' | 'emag_ro' | 'emag_bg';
 export const EMAG: EmagType[] = ['emag_pl', 'emag_hu', 'emag_ro', 'emag_bg'];
 
-export type MarketplaceName = AmazonType | MallType | AlzaType | EmagType;
+export type RealType = 'real_de';
+export const REAL: RealType[] = ['real_de'];
+
+export type MarketplaceName = AmazonType | MallType | AlzaType | EmagType | RealType;
 export const MARKETPLACES: MarketplaceName[] = []
     .concat(AMAZON)
     .concat(MALL)
     .concat(ALZA)
-    .concat(EMAG);
+    .concat(EMAG)
+    .concat(REAL);
 
 export function getRegionMarketplaces(region: MarketplaceRegion): MarketplaceName[] {
     switch (region) {
@@ -64,6 +68,8 @@ export function getRegionMarketplaces(region: MarketplaceRegion): MarketplaceNam
             return ['mall_ro'];
         case 'alza_cz':
             return ['alza_cz'];
+        case 'real_de':
+            return ['real_de'];
         default:
             return [];
     }
@@ -84,18 +90,20 @@ export function getRegion(marketplace: MarketplaceName): MarketplaceRegion {
     if ('emag_hu' == marketplace) return 'emag_hu';
     if ('emag_ro' == marketplace) return 'emag_ro';
     if ('emag_bg' == marketplace) return 'emag_bg';
+    if ('real_de' == marketplace) return 'real_de';
 
     return null;
 }
 
-export type MarketplaceType = 'amazon' | 'mall' | 'alza' | 'emag';
-export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall', 'alza', 'emag'];
+export type MarketplaceType = 'amazon' | 'mall' | 'alza' | 'emag' | 'real';
+export const MARKETPLACE_TYPES: MarketplaceType[] = ['amazon', 'mall', 'alza', 'emag', 'real'];
 
 export function getMarketplaceType(marketplace: MarketplaceName): MarketplaceType {
     if (AMAZON.includes(marketplace as AmazonType)) return 'amazon';
     if (MALL.includes(marketplace as MallType)) return 'mall';
     if (ALZA.includes(marketplace as AlzaType)) return 'alza';
     if (EMAG.includes(marketplace as EmagType)) return 'emag';
+    if (REAL.includes(marketplace as RealType)) return 'real';
     return null;
 }
 
@@ -109,6 +117,8 @@ export function getMarketplaceNamesForMarketplaceType(marketplaceType: Marketpla
             return MALL;
         case 'emag':
             return EMAG;
+        case 'real':
+            return REAL;
         default:
             return [];
     }
