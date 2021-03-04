@@ -35,6 +35,8 @@ export function getMarketplaceCurrency(marketplace: MarketplaceName): CurrencyCo
             return 'SEK';
         case 'amazon_tr':
             return 'TRY';
+        case 'amazon_pl':
+            return 'PLN';
         case 'mall_cz':
         case 'alza_cz':
             return 'CZK';

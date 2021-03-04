@@ -1,6 +1,6 @@
 import { MarketplaceRegion } from './marketplace-region';
 
-export type AmazonEuropeType = 'amazon_de' | 'amazon_uk' | 'amazon_it' | 'amazon_fr' | 'amazon_es' | 'amazon_nl' | 'amazon_se' | 'amazon_tr';
+export type AmazonEuropeType = 'amazon_de' | 'amazon_uk' | 'amazon_it' | 'amazon_fr' | 'amazon_es' | 'amazon_nl' | 'amazon_se' | 'amazon_tr' | 'amazon_pl';
 export const AMAZON_EUROPE: AmazonEuropeType[] = [
     'amazon_de',
     'amazon_uk',
@@ -9,7 +9,8 @@ export const AMAZON_EUROPE: AmazonEuropeType[] = [
     'amazon_es',
     'amazon_nl',
     'amazon_se',
-    'amazon_tr'
+    'amazon_tr',
+    'amazon_pl'
 ];
 
 export type AmazonAmericaType = 'amazon_mx' | 'amazon_us' | 'amazon_ca' | 'amazon_br';

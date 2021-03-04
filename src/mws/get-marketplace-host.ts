@@ -9,7 +9,8 @@ export function isEuropeanMarketplace(marketplace: AmazonType): Boolean {
         marketplace === 'amazon_it' ||
         marketplace === 'amazon_nl' ||
         marketplace === 'amazon_se' ||
-        marketplace === 'amazon_tr'
+        marketplace === 'amazon_tr' ||
+        marketplace === 'amazon_pl'
     );
 }
 
