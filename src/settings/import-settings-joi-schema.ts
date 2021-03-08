@@ -1,4 +1,4 @@
-import { array, bool, object, string } from 'joi';
+import { array, bool, date, object, string } from 'joi';
 import { MARKETPLACE_TYPES, MARKETPLACES, optionalString, SERVICE_NAMES } from '..';
 
 const optionalBool = () =>
@@ -38,4 +38,5 @@ export const IMPORT_SETTINGS_JOI_SCHEMA = object({
         )
         .allow(null),
     autoconfirmOrderOnStatus: optionalString(),
+    importFromPurchaseDate: date(),
 });
