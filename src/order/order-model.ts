@@ -59,6 +59,8 @@ export interface OrderItem {
     sku: string;
     asin: string;
     marketplaceItemId: string;
+    marketplaceSku?: string | number;
+    marketplaceCatalogueId?: string;
     name: string;
     price: number;
     itemPrice: number;
